@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#000000</color>
+    <color name="white">#F9EFEE</color>
+
+    <color name="primary">#FF0000</color>
+    <color name="secondary">#FCE150</color>
+    <color name="tertiary">#003F88</color>
+
+    <color name="text">@color/black</color>
+    <color name="text_alt">@color/white</color>
+    <color name="text_accent_1">#FF0000</color>  <!-- define color -->
+    <color name="text_accent_2">#000AFF</color>
+    <color name="text_accent_3">#FF0000</color>
+
+    <color name="background">@color/white</color>
+</resources>
