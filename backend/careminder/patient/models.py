@@ -24,8 +24,8 @@ class MedicalExamination(models.Model):
         FINISHED = 2, "Finished"
 
     name = models.CharField(max_length=255)
-    time = models.DateField(null=True)
     state = models.IntegerField(choices=State.choices, default=State.WAITING)
     patient = models.ForeignKey(
         Patient, related_name="medical_examinations", on_delete=models.CASCADE
     )
+    time = models.DateTimeField(null=True)

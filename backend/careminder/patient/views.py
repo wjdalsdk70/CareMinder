@@ -1,30 +1,36 @@
+# patient.views
 from rest_framework import generics
-from .models import Patient
-from .serializers import PatientSerializer
+from .models import Patient, MedicalExamination
+from .serializers import PatientSerializer, MedicalExaminationSerializer
 
 
-class PatientListView(generics.ListAPIView):
-    """
-    View to list all patients in the system.
-    """
-
+class PatientListCreateView(generics.ListCreateAPIView):
     queryset = Patient.objects.all()
     serializer_class = PatientSerializer
 
 
-class PatientCreateView(generics.CreateAPIView):
-    """
-    View to create a new patient in the system.
-    """
-
+class PatientRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Patient.objects.all()
     serializer_class = PatientSerializer
 
 
-class PatientDetailView(generics.RetrieveUpdateDestroyAPIView):
-    """
-    View to retrieve, update or delete a patient instance.
-    """
+class MedicalExaminationListCreateView(generics.ListCreateAPIView):
+    serializer_class = MedicalExaminationSerializer
 
-    queryset = Patient.objects.all()
-    serializer_class = PatientSerializer
+    def get_queryset(self):
+        patient_id = self.kwargs["patient_pk"]
+        return MedicalExamination.objects.filter(patient__id=patient_id)
+
+    def perform_create(self, serializer):
+        patient = Patient.objects.get(pk=self.kwargs["patient_pk"])
+        serializer.save(patient=patient)
+
+
+class MedicalExaminationRetrieveUpdateDestroyView(
+    generics.RetrieveUpdateDestroyAPIView
+):
+    serializer_class = MedicalExaminationSerializer
+
+    def get_queryset(self):
+        patient_id = self.kwargs["patient_pk"]
+        return MedicalExamination.objects.filter(patient__id=patient_id)
