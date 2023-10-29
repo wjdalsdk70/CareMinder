@@ -8,4 +8,10 @@ urlpatterns = [
         views.StaffRetrieveUpdateDestroyView.as_view(),
         name="staff-detail",
     ),
+    path("roles/", views.RoleListView.as_view(), name="role-list"),
+    path(
+        "roles/<int:pk>/",
+        views.RoleRetrieveView.as_view(),
+        name="role-detail",
+    ),
 ]

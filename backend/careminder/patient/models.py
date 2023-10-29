@@ -16,6 +16,9 @@ class Patient(models.Model):
         choices=Hospitalization.choices, default=Hospitalization.NOT_HOSPITALIZED
     )
 
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
+
 
 class MedicalExamination(models.Model):
     class State(models.IntegerChoices):

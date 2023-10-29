@@ -4,6 +4,7 @@ from django.core.validators import MaxValueValidator
 from django.db import models
 
 from staff.models import Role
+from tablet.models import Tablet
 
 
 class Request(models.Model):
@@ -20,4 +21,4 @@ class Request(models.Model):
     time = models.DateTimeField(auto_now_add=True)
     response = models.TextField(null=True, blank=True)
     response_time = models.DateTimeField(null=True)
-    tablet = models.IntegerField()  # TODO
+    tablet = models.ForeignKey(Tablet, on_delete=models.SET_NULL, null=True)

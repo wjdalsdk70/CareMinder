@@ -11,3 +11,13 @@ class StaffListCreateView(generics.ListCreateAPIView):
 class StaffRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Staff.objects.all()
     serializer_class = StaffSerializer
+
+
+class RoleListView(generics.ListAPIView):
+    queryset = Role.objects.all()
+    serializer_class = RoleSerializer
+
+
+class RoleRetrieveView(generics.RetrieveAPIView):
+    queryset = Role.objects.all()
+    serializer_class = RoleSerializer
