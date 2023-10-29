@@ -4,7 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="705c982a-fc4a-4646-9e69-913c4d72a412" name="Changes" comment="" />
+    <list default="true" id="705c982a-fc4a-4646-9e69-913c4d72a412" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../frontend/app/src/main/java/com/example/careminder/model/HospitalizationType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/app/src/main/res/drawable/rounded_box_dark.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/app/src/main/res/drawable/rounded_box_light.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/app/src/main/res/drawable/rounded_box_response.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/.idea/deploymentTargetDropDown.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/.idea/deploymentTargetDropDown.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/app/src/main/java/com/example/careminder/activity/PatientActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/app/src/main/java/com/example/careminder/activity/PatientActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/app/src/main/java/com/example/careminder/dal/PatientDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/app/src/main/java/com/example/careminder/dal/PatientDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/app/src/main/java/com/example/careminder/helper/PatientJsonParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/app/src/main/java/com/example/careminder/helper/PatientJsonParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/app/src/main/java/com/example/careminder/model/Patient.java" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/app/src/main/java/com/example/careminder/model/Patient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/app/src/main/res/layout/activity_patient.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/app/src/main/res/layout/activity_patient.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/app/src/main/res/values/colors.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -48,7 +62,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/greg1/OneDrive/Dokumente/GitHub/Neural-Network",
+    "last_opened_file_path": "C:/Users/greg1/OneDrive/Dokumente/GitHub/CareMinder/backend",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -117,6 +131,7 @@
       <workItem from="1694011515245" duration="1565000" />
       <workItem from="1694544807269" duration="2713000" />
       <workItem from="1695059508962" duration="31000" />
+      <workItem from="1698584122604" duration="10851000" />
     </task>
     <servers />
   </component>

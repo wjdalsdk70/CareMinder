@@ -2,55 +2,68 @@ package com.example.careminder.model;
 
 public class Patient {
 
-    public String name;
-    public String description;
+    private String firstName;
+    private String lastName;
+    private Integer age;
+    private boolean doctorFirstVisit;
+    private Integer hospitalization;
 
-    public Integer id;
-
-    public Patient(String name, String description, int id) {
-        this.name = name;
-        this.description = description;
-        this.id = id;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public Patient(String name, String description) {
-        this.name = name;
-        this.description = description;
-    }
-    public Patient(int id) {
-        this.id = id;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getName() {
-        return name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public String getDescription() {
-        return description;
+    public Integer getAge() {
+        return age;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setAge(Integer age) {
+        this.age = age;
     }
 
-    public int getId() {
-        return id;
+    public boolean isDoctorFirstVisit() {
+        return doctorFirstVisit;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setDoctorFirstVisit(boolean doctorFirstVisit) {
+        this.doctorFirstVisit = doctorFirstVisit;
+    }
+
+    public Integer getHospitalization() {
+        return hospitalization;
+    }
+
+    public void setHospitalization(Integer hospitalization) {
+        this.hospitalization = hospitalization;
+    }
+
+    public Patient(String firstName, String lastName, Integer age, boolean doctorFirstVisit, Integer hospitalization) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.doctorFirstVisit = doctorFirstVisit;
+        this.hospitalization = hospitalization;
     }
 
     @Override
     public String toString() {
         return "Patient{" +
-                "name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", id=" + id +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                ", doctorFirstVisit=" + doctorFirstVisit +
+                ", hospitalization=" + hospitalization +
                 '}';
     }
 }
