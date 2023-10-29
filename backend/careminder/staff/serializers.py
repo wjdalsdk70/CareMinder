@@ -6,7 +6,10 @@ from .models import Staff, Role
 class RoleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Role
-        fields = ["id", "name"]
+        fields = [
+            "id",
+            "name",
+        ]
 
 
 class StaffSerializer(serializers.ModelSerializer):
@@ -17,4 +20,11 @@ class StaffSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Staff
-        fields = ["id", "first_name", "last_name", "role", "role_id", "nfc"]
+        fields = [
+            "id",
+            "first_name",
+            "last_name",
+            "role",
+            "role_id",
+            "nfc",
+        ]

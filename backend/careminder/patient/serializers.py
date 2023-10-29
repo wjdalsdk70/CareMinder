@@ -6,7 +6,12 @@ from .models import Patient, MedicalExamination
 class MedicalExaminationSerializer(serializers.ModelSerializer):
     class Meta:
         model = MedicalExamination
-        fields = ["id", "name", "state", "time"]
+        fields = [
+            "id",
+            "name",
+            "state",
+            "time",
+        ]
 
 
 class PatientSerializer(serializers.ModelSerializer):
