@@ -21,9 +21,21 @@ class StaffSerializer(serializers.ModelSerializer):
         model = Staff
         fields = [
             "id",
+            "username",
+            "password",
             "first_name",
             "last_name",
             "role",
             "role_id",
             "nfc",
         ]
+        extra_kwargs = {
+            "password": {"write_only": True},
+        }
+
+    def create(self, validated_data):
+        password = validated_data.pop("password")
+        user = Staff(**validated_data)
+        user.set_password(password)
+        user.save()
+        return user
