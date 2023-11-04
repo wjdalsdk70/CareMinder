@@ -12,7 +12,7 @@ class Patient(models.Model):
     last_name = models.CharField(max_length=255, null=True)
     age = models.IntegerField(null=True)
     doctor_first_visit = models.BooleanField(default=False)
-    hospitalization = models.IntegerField(
+    hospitalization = models.PositiveSmallIntegerField(
         choices=Hospitalization.choices, default=Hospitalization.NOT_HOSPITALIZED
     )
 

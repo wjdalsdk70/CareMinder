@@ -1,9 +1,8 @@
 from http.client import PROCESSING
 
-from django.core.validators import MaxValueValidator
 from django.db import models
+from staff.models import Staff
 
-from staff.models import Role
 from tablet.models import Tablet
 
 
@@ -15,9 +14,11 @@ class Request(models.Model):
 
     text = models.TextField()
     recording = models.BinaryField(null=True)
-    for_role = models.ForeignKey(Role, on_delete=models.SET_NULL, null=True)
+    for_role = models.PositiveSmallIntegerField(choices=Staff.Role.choices)
     is_question = models.BooleanField()
-    state = models.IntegerField(choices=State.choices, default=State.WAITING)
+    state = models.PositiveSmallIntegerField(
+        choices=State.choices, default=State.WAITING
+    )
     time = models.DateTimeField(auto_now_add=True)
     response = models.TextField(null=True, blank=True)
     response_time = models.DateTimeField(null=True)

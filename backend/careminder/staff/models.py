@@ -1,32 +1,19 @@
-from os import name
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.hashers import make_password
 
 
-class Role(models.Model):
-    name = models.CharField(max_length=255)
+class Staff(AbstractUser):
+    class Role(models.IntegerChoices):
+        SECRETARY = 0, "Secretary"
+        HELPER = 1, "Helper"
+        NURSE = 2, "Nurse"
+        DOCTOR = 3, "Doctor"
 
-    def __str__(self):
-        return self.name
-
-
-class Staff(AbstractBaseUser):
-    username = models.CharField(max_length=255, unique=True)
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
-    role = models.ForeignKey(Role, on_delete=models.CASCADE)
-    nfc = models.IntegerField(null=True)
+    role = models.PositiveSmallIntegerField(null=True, choices=Role.choices)
+    nfc = models.CharField(null=True, max_length=256)
 
     USERNAME_FIELD = "username"
 
-    def __str__(self):
-        return f"{self.first_name} {self.last_name} ({self.role})"
-
-    @property
-    def is_staff(self):
-        """
-        Checks if the Staff member is an 'ADMIN'.
-
-        :return: True if the Staff member's role is 'ADMIN', False otherwise.
-        """
-        return self.role == Role.objects.filter(name="ADMIN").first()
+    def set_nfc(self, nfc: str):
+        self.nfc = make_password(nfc)
