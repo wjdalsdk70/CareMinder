@@ -7,20 +7,28 @@ import java.time.LocalDateTime;
 public class Request {
     private int id;
     private String text;
-    private Blob recording;
     private Integer forRole;
     private Integer forRoleId;
     private boolean isQuestion;
     private Integer state;
     private LocalDateTime time;
-    private String response;
-    private LocalDateTime responseTime;
     private int tabletId;
 
-    public Request(String text, Integer state, LocalDateTime responseTime) {
+    public Request(String text, Integer state, LocalDateTime time) {
         this.text = text;
         this.state = state;
-        this.responseTime = responseTime;
+        this.time = time;
+    }
+
+    public Request(int id, String text, Integer forRole, Integer forRoleId, boolean isQuestion, Integer state, LocalDateTime time, int tabletId) {
+        this.id = id;
+        this.text = text;
+        this.forRole = forRole;
+        this.forRoleId = forRoleId;
+        this.isQuestion = isQuestion;
+        this.state = state;
+        this.time = time;
+        this.tabletId = tabletId;
     }
 
     public int getId() {
@@ -37,14 +45,6 @@ public class Request {
 
     public void setText(String text) {
         this.text = text;
-    }
-
-    public Blob getRecording() {
-        return recording;
-    }
-
-    public void setRecording(Blob recording) {
-        this.recording = recording;
     }
 
     public Integer getForRole() {
@@ -87,22 +87,6 @@ public class Request {
         this.time = time;
     }
 
-    public String getResponse() {
-        return response;
-    }
-
-    public void setResponse(String response) {
-        this.response = response;
-    }
-
-    public LocalDateTime getResponseTime() {
-        return responseTime;
-    }
-
-    public void setResponseTime(LocalDateTime responseTime) {
-        this.responseTime = responseTime;
-    }
-
     public int getTabletId() {
         return tabletId;
     }
@@ -116,14 +100,11 @@ public class Request {
         return "Request{" +
                 "id=" + id +
                 ", text='" + text + '\'' +
-                ", recording=" + recording +
                 ", forRole=" + forRole +
                 ", forRoleId=" + forRoleId +
                 ", isQuestion=" + isQuestion +
                 ", state=" + state +
                 ", time=" + time +
-                ", response='" + response + '\'' +
-                ", responseTime=" + responseTime +
                 ", tabletId=" + tabletId +
                 '}';
     }

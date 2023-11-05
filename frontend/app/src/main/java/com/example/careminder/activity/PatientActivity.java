@@ -6,11 +6,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.example.careminder.R;
 import com.example.careminder.dal.PatientDao;
 import com.example.careminder.model.Patient;
+import com.example.careminder.model.Request;
 
 import org.json.JSONException;
 
@@ -28,7 +30,7 @@ public class PatientActivity extends AppCompatActivity {
 
         patientDao = new PatientDao(this);
 
-        getPatients();
+//        getPatients();
 
         LinearLayout linearLayout = findViewById(R.id.patient_detail);
         int numViews = 7;
@@ -56,7 +58,6 @@ public class PatientActivity extends AppCompatActivity {
             LinearLayout rowLayout = new LinearLayout(this);
             rowLayout.setOrientation(LinearLayout.VERTICAL);
 
-            // First Row (original text)
             TextView textView1 = new TextView(this);
             LinearLayout.LayoutParams layoutParams1 = new LinearLayout.LayoutParams(
                     dpToPx(155), dpToPx(46)
@@ -99,6 +100,17 @@ public class PatientActivity extends AppCompatActivity {
             linearLayout.addView(rowLayout);
         }
     }
+
+    public void OnRequestButtonClick(View view) {
+        Intent intent = new Intent(this, RequestActivity.class);
+        startActivity(intent);
+    }
+
+    public void OnQuestionButtonClick(View view) {
+        Intent intent = new Intent(this, RequestActivity.class);
+        startActivity(intent);
+    }
+
 
     public int dpToPx(int dp) {
         float scale = getResources().getDisplayMetrics().density;
