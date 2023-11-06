@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">CareMinder</string>
+    <string name="back_button">Back to Mainpage</string>
+    <string name="info">Currently, emergency patients are crowded, causing delays. We are fully aware of the urgency of the patients, but due to the nat.</string>
+    <string name="cancel">Cancel</string>
 </resources>
