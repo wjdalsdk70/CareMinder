@@ -7,12 +7,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.example.careminder.R;
 import com.example.careminder.dal.PatientDao;
 import com.example.careminder.model.Patient;
 import com.example.careminder.model.Request;
+import com.example.careminder.touch.OnSwipeTouchListener;
 
 import org.json.JSONException;
 
@@ -22,6 +24,7 @@ import java.util.List;
 public class PatientActivity extends AppCompatActivity {
 
     private PatientDao patientDao;
+    private FrameLayout popupContainer;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +32,8 @@ public class PatientActivity extends AppCompatActivity {
         setContentView(R.layout.activity_patient);
 
         patientDao = new PatientDao(this);
+
+        popupContainer = findViewById(R.id.popupContainer);
 
 //        getPatients();
 
@@ -99,6 +104,27 @@ public class PatientActivity extends AppCompatActivity {
 
             linearLayout.addView(rowLayout);
         }
+
+        linearLayout.setOnTouchListener(new OnSwipeTouchListener(this) {
+            @Override
+            public void onSwipeLeft() {
+                popupContainer.setVisibility(View.VISIBLE);
+                popupContainer.animate().translationX(0f);
+            }
+
+            @Override
+            public void onSwipeRight() {
+                popupContainer.animate()
+                        .translationX(popupContainer.getWidth())
+                        .withEndAction(new Runnable() {
+                            @Override
+                            public void run() {
+                                popupContainer.setVisibility(View.GONE);
+                                popupContainer.setTranslationX(0f);
+                            }
+                        });
+            }
+        });
     }
 
     public void OnRequestButtonClick(View view) {

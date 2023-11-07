@@ -8,6 +8,13 @@
     android:paddingHorizontal="32dp"
     android:paddingVertical="16dp">
 
+<FrameLayout
+    android:id="@+id/popupContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="gone"
+    android:background="#80000000">
+</FrameLayout>
 
 <LinearLayout
         android:id="@+id/header"
