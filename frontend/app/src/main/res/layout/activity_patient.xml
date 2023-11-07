@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.PatientActivity"
-    android:paddingHorizontal="32dp"
-    android:paddingVertical="16dp">
+    style="@style/app">
 
 <FrameLayout
     android:id="@+id/popupContainer"
@@ -19,7 +18,7 @@
 <LinearLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
-        android:layout_height="96dp"
+        android:layout_height="@dimen/header_height"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         app:layout_constraintTop_toTopOf="parent">
