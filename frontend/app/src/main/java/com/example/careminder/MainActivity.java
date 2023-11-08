@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import com.example.careminder.R;
+import com.example.careminder.activity.NurseActivity;
+import com.example.careminder.activity.PatientActivity;
 import com.example.careminder.activity.PatientRecordingActivity;
 
 
@@ -22,12 +24,28 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void OnStartButtonClick(View view) {
+    public void OnPatientButtonClick(View view) {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, 1);
         } else {
-            startPatientRecordingActivity();
+            Intent intent = new Intent(this, PatientActivity.class);
+            startActivity(intent);
         }
+    }
+
+    public void OnRecordButtonClick(View view) {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, 1);
+        } else {
+            Intent intent = new Intent(this, PatientRecordingActivity.class);
+            startActivity(intent);
+        }
+    }
+
+    public void OnNurseButtonClick(View view) {
+        Intent intent = new Intent(this, NurseActivity.class);
+        startActivity(intent);
+
     }
 
     @Override
@@ -45,11 +63,6 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
         }
-    }
-
-    private void startPatientRecordingActivity() {
-        Intent intent = new Intent(this, PatientRecordingActivity.class);
-        startActivity(intent);
     }
 
     private void showPermissionDialog() {
