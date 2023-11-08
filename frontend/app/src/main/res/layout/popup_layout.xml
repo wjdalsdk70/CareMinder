@@ -1,12 +1,16 @@
-<FrameLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="#80000000"> <!-- Semi-transparent black background -->
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="1">
         <!-- Add your UI elements and content here -->
     </androidx.constraintlayout.widget.ConstraintLayout>
-</FrameLayout>
+
+    <!-- The remaining half of the screen for other content -->
+</LinearLayout>
