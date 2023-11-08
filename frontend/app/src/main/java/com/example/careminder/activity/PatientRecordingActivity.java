@@ -8,18 +8,24 @@ import android.media.AudioRecord;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Handler;
+import android.speech.RecognitionListener;
+import android.speech.SpeechRecognizer;
 import android.view.View;
+import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import com.example.careminder.MainActivity;
 import com.example.careminder.R;
 import com.example.careminder.view.VisualizerView;
+import java.util.ArrayList;
 
 public class PatientRecordingActivity extends AppCompatActivity {
     private static final int SAMPLE_RATE = 8000;
     private AudioRecord audioRecord;
     private VisualizerView visualizerView;
     private int minBufferSize;
+    private SpeechRecognizer speechRecognizer;
+    private TextView textView;
 
     private Handler handler = new Handler();
     private Runnable updateVisualizer = new Runnable() {
@@ -42,6 +48,23 @@ public class PatientRecordingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_recording);
 
+        handleAudio();
+
+//        textView = findViewById(R.id.recognizedText);
+//        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
+//        speechRecognizer.setRecognitionListener(new RecognitionListener() {
+//            @Override
+//            public void onResults(Bundle results) {
+//                ArrayList<String> matches = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+//                if (matches != null) textView.setText(matches.get(0));
+//            }
+//
+//            // Implement other methods as needed
+//        });
+//        speechRecognizer.startListening(new Intent());
+    }
+
+    protected void handleAudio() {
         visualizerView = findViewById(R.id.visualizer);
 
         minBufferSize = AudioRecord.getMinBufferSize(SAMPLE_RATE, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT);
@@ -64,6 +87,9 @@ public class PatientRecordingActivity extends AppCompatActivity {
             audioRecord = null;
         }
         handler.removeCallbacks(updateVisualizer);
+        if (speechRecognizer != null) {
+            speechRecognizer.destroy();
+        }
     }
 
     public void OnBackButtonClick(View view) {
@@ -74,4 +100,3 @@ public class PatientRecordingActivity extends AppCompatActivity {
     public void OnCancelClick(View view) {
     }
 }
-
