@@ -128,12 +128,12 @@ public class PatientActivity extends AppCompatActivity {
     }
 
     public void OnRequestButtonClick(View view) {
-        Intent intent = new Intent(this, RequestActivity.class);
+        Intent intent = new Intent(this, PatientRecordingActivity.class);
         startActivity(intent);
     }
 
     public void OnQuestionButtonClick(View view) {
-        Intent intent = new Intent(this, RequestActivity.class);
+        Intent intent = new Intent(this, PatientRecordingActivity.class);
         startActivity(intent);
     }
 
