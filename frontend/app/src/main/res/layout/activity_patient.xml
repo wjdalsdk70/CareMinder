@@ -7,17 +7,6 @@
     tools:context=".activity.PatientActivity"
     style="@style/app">
 
-
-<FrameLayout
-    android:id="@+id/popupContainer"
-    android:layout_width="0dp"
-    android:layout_height="match_parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintWidth_percent="0.5"
-    android:visibility="gone"
-    android:background="#80000000">
-</FrameLayout>
-
 <LinearLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
@@ -61,7 +50,6 @@
 
 
     </LinearLayout>
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -169,5 +157,35 @@
 
         </LinearLayout>
     </LinearLayout>
+    <FrameLayout
+        android:id="@+id/popupContainer"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:background="#80000000"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.5">
+
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/descriptionTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
