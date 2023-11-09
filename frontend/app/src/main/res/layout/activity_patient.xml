@@ -21,20 +21,20 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="12dp"
             android:adjustViewBounds="true"
-            android:src="@drawable/ic_launcher_background" />
+            android:src="@mipmap/careminder_launcher_foreground"/>
 
         <TextView
             android:id="@+id/text_1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Accumulated Requests: 42" />
+            android:text="현재 누적된 요청사항 42" />
 
         <TextView
             android:id="@+id/text_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Waiting 1   Processing 1   Finished 2" />
+            android:text="대기1       진행중1        완료2" />
 
     </LinearLayout>
 
@@ -67,7 +67,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="궁금한 사항이 있으시다면,"
+                android:text="궁금한 사항이 있으시다면"
+                android:textSize="@dimen/text_size_title"
                 android:gravity="center"/>
 
             <LinearLayout
@@ -76,27 +77,33 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="vertical"
+                android:onClick="OnQuestionButtonClick"
                 android:background="@drawable/patient_question_background">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/baseline_mic_none_24"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/baseline_question_mark_24"
+                    android:layout_margin="10dp"
                     android:layout_marginTop="10dp"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Text below icon 1"
+                    android:text="궁금한 사항이 있으시다면"
+                    android:textStyle="bold"
                     android:gravity="center"
-                    android:layout_marginTop="10dp"/>
+                    android:layout_margin="10dp"
+                    android:textSize="@dimen/text_size_title"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Text below icon 1"
+                    android:text="자동으로 간호사에게 전달됩니다"
                     android:gravity="center"
-                    android:layout_marginTop="10dp"/>
+                    android:layout_margin="10dp"
+                    android:textSize="@dimen/text_size_h1"/>
 
             </LinearLayout>
 
@@ -121,7 +128,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="빠른 해결을 원하신다면,"
+                android:text="빠른 해결을 원하신다면"
+                android:textSize="@dimen/text_size_title"
                 android:gravity="center"/>
 
             <LinearLayout
@@ -130,27 +138,33 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="vertical"
+                android:onClick="OnRequestButtonClick"
                 android:background="@drawable/patient_request_background">
 
                 <ImageView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="10dp"
                     android:src="@drawable/baseline_mic_none_24"
                     android:layout_marginTop="10dp"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Text below icon 1"
+                    android:text="요청사항을 말씀해주세요"
+                    android:textStyle="bold"
                     android:gravity="center"
-                    android:layout_marginTop="10dp"/>
+                    android:layout_margin="10dp"
+                    android:textSize="@dimen/text_size_title"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Text below icon 1"
+                    android:text="자동으로 간호사에게 전달됩니다"
                     android:gravity="center"
-                    android:layout_marginTop="10dp"/>
+                    android:layout_margin="10dp"
+                    android:textSize="@dimen/text_size_h1"/>
 
             </LinearLayout>
 
