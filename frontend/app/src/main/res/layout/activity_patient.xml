@@ -7,10 +7,13 @@
     tools:context=".activity.PatientActivity"
     style="@style/app">
 
+
 <FrameLayout
     android:id="@+id/popupContainer"
-    android:layout_width="match_parent"
+    android:layout_width="0dp"
     android:layout_height="match_parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintWidth_percent="0.5"
     android:visibility="gone"
     android:background="#80000000">
 </FrameLayout>

@@ -15,12 +15,30 @@
         android:gravity="center">
 
         <Button
-            android:id="@+id/start_button"
-            android:onClick="OnStartButtonClick"
+            android:id="@+id/patient_button"
+            android:onClick="OnPatientButtonClick"
             android:layout_width="294dp"
             android:layout_height="102dp"
             android:textSize="24dp"
-            android:text="Hello World"
+            android:text="Go to Patient"
+            />
+
+        <Button
+            android:id="@+id/record_button"
+            android:onClick="OnRecordButtonClick"
+            android:layout_width="294dp"
+            android:layout_height="102dp"
+            android:textSize="24dp"
+            android:text="Go to Record"
+            />
+
+        <Button
+            android:id="@+id/nurse_button"
+            android:onClick="OnNurseButtonClick"
+            android:layout_width="294dp"
+            android:layout_height="102dp"
+            android:textSize="24dp"
+            android:text="Go to Nurse"
             />
 
     </LinearLayout>
