@@ -10,7 +10,6 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import com.example.careminder.R;
 import com.example.careminder.activity.NurseActivity;
 import com.example.careminder.activity.PatientActivity;
 import com.example.careminder.activity.PatientRecordingActivity;
@@ -58,14 +57,14 @@ public class MainActivity extends AppCompatActivity {
                     // Permission was granted
                 } else {
                     // Permission denied - show a dialog
-                    showPermissionDialog();
+                    showMicrophonePermissionDialog();
                 }
                 return;
             }
         }
     }
 
-    private void showPermissionDialog() {
+    private void showMicrophonePermissionDialog() {
         new AlertDialog.Builder(this)
                 .setTitle("Microphone Permission Needed")
                 .setMessage("This app needs the Microphone permission to record audio. Please grant the permission.")
