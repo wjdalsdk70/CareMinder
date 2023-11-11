@@ -14,7 +14,7 @@ import com.example.careminder.R;
 public class VisualizerView extends View {
     private byte[] bytes;
     private Paint paint = new Paint();
-    private float volumeThreshold = 10.0f;
+    private float volumeThreshold = 20.0f;
 
     final int numLines = 20;
 
