@@ -95,7 +95,7 @@ public class PatientRecordingActivity extends AppCompatActivity {
                 byte[] buffer = new byte[minBufferSize];
                 audioRecord.read(buffer, 0, buffer.length);
                 runOnUiThread(() -> visualizerView.updateVisualizer(buffer));
-                handler.postDelayed(this, 500);
+                handler.postDelayed(this, 100);
             }
         }
     };
