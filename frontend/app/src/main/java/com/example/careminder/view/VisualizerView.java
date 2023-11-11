@@ -69,7 +69,7 @@ public class VisualizerView extends View {
             Log.d("test", "" + avgAbsValue);
 
             float relX = i * (width - strokeWidth) / (numLines - 1) + strokeWidth/2;
-            float absY = avgAbsValue / 128.0f * (height - strokeWidth) / 2;
+            float absY = avgAbsValue / (128.0f - volumeThreshold) * (height - strokeWidth) / 2;
             canvas.drawLine(relX, centerY - absY, relX, centerY + absY, paint);
         }
     }
