@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import androidx.core.content.ContextCompat;
 import com.example.careminder.R;
@@ -13,6 +14,7 @@ import com.example.careminder.R;
 public class VisualizerView extends View {
     private byte[] bytes;
     private Paint paint = new Paint();
+    private float volumeThreshold = 10.0f;
 
     final int numLines = 20;
 
@@ -63,6 +65,8 @@ public class VisualizerView extends View {
                 avgAbsValue += Math.abs(bytes[j]);
             }
             avgAbsValue /= bytesPerLine;
+            avgAbsValue = Math.max(avgAbsValue - volumeThreshold, 0);
+            Log.d("test", "" + avgAbsValue);
 
             float relX = i * (width - strokeWidth) / (numLines - 1) + strokeWidth/2;
             float absY = avgAbsValue / 128.0f * (height - strokeWidth) / 2;
