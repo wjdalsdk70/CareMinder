@@ -88,13 +88,13 @@ public class PatientRecordingActivity extends AppCompatActivity {
     };
 
 
-    private Runnable updateVisualizer = new Runnable() {
+    final Runnable updateVisualizer = new Runnable() {
         @Override
         public void run() {
             if (audioRecord != null && audioRecord.getRecordingState() == AudioRecord.RECORDSTATE_RECORDING) {
                 byte[] buffer = new byte[minBufferSize];
                 audioRecord.read(buffer, 0, buffer.length);
-                visualizerView.updateVisualizer(buffer);
+                runOnUiThread(() -> visualizerView.updateVisualizer(buffer));
                 handler.postDelayed(this, 500);
             }
         }
