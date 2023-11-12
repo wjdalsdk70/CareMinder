@@ -107,8 +107,6 @@ public class PatientRecordingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_recording);
-        textView = findViewById(R.id.recognized_text);
-        textView.setText("말씀하시는 내용을 인식하고 있습니다");
 
         handleAudio();
     }
@@ -144,6 +142,7 @@ public class PatientRecordingActivity extends AppCompatActivity {
     }
 
     private void startSpeechRecognition() {
+        textView = findViewById(R.id.recognized_text);
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
         speechRecognizer.setRecognitionListener(recognitionListener);
 
@@ -212,6 +211,13 @@ public class PatientRecordingActivity extends AppCompatActivity {
 
     public void OnCancelClick(View view) {
         Intent intent = new Intent(this, PatientActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+
+    public void OnSendClick(View view) {
+        Intent intent = new Intent(this, PatientRecordingResultActivity.class);
         startActivity(intent);
         finish();
     }

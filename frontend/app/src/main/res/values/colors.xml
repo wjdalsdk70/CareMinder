@@ -22,4 +22,5 @@
     <color name="background_secondary">#CDCDCD</color>
 
     <color name="border">@color/black</color>
+    <color name="background_grey">#CCCCCC</color>
 </resources>
