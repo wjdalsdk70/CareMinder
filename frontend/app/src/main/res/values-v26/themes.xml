@@ -3,6 +3,7 @@
 
     <style name="Widget.AppCompat.Button" parent="Widget.MaterialComponents.Button">
         <item name="android:backgroundTint">@color/text_background_light</item>
+        <item name="android:layout_width">290dp</item>
         <item name="android:paddingHorizontal">100dp</item>
         <item name="android:paddingVertical">12dp</item>
         <item name="cornerRadius">15dp</item>

@@ -20,7 +20,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.popup_layout, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_request_adapter, parent, false);
         return new ViewHolder(view);
     }
 
