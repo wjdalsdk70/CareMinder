@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="12dp"
             android:adjustViewBounds="true"
-            android:src="@drawable/ic_launcher_background" />
+            android:src="@drawable/logo" />
 
     </LinearLayout>
 
@@ -47,6 +47,59 @@
         app:flow_verticalGap="12dp">
 
         <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/vector" />
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="15dp"
+                android:gravity="center"
+                android:text="인식이 완료되었습니다. 내용을 확인해주세요."
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:textSize="60px"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="수정을 원하실 경우, "
+                android:textColor="#000000"
+                android:textSize="35px"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="‘다시 녹음’ "
+                android:textColor="#FF0000"
+                android:textSize="35px"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="또는 ‘직접 수정’을 하실 수 있습니다."
+                android:textColor="#000000"
+                android:textSize="35px"/>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
             android:layout_width="900dp"
             android:layout_height="250dp">
 
@@ -56,24 +109,29 @@
                 android:background="@color/background_grey">
 
                 <TextView
-                    android:id="@+id/textView1"
+                    android:id="@+id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center"
                     android:text="안녕하세요, 스크린샷을 찍은 것이 맞습니까?"
                     android:textColor="#000000"
-                    android:layout_margin="10dp"
-                    android:gravity="center"/>
+                    android:textSize="40px"/>
 
                 <EditText
                     android:id="@+id/editText"
                     android:layout_width="800dp"
                     android:layout_height="150dp"
-                    android:layout_below="@id/textView1"
+                    android:layout_below="@id/textView3"
                     android:layout_centerInParent="true"
                     android:background="#FFFFFF"
                     android:padding="10dp"
                     android:text="맞습니다"
-                    android:textColor="#000000" />
+                    android:textColor="#000000"
+                    android:textSize="40px"/>
 
             </RelativeLayout>
 
@@ -95,7 +153,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/cancel"
                 android:onClick="OnCancelClick"
-                android:layout_marginEnd="8dp"/>
+                android:layout_marginEnd="10dp"/>
 
             <com.google.android.material.button.MaterialButton
                 style="@style/Widget.AppCompat.Button"
@@ -103,8 +161,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/cancel"
                 android:onClick="OnCancelClick"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"/>
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="#FF0000"/>
 
             <com.google.android.material.button.MaterialButton
                 style="@style/Widget.AppCompat.Button"
@@ -112,7 +171,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/cancel"
                 android:onClick="OnCancelClick"
-                android:layout_marginStart="8dp"/>
+                android:layout_marginStart="10dp"/>
 
         </LinearLayout>
 
