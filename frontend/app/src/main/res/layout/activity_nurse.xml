@@ -133,15 +133,44 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingTop="16dp">
 
-                <Button
-                    android:id="@+id/button2"
+                <Spinner
+                    android:id="@+id/spinner11"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Placeholder" />
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="16dp"
+                    android:background="@drawable/nurse_dropdown_dark"
+                    android:entries="@array/my_task"
+                    android:textColor="@color/text_background_light"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+                <Spinner
+                    android:id="@+id/spinner12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="16dp"
+                    android:background="@drawable/nurse_dropdown_dark"
+                    android:entries="@array/my_patient"
+                    android:textColor="@color/text_background_light" />
+
+                <Spinner
+                    android:id="@+id/spinner13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="16dp"
+                    android:background="@drawable/nurse_dropdown_dark"
+                    android:entries="@array/my_zone"
+                    android:textColor="@color/text_background_light" />
             </LinearLayout>
+
+            <ListView
+                android:id="@+id/nurse_list_right"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="16dp" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -151,8 +180,10 @@
             android:padding="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -180,15 +211,38 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingTop="16dp">
 
-                <Button
-                    android:id="@+id/button"
+                <Spinner
+                    android:id="@+id/spinner1"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Placeholder" />
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="16dp"
+                    android:background="@drawable/nurse_dropdown"
+                    android:entries="@array/task" />
+
+                <Spinner
+                    android:id="@+id/spinner2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="16dp"
+                    android:background="@drawable/nurse_dropdown"
+                    android:entries="@array/patient" />
+
+                <Spinner
+                    android:id="@+id/spinner3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/nurse_dropdown"
+                    android:entries="@array/zone" />
             </LinearLayout>
+
+            <ListView
+                android:id="@+id/nurse_list_left"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="16dp" />
 
         </LinearLayout>
 

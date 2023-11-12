@@ -7,4 +7,34 @@
     <string name="group38">전송 취소하기</string>
     <string name="red_cancel">다시 녹음하기</string>
     <string name="right_cancel">추가 전송하기</string>
+
+    <string-array name="task">
+        <item>요청사항</item>
+        <item>질문사항</item>
+    </string-array>
+
+    <string-array name="patient">
+        <item>내 담당 환자</item>
+        <item>김 O 희</item>
+        <item>이 O 연</item>
+        <item>황 O 민</item>
+    </string-array>
+
+    <string-array name="zone">
+        <item>응급실</item>
+        <item>메인1</item>
+        <item>메인2</item>
+    </string-array>
+
+    <string-array name="my_task">
+        <item>업무별 | 질문사항</item>
+    </string-array>
+
+    <string-array name="my_patient">
+        <item>환자별 | 내 담당 환자</item>
+    </string-array>
+
+    <string-array name="my_zone">
+        <item>구역별 | 응급실</item>
+    </string-array>
 </resources>
