@@ -18,4 +18,8 @@
     <color name="text_background_response">#F2F2F2</color>
 
     <color name="background">@color/white</color>
+    <color name="background_primary">#EFEEEE</color>
+    <color name="background_secondary">#CDCDCD</color>
+
+    <color name="border">@color/black</color>
 </resources>

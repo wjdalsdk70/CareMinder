@@ -58,6 +58,7 @@
         android:id="@+id/request_boxes"
         app:layout_constraintTop_toBottomOf="@id/patient_detail">
 
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -68,50 +69,48 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="궁금한 사항이 있으시다면"
-                android:textSize="@dimen/text_size_title"
-                android:gravity="center"/>
+                android:textSize="@dimen/text_size_title" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                android:background="@drawable/patient_question_background"
                 android:gravity="center"
-                android:orientation="vertical"
                 android:onClick="OnQuestionButtonClick"
-                android:background="@drawable/patient_question_background">
+                android:orientation="vertical">
 
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
+                    android:layout_margin="10dp"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:src="@drawable/baseline_question_mark_24"
-                    android:layout_margin="10dp"
-                    android:layout_marginTop="10dp"/>
+                    android:src="@drawable/baseline_question_mark_24" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:gravity="center"
                     android:text="궁금한 사항이 있으시다면"
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    android:layout_margin="10dp"
-                    android:textSize="@dimen/text_size_title"/>
+                    android:textSize="@dimen/text_size_title"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="자동으로 간호사에게 전달됩니다"
-                    android:gravity="center"
                     android:layout_margin="10dp"
-                    android:textSize="@dimen/text_size_h1"/>
+                    android:gravity="center"
+                    android:text="자동으로 간호사에게 전달됩니다"
+                    android:textSize="@dimen/text_size_h1" />
 
             </LinearLayout>
 
 
-
         </LinearLayout>
-
 
         <View
             android:layout_width="3dp"
@@ -209,7 +208,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.5">
+        app:layout_constraintWidth_percent="0.5"
+        tools:visibility="gone">
 
         <TextView
             android:id="@+id/titleTextView"
