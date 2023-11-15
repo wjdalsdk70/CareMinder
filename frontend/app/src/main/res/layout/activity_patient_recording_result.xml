@@ -100,26 +100,28 @@
 
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="250dp">
+            android:layout_width="wrap_content"
+            android:layout_height="230dp"
+            android:layout_marginHorizontal="100dp"
+            android:background="@drawable/patientrecordingpage_rounded_box">
 
             <RelativeLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:background="@color/background_grey">
+                android:background="@drawable/patientrecordingpage_rounded_box">
 
                 <TextView
                     android:id="@+id/textView3"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="10dp"
-                    android:gravity="center"
-                    android:text="안녕하세요, 스크린샷을 찍은 것이 맞습니까?"
+                    android:text="@string/boxedit"
                     android:textColor="@color/black"
-                    android:textSize="40px"/>
+                    android:textSize="40px"
+                    android:gravity="center"/>
 
                 <EditText
                     android:id="@+id/editText"
@@ -127,11 +129,12 @@
                     android:layout_height="150dp"
                     android:layout_below="@id/textView3"
                     android:layout_centerInParent="true"
-                    android:background="#FFFFFF"
+                    android:background="@drawable/patient_recordingpage_rounded_edidtext"
+                    android:gravity="center"
                     android:padding="10dp"
-                    android:text="맞습니다"
+                    android:text="@string/textfeld"
                     android:textColor="@color/black"
-                    android:textSize="40px"/>
+                    android:textSize="40px" />
 
             </RelativeLayout>
 
@@ -146,29 +149,35 @@
 
             <com.google.android.material.button.MaterialButton
                 style="@style/Widget.AppCompat.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="300dp"
+                android:layout_height="75dp"
                 android:layout_marginEnd="10dp"
                 android:onClick="OnCancelClick"
-                android:text="@string/group38" />
+                android:paddingHorizontal="0dp"
+                android:text="@string/group38"
+                android:gravity="center"/>
 
             <com.google.android.material.button.MaterialButton
                 style="@style/Widget.AppCompat.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="300dp"
+                android:layout_height="75dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:backgroundTint="@color/text_accent_3"
                 android:onClick="OnCancelClick"
-                android:text="@string/red_cancel" />
+                android:text="@string/red_cancel"
+                android:paddingHorizontal="0dp"
+                android:gravity="center"/>
 
             <com.google.android.material.button.MaterialButton
                 style="@style/Widget.AppCompat.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="300dp"
+                android:layout_height="75dp"
                 android:layout_marginStart="10dp"
                 android:onClick="OnCancelClick"
-                android:text="@string/right_cancel" />
+                android:text="@string/right_cancel"
+                android:paddingHorizontal="0dp"
+                android:gravity="center"/>
 
         </LinearLayout>
 
