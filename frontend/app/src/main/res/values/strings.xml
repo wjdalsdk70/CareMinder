@@ -7,6 +7,8 @@
     <string name="group38">전송 취소하기</string>
     <string name="red_cancel">다시 녹음하기</string>
     <string name="right_cancel">추가 전송하기</string>
+    <string name="boxedit">안녕하세요, 스크린샷을 찍은 것이 맞습니까?</string>
+    <string name="textfeld">맞습니다</string>
 
     <string-array name="task">
         <item>요청사항</item>
