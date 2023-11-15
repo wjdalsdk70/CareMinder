@@ -44,7 +44,7 @@ GROUPS = {
 }
 
 
-def populate_models(sender, **kwargs):
+def populate_groups():
     from django.contrib.auth.models import Group, Permission
     from django.core.exceptions import ObjectDoesNotExist
 
