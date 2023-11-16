@@ -221,12 +221,4 @@ public class PatientRecordingActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-
-    public void OnSendMoreClick(View view) {
-        Intent intent = new Intent(this, PatientRecordingActivity.class);
-        startActivity(intent);
-        finish();
-    }
-
-
 }

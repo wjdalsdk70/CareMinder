@@ -132,7 +132,7 @@
                     android:background="@drawable/patient_recordingpage_rounded_edidtext"
                     android:gravity="center"
                     android:padding="10dp"
-                    android:text="@string/textfeld"
+                    android:hint="@string/textfeld"
                     android:textColor="@color/black"
                     android:textSize="40px" />
 
@@ -164,7 +164,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:backgroundTint="@color/text_accent_3"
-                android:onClick="OnSendClick"
+                android:onClick="OnSendTextClick"
                 android:text="@string/red_cancel"
                 android:paddingHorizontal="0dp"
                 android:gravity="center"/>
