@@ -52,8 +52,8 @@ public class PatientActivity extends AppCompatActivity {
         // params //
         int margin = 16;
         int padding = 20;
-        int width = 380;
-        int height = 120;
+        int width = 320;
+        int height = 100;
 
         // top items title //
         LinearLayout title_row = findViewById(R.id.horizontal_scroll_description_title);
@@ -129,7 +129,7 @@ public class PatientActivity extends AppCompatActivity {
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT));
 
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(300, 90);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, height);
 
             params.setMargins(margin, 0, margin, 0);
             textView.setLayoutParams(params);
