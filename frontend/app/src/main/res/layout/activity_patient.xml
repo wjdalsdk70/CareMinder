@@ -25,35 +25,103 @@
 
         <TextView
             android:id="@+id/text_1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="현재 누적된 요청사항 42" />
-
-        <TextView
-            android:id="@+id/text_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="대기1       진행중1        완료2" />
+            android:paddingRight="10dp"
+            android:text="@string/amount_of_requests"/>
+
+        <TextView
+            android:id="@+id/amount_of_requests"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="end"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/waiting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="5dp"
+            android:text="@string/stand_by" />
+
+        <TextView
+            android:id="@+id/waiting_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="10dp"/>
+
+        <TextView
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="5dp"
+            android:text="@string/in_progress" />
+
+        <TextView
+            android:id="@+id/progress_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="10dp"/>
+
+        <TextView
+            android:id="@+id/complete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="5dp"
+            android:text="@string/completed" />
+
+        <TextView
+            android:id="@+id/complete_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="10dp"/>
+    </LinearLayout>
+
 
     </LinearLayout>
 
 
     <HorizontalScrollView
-        android:id="@+id/patient_detail"
+        android:id="@+id/horizontal_scroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_horizontal"
+        android:scrollbars="none"
         android:paddingTop="16dp"
         android:paddingBottom="48dp"
         app:layout_constraintTop_toBottomOf="@id/header" >
 
         <LinearLayout
-            android:id="@+id/horizontal_scroll_menu"
+            android:id="@+id/patient_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" />
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/horizontal_scroll_description_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:orientation="horizontal"/>
+
+            <LinearLayout
+                android:id="@+id/horizontal_scroll_description_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:orientation="horizontal" />
+
+        </LinearLayout>
+
     </HorizontalScrollView>
 
 
@@ -62,7 +130,7 @@
         android:layout_height="384dp"
         android:orientation="horizontal"
         android:id="@+id/request_boxes"
-        app:layout_constraintTop_toBottomOf="@id/patient_detail">
+        app:layout_constraintTop_toBottomOf="@id/horizontal_scroll">
 
 
         <LinearLayout
@@ -76,7 +144,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="궁금한 사항이 있으시다면"
+                android:text="@string/question_title"
                 android:textSize="@dimen/text_size_title" />
 
             <LinearLayout
@@ -101,7 +169,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:gravity="center"
-                    android:text="궁금한 사항이 있으시다면"
+                    android:text="@string/question_button"
                     android:textSize="@dimen/text_size_title"
                     android:textStyle="bold" />
 
@@ -110,7 +178,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:gravity="center"
-                    android:text="자동으로 간호사에게 전달됩니다"
+                    android:text="@string/subtitle"
                     android:textSize="@dimen/text_size_h1" />
 
             </LinearLayout>
@@ -134,7 +202,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="빠른 해결을 원하신다면"
+                android:text="@string/request_title"
                 android:textSize="@dimen/text_size_title"
                 android:gravity="center"/>
 
@@ -158,7 +226,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="요청사항을 말씀해주세요"
+                    android:text="@string/request_button"
                     android:textStyle="bold"
                     android:gravity="center"
                     android:layout_margin="10dp"
@@ -167,7 +235,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="자동으로 간호사에게 전달됩니다"
+                    android:text="@string/subtitle"
                     android:gravity="center"
                     android:layout_margin="10dp"
                     android:textSize="@dimen/text_size_h1"/>

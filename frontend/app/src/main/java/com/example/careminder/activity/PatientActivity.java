@@ -35,9 +35,29 @@ public class PatientActivity extends AppCompatActivity {
 
 //        popupContainer = findViewById(R.id.popupContainer);
 
-        LinearLayout menu = findViewById(R.id.horizontal_scroll_menu);
+        // Set request amounts //
+        TextView amount_of_requests = findViewById(R.id.amount_of_requests);
+        amount_of_requests.setText("42");
 
-        String[] items = {
+        TextView amount_waiting = findViewById(R.id.waiting_amount);
+        amount_waiting.setText("3");
+        TextView progress_amount = findViewById(R.id.progress_amount);
+        progress_amount.setText("5");
+        TextView complete_amount = findViewById(R.id.complete_amount);
+        complete_amount.setText("2");
+
+
+        // Set request amounts //
+
+        // params //
+        int margin = 16;
+        int padding = 20;
+        int width = 380;
+        int height = 120;
+
+        // top items title //
+        LinearLayout title_row = findViewById(R.id.horizontal_scroll_description_title);
+        String[] titles = {
                 "Name",
                 "Doctor",
                 "Nurse",
@@ -57,8 +77,51 @@ public class PatientActivity extends AppCompatActivity {
                 "Examinations",
                 "Hospitalization"
         };
-        for (int i = 0; i < items.length; i++) {
-            String item = items[i];
+        for (int i = 0; i < titles.length; i++) {
+            String item = titles[i];
+
+            TextView textView = new TextView(PatientActivity.this);
+            textView.setText(item);
+            textView.setLayoutParams(new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT));
+
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, height);
+            params.setMargins(margin, 0, margin, 0);
+            textView.setLayoutParams(params);
+            textView.setBackgroundResource(R.drawable.rounded_box_light);
+
+            textView.setPadding(padding, padding, padding, padding);
+            textView.setGravity(Gravity.CENTER);
+
+            title_row.addView(textView);
+        }
+
+        // bottom items text //
+
+        LinearLayout text_row = findViewById(R.id.horizontal_scroll_description_text);
+        String[] text = {
+                "Name",
+                "Doctor",
+                "Nurse",
+                "1st Visit",
+                "Examinations",
+                "Examinations",
+                "Examinations",
+                "Examinations",
+                "Examinations",
+                "Examinations",
+                "Examinations",
+                "Examinations",
+                "Examinations",
+                "Examinations",
+                "Examinations",
+                "Examinations",
+                "Examinations",
+                "Hospitalization"
+        };
+        for (int i = 0; i < text.length; i++) {
+            String item = text[i];
 
             TextView textView = new TextView(PatientActivity.this);
             textView.setText(item);
@@ -67,17 +130,16 @@ public class PatientActivity extends AppCompatActivity {
                     LinearLayout.LayoutParams.WRAP_CONTENT));
 
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(300, 90);
-            int margin = 16;
+
             params.setMargins(margin, 0, margin, 0);
             textView.setLayoutParams(params);
             textView.setBackgroundResource(R.drawable.rounded_box_light);
 
-            int padding = 20;
             textView.setPadding(padding, padding, padding, padding);
+            textView.setGravity(Gravity.CENTER);
 
-            menu.addView(textView);
+            text_row.addView(textView);
         }
-
 
     }
 
