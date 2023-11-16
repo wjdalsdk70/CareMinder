@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import com.example.careminder.activity.NurseActivity;
+import com.example.careminder.activity.NurseEditPatientActivity;
 import com.example.careminder.activity.PatientActivity;
 import com.example.careminder.activity.PatientRecordingActivity;
 
@@ -30,6 +31,12 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, PatientActivity.class);
             startActivity(intent);
         }
+    }
+
+    public void OnNurseEditPatientButtonClick(View view) {
+        Intent intent = new Intent(this, NurseEditPatientActivity.class);
+        startActivity(intent);
+
     }
 
     public void OnRecordButtonClick(View view) {
