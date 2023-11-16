@@ -133,7 +133,7 @@ public class PatientActivity extends AppCompatActivity {
 
             params.setMargins(margin, 0, margin, 0);
             textView.setLayoutParams(params);
-            textView.setBackgroundResource(R.drawable.rounded_box_light);
+            textView.setBackgroundResource(R.drawable.rounded_box_response);
 
             textView.setPadding(padding, padding, padding, padding);
             textView.setGravity(Gravity.CENTER);
