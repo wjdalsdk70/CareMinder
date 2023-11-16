@@ -7,6 +7,19 @@
     <string name="group38">전송 취소하기</string>
     <string name="red_cancel">다시 녹음하기</string>
     <string name="right_cancel">추가 전송하기</string>
+    <string name="boxedit">안녕하세요, 스크린샷을 찍은 것이 맞습니까?</string>
+    <string name="textfeld">맞습니다</string>
+
+    <string name="question_title">궁금한 사항이 있으시다면,</string>
+    <string name="question_button">질문을 말씀해주세요</string>
+    <string name="subtitle">자동으로 간호사에게 전달됩니다</string>
+    <string name="request_title">빠른 해결을 원하신다면,</string>
+    <string name="request_button">요청사항을 말씀해주세요</string>
+    <string name="amount_of_requests">현재 누적된 요청사항</string>
+    <string name="stand_by">대기</string>
+    <string name="in_progress">진행중</string>
+    <string name="completed">완료</string>
+
 
     <string-array name="task">
         <item>요청사항</item>
