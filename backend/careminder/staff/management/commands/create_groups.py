@@ -19,23 +19,7 @@ GROUPS = {
         "change_request",
         "delete_request",
     ],
-    "HELPER": [
-        "view_patient",
-        "change_patient",
-        "add_request",
-        "view_request",
-        "change_request",
-        "delete_request",
-    ],
-    "NURSE": [
-        "view_patient",
-        "change_patient",
-        "add_request",
-        "view_request",
-        "change_request",
-        "delete_request",
-    ],
-    "DOCTOR": [
+    "CAREWORKER": [
         "view_patient",
         "change_patient",
         "add_request",

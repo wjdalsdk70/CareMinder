@@ -6,12 +6,19 @@ from django.contrib.auth.hashers import make_password
 class Staff(AbstractUser):
     class Role(models.IntegerChoices):
         SECRETARY = 0, "Secretary"
-        HELPER = 1, "Helper"
-        NURSE = 2, "Nurse"
-        DOCTOR = 3, "Doctor"
+        CAREWORKER = (
+            1,
+            "Careworker",
+        )
 
-    role = models.PositiveSmallIntegerField(null=True, choices=Role.choices)
+    class Type(models.IntegerChoices):
+        HELPER = 0, "Helper"
+        NURSE = 1, "Nurse"
+        DOCTOR = 2, "Doctor"
+
     nfc = models.CharField(null=True, max_length=256)
+    role = models.PositiveSmallIntegerField(null=True, choices=Role.choices)
+    type = models.PositiveSmallIntegerField(null=True, choices=Type.choices)
 
     USERNAME_FIELD = "username"
 
