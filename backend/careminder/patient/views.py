@@ -1,23 +1,23 @@
 from rest_framework import generics
-from rest_framework.permissions import DjangoModelPermissions
+from careminder.permissions import CustomDjangoModelPermissions
 from .models import Patient, MedicalExamination
 from .serializers import PatientSerializer, MedicalExaminationSerializer
 
 
 class PatientListCreateView(generics.ListCreateAPIView):
-    permission_classes = [DjangoModelPermissions]
+    permission_classes = [CustomDjangoModelPermissions]
     queryset = Patient.objects.all()
     serializer_class = PatientSerializer
 
 
 class PatientRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = [DjangoModelPermissions]
+    permission_classes = [CustomDjangoModelPermissions]
     queryset = Patient.objects.all()
     serializer_class = PatientSerializer
 
 
 class MedicalExaminationListCreateView(generics.ListCreateAPIView):
-    permission_classes = [DjangoModelPermissions]
+    permission_classes = [CustomDjangoModelPermissions]
     serializer_class = MedicalExaminationSerializer
 
     def get_queryset(self):
@@ -32,7 +32,7 @@ class MedicalExaminationListCreateView(generics.ListCreateAPIView):
 class MedicalExaminationRetrieveUpdateDestroyView(
     generics.RetrieveUpdateDestroyAPIView
 ):
-    permission_classes = [DjangoModelPermissions]
+    permission_classes = [CustomDjangoModelPermissions]
     serializer_class = MedicalExaminationSerializer
 
     def get_queryset(self):

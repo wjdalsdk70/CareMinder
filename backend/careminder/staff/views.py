@@ -2,7 +2,11 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.hashers import make_password
 from rest_framework import generics, status
 from rest_framework.response import Response
-from rest_framework.permissions import DjangoModelPermissions
+
+from careminder.permissions import CustomDjangoModelPermissions
+from staff.permissions import (
+    IsUserOrIsSecretaryOrHasCustomModelPermissions,
+)
 from .models import Staff
 from .serializers import StaffSerializer
 
@@ -40,12 +44,14 @@ class LoginView(generics.GenericAPIView):
 
 
 class StaffListCreateView(generics.ListCreateAPIView):
-    permission_classes = [DjangoModelPermissions]
+    permission_classes = [CustomDjangoModelPermissions]
     queryset = Staff.objects.all()
     serializer_class = StaffSerializer
 
 
 class StaffRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = [DjangoModelPermissions]
+    permission_classes = [
+        IsUserOrIsSecretaryOrHasCustomModelPermissions,
+    ]
     queryset = Staff.objects.all()
     serializer_class = StaffSerializer

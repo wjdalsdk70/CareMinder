@@ -1,16 +1,16 @@
 from rest_framework import generics
-from rest_framework.permissions import DjangoModelPermissions
+from careminder.permissions import CustomDjangoModelPermissions
 from .models import Request
 from .serializers import RequestSerializer
 
 
 class RequestListCreateView(generics.ListCreateAPIView):
-    permission_classes = [DjangoModelPermissions]
+    permission_classes = [CustomDjangoModelPermissions]
     queryset = Request.objects.all()
     serializer_class = RequestSerializer
 
 
 class RequestRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = [DjangoModelPermissions]
+    permission_classes = [CustomDjangoModelPermissions]
     queryset = Request.objects.all()
     serializer_class = RequestSerializer
