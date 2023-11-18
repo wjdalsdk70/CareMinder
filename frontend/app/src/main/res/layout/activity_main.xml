@@ -41,6 +41,15 @@
             android:text="Go to Nurse"
             />
 
+        <Button
+            android:id="@+id/nurse_patient_edit_button"
+            android:onClick="OnNurseEditPatientButtonClick"
+            android:layout_width="294dp"
+            android:layout_height="102dp"
+            android:textSize="24dp"
+            android:text="Go to Edit"
+            />
+
     </LinearLayout>
 
 
