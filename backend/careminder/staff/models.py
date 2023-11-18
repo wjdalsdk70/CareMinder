@@ -1,6 +1,8 @@
+from tkinter import NO
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import check_password
 
 
 class Staff(AbstractUser):
@@ -24,3 +26,8 @@ class Staff(AbstractUser):
 
     def set_nfc(self, nfc: str):
         self.nfc = make_password(nfc)
+
+    def check_nfc(self, nfc):
+        if self.nfc is None:
+            return False
+        return check_password(nfc, self.nfc)
