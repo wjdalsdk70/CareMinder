@@ -284,13 +284,37 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.5"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/close_cross"/>
+
+        <LinearLayout
+            android:layout_width="550dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_gravity="center|top"
+            android:background="@color/tertiary">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/logo"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="Item 1"
+                android:textColor="@color/white"/>
+
+        </LinearLayout>
 
     </FrameLayout>
 
@@ -300,7 +324,7 @@
         android:layout_width="wrap_content"
         android:layout_height="200dp"
         android:layout_gravity="start|bottom"
-        android:layout_marginStart="1100dp"
+        android:layout_marginStart="1140dp"
         android:layout_marginBottom="275dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
