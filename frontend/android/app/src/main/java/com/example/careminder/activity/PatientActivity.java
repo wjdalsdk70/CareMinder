@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -25,6 +26,7 @@ public class PatientActivity extends AppCompatActivity {
 
     private PatientDao patientDao;
     private FrameLayout popupContainer;
+    private Button listButton;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +35,19 @@ public class PatientActivity extends AppCompatActivity {
 
         patientDao = new PatientDao(this);
 
-//        popupContainer = findViewById(R.id.popupContainer);
+        popupContainer = findViewById(R.id.popupContainer);
+        listButton = findViewById(R.id.list_button);
+
+        listButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (popupContainer.getVisibility() == View.VISIBLE) {
+                    popupContainer.setVisibility(View.GONE);
+                } else {
+                    popupContainer.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
         // Set request amounts //
         TextView amount_of_requests = findViewById(R.id.amount_of_requests);
