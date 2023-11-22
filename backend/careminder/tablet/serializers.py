@@ -11,15 +11,24 @@ from .models import Tablet
 class TabletSerializer(serializers.ModelSerializer):
     patient = PatientSerializer(read_only=True)
     patient_id = serializers.PrimaryKeyRelatedField(
-        queryset=Patient.objects.all(), write_only=True, source="patient"
+        queryset=Patient.objects.all(),
+        write_only=True,
+        source="patient",
+        required=False,
     )
     doctor = StaffSerializer(read_only=True)
     doctor_id = serializers.PrimaryKeyRelatedField(
-        queryset=Staff.objects.all(), write_only=True, source="doctor"
+        queryset=Staff.objects.all(),
+        write_only=True,
+        source="doctor",
+        required=False,
     )
     nurse = StaffSerializer(read_only=True)
     nurse_id = serializers.PrimaryKeyRelatedField(
-        queryset=Staff.objects.all(), write_only=True, source="nurse"
+        queryset=Staff.objects.all(),
+        write_only=True,
+        source="nurse",
+        required=False,
     )
 
     class Meta:

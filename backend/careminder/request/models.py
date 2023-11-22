@@ -1,6 +1,8 @@
 from http.client import PROCESSING
+from urllib import request
 
 from django.db import models
+from patient.models import Patient
 from staff.models import Staff
 
 from tablet.models import Tablet
@@ -22,4 +24,13 @@ class Request(models.Model):
     time = models.DateTimeField(auto_now_add=True)
     response = models.TextField(null=True, blank=True)
     response_time = models.DateTimeField(null=True)
-    tablet = models.ForeignKey(Tablet, on_delete=models.SET_NULL, null=True)
+    tablet = models.ForeignKey(
+        Tablet, on_delete=models.SET_NULL, null=True
+    )  # TODO: fix request history on patient change problem
+
+
+class ChatMessage(models.Model):
+    request = models.ForeignKey(Request, on_delete=models.CASCADE)
+    text = models.TextField()
+    time = models.DateTimeField(auto_now_add=True)
+    from_patient = models.BooleanField()
