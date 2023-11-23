@@ -444,6 +444,177 @@ paths:
           description: ''
       tags:
       - api
+  /api/requests/{request_pk}/chat_messages/:
+    get:
+      operationId: listChatMessages
+      description: ''
+      parameters:
+      - name: request_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ChatMessage'
+          description: ''
+      tags:
+      - api
+    post:
+      operationId: createChatMessage
+      description: ''
+      parameters:
+      - name: request_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatMessage'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ChatMessage'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ChatMessage'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatMessage'
+          description: ''
+      tags:
+      - api
+  /api/requests/{request_pk}/chat_messages/{id}/:
+    get:
+      operationId: retrieveChatMessage
+      description: ''
+      parameters:
+      - name: request_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this chat message.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Request'
+          description: ''
+      tags:
+      - api
+    put:
+      operationId: updateChatMessage
+      description: ''
+      parameters:
+      - name: request_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this chat message.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Request'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Request'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Request'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Request'
+          description: ''
+      tags:
+      - api
+    patch:
+      operationId: partialUpdateChatMessage
+      description: ''
+      parameters:
+      - name: request_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this chat message.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Request'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Request'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Request'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Request'
+          description: ''
+      tags:
+      - api
+    delete:
+      operationId: destroyChatMessage
+      description: ''
+      parameters:
+      - name: request_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this chat message.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - api
   /api/tablets/:
     get:
       operationId: listTablets
@@ -714,6 +885,31 @@ paths:
           description: ''
       tags:
       - api
+  /api/tablets/login/:
+    post:
+      operationId: createTabletTokenObtainPair
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TabletTokenObtainPair'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TabletTokenObtainPair'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TabletTokenObtainPair'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TabletTokenObtainPair'
+          description: ''
+      tags:
+      - api
   /api/staffs/login/:
     post:
       operationId: createTokenObtainPair
@@ -742,7 +938,7 @@ paths:
           description: ''
       tags:
       - api
-  /api/staffs/logout/:
+  /api/token/blacklist/:
     post:
       operationId: createTokenBlacklist
       description: 'Takes a token and blacklists it. Must be used with the
@@ -769,7 +965,7 @@ paths:
           description: ''
       tags:
       - api
-  /api/staffs/refresh/:
+  /api/token/refresh/:
     post:
       operationId: createTokenRefresh
       description: 'Takes a refresh type JSON web token and returns an access type
@@ -888,6 +1084,23 @@ components:
       - for_role
       - is_question
       - tablet_id
+    ChatMessage:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        text:
+          type: string
+        time:
+          type: string
+          format: date-time
+          readOnly: true
+        from_patient:
+          type: boolean
+      required:
+      - text
+      - from_patient
     Tablet:
       type: object
       properties:
@@ -1021,10 +1234,7 @@ components:
           type: integer
           writeOnly: true
       required:
-      - patient_id
       - room
-      - doctor_id
-      - nurse_id
     Staff:
       type: object
       properties:
@@ -1065,6 +1275,17 @@ components:
           - 2
           type: integer
           nullable: true
+      required:
+      - username
+      - password
+    TabletTokenObtainPair:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+          writeOnly: true
       required:
       - username
       - password

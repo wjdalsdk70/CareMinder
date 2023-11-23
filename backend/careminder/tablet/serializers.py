@@ -1,9 +1,11 @@
 from rest_framework import serializers
 from patient.models import Patient
 
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from patient.serializers import PatientSerializer
 from staff.models import Staff
 from staff.serializers import StaffSerializer
+from rest_framework import exceptions
 
 from .models import Tablet
 
