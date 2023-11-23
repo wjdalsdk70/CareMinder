@@ -20,15 +20,5 @@ public class PopupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.popup_layout);
 
-        List<RequestDummy> dummyDataList = new ArrayList<>();
-        dummyDataList.add(new RequestDummy("Request 1", "Description 1"));
-        dummyDataList.add(new RequestDummy("Request 2", "Description 2"));
-        dummyDataList.add(new RequestDummy("Request 3", "Description 3"));
-
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        RequestAdapter adapter = new RequestAdapter(dummyDataList);
-        recyclerView.setAdapter(adapter);
     }
 }
