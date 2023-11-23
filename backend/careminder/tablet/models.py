@@ -1,3 +1,4 @@
+import uuid
 from django.db import models
 
 from patient.models import Patient
@@ -5,6 +6,7 @@ from staff.models import Staff
 
 
 class Tablet(models.Model):
+    # uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     patient = models.ForeignKey(
         Patient, related_name="tablets", on_delete=models.SET_NULL, null=True
     )

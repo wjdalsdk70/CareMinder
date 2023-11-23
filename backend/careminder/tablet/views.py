@@ -2,6 +2,7 @@ from rest_framework import generics
 from careminder.permissions import CustomDjangoModelPermissions
 
 from tablet.serializers import TabletSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 from .models import Tablet
 

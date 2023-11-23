@@ -15,6 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework_simplejwt.views import (
+    TokenRefreshView,
+    TokenBlacklistView,
+)
 
 
 urlpatterns = [
@@ -24,4 +28,6 @@ urlpatterns = [
     path("api/requests/", include("request.urls")),
     path("api/tablets/", include("tablet.urls")),
     path("api/staffs/", include("staff.urls")),
+    path("api/token/blacklist/", TokenBlacklistView.as_view(), name="token_blacklist"),
+    path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
 ]
