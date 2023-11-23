@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#000000</color>
+    <color name="sixty_opacity_background_black">#99000000</color>
     <color name="white">#F9EFEE</color>
     <color name="pure_white">#FFFFFF</color>
 
