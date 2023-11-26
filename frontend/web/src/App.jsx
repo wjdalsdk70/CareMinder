@@ -4,6 +4,9 @@ import Secretary from "src/pages/Secretary/Secretary";
 import useSession from "src/hooks/useSession";
 import Login from "src/pages/Login/Login";
 
+import "src/theme/global.css";
+import "src/theme/variables.css";
+
 function App() {
   const session = useSession();
 

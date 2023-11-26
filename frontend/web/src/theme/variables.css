@@ -1,0 +1,24 @@
+:root {
+  --primary: #f65a5a;
+  --secondary: #fce150;
+  --tertiary: #003f88;
+
+  --text: #000000;
+  --text-alt: #f9efee;
+  --text-accent-1: #ff0000;
+  --text-accent-2: #000aff;
+  --text-accent-3: #ff0000; /* TODO: define color */
+
+  --text-background-lighter: #d9d9d9;
+  --text-background-light: #b8b8b8;
+  --text-background-dark: #353535;
+  --text-background-response: #f2f2f2;
+
+  --background: var(--white);
+  --background-primary: #efeeee;
+  --background-secondary: #cdcdcd;
+
+  --border: var(--black);
+  --background-grey: #cccccc;
+  --background-glass: #35353580;
+}

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
+import "./Login.css";
+
 export default function Login() {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
@@ -21,26 +23,36 @@ export default function Login() {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="username">Username</label>
-        <input
-          type="text"
-          id="username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
+    <div className="login">
+      <div className="login__circle" />
+      <div className="login__container">
+        <div>
+          <h1 className="login__title">CARE MINDER</h1>
+          <h2 className="login__subtitle">WELCOME to CareMinder</h2>
+          <form className="login__form" onSubmit={handleSubmit}>
+            <fieldset>
+              <label htmlFor="username">Username</label>
+              <input
+                type="text"
+                id="username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </fieldset>
+            <fieldset>
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </fieldset>
 
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-
-        <input type="submit" value="Login" />
-      </form>
+            <input type="submit" value="Login" />
+          </form>
+        </div>
+      </div>
     </div>
   );
 }
