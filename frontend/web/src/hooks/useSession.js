@@ -35,9 +35,9 @@ export default function useSession() {
     }
   }, [session]);
 
-  const refreshToken = async () => {
+  const refresh = async () => {
     try {
-      const response = await refresh(session.refreshToken);
+      const response = await refresh(session);
       login({
         user: session.user,
         accessToken: response.accessToken,
@@ -61,7 +61,7 @@ export default function useSession() {
     ready,
     login,
     logout,
-    refreshToken,
+    refreshToken: refresh,
   };
 }
 
