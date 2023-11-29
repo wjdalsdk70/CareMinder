@@ -53,3 +53,11 @@
   flex-direction: row;
   gap: 16px;
 }
+
+.nurse__requests {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 12px;
+  overflow: scroll;
+}

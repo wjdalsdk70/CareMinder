@@ -51,12 +51,12 @@ export async function logout({ refreshToken }) {
   return data;
 }
 
-export async function get_request(){
-  const response = await fetch(`${BASE_URL}/requests/`,{
+export async function getRequests() {
+  const response = await fetch(`${BASE_URL}/requests/`, {
     method: "GET",
     headers: {
       "content-type": "application/json",
-    }
+    },
   });
 
   if (!response.ok) {
@@ -65,5 +65,4 @@ export async function get_request(){
 
   const data = await response.json();
   return data;
-
 }

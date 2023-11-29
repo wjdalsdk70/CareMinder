@@ -65,12 +65,11 @@ export default function useSession() {
   };
 }
 
-export function useRedirectToLogin(session, access) {
+export function useRedirectToLogin(session) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (session.ready && (!session.user || session.user.access < access))
-      navigate("/login");
+    if (session.ready && !session.user) navigate("/login?next=/nurse");
   }, [session, navigate]);
 }
 
