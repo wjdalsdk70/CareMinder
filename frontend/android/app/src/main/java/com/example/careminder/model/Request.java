@@ -1,42 +1,54 @@
 package com.example.careminder.model;
 
 import java.sql.Blob;
+import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 
 public class Request {
-    private int id;
-    private String text;
-    private Integer forRole;
-    private Integer forRoleId;
-    private boolean isQuestion;
-    private Integer state;
-    private LocalDateTime time;
-    private int tabletId;
+    public enum State {
+        WAITING(0),
+        PROCESSING(1),
+        FINISHED(2);
 
-    public Request(String text, Integer state, LocalDateTime time) {
-        this.text = text;
-        this.state = state;
-        this.time = time;
+        private int value;
+
+        private State(int value) {
+            this.value = value;
+        }
+
+        public int getValue() {
+            return value;
+        }
     }
 
-    public Request(int id, String text, Integer forRole, Integer forRoleId, boolean isQuestion, Integer state, LocalDateTime time, int tabletId) {
-        this.id = id;
+    private String text;
+    private byte[] recording;
+    private Integer forRole;
+    private boolean isQuestion;
+    private State state;
+    private Date time;
+    private String response;
+    private Date responseTime;
+    private Integer tablet;
+
+    public Request(String text, byte[] recording, boolean isQuestion, Date time, Integer tablet) {
         this.text = text;
-        this.forRole = forRole;
-        this.forRoleId = forRoleId;
+        this.recording = recording;
+        this.isQuestion = isQuestion;
+        this.time = time;
+        this.tablet = tablet;
+    }
+
+    public Request(String text, boolean isQuestion, State state, Date time, String response, Date responseTime, Integer tablet) {
+        this.text = text;
         this.isQuestion = isQuestion;
         this.state = state;
         this.time = time;
-        this.tabletId = tabletId;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        this.response = response;
+        this.responseTime = responseTime;
+        this.tablet = tablet;
     }
 
     public String getText() {
@@ -47,20 +59,20 @@ public class Request {
         this.text = text;
     }
 
+    public byte[] getRecording() {
+        return recording;
+    }
+
+    public void setRecording(byte[] recording) {
+        this.recording = recording;
+    }
+
     public Integer getForRole() {
         return forRole;
     }
 
     public void setForRole(Integer forRole) {
         this.forRole = forRole;
-    }
-
-    public Integer getForRoleId() {
-        return forRoleId;
-    }
-
-    public void setForRoleId(Integer forRoleId) {
-        this.forRoleId = forRoleId;
     }
 
     public boolean isQuestion() {
@@ -71,41 +83,58 @@ public class Request {
         isQuestion = question;
     }
 
-    public Integer getState() {
+    public State getState() {
         return state;
     }
 
-    public void setState(Integer state) {
+    public void setState(State state) {
         this.state = state;
     }
 
-    public LocalDateTime getTime() {
+    public Date getTime() {
         return time;
     }
 
-    public void setTime(LocalDateTime time) {
+    public void setTime(Date time) {
         this.time = time;
     }
 
-    public int getTabletId() {
-        return tabletId;
+    public String getResponse() {
+        return response;
     }
 
-    public void setTabletId(int tabletId) {
-        this.tabletId = tabletId;
+    public void setResponse(String response) {
+        this.response = response;
+    }
+
+    public Date getResponseTime() {
+        return responseTime;
+    }
+
+    public void setResponseTime(Date responseTime) {
+        this.responseTime = responseTime;
+    }
+
+    public Integer getTablet() {
+        return tablet;
+    }
+
+    public void setTablet(Integer tablet) {
+        this.tablet = tablet;
     }
 
     @Override
     public String toString() {
         return "Request{" +
-                "id=" + id +
-                ", text='" + text + '\'' +
+                "text='" + text + '\'' +
+                ", recording=" + Arrays.toString(recording) +
                 ", forRole=" + forRole +
-                ", forRoleId=" + forRoleId +
                 ", isQuestion=" + isQuestion +
                 ", state=" + state +
                 ", time=" + time +
-                ", tabletId=" + tabletId +
+                ", response='" + response + '\'' +
+                ", responseTime=" + responseTime +
+                ", tablet=" + tablet +
                 '}';
     }
 }

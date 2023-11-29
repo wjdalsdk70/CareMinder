@@ -1,14 +1,9 @@
 package com.example.careminder.helper;
 
-import com.example.careminder.model.HospitalizationType;
 import com.example.careminder.model.Patient;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class PatientJsonParser {
     public static Patient parsePatient(String json) throws JSONException {
