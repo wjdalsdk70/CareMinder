@@ -9,7 +9,20 @@ import "./Nurse.css";
 
 const Nurse = () => {
 
+  const [requests, setRequests] = useState([]);
 
+  useEffect(() => {
+    async function load() {
+      try{
+        const m = await get_request()
+        setRequests(m)
+        console.log(m)
+      } catch(e) {
+        console.log(e)
+      }
+    }
+    load()
+  }, [])
 
   const [selectedOptions, setSelectedOptions] = useState({});
 
@@ -49,7 +62,11 @@ const Nurse = () => {
             />
           </div>
           <div className="requests">
-            <Request isQuestion={true} text="text" date={new Date() - 1e9} />
+            {
+              requests.map(item => (
+                <Request isQuestion={item.is_question} text={item.text} date={new Date(item.time)} />
+            ))
+            }
           </div>
         </div>
         <div className="nurse__line" />
@@ -79,7 +96,7 @@ const Nurse = () => {
             />
           </div>
           <div className="requests">
-            <Request isQuestion={true} text="text" date={new Date() - 1e9} />
+            <Request isQuestion={true} text="2" date={new Date() - 1e9} />
           </div>
         </div>
       </div>
