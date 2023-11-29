@@ -14,23 +14,28 @@
 
   display: flex;
   flex-direction: row;
-  padding: 16px;
+  padding: 32px;
 }
 
-.nurse__waiting,
-.nurse__processing {
-  padding: 8px;
+.nurse__processing,
+.nurse__waiting {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .nurse__waiting {
   width: 55%;
 }
+
 .nurse__line {
   background-color: var(--border);
   width: 1px;
-  height: calc(100% - 64px);
-  margin-top: 64px;
+  height: calc(100% - 54px);
+  margin: 0 16px;
+  margin-top: 54px;
 }
+
 .nurse__processing {
   width: 45%;
 }
@@ -41,4 +46,10 @@
   flex-direction: row;
   gap: 8px;
   align-items: center;
+}
+
+.nurse__filters {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
 }
