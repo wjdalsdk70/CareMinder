@@ -16,7 +16,7 @@ class Request(models.Model):
 
     text = models.TextField()
     recording = models.BinaryField(null=True)
-    for_role = models.PositiveSmallIntegerField(choices=Staff.Role.choices)
+    for_role = models.PositiveSmallIntegerField(choices=Staff.Type.choices)
     is_question = models.BooleanField()
     state = models.PositiveSmallIntegerField(
         choices=State.choices, default=State.WAITING
