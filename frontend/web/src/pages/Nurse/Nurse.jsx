@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Filter from "src/components/Filter/Filter";
 import { BiLoaderCircle } from "react-icons/bi";
 import { MdOutlineDownloading } from "react-icons/md";
 import Request from "src/components/Request/Request";
+import { get_request } from "src/lib/api";
 
 import "./Nurse.css";
 
 const Nurse = () => {
+
+
+
   const [selectedOptions, setSelectedOptions] = useState({});
 
   const handleCheckboxChange = (event) => {
