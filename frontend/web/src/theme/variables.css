@@ -1,4 +1,6 @@
 :root {
+  --header-height: 64px;
+
   --primary: #f65a5a;
   --secondary: #fce150;
   --tertiary: #003f88;
@@ -14,11 +16,11 @@
   --text-background-dark: #353535;
   --text-background-response: #f2f2f2;
 
-  --background: var(--white);
+  --background: white;
   --background-primary: #efeeee;
   --background-secondary: #cdcdcd;
 
-  --border: var(--black);
+  --border: black;
   --background-grey: #cccccc;
   --background-glass: #35353580;
 }
