@@ -1,14 +1,16 @@
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
-from careminder.permissions import CustomDjangoModelPermissions
-import request
-from .models import Request, ChatMessage
 from .serializers import ChatMessageSerializer, RequestSerializer
+from careminder.permissions import CustomDjangoModelPermissions
+from .models import Request, ChatMessage
 
 
 class RequestListCreateView(generics.ListCreateAPIView):
     # permission_classes = [CustomDjangoModelPermissions]
     queryset = Request.objects.all()
     serializer_class = RequestSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ["for_role", "is_question", "state", "tablet"]
 
 
 class RequestRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
