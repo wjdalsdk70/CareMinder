@@ -31,6 +31,7 @@ public class PatientRecordingActivity extends AppCompatActivity {
     private SpeechRecognizer speechRecognizer;
     private TextView textView;
     private Handler handler = new Handler();
+    private boolean isQuestion;
     RecognitionListener recognitionListener = new RecognitionListener() {
         @Override
         public void onReadyForSpeech(Bundle params) {
@@ -109,6 +110,9 @@ public class PatientRecordingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_patient_recording);
 
         handleAudio();
+
+        Intent intent = getIntent();
+        isQuestion = intent.getBooleanExtra("isQuestion", false);
     }
 
     protected void handleAudio() {
@@ -177,6 +181,7 @@ public class PatientRecordingActivity extends AppCompatActivity {
                 } else {
                     Intent intent = new Intent(this, PatientRecordingActivity.class);
                     startActivity(intent);
+                    intent.putExtra("isQuestion", isQuestion);
                 }
                 return;
             }

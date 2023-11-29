@@ -5,19 +5,19 @@ from .serializers import PatientSerializer, MedicalExaminationSerializer
 
 
 class PatientListCreateView(generics.ListCreateAPIView):
-    permission_classes = [CustomDjangoModelPermissions]
+    # permission_classes = [CustomDjangoModelPermissions]
     queryset = Patient.objects.all()
     serializer_class = PatientSerializer
 
 
 class PatientRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = [CustomDjangoModelPermissions]
+    # permission_classes = [CustomDjangoModelPermissions]
     queryset = Patient.objects.all()
     serializer_class = PatientSerializer
 
 
 class MedicalExaminationListCreateView(generics.ListCreateAPIView):
-    permission_classes = [CustomDjangoModelPermissions]
+    # permission_classes = [CustomDjangoModelPermissions]
     serializer_class = MedicalExaminationSerializer
 
     def get_queryset(self):

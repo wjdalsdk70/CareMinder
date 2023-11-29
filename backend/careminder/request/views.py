@@ -6,19 +6,19 @@ from .serializers import ChatMessageSerializer, RequestSerializer
 
 
 class RequestListCreateView(generics.ListCreateAPIView):
-    permission_classes = [CustomDjangoModelPermissions]
+    # permission_classes = [CustomDjangoModelPermissions]
     queryset = Request.objects.all()
     serializer_class = RequestSerializer
 
 
 class RequestRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = [CustomDjangoModelPermissions]
+    # permission_classes = [CustomDjangoModelPermissions]
     queryset = Request.objects.all()
     serializer_class = RequestSerializer
 
 
 class ChatMessageListCreateView(generics.ListCreateAPIView):
-    permission_classes = [CustomDjangoModelPermissions]
+    # permission_classes = [CustomDjangoModelPermissions]
     queryset = ChatMessage.objects.all()
     serializer_class = ChatMessageSerializer
 
@@ -32,7 +32,7 @@ class ChatMessageListCreateView(generics.ListCreateAPIView):
 
 
 class ChatMessageRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = [CustomDjangoModelPermissions]
+    # permission_classes = [CustomDjangoModelPermissions]
     queryset = ChatMessage.objects.all()
     serializer_class = RequestSerializer
 

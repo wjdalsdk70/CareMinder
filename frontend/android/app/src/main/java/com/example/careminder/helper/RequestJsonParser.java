@@ -1,5 +1,7 @@
 package com.example.careminder.helper;
 
+import android.util.Log;
+
 import com.example.careminder.model.Patient;
 import com.example.careminder.model.Request;
 
@@ -14,12 +16,11 @@ public class RequestJsonParser {
     public static Request parsePostRequest(String json) throws JSONException {
         JSONObject jsonObject = new JSONObject(json);
         String text = jsonObject.getString("text");
-        byte[] recording = jsonObject.get("recording").toString().getBytes();
         boolean isQuestion = jsonObject.getBoolean("isQuestion");
-        Date time = Date.valueOf(jsonObject.getString("time"));
         Integer tablet = jsonObject.getInt("tablet");
+        Integer forRole = jsonObject.getInt("forRole");
 
-        return new Request(text, recording, isQuestion, time, tablet);
+        return new Request(text, isQuestion, tablet, forRole);
     }
 
     public static Request parseGetRequest(String json) throws JSONException {

@@ -33,12 +33,11 @@ public class Request {
     private Date responseTime;
     private Integer tablet;
 
-    public Request(String text, byte[] recording, boolean isQuestion, Date time, Integer tablet) {
+    public Request(String text, boolean isQuestion, Integer tablet, Integer forRole) {
         this.text = text;
-        this.recording = recording;
         this.isQuestion = isQuestion;
-        this.time = time;
         this.tablet = tablet;
+        this.forRole = forRole;
     }
 
     public Request(String text, boolean isQuestion, State state, Date time, String response, Date responseTime, Integer tablet) {
