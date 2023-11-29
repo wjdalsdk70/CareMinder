@@ -1,0 +1,34 @@
+.filter {
+  width: fit-content;
+  position: relative;
+}
+
+.filter .title,
+.filter-options {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 32px;
+  z-index: 50;
+}
+
+.filter .title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 24px 8px 12px;
+  cursor: pointer;
+}
+
+.filter .icon {
+  width: 32px;
+  height: 32px;
+}
+
+.filter-options {
+  display: none;
+  z-index: 45;
+  position: absolute;
+  top: 0;
+  left: 0;
+}

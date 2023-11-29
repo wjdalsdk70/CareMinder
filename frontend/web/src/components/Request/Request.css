@@ -1,0 +1,19 @@
+.request {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  background-color: var(--primary);
+  padding: 12px 20px;
+  border-radius: 12px;
+}
+
+.request__icon {
+  width: 36px;
+  height: 36px;
+  fill: white;
+}
+
+.request__info .top {
+  color: white;
+}
