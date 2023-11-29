@@ -44,6 +44,9 @@ const Nurse = () => {
               handleCheckboxChange={handleCheckboxChange}
             />
           </div>
+          <div className="requests">
+            <Request isQuestion={true} text="text" date={new Date() - 1e9} />
+          </div>
         </div>
         <div className="nurse__line" />
         <div className="nurse__processing">
@@ -71,8 +74,8 @@ const Nurse = () => {
               handleCheckboxChange={handleCheckboxChange}
             />
           </div>
-          <div>
-            <Request isQuestion={true} text="text" />
+          <div className="requests">
+            <Request isQuestion={true} text="text" date={new Date() - 1e9} />
           </div>
         </div>
       </div>
