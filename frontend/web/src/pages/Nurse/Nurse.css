@@ -1,0 +1,44 @@
+.nurse {
+  background-color: var(--background);
+  padding: var(--header-height) 16px 16px 16px;
+  width: 100vw;
+  height: 100vh;
+}
+
+.nurse__container {
+  width: 100%;
+  height: 100%;
+  background-color: var(--background-primary);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+
+  display: flex;
+  flex-direction: row;
+  padding: 16px;
+}
+
+.nurse__waiting,
+.nurse__processing {
+  padding: 8px;
+}
+
+.nurse__waiting {
+  width: 55%;
+}
+.nurse__line {
+  background-color: var(--border);
+  width: 1px;
+  height: calc(100% - 64px);
+  margin-top: 64px;
+}
+.nurse__processing {
+  width: 45%;
+}
+
+.nurse__waiting h1,
+.nurse__processing h1 {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+}
