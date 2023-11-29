@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="705c982a-fc4a-4646-9e69-913c4d72a412" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/careminder/patient/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/careminder/patient/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/careminder/request/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/careminder/request/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
