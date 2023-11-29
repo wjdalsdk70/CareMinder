@@ -1,6 +1,7 @@
 import React from "react";
 
 import "./Request.css";
+import { timeSince } from "src/core/utils";
 
 import {
   BsFillQuestionCircleFill,
@@ -17,9 +18,9 @@ export default function Request({ isQuestion, text, date }) {
       <div className="request__info">
         <div className="top">
           <h3>외상-1 (케어어)</h3>
-          <span>{}</span>
+          <span>{timeSince(date)}</span>
         </div>
-        <p>{text}</p>
+        <p className="bottom">{text}</p>
       </div>
     </div>
   );

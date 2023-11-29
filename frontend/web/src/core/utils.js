@@ -9,7 +9,7 @@ export function readForm(form) {
   return obj;
 }
 
-function timeSince(date) {
+export function timeSince(date) {
   var seconds = Math.floor((new Date() - date) / 1000);
 
   var interval = seconds / 31536000;
