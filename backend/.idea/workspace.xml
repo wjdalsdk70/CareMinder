@@ -6,6 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="705c982a-fc4a-4646-9e69-913c4d72a412" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/android/.idea/deploymentTargetDropDown.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/android/.idea/deploymentTargetDropDown.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/android/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/android/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/android/app/src/main/java/com/example/careminder/activity/PatientRecordingResultActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/android/app/src/main/java/com/example/careminder/activity/PatientRecordingResultActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/android/app/src/main/java/com/example/careminder/dal/RequestDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/android/app/src/main/java/com/example/careminder/dal/RequestDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/web/src/pages/Nurse/Nurse.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/web/src/pages/Nurse/Nurse.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,6 +125,7 @@
       <workItem from="1694544807269" duration="2713000" />
       <workItem from="1695059508962" duration="31000" />
       <workItem from="1698584122604" duration="10851000" />
+      <workItem from="1701345282966" duration="1717000" />
     </task>
     <servers />
   </component>

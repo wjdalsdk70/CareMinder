@@ -40,6 +40,8 @@ public class RequestDao {
 
         JSONObject jsonParams = new JSONObject(params);
 
+        Log.d("{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{TAG}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}", jsonParams.toString());
+
         StringRequest stringRequest = new StringRequest(Request.Method.POST, BASE_REQUEST_URL,
                 new Response.Listener<String>() {
                     @Override

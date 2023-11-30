@@ -9,7 +9,7 @@ import "./Nurse.css";
 import { useRedirectToLogin } from "src/hooks/useSession";
 
 const Nurse = ({ session }) => {
-  useRedirectToLogin(session);
+  // useRedirectToLogin(session);
   const [requests, setRequests] = useState([]);
 
   async function load() {
