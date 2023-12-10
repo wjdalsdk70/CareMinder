@@ -1,11 +1,11 @@
-.nurse {
+.home {
   background-color: var(--background);
   padding: var(--header-height) 16px 16px 16px;
   width: 100vw;
   height: 100vh;
 }
 
-.nurse__container {
+.home__container {
   width: 100%;
   height: 100%;
   background-color: var(--background-primary);
@@ -17,18 +17,18 @@
   padding: 32px;
 }
 
-.nurse__processing,
-.nurse__waiting {
+.home__processing,
+.home__waiting {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-.nurse__waiting {
+.home__waiting {
   width: 55%;
 }
 
-.nurse__line {
+.home__line {
   background-color: var(--border);
   width: 1px;
   height: calc(100% - 54px);
@@ -36,25 +36,25 @@
   margin-top: 54px;
 }
 
-.nurse__processing {
+.home__processing {
   width: 45%;
 }
 
-.nurse__waiting h1,
-.nurse__processing h1 {
+.home__waiting h1,
+.home__processing h1 {
   display: flex;
   flex-direction: row;
   gap: 8px;
   align-items: center;
 }
 
-.nurse__filters {
+.home__filters {
   display: flex;
   flex-direction: row;
   gap: 16px;
 }
 
-.nurse__requests {
+.home__requests {
   display: flex;
   flex-direction: column;
   height: 100%;

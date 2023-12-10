@@ -2,9 +2,9 @@ import React from "react";
 import { FaBars } from "react-icons/fa";
 import Logo from "src/assets/logo.svg";
 
-import "./Header.css";
+import "./NurseHeader.css";
 
-export default function Header() {
+export default function NurseHeader() {
   return (
     <header className="header">
       <img
