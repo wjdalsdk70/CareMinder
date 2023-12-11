@@ -3,33 +3,29 @@ from django.db import models
 
 
 class Patient(models.Model):
-    class Hospitalization(models.IntegerChoices):
-        NOT_HOSPITALIZED = 0, "Not Hospitalized"
-        HOSPITALIZED = 1, "Hospitalized"
-        CRITICAL = 2, "Critical"
+    class Severity(models.IntegerChoices):
+        LOW = 0, "Low"
+        MIDDLE = 1, "Middle"
+        HIGH = 2, "High"
+
+    class MedicalProgress(models.IntegerChoices):
+        WAIT = 0, "Wait"
+        CT = 1, "CT"
+        XRAY = 2, "X-Ray"
+        BLOOD = 3, "Blood"
+        DOCTOR_FIRST_VISIT = 4, "Doctor first visit"
+        RELEASED = 5, "Out of the hospital"
 
     first_name = models.CharField(max_length=255, null=True)
     last_name = models.CharField(max_length=255, null=True)
     age = models.IntegerField(null=True)
 
-    doctor_first_visit = models.BooleanField(default=False)
-    hospitalization = models.PositiveSmallIntegerField(
-        choices=Hospitalization.choices, default=Hospitalization.NOT_HOSPITALIZED
+    severity = models.PositiveSmallIntegerField(
+        choices=Severity.choices, default=Severity.LOW
+    )
+    medical_progress = models.PositiveSmallIntegerField(
+        choices=MedicalProgress.choices, default=MedicalProgress.WAIT
     )
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
-
-
-class MedicalExamination(models.Model):
-    class State(models.IntegerChoices):
-        WAITING = 0, "Waiting"
-        PROCESSING = 1, "Processing"
-        FINISHED = 2, "Finished"
-
-    name = models.CharField(max_length=255)
-    state = models.IntegerField(choices=State.choices, default=State.WAITING)
-    patient = models.ForeignKey(
-        Patient, related_name="medical_examinations", on_delete=models.CASCADE
-    )
-    time = models.DateTimeField(null=True)

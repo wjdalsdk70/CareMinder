@@ -1,16 +1,5 @@
 from rest_framework import serializers
-from .models import Patient, MedicalExamination
-
-
-class MedicalExaminationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = MedicalExamination
-        fields = [
-            "id",
-            "name",
-            "state",
-            "time",
-        ]
+from .models import Patient
 
 
 class PatientSerializer(serializers.ModelSerializer):
@@ -21,6 +10,6 @@ class PatientSerializer(serializers.ModelSerializer):
             "first_name",
             "last_name",
             "age",
-            "doctor_first_visit",
-            "hospitalization",
+            "severity",
+            "medical_progress",
         ]
