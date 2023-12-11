@@ -22,8 +22,9 @@ from rest_framework_simplejwt.views import (
 
 
 urlpatterns = [
-    path("api/admin/", admin.site.urls),
     path("api/auth/", include("rest_framework.urls", namespace="rest_framework")),
+    path("api/admin/", admin.site.urls),
+    path("api/settings/", include("settings.urls")),
     path("api/patients/", include("patient.urls")),
     path("api/requests/", include("request.urls")),
     path("api/tablets/", include("tablet.urls")),

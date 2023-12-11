@@ -3,6 +3,8 @@ from patient.models import Patient
 
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from patient.serializers import PatientSerializer
+from settings.models import Area
+from settings.serializers import AreaSerializer
 from staff.models import Staff
 from staff.serializers import StaffSerializer
 from rest_framework import exceptions
@@ -11,25 +13,25 @@ from .models import Tablet
 
 
 class TabletSerializer(serializers.ModelSerializer):
-    patient = PatientSerializer(read_only=True)
+    # Use PrimaryKeyRelatedField for read mode to show only the ID
     patient_id = serializers.PrimaryKeyRelatedField(
         queryset=Patient.objects.all(),
-        write_only=True,
         source="patient",
         required=False,
     )
-    doctor = StaffSerializer(read_only=True)
     doctor_id = serializers.PrimaryKeyRelatedField(
-        queryset=Staff.objects.all(),
-        write_only=True,
+        queryset=Staff.objects.filter(type=Staff.Type.DOCTOR),
         source="doctor",
         required=False,
     )
-    nurse = StaffSerializer(read_only=True)
     nurse_id = serializers.PrimaryKeyRelatedField(
-        queryset=Staff.objects.all(),
-        write_only=True,
+        queryset=Staff.objects.filter(type=Staff.Type.NURSE),
         source="nurse",
+        required=False,
+    )
+    area_id = serializers.PrimaryKeyRelatedField(
+        queryset=Area.objects.all(),
+        source="area",
         required=False,
     )
 
@@ -37,11 +39,9 @@ class TabletSerializer(serializers.ModelSerializer):
         model = Tablet
         fields = [
             "id",
-            "patient",
+            "name",
             "patient_id",
-            "room",
-            "doctor",
             "doctor_id",
-            "nurse",
             "nurse_id",
+            "area_id",
         ]

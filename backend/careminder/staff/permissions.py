@@ -6,7 +6,7 @@ from careminder.permissions import CustomDjangoModelPermissions
 from rest_framework import permissions
 
 
-class IsUserOrIsSecretaryOrHasCustomModelPermissions(permissions.BasePermission):
+class IsUserOrHasCustomModelPermissions(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         if obj == request.user:
             return True

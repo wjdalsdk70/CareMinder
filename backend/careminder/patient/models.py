@@ -1,3 +1,4 @@
+from turtle import mode
 from django.db import models
 
 
@@ -10,6 +11,7 @@ class Patient(models.Model):
     first_name = models.CharField(max_length=255, null=True)
     last_name = models.CharField(max_length=255, null=True)
     age = models.IntegerField(null=True)
+
     doctor_first_visit = models.BooleanField(default=False)
     hospitalization = models.PositiveSmallIntegerField(
         choices=Hospitalization.choices, default=Hospitalization.NOT_HOSPITALIZED

@@ -5,7 +5,7 @@ from rest_framework.response import Response
 
 from careminder.permissions import CustomDjangoModelPermissions
 from staff.permissions import (
-    IsUserOrIsSecretaryOrHasCustomModelPermissions,
+    IsUserOrHasCustomModelPermissions,
 )
 from .models import Staff
 from .serializers import StaffSerializer
@@ -51,7 +51,7 @@ class StaffListCreateView(generics.ListCreateAPIView):
 
 class StaffRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [
-        IsUserOrIsSecretaryOrHasCustomModelPermissions,
+        IsUserOrHasCustomModelPermissions,
     ]
     queryset = Staff.objects.all()
     serializer_class = StaffSerializer
