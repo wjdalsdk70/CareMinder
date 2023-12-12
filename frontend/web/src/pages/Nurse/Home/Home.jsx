@@ -43,14 +43,14 @@ const Home = ({ session }) => {
     <>
       <NurseHeader />
       <main>
-        <div className="home">
-          <div className="home__container">
-            <div className="home__waiting">
+        <div className="nurse__home">
+          <div className="container">
+            <div className="waiting">
               <h1>
                 <BiLoaderCircle />
                 대기 중인 환자 요청
               </h1>
-              <div className="home__filters">
+              <div className="filters">
                 <Filter
                   title="Filter 1"
                   options={[]}
@@ -70,7 +70,7 @@ const Home = ({ session }) => {
                   handleCheckboxChange={handleCheckboxChange}
                 />
               </div>
-              <div className="home__requests">
+              <div className="requests">
                 {requests.map((item) => (
                   <Request
                     isQuestion={item.is_question}
@@ -80,13 +80,13 @@ const Home = ({ session }) => {
                 ))}
               </div>
             </div>
-            <div className="home__line" />
-            <div className="home__processing">
+            <div className="line" />
+            <div className="processing">
               <h1>
                 <MdOutlineDownloading />
                 내가 진행 중인 요청사항
               </h1>
-              <div className="home__filters">
+              <div className="filters">
                 <Filter
                   title="Filter 1"
                   options={[]}
@@ -106,7 +106,7 @@ const Home = ({ session }) => {
                   handleCheckboxChange={handleCheckboxChange}
                 />
               </div>
-              <div className="home__requests">
+              <div className="requests">
                 <Request
                   isQuestion={true}
                   text="test"

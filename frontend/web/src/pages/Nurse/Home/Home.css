@@ -1,11 +1,11 @@
-.home {
+.nurse__home {
   background-color: var(--background);
   padding: var(--header-height) 16px 16px 16px;
   width: 100vw;
   height: 100vh;
 }
 
-.home__container {
+.nurse__home .container {
   width: 100%;
   height: 100%;
   background-color: var(--background-primary);
@@ -17,18 +17,18 @@
   padding: 32px;
 }
 
-.home__processing,
-.home__waiting {
+.nurse__home .processing,
+.nurse__home .waiting {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-.home__waiting {
+.nurse__home .waiting {
   width: 55%;
 }
 
-.home__line {
+.nurse__home .line {
   background-color: var(--border);
   width: 1px;
   height: calc(100% - 54px);
@@ -36,25 +36,25 @@
   margin-top: 54px;
 }
 
-.home__processing {
+.nurse__home .processing {
   width: 45%;
 }
 
-.home__waiting h1,
-.home__processing h1 {
+.nurse__home .waiting h1,
+.nurse__home .processing h1 {
   display: flex;
   flex-direction: row;
   gap: 8px;
   align-items: center;
 }
 
-.home__filters {
+.nurse__home .filters {
   display: flex;
   flex-direction: row;
   gap: 16px;
 }
 
-.home__requests {
+.nurse__home .requests {
   display: flex;
   flex-direction: column;
   height: 100%;
