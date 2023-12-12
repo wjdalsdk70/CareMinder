@@ -1,14 +1,20 @@
 from rest_framework import serializers
-import request
+from staff.models import Staff
 from tablet.models import Tablet
-from tablet.serializers import TabletSerializer
 from .models import ChatMessage, Request
+from django.db.models import Q
 
 
 class RequestSerializer(serializers.ModelSerializer):
     tablet_id = serializers.PrimaryKeyRelatedField(
         queryset=Tablet.objects.all(),
         source="tablet",
+    )
+
+    staff_id = serializers.PrimaryKeyRelatedField(
+        queryset=Staff.objects.all(),
+        source="staff",
+        required=False,
     )
 
     class Meta:
@@ -24,6 +30,7 @@ class RequestSerializer(serializers.ModelSerializer):
             "response",
             "response_time",
             "tablet_id",
+            "staff_id",
         ]
 
 

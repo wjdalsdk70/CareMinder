@@ -27,6 +27,9 @@ class Request(models.Model):
     tablet = models.ForeignKey(
         Tablet, on_delete=models.SET_NULL, null=True
     )  # TODO: fix request history on patient change problem
+    staff = models.ForeignKey(
+        Staff, related_name="staff_requests", on_delete=models.SET_NULL, null=True
+    )
 
 
 class ChatMessage(models.Model):

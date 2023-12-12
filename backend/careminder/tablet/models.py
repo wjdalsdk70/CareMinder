@@ -2,6 +2,7 @@ import uuid
 from django.db import models
 
 from patient.models import Patient
+from settings.models import Area
 from staff.models import Staff
 
 
@@ -11,14 +12,8 @@ class Tablet(models.Model):
     patient = models.ForeignKey(
         Patient, related_name="tablets", on_delete=models.SET_NULL, null=True
     )
-    doctor = models.ForeignKey(
-        Staff, related_name="doctor_tablets", on_delete=models.SET_NULL, null=True
-    )
-    nurse = models.ForeignKey(
-        Staff, related_name="nurse_tablets", on_delete=models.SET_NULL, null=True
-    )
     area = models.ForeignKey(
-        "settings.Area", related_name="tablets", on_delete=models.CASCADE, null=True
+        Area, related_name="tablets", on_delete=models.CASCADE, null=True
     )
 
     def __str__(self) -> str:

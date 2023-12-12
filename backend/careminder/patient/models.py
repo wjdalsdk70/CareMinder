@@ -1,6 +1,8 @@
 from turtle import mode
 from django.db import models
 
+from staff.models import Staff
+
 
 class Patient(models.Model):
     class Severity(models.IntegerChoices):
@@ -20,11 +22,12 @@ class Patient(models.Model):
     last_name = models.CharField(max_length=255, null=True)
     age = models.IntegerField(null=True)
 
-    severity = models.PositiveSmallIntegerField(
-        choices=Severity.choices, default=Severity.LOW
-    )
+    severity = models.PositiveSmallIntegerField(choices=Severity.choices, null=True)
     medical_progress = models.PositiveSmallIntegerField(
         choices=MedicalProgress.choices, default=MedicalProgress.WAIT
+    )
+    doctor = models.ForeignKey(
+        Staff, related_name="doctor_tablets", on_delete=models.SET_NULL, null=True
     )
 
     def __str__(self):

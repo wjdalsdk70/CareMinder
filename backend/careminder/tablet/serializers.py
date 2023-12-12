@@ -13,20 +13,9 @@ from .models import Tablet
 
 
 class TabletSerializer(serializers.ModelSerializer):
-    # Use PrimaryKeyRelatedField for read mode to show only the ID
     patient_id = serializers.PrimaryKeyRelatedField(
         queryset=Patient.objects.all(),
         source="patient",
-        required=False,
-    )
-    doctor_id = serializers.PrimaryKeyRelatedField(
-        queryset=Staff.objects.filter(type=Staff.Type.DOCTOR),
-        source="doctor",
-        required=False,
-    )
-    nurse_id = serializers.PrimaryKeyRelatedField(
-        queryset=Staff.objects.filter(type=Staff.Type.NURSE),
-        source="nurse",
         required=False,
     )
     area_id = serializers.PrimaryKeyRelatedField(
@@ -41,7 +30,5 @@ class TabletSerializer(serializers.ModelSerializer):
             "id",
             "name",
             "patient_id",
-            "doctor_id",
-            "nurse_id",
             "area_id",
         ]
