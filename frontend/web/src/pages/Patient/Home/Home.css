@@ -1,4 +1,6 @@
 .patient__home {
+    padding: var(--header-height) 0 var(--footer-height);
+
     height: 100vh;
     width: 100vw;
 }
@@ -13,15 +15,20 @@
     height: 100%;
     width: 100%;
 
-    padding: 48px;
+    padding: 0 48px 48px;
 }
 
 .patient__home .menu{
-    padding: 12px;
+    padding: 12px 12px 64px;
 }
 
-.patient__menu h1 {
-    font-size: 3rem ;
+.patient__home .menu h1 {
+    font-size: 4rem;
+}
+
+.patient__home .icon{
+    color: white;
+    margin: 15px;
 }
 
 .patient__home .rq-container{
@@ -33,8 +40,15 @@
     height: 100%;
 }
 
+.patient__home .rq-container h1{
+    text-align: center;
+    padding-bottom: 25px;
+    font-size: 3rem;
+}
+
+
 .patient__home .question-container {
-    padding: 64px;
+    padding: 0 64px 64px;
     width: 100%;
     height: 100%;
 }
@@ -42,22 +56,35 @@
 .patient__home .question-container button {
     width: 100%;
     height: 100%;
+
+    border: none;
+    border-radius: 26px;
+    outline: none;
+    cursor: pointer;
+
     background: var(--quesiton);
 
 }
 
-
+.patient__home .separator{
+    border-left: 4px solid rgba(0, 0, 0, 0.6);
+    height: 100%;
+}
 
 .patient__home .request-container {
-    padding: 64px;
+    padding: 0 64px 64px;
     width: 100%;
     height: 100%;
-
-    overflow: hidden;
 }
 
 .patient__home .request-container button {
     width: 100%;
     height: 100%;
+
+    border: none;
+    border-radius: 26px;
+    outline: none;
+    cursor: pointer;
+
     background: var(--request);
 }

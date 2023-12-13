@@ -9,7 +9,14 @@
         "requestTitle": "If you want a quick solution",
         "requestSubtitle" : "Please speak to us",
 
-        "confirmation": "The question will be sent to the nurse"
+        "confirmation": "The question will be sent to the nurse",
+
+
+        "patientHeader" : "Current Cumulative Requests: ",
+
+        "patientHeaderWaiting" : "Waiting: ",
+        "patientHeaderProcess" : "In Process: ",
+        "patientHeaderDone" : "Completed: "
     },
     
     

@@ -1,5 +1,6 @@
 :root {
-  --header-height: 64px;
+  --header-height: 128px;
+  --footer-height: 128px;
 
   --request: #f65a5a;
   --quesiton: #fce150;
