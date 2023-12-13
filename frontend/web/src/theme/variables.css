@@ -1,8 +1,8 @@
 :root {
   --header-height: 64px;
 
-  --primary: #f65a5a;
-  --secondary: #fce150;
+  --request: #f65a5a;
+  --quesiton: #fce150;
   --tertiary: #003f88;
 
   --text: #000000;

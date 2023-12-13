@@ -1,6 +1,15 @@
 {
     "patient": {
-        "name" : "string"
+        "title" : "Thank you for visiting OOO hospital!",
+        "subtitle": "Our hospital introduces a CareMind service for accurate and smooth communication with patients. Press the button below to solve your questions.",
+
+        "questionTitle": "If you have any question",
+        "questionSubtitle" : "Please speak to us",
+
+        "requestTitle": "If you want a quick solution",
+        "requestSubtitle" : "Please speak to us",
+
+        "confirmation": "The question will be sent to the nurse"
     },
     
     

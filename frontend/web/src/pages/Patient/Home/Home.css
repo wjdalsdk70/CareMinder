@@ -1,11 +1,22 @@
-.patient__container {
+.patient__home {
     height: 100vh;
     width: 100vw;
-
-    margin: 36px;
 }
 
-.patient__menu{
+
+.patient__home .container{
+    display: flex;
+    justify-content: start;
+    align-content: center;
+    flex-direction: column;
+    max-height: 100%;
+    height: 100%;
+    width: 100%;
+
+    padding: 48px;
+}
+
+.patient__home .menu{
     padding: 12px;
 }
 
@@ -13,12 +24,40 @@
     font-size: 3rem ;
 }
 
-.patient__randq__container{
+.patient__home .rq-container{
     display: flex;
     justify-content: center;
     align-content: center;
+
+    width: 100%;
+    height: 100%;
 }
 
-.patient__request__container {
+.patient__home .question-container {
     padding: 64px;
+    width: 100%;
+    height: 100%;
+}
+
+.patient__home .question-container button {
+    width: 100%;
+    height: 100%;
+    background: var(--quesiton);
+
+}
+
+
+
+.patient__home .request-container {
+    padding: 64px;
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+}
+
+.patient__home .request-container button {
+    width: 100%;
+    height: 100%;
+    background: var(--request);
 }

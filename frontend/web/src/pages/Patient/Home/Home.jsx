@@ -1,48 +1,53 @@
 import React from "react";
 import "./Home.css";
 import Logo from "src/assets/logo.svg";
+import data from "src/data.json"
 
 export default function Home() {
+    const patient = data.patient
+
     return (
-        <div className="patient__container">
-            <div className="patient__menu">
-                <h1>Thank you for visiting OOO hospital!</h1>
-                <h2>Our hospital introduces a CareMind service for accurate and smooth communication with patients.
-                    Press the button below to solve your questions. </h2>
-            </div>
-
-            <div className="patient__randq__container">
-                <div className="patient__request__container">
-                    <h1>Request</h1>
-                    <button>
-                        <img
-                            className="header__img"
-                            src={Logo}
-                            alt=""
-                            width="80px"
-                            height="80px"
-                        />
-                        <h1>tell us you request</h1>
-                        <h3>some text </h3>
-                    </button>
+        <div className="patient__home">
+            <div className="container">
+                <div className="menu">
+                    <h1>{patient.title}</h1>
+                    <h2>{patient.subtitle} </h2>
                 </div>
 
-                <div className="patient__question__container">
-                    <h1>Question</h1>
-                    <button>
-                        <img
-                            className="header__img"
-                            src={Logo}
-                            alt=""
-                            width="80px"
-                            height="80px"
-                        />
-                        <h1>tell us you question</h1>
-                        <h3>some text </h3>
-                    </button>
-                </div>
-            </div>
+                <div className="rq-container">
+                    <div className="question-container">
+                        <h1>{patient.questionTitle}</h1>
+                        <button>
+                            <img
+                                className="header__img"
+                                src={Logo}
+                                alt=""
+                                width="80px"
+                                height="80px"
+                            />
+                            <h1>{patient.questionSubtitle}</h1>
+                            <h3>{patient.confirmation}</h3>
+                        </button>
+                    </div>
 
+                    <div className="request-container">
+                        <h1>{patient.requestTitle}</h1>
+                        <button>
+                            <img
+                                className="header__img"
+                                src={Logo}
+                                alt=""
+                                width="80px"
+                                height="80px"
+                            />
+                            <h1>{patient.requestSubtitle}</h1>
+                            <h3>{patient.confirmation}</h3>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
         </div>
+
     );
 }
