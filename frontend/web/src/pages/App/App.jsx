@@ -61,6 +61,7 @@ function App() {
           element={<UserList session={session} />}
         />
 
+        <Route path="/patient" element={<Navigate to="/patient/home" />} />
         <Route path="/patient/home" element={<PatientHome />} />
         <Route path="/patient/agreement" element={<Agreement />} />
         <Route path="/patient/recording" element={<Recording />} />

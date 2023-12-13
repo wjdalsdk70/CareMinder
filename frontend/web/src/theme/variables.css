@@ -1,6 +1,6 @@
 :root {
-  --header-height: 128px;
-  --footer-height: 128px;
+  --header-height: 100px;
+  --footer-height: 100px;
 
   --request: #f65a5a;
   --quesiton: #fce150;
@@ -24,4 +24,5 @@
   --border: black;
   --background-grey: #cccccc;
   --background-glass: #35353580;
+  --background-glass-blur: blur(20px);
 }
