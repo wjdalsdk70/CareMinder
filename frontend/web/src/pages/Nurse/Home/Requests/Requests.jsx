@@ -6,10 +6,11 @@ import Request from "src/components/Request/Request";
 import { getRequests as getRequests } from "src/lib/api";
 import NurseHeader from "src/components/NurseHeader/NurseHeader";
 
-import "./Home.css";
+import "./Requests.css";
+import "../Home.css";
 import { useRedirectToLogin } from "src/hooks/useSession";
 
-const Home = ({ session }) => {
+const Requests = ({ session }) => {
   // useRedirectToLogin(session);
   const [requests, setRequests] = useState([]);
 
@@ -43,7 +44,7 @@ const Home = ({ session }) => {
     <>
       <NurseHeader />
       <main>
-        <div className="nurse__home">
+        <div className="nurse__home-requests nurse__home">
           <div className="container">
             <div className="waiting">
               <h1>
@@ -121,4 +122,4 @@ const Home = ({ session }) => {
   );
 };
 
-export default Home;
+export default Requests;
