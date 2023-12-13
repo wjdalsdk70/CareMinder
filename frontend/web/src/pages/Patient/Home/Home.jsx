@@ -5,9 +5,10 @@ import Logo from "src/assets/logo.svg";
 export default function Home() {
     return (
         <div className="patient__container">
-            <div className="Patient__menu">
-                <h1> Title</h1>
-                <h2> which hospital some text</h2>
+            <div className="patient__menu">
+                <h1>Thank you for visiting OOO hospital!</h1>
+                <h2>Our hospital introduces a CareMind service for accurate and smooth communication with patients.
+                    Press the button below to solve your questions. </h2>
             </div>
 
             <div className="patient__randq__container">

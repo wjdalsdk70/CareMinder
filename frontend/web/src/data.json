@@ -1,0 +1,11 @@
+{
+    "patient": {
+        "name" : "string"
+    },
+    
+    
+    "nurse":{
+        "name" : "string"
+    }
+    
+}

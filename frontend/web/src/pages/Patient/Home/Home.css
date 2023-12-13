@@ -4,3 +4,21 @@
 
     margin: 36px;
 }
+
+.patient__menu{
+    padding: 12px;
+}
+
+.patient__menu h1 {
+    font-size: 3rem ;
+}
+
+.patient__randq__container{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.patient__request__container {
+    padding: 64px;
+}
