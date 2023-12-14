@@ -1,0 +1,22 @@
+.set-tablet {
+    display: flex;
+    justify-content: start;
+    align-content: center;
+    gap: 32px;
+    width: 100%	;
+    flex-direction: row;
+}
+
+.set-tablet .text-area {
+    width: 100%;
+    height: 100%;
+    
+    padding: 0 5px;
+    text-align: center;
+
+    resize: none;
+    border: none;
+    background-color: var(--text-background-lighter); 
+    outline: none; 
+    overflow: auto;
+}

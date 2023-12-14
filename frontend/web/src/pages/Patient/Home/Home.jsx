@@ -1,13 +1,11 @@
 import React from "react";
 import "./Home.css";
-import Logo from "src/assets/logo.svg";
 import data from "src/data.json";
 import PatientHeader from "src/components/PatientHeader/PatientHeader";
 import PatientFooter from "src/components/PatientFooter/PatientFooter";
 
 import { BsQuestionCircleFill } from "react-icons/bs";
 import { TbMicrophone } from "react-icons/tb";
-import { MdKeyboardArrowLeft } from "react-icons/md";
 import PatientHistory from "src/components/PatientHistory/PatientHistory";
 
 export default function Home() {
@@ -19,8 +17,8 @@ export default function Home() {
       <main>
         <div className="container">
           <div className="menu">
-            <h1>{patient.title}</h1>
-            <h2>{patient.subtitle} </h2>
+            <h1>{patient.hospitalTitle}</h1>
+            <h2>{patient.hospitalSubtitle} </h2>
           </div>
 
           <div className="rq-container">

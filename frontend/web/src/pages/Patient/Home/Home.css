@@ -13,10 +13,14 @@
   flex-direction: column;
   gap: 32px;
   height: calc(100vh - var(--header-height) - var(--footer-height));
+  width: 100%;
+  padding: 32px;
 }
 
 .patient__home .menu {
-  padding: 0 32px;
+  padding:0 32px;
+  width: 100%;
+  height: auto;
 }
 
 .patient__home .menu h1 {
@@ -42,7 +46,7 @@
 .patient__home .rq-container .title {
   text-align: center;
   padding-bottom: 24px;
-  font-size: 3vw;
+  font-size: 2.5vw;
   text-wrap: nowrap;
   text-align: center;
 }
