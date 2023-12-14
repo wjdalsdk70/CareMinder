@@ -1,8 +1,9 @@
 :root {
-  --header-height: 64px;
+  --header-height: 100px;
+  --footer-height: 100px;
 
-  --primary: #f65a5a;
-  --secondary: #fce150;
+  --request: #f65a5a;
+  --quesiton: #fce150;
   --tertiary: #003f88;
 
   --text: #000000;
@@ -23,4 +24,5 @@
   --border: black;
   --background-grey: #cccccc;
   --background-glass: #35353580;
+  --background-glass-blur: blur(20px);
 }

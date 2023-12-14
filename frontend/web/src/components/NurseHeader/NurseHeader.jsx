@@ -7,13 +7,7 @@ import "./NurseHeader.css";
 export default function NurseHeader() {
   return (
     <header className="header">
-      <img
-        className="header__img"
-        src={Logo}
-        alt=""
-        width="80px"
-        height="80px"
-      />
+      <img className="header__img" src={Logo} alt="" />
       <FaBars className="header__bars" />
     </header>
   );
