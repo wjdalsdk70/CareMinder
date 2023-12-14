@@ -37,7 +37,13 @@
         "data.nurse.settingsSubmit": "Submit",	
         "data.nurse.settingsCancel": "Cancel",
 
-        "name" : "string"
+        "required": "*",
+
+        "userName": "Name",
+        "companyID": "Company ID",
+        "ID": "ID",
+        "password": "Password",
+        "nfcData": "NFC Data"
     }
     
 }
