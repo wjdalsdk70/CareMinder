@@ -66,19 +66,3 @@ export async function getRequests() {
   const data = await response.json();
   return data;
 }
-
-export async function getChats(id) {
-  const response = await fetch(`${BASE_URL}/requests/${id}/chat_messages`, {
-    method: "GET",
-    headers: {
-      "content-type": "application/json",
-    },
-  });
-
-  if (!response.ok) {
-    return Promise.reject(response);
-  }
-
-  const data = await response.json();
-  return data;
-}

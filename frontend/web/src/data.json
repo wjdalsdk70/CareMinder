@@ -1,9 +1,7 @@
 {
     "patient": {
-        "hospitalTitle" : "Thank you for visiting OOO hospital!",
-        "hospitalSubtitle": "Our hospital introduces a CareMind service for accurate and smooth communication with patients. Press the button below to solve your questions.",
-
-        "notification": "Currently, there is a delay due to the influx of emergency patients. We fully recognize the urgency of the patients, but due to the nature of the emergency room, we are treating them according to their priorities, so we ask for their understanding.",
+        "title" : "Thank you for visiting OOO hospital!",
+        "subtitle": "Our hospital introduces a CareMind service for accurate and smooth communication with patients. Press the button below to solve your questions.",
 
         "questionTitle": "If you have any question",
         "questionSubtitle" : "Please speak to us",
@@ -23,27 +21,7 @@
     
     
     "nurse":{
-        "nurseHeaderBack" : "Back",
-
-        "settingsTitle" : "Show Process of Patent Care",
-        "settingsNFC" : "Use NFC Tagging Feature",
-        "editHospital" : "Edit Hospital Introduction",
-        "settingsHospitalTitle": "Bold Text",
-        "settingsHospitalSubtitle": "Thin Text",	
-        "editNotification": "Edit Notification",
-        "setTable": "Set Table",	
-        "changeArea": "Change Area",
-        "changeName": "Change Name",   
-        "data.nurse.settingsSubmit": "Submit",	
-        "data.nurse.settingsCancel": "Cancel",
-
-        "required": "*",
-
-        "userName": "Name",
-        "companyID": "Company ID",
-        "ID": "ID",
-        "password": "Password",
-        "nfcData": "NFC Data"
+        "name" : "string"
     }
     
 }

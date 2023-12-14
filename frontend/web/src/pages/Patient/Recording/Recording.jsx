@@ -1,11 +1,5 @@
 import React from "react";
-import data from "src/data.json";
-import { FaArrowLeft } from "react-icons/fa6";
 
-import { PiWaveformBold } from "react-icons/pi";
-import PatientFooter from "src/components/PatientFooter/PatientFooter";
-import Logo from "src/assets/logo.svg"; 
-import "./Recording.css";
 export default function Recording() {
     return ( 
         <div className="recording">
@@ -42,5 +36,5 @@ export default function Recording() {
         <PatientFooter/>
         </div>
     
-    )
+    );
 }

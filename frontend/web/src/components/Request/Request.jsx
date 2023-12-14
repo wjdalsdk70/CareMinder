@@ -13,7 +13,7 @@ export default function Request({ isQuestion, text, date }) {
     ? BsFillQuestionCircleFill
     : BsArrowDownRightCircleFill;
   return (
-    <div className="request">
+    <div className={`request__item ${isQuestion ? 'request__bg_question' : 'request__bg_request'}`}>
       <Icon className="request__icon" />
       <div className="request__info">
         <div className="top">
