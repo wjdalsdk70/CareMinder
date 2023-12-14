@@ -26,6 +26,7 @@
 .patient-history__title__icon,
 .patient-history__title h1 {
   color: white;
+  font-weight: 700;
 }
 
 .patient-history__button__icon {
@@ -37,8 +38,8 @@
 
 .patient-history__button {
   background-color: var(--text-background-lighter);
-  width: 75px;
-  height: 150px;
+  width: 3.5vw;
+  height: 7vw;
   border-top-left-radius: 510px;
   border-bottom-left-radius: 510px;
 
@@ -50,4 +51,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  user-select: none;
 }
+ 
