@@ -28,7 +28,7 @@ export default function Recording() {
         <div className="body">
          <PiWaveformBold size={200}/> 
         </div>
-        <h2 className="record-text">Recording your voice</h2>
+        <h2 className="record-text">Recording your voice</h2>z
         <div className="record-buttons">
          <button className="record-button"> 
           Cancel

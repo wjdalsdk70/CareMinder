@@ -52,7 +52,7 @@ export async function logout({ refreshToken }) {
 }
 
 export async function getRequests() {
-  const response = await fetch(`${BASE_URL}/requests/`, {
+  const response = await fetch(`${BASE_URL}/requests`, {
     method: "GET",
     headers: {
       "content-type": "application/json",
