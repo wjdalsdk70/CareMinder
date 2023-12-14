@@ -55,3 +55,63 @@
   user-select: none;
 }
  
+.Processing {
+  background: var(--request);
+}
+
+.Waiting {
+  background: var(--quesiton);
+}
+
+
+.Finished {
+  background: var(--background-grey);
+  opacity: 80%;
+}
+
+
+.request-item {
+  align-items: center;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.top-container {
+  display: flex;
+}
+
+.icon-container {
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
+  max-height: 5rem;
+}
+
+.info-container {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.text-container {
+  margin-top: 1rem;
+  background-color: var(--text-background-response);
+  padding: 0.3rem;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.time {
+  text-align: right;
+  align-self: flex-end;
+}
+
+.chat-container {
+  opacity: 95%;
+}
