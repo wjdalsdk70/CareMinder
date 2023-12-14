@@ -21,7 +21,13 @@
     
     
     "nurse":{
-        "name" : "string"
+        "required": "*",
+
+        "userName": "Name",
+        "companyID": "Company ID",
+        "ID": "ID",
+        "password": "Password",
+        "nfcData": "NFC Data"
     }
     
 }

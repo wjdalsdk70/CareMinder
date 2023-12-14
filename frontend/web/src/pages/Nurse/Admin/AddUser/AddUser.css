@@ -1,0 +1,115 @@
+::placeholder
+{
+    color: rgb(150, 150, 150);
+    opacity: 1; /* Firefox */
+}
+  
+:-ms-input-placeholder
+{
+    /* Internet Explorer 10-11 */
+    color: rgb(150, 150, 150);
+}
+
+::-ms-input-placeholder
+{
+    /* Microsoft Edge */
+    color: rgb(150, 150, 150);
+}
+
+html
+{
+    height: 100%;
+}
+
+form
+{
+    display: flex;
+    flex-direction: column;
+    gap: 2.5svw;
+    width: min-content;
+}
+
+input
+{
+    background-color: transparent;
+    border: none;
+    border-bottom: 0.15svw solid rgb(150, 150, 150);
+    text-align: center;
+    width: 20vmin;
+    padding-bottom: 0.5vmin;
+    /*margin-bottom: 0.15svw;*/
+}
+/*
+input:focus
+{
+    margin-bottom: 0;
+    border-bottom: 0.3svw solid rgb(80, 80, 80);
+}*/
+
+span
+{
+    color: red;
+}
+
+.change_data_button
+{
+    width: 18vmin;
+    height: 3vmin;
+    border: 1px outset #383838;
+    margin-left: 2vmin;
+    background-color: rgb(245, 245, 245);
+    font-size: large;
+}
+
+.cancel_button
+{
+    border: 1px outset #383838;
+    width: 18vmin;
+    height: 4.5vmin;
+    background-color: rgb(245, 245, 245);
+    border-radius: 10px;
+    font-size: large;
+}
+
+.save_button
+{
+    border: 1px outset #383838;
+    width: 18vmin;
+    height: 4.5vmin;
+    background-color: #383838;
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: large;
+}
+
+#bottom_buttons
+{
+    display: flex;
+    justify-content: center;
+    gap: 4vw;
+    margin-top: 10vmin;
+}
+
+#data_form
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vmin;
+}
+
+*:focus {
+    outline: none;
+}
+
+.input_field
+{
+    display: flex;
+    flex-direction: row;
+}
+
+.input_field p
+{
+    text-align: center;
+    width: 12vmin;
+}
