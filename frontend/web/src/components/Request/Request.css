@@ -1,9 +1,16 @@
-.request {
+.request__bg_question {
+  background: var(--quesiton);
+}
+
+.request__bg_request {
+  background: var(--request);
+}
+
+.request__item {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 12px;
-  background-color: var(--primary);
   padding: 12px 20px;
   border-radius: 12px;
 }

@@ -1,0 +1,51 @@
+.wrapper {
+    display: flex;
+
+    height: 100%;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+}
+.title > svg {
+    height: 2rem;
+    width: 2rem;
+    margin-right: .5rem;
+}
+
+.left {
+    width: 100%;
+    height: calc(100% - 48px);
+
+    padding-right: 16px;
+    border-right: 1px solid var(--border);
+}
+
+.waiting, .ongoing {
+    display: flex;
+    flex-direction: column;
+    
+    gap: 16px;
+}
+
+.waiting > div, .ongoing > div {
+    position: fixed;
+    cursor: grab;
+}
+
+.filter { display: flex; }
+.filter > div { padding: 8px; }
+.filter > div:first-child { padding-left: 0; }
+.filter > div:last-child { padding-right: 0; }
+
+.wrapper > div:first-child { flex: .6; }
+.wrapper > div:last-child { flex: .4; }
+
+.follow {
+    z-index: 999;
+    top: 0;
+    left: 0;
+    cursor: grabbing;
+}
