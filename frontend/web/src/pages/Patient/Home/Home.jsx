@@ -1,6 +1,6 @@
 import React from "react";
 import "./Home.css";
-import Logo from "src/assets/logo.svg";
+
 import data from "src/data.json";
 import PatientHeader from "src/components/PatientHeader/PatientHeader";
 import PatientFooter from "src/components/PatientFooter/PatientFooter";
