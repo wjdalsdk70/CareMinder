@@ -1,4 +1,4 @@
-.header {
+.patient-header {
     position: absolute;
     top: 0;
     left: 0;
@@ -12,14 +12,14 @@
     overflow: hidden;
 }
 
-.header .left{
+.patient-header .left{
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 0px;
+    padding: 0;
 }
 
-.header .status{
+.patient-header .status{
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -27,7 +27,7 @@
     padding: 0 35px 0 0;
 
 }
-.header .status h2{
+.patient-header .status h2{
     padding: 0 15px;
 
 }

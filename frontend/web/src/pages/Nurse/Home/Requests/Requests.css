@@ -1,63 +1,71 @@
-.nurse__home {
-  background-color: var(--background);
-  padding: var(--header-height) 16px 16px 16px;
-  width: 100vw;
-  height: 100vh;
+.request__home-top {
+    z-index: 10;
+    position: relative;
+
+    display: flex;
+    align-items: flex-end;
+
+    height: var(--header-height);
+    padding: 0 15svw 0 15svw;
 }
 
-.nurse__home .container {
-  width: 100%;
-  height: 100%;
-  background-color: var(--background-primary);
-  border: 1px solid var(--border);
-  border-radius: 6px;
+.request__home-top > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  display: flex;
-  flex-direction: row;
-  padding: 32px;
+    width: 100%;
+    height: 50%;
+    text-align: center;
+    font-weight: bold;
 }
 
-.nurse__home-requests .processing,
-.nurse__home-requests .waiting {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+.toggle {
+    border-radius: 1rem 1rem 0 0;
+    border: 1px solid var(--border);
+    border-bottom: 0;
+    
+    background: var(--background-grey);
+
+    transition: .5s;
 }
 
-.nurse__home-requests .waiting {
-  width: 55%;
+.active {
+    z-index: 11;
+    position: relative;
+
+    transform: scale(1.025);
+    background: var(--background-primary);
+}
+.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: calc(100% - 2px);
+
+    width: 100%;
+    height: 4px;
+    background: var(--background-primary);
 }
 
-.nurse__home-requests .line {
-  background-color: var(--border);
-  width: 1px;
-  height: calc(100% - 54px);
-  margin: 0 16px;
-  margin-top: 54px;
+.request__home-bottom {
+    width: 100%;
+    height: calc(100svh - var(--header-height));
+
+    box-sizing: border-box;
+
+    padding: 0 16px 16px 16px;
 }
 
-.nurse__home-requests .processing {
-  width: 45%;
-}
+.request__home-bottom > div {
+    position: relative;
 
-.nurse__home-requests .waiting h1,
-.nurse__home-requests .processing h1 {
-  display: flex;
-  flex-direction: row;
-  gap: 8px;
-  align-items: center;
-}
+    height: 100%;
 
-.nurse__home-requests .filters {
-  display: flex;
-  flex-direction: row;
-  gap: 16px;
-}
+    padding: 16px;
 
-.nurse__home-requests .requests {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  gap: 12px;
-  overflow: scroll;
+    border-radius: 1rem;
+    border: 1px solid var(--border);
+
+    background: var(--background-primary);
 }

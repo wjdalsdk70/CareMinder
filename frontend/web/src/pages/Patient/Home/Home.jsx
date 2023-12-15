@@ -9,7 +9,15 @@ import { TbMicrophone } from "react-icons/tb";
 import { MdKeyboardArrowLeft } from "react-icons/md";
 import PatientHistory from "src/components/PatientHistory/PatientHistory";
 
+import {useNavigate} from "react-router-dom";
+
 export default function Home() {
+  const navigate = useNavigate();
+  const navigateToContacts = () => {
+    navigate("/patient/recording");
+    console.log("navigateToContacts");
+  };
+
   const patient = data.patient;
 
   return (
@@ -25,7 +33,7 @@ export default function Home() {
           <div className="rq-container">
             <div className="question-container">
               <h1 className="title">{patient.questionTitle}</h1>
-              <button>
+              <button onClick={navigateToContacts}>
                 <BsQuestionCircleFill size={260} className="icon" />
                 <h1>{patient.questionSubtitle}</h1>
                 <h3>{patient.confirmation}</h3>
@@ -36,7 +44,7 @@ export default function Home() {
 
             <div className="request-container">
               <h1 className="title">{patient.requestTitle}</h1>
-              <button>
+              <button onClick={navigateToContacts}>
                 <TbMicrophone size={260} className="icon" />
                 <h1>{patient.requestSubtitle}</h1>
                 <h3>{patient.confirmation}</h3>

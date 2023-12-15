@@ -1,125 +1,34 @@
-import React, { useState, useEffect } from "react";
-import Filter from "src/components/Filter/Filter";
-import { BiLoaderCircle } from "react-icons/bi";
-import { MdOutlineDownloading } from "react-icons/md";
-import Request from "src/components/Request/Request";
-import { getRequests as getRequests } from "src/lib/api";
-import NurseHeader from "src/components/NurseHeader/NurseHeader";
+import { useState } from 'react'
 
-import "./Requests.css";
-import "../Home.css";
-import { useRedirectToLogin } from "src/hooks/useSession";
+import ViewRequest from './viewRequest/viewRequest'
+import Progress from './progress/progress'
+import NurseHeader from 'src/components/NurseHeader/NurseHeader'
 
-const Requests = ({ session }) => {
-  // useRedirectToLogin(session);
-  const [requests, setRequests] = useState([]);
+import './Requests.css'
 
-  async function load() {
-    try {
-      const resp = await getRequests();
-      setRequests(resp);
-    } catch (e) {
-      console.error(e);
+export default function Requests({ session }) {
+    const [toggle, setToggle] = useState(true)
+
+    const handleToggle = (i) => {
+        if (i == 1) return setToggle(false)
+        setToggle(true)
     }
-  }
 
-  useEffect(() => {
-    load();
-    const timeoutId = setTimeout(load, 1000 * 5);
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  }, []);
-
-  const [selectedOptions, setSelectedOptions] = useState({});
-
-  const handleCheckboxChange = (event) => {
-    setSelectedOptions({
-      ...selectedOptions,
-      [event.target.name]: event.target.checked,
-    });
-  };
-
-  return (
-    <>
-      <NurseHeader />
-      <main>
-        <div className="nurse__home-requests nurse__home">
-          <div className="container">
-            <div className="waiting">
-              <h1>
-                <BiLoaderCircle />
-                대기 중인 환자 요청
-              </h1>
-              <div className="filters">
-                <Filter
-                  title="Filter 1"
-                  options={[]}
-                  selectedOptions={selectedOptions}
-                  handleCheckboxChange={handleCheckboxChange}
-                />
-                <Filter
-                  title="Filter 2"
-                  options={[]}
-                  selectedOptions={selectedOptions}
-                  handleCheckboxChange={handleCheckboxChange}
-                />
-                <Filter
-                  title="Filter 3"
-                  options={[]}
-                  selectedOptions={selectedOptions}
-                  handleCheckboxChange={handleCheckboxChange}
-                />
-              </div>
-              <div className="requests">
-                {requests.map((item) => (
-                  <Request
-                    isQuestion={item.is_question}
-                    text={item.text}
-                    date={new Date(item.time)}
-                  />
-                ))}
-              </div>
+    return (
+        <>
+            <NurseHeader />
+            <div className='request__home-top'>
+                <div className={`toggle ${toggle ? 'active' : ''}`} onClick={() => handleToggle(0)}>View patient-specific requests</div>
+                <div className={`toggle ${!toggle ? 'active' : ''}`} onClick={() => handleToggle(1)}>Set progress by patient</div>
             </div>
-            <div className="line" />
-            <div className="processing">
-              <h1>
-                <MdOutlineDownloading />
-                내가 진행 중인 요청사항
-              </h1>
-              <div className="filters">
-                <Filter
-                  title="Filter 1"
-                  options={[]}
-                  selectedOptions={selectedOptions}
-                  handleCheckboxChange={handleCheckboxChange}
-                />
-                <Filter
-                  title="Filter 2"
-                  options={[]}
-                  selectedOptions={selectedOptions}
-                  handleCheckboxChange={handleCheckboxChange}
-                />
-                <Filter
-                  title="Filter 3"
-                  options={[]}
-                  selectedOptions={selectedOptions}
-                  handleCheckboxChange={handleCheckboxChange}
-                />
-              </div>
-              <div className="requests">
-                <Request
-                  isQuestion={true}
-                  text="test"
-                  date={new Date() - 1e9}
-                />
-              </div>
+            <div className='request__home-bottom'>
+                <div>
+                    { toggle ?
+                        <ViewRequest/> :
+                        <Progress/>
+                    }
+                </div>
             </div>
-          </div>
-        </div>
-      </main>
-    </>
-  );
-};
-
-export default Requests;
+        </>
+    )
+}

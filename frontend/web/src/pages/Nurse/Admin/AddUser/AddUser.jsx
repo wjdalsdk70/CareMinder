@@ -1,9 +1,4 @@
 import React from "react";
-import data from "src/data.json";
-import "./AddUser.css";
-import NurseHeader from "src/components/NurseHeader/NurseHeader";
-import { BsPersonFillAdd } from "react-icons/bs";
-import { IoIosArrowBack } from "react-icons/io";
 
 export default function AddUser() {
 

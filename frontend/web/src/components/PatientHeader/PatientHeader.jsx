@@ -8,7 +8,7 @@ export default function PatientHeader() {
     const patient = data.patient
 
     return (
-        <header className="header">
+        <header className="patient-header">
             <div className="left">
                 <img
                     className="patient-img"
