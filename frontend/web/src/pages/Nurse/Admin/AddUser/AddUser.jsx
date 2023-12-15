@@ -12,10 +12,14 @@ export default function AddUser() {
     return (
         <div>
             <NurseHeader />
-            <IoIosArrowBack />
-            <a>Back</a>
-            <BsPersonFillAdd size="10rem"/>
-            <h1>Add new User</h1>
+            <div id="go_back">
+                <IoIosArrowBack size="3rem" />
+                <a>Back</a>
+            </div>
+            <div id="title">
+                <BsPersonFillAdd size="3rem" />
+                <h1>Add new User</h1>
+            </div>
             <div id="data_form">
                 <form>
                     <div className="input_field">
