@@ -4,10 +4,12 @@ import "./AddUser.css";
 import NurseHeader from "src/components/NurseHeader/NurseHeader";
 import { BsPersonFillAdd } from "react-icons/bs";
 import { IoIosArrowBack } from "react-icons/io";
+
 export default function AddUser() {
     const nurse = data.nurse;
+
     return (
-        <div className="add-user">
+        <div>
             <NurseHeader />
             <div id="title">
                 <BsPersonFillAdd size="3rem" />

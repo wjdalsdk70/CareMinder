@@ -10,7 +10,7 @@ export default function EditUser() {
     const nurse = data.nurse;
 
     return (
-        <div className="edit-user">
+        <div>
             <NurseHeader />
             <div id="title">
                 <FaUserEdit size="3rem" />
