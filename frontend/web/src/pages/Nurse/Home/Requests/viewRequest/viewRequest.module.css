@@ -31,7 +31,6 @@
 }
 
 .waiting > div, .ongoing > div {
-    position: fixed;
     cursor: grab;
 }
 
@@ -44,8 +43,11 @@
 .wrapper > div:last-child { flex: .4; }
 
 .follow {
-    z-index: 999;
-    top: 0;
-    left: 0;
-    cursor: grabbing;
+    z-index: 990;
+    position: absolute !important;
+    top: var(--y);
+    left: var(--x);
+
+    cursor: grabbing !important;
+    transform: translate(-50%, -50%);
 }
