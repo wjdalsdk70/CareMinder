@@ -34,7 +34,6 @@
     z-index: 11;
 
     transform: scale(1.025);
-    background: var(--background-primary);
 }
 .active::before {
     content: '';
