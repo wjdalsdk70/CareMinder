@@ -125,16 +125,15 @@ span
     transition-duration: 0.5s;
 }
 
-#title
+.title
 {
     display: flex;
     flex-direction: row;
     align-items: center;
     margin-top: 4vmin;
-    margin-left: 12vmin;
 }
 
-#title h1
+.title h1
 {
     margin-left: 1vmin;
 }
@@ -158,13 +157,23 @@ span
 *:focus {
     outline: none;
 }
+
 .input_field
 {
     display: flex;
     flex-direction: row;
 }
+
 .input_field p
 {
     text-align: center;
     width: 12vmin;
+
+}
+
+.adduser-container
+{
+    padding: var(--header-height);
+    height: 100vh;
+    width: 100vw;
 }

@@ -3,16 +3,15 @@ import data from "src/data.json";
 import "./EditUser.css";
 import NurseHeader from "src/components/NurseHeader/NurseHeader";
 import { FaUserEdit } from "react-icons/fa";
-import { IoIosArrowBack } from "react-icons/io";
 
 export default function EditUser() {
 
     const nurse = data.nurse;
 
     return (
-        <div>
+        <div className="edituser-container">
             <NurseHeader />
-            <div id="title">
+            <div className="title">
                 <FaUserEdit size="3rem" />
                 <h1>Edit user data</h1>
             </div>

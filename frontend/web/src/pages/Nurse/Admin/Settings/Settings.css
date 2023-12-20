@@ -40,7 +40,7 @@
 
 .settings__home .container {
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     align-content: center;
     flex-direction: row;
     height: auto;
@@ -51,7 +51,7 @@
 
 .settings__home .column {
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     align-content: center;
     flex-direction: column;
     gap: 32px;
@@ -62,7 +62,7 @@
 
 .settings__home .row {
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     align-content: center;
     flex-direction: row;
 }
@@ -81,7 +81,7 @@
 
 .settings__home .row .row-container{
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     align-content: center;
     gap: 32px;
     padding: 10px;
