@@ -1,0 +1,54 @@
+.header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    overflow: hidden;
+}
+
+.header .left{
+    display: flex;
+    flex-direction: column;
+    padding: 0px;
+    margin: 5px;
+}
+
+.body {
+    display: flex;
+    justify-content: center;
+    margin-top: 20rem; 
+    text-align: center;
+
+
+}
+
+.check {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    gap: 1rem; 
+    margin-bottom: 1rem;
+
+}
+
+.textArea {
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 12px;
+    background-color: var(--text-background-light);
+    display: flex;
+    justify-content: center;
+    
+
+}
+
+.textArea-text {
+    display: flex;
+    flex-direction: row;
+}
+
+
