@@ -38,16 +38,28 @@ export default function RecordingResult() {
                 <h2>If you want to edit, press <span className="again">Record Again</span> for voice recording or edit directly with keyboard</h2>
 
                 <div className="textArea">
-                    <div className="textArea-text">
-                               <GiClick size={50} />
-                               <h2>Click the box below for editing with keyboard directly</h2>
-                             
-                    </div>
-                    <textarea>
-                                
-                                </textarea>
+      <div className="textArea-text">
+        <GiClick size={50} />
+        <h2>Click the box below for editing with keyboard directly</h2>
+      </div>
+      <div className="textArea-container">
+        <textarea></textarea>
+      </div>
+    </div>
+    <div className="buttons">
+    <button className="record-button">
+                    Cancel
+                </button>
+               
+                    <button className="record-button" color="var(--request)">
+                       Record Again
+                    </button>
 
-                </div>
+                    <button className="record-button">
+                        Finish
+                    </button>
+              
+    </div>
                 </div>
                
             </div>
