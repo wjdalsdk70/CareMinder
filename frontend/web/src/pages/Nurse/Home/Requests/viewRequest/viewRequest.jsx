@@ -17,7 +17,6 @@ export default function ViewRequest() {
     const [ongoing, setOngoing] = useState([])
 
     const [selItem, setSelItem] = useState({ i: null, s: null })
-    const [offset, setOffset] = useState({ x1: 0, y1: 0, x2: 0, y2: 0 })
   
     const handleCheckboxChange = (event) => {
         setSelectedOptions({
@@ -26,12 +25,52 @@ export default function ViewRequest() {
         })
     }
 
-    const handleMouseDown = (i, s) => { setSelItem({ i, s }) }
-    const handleMouseUp = () => { setSelItem({ i: null, s: null }) }
+    const handleMouseDown = (i, s) => {
+        setSelItem({ i, s })
+    }
+    const handleMouseUp = (e) => {
+        if (!selItem.i) return false
+
+        const leftElement = leftRef.current
+        const rightElement = rightRef.current
+
+        const { clientX, clientY } = e
+
+        const leftRect = leftElement.getBoundingClientRect()
+        const rightRect = rightElement.getBoundingClientRect()
+
+        if (
+            clientX >= leftRect.left &&
+            clientX <= leftRect.right &&
+            clientY >= leftRect.top &&
+            clientY <= leftRect.bottom
+        ) {
+            setWaiting(prev => [...prev, ongoing[selItem.i]])
+            selItem.s === 0 ? setWaiting(prev => prev.filter((_, index) => index !== selItem.i)) : setOngoing(prev => prev.filter((_, index) => index !== selItem.i))
+        }
+        else if (
+            clientX >= rightRect.left &&
+            clientX <= rightRect.right &&
+            clientY >= rightRect.top &&
+            clientY <= rightRect.bottom
+        ) {
+            setOngoing(prev => [...prev, waiting[selItem.i]])
+            selItem.s === 0 ? setWaiting(prev => prev.filter((_, index) => index !== selItem.i)) : setOngoing(prev => prev.filter((_, index) => index !== selItem.i))
+        }
+        
+        setSelItem({ i: null, s: null })
+    }
+    
+    const handleMouseMove = (e) => {
+        const item = document.querySelector(`.${styles.follow}`)
+        
+        if (item) {
+            item.style.setProperty('--x', `${e.clientX}px`)
+            item.style.setProperty('--y', `${e.clientY}px`)
+        }
+    }
 
     useEffect(() => {
-        document.addEventListener('mouseup', handleMouseUp)
-
         // test data
         setWaiting([
             { is_question: false, text: '1', time: Date.now() },
@@ -44,49 +83,27 @@ export default function ViewRequest() {
             { is_question: true, text: '2', time: Date.now() },
             { is_question: false, text: '3', time: Date.now() }
         ])
-
-        return () => document.removeEventListener('mouseup', handleMouseUp)
     }, [])
 
     useEffect(() => {
-        if (leftRef.current && rightRef.current) {
-            const leftRect = leftRef.current.getBoundingClientRect()
-            const rightRect = rightRef.current.getBoundingClientRect()
-
-            setOffset({ x1: leftRect.left, y1: leftRect.top, x2: rightRect.left, y2: rightRect.top })
-        }
-
-        const handleMouseMove = (e) => {
-            const item = document.querySelector('.follow')
-
-            if (item) {
-                const x = e.clientX - item.offsetWidth / 2
-                const y = e.clientY - item.offsetHeight / 2
-
-                const keyframes = {
-                    transform: `translate(${selItem.s == 0 ? x - offset.x1 : x - offset.x2}px, ${selItem.s == 0 ? y - offset.y1 : y - offset.y2}px)`,
-                }
-        
-                item.animate([keyframes], {
-                    duration: 800,
-                    fill: 'forwards'
-                })
-            }
-        }
-    
         window.addEventListener('mousemove', handleMouseMove)
+        window.addEventListener('mouseup', handleMouseUp)
     
-        return () => window.removeEventListener('mousemove', handleMouseMove)
-    }, [])
+        return () => {
+            window.removeEventListener('mouseup', handleMouseUp)
+            window.removeEventListener('mousemove', handleMouseMove)
+        }
+    }, [selItem])
 
     return (
+        <>
         <div className={styles.wrapper} onMouseLeave={handleMouseUp}>
-            <div>
+            <div ref={leftRef}>
                 <div className={styles.title}>
                     <BiLoaderCircle />
                     <h2>대기 중인 환자 요청</h2>
                 </div>
-                <div className={styles.left}>
+                <div className={styles.left} ref={leftRef}>
                     <div className={styles.filter}>
                     <Filter
                         title="By job"
@@ -107,12 +124,12 @@ export default function ViewRequest() {
                         handleCheckboxChange={handleCheckboxChange}
                     />
                     </div>
-                    <div className={styles.waiting} ref={leftRef}>
+                    <div className={styles.waiting}>
                         {waiting.map((item, i) => (
-                            <div key={i} onMouseDown={() => handleMouseDown(i, 0)} className={selItem.i == i && selItem.s == 0 ? 'follow' : ''}>
+                            <div key={i} onMouseDown={() => handleMouseDown(i, 0)} className={selItem.i === i && selItem.s === 0 ? styles.follow : ''}>
                                 <Request
                                     isQuestion={item.is_question}
-                                    text={item. text}
+                                    text={item.text}
                                     date={new Date(item.time)}
                                 />
                             </div>
@@ -120,7 +137,7 @@ export default function ViewRequest() {
                     </div>
                 </div>
             </div>
-            <div style={{ marginLeft: '16px' }}>
+            <div style={{ marginLeft: '16px' }} ref={rightRef}>
                 <div className={styles.title}>
                     <MdOutlineDownloading />
                     <h2>내가 진행 중인 요청사항</h2>
@@ -146,9 +163,9 @@ export default function ViewRequest() {
                             handleCheckboxChange={handleCheckboxChange}
                         />
                     </div>
-                    <div className={styles.ongoing} ref={rightRef}>
+                    <div className={styles.ongoing}>
                         {ongoing.map((item, i) => (
-                            <div key={i} onMouseDown={() => handleMouseDown(i, 1)} className={selItem.i == i && selItem.s == 1 ? 'follow' : ''}>
+                            <div key={i} onMouseDown={() => handleMouseDown(i, 1)} className={selItem.i === i && selItem.s === 1 ? styles.follow : ''}>
                                 <Request
                                     isQuestion={item.is_question}
                                     text={item.text}
@@ -160,5 +177,6 @@ export default function ViewRequest() {
                 </div>
             </div>
         </div>
+        </>
     )
 }

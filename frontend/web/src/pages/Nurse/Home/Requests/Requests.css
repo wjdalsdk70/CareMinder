@@ -32,10 +32,8 @@
 
 .active {
     z-index: 11;
-    position: relative;
 
     transform: scale(1.025);
-    background: var(--background-primary);
 }
 .active::before {
     content: '';
@@ -58,8 +56,6 @@
 }
 
 .request__home-bottom > div {
-    position: relative;
-
     height: 100%;
 
     padding: 16px;

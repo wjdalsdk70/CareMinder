@@ -3,20 +3,14 @@ import data from "src/data.json";
 import "./AddUser.css";
 import NurseHeader from "src/components/NurseHeader/NurseHeader";
 import { BsPersonFillAdd } from "react-icons/bs";
-import { IoIosArrowBack } from "react-icons/io";
 
 export default function AddUser() {
-
     const nurse = data.nurse;
 
     return (
-        <div>
+        <div className="adduser-container">
             <NurseHeader />
-            <div id="go_back">
-                <IoIosArrowBack size="3rem" />
-                <a>Back</a>
-            </div>
-            <div id="title">
+            <div className="title">
                 <BsPersonFillAdd size="3rem" />
                 <h1>Add new User</h1>
             </div>
@@ -45,7 +39,6 @@ export default function AddUser() {
                         </div>
                         <button className="change_data_button">Change Data</button>
                     </div>
-
                     <div id="bottom_buttons">
                         <button className="cancel_button">Cancel</button>
                         <button className="save_button" type="submit">Save</button>
