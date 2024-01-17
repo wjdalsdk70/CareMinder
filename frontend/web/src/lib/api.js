@@ -1,4 +1,5 @@
 const BASE_URL = "http://127.0.0.1:8000/api";
+
 export async function login(username, password) {
   const response = await fetch(`${BASE_URL}/staffs/login/`, {
     method: "POST",
@@ -13,6 +14,7 @@ export async function login(username, password) {
   const data = await response.json();
   return data;
 }
+
 export async function refresh({ refreshToken }) {
   const response = await fetch(`${BASE_URL}/token/refresh/`, {
     method: "POST",
@@ -27,6 +29,7 @@ export async function refresh({ refreshToken }) {
   const data = await response.json();
   return data;
 }
+
 export async function logout({ refreshToken }) {
   const response = await fetch(`${BASE_URL}/token/blacklist/`, {
     method: "POST",
@@ -41,6 +44,7 @@ export async function logout({ refreshToken }) {
   const data = await response.json();
   return data;
 }
+
 export async function getRequests() {
   const response = await fetch(`${BASE_URL}/requests/`, {
     method: "GET",
