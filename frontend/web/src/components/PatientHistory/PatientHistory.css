@@ -57,18 +57,40 @@
 
 .Processing {
   background: var(--request);
+  border-radius: 10px;
 }
 
 .Waiting {
   background: var(--quesiton);
+  border-radius: 10px;
 }
 
 
 .Finished {
   background: var(--background-grey);
+  border-radius: 10px;
   opacity: 80%;
 }
 
+/* CHAT STYLING START */
+
+.Processingchat {
+  background: var(--request);
+  border-radius: 0px 0px 10px 10px;
+  border: 5px;
+}
+
+.Waitingchat {
+  background: var(--quesiton);
+}
+
+
+.Finishedchat {
+  background: var(--background-grey);
+  opacity: 80%;
+}
+
+/* CHAT STYLING END */
 
 .request-item {
   align-items: center;
@@ -79,6 +101,7 @@
 
 .top-container {
   display: flex;
+  padding: 0.5rem;
 }
 
 .icon-container {
@@ -114,4 +137,5 @@
 
 .chat-container {
   opacity: 95%;
+  padding: 5px;
 }
