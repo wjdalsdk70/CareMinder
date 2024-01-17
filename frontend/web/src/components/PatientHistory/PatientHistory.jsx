@@ -94,9 +94,9 @@ export default function PatientHistory() {
           requests.map((request) => (
             <div
               key={request.id}
-              className={`request-item ${getStateText(request.state)}`}
+              className={`request-item`}
             >
-              <div className="top-container">
+              <div className={`top-container ${getStateText(request.state)}`}>
                 <div className="icon-container">
                   {request.is_question ? (
                     <BsQuestionCircleFill size={50} className="icon" />
@@ -114,7 +114,7 @@ export default function PatientHistory() {
                   </div>
                 </div>
               </div>
-              <div className="chat-container">
+              <div className={`chat-container ${getStateText(request.state)+"chat"}`}>
                 {chats
                   .find((chat) => chat.requestId === request.id).chats
                   .map((chat) => {
