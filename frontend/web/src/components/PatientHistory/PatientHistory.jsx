@@ -94,9 +94,9 @@ export default function PatientHistory() {
           requests.map((request) => (
             <div
               key={request.id}
-              className={`request-item`}
+              className={`request-item ${getStateText(request.state)}`}
             >
-              <div className={`top-container ${getStateText(request.state)}`}>
+              <div className={`top-container `}>
                 <div className="icon-container">
                   {request.is_question ? (
                     <BsQuestionCircleFill size={50} className="icon" />
@@ -121,15 +121,8 @@ export default function PatientHistory() {
                     console.log("{");
                     console.log(chat);
                     console.log("}");
-                    return (<div key={request.id + "-" + chat.id} className="chat-item">
+                    return (<div key={request.id + "-" + chat.id} className={`chat-item patient-${chat.from_patient}`}>
                       <p>{chat.text}</p>
-                      <p
-                        className={
-                          chat.from_patient ? "from-patient" : "from-nurse"
-                        }
-                      >
-                        {chat.from_patient ? "Patient" : "Nurse"}
-                      </p>
                       <p className="chat-time">{timeAgo(chat.time)}</p>
                     </div>)
                 })}

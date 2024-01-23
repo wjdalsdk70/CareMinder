@@ -95,7 +95,7 @@
 .request-item {
   align-items: center;
   border-radius: 1rem;
-  padding: 1rem;
+  padding: 0.2rem;
   margin-bottom: 1rem;
 }
 
@@ -116,6 +116,7 @@
   flex-grow: 1;
   flex-direction: row;
   justify-content: space-between;
+  vertical-align: bottom;
 }
 
 .text-container {
@@ -136,6 +137,37 @@
 }
 
 .chat-container {
-  opacity: 95%;
-  padding: 5px;
+  padding: 1rem 1rem 0.5rem 1rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  overflow: hidden; 
+}
+
+.patient-false {
+  background-color: var(--text-background-response);
+  border-radius: 10px 10px 10px 0px;
+  padding: 0.5rem;
+  width: max-content;
+  float: left;
+  margin-bottom: 0.5rem;
+}
+
+.patient-true {
+  background-color: var(--text-background-light);
+  border-radius: 10px 10px 0px 10px;
+  padding: 0.5rem;
+  width: max-content;
+  float: right;
+  margin-bottom: 0.5rem;
+}
+
+.chat-time {
+  color: var(--text);
+  font-family: 'consolas';
+  font-size: small;
+}
+
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
 }
