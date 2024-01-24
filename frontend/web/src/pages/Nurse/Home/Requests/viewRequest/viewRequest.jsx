@@ -41,11 +41,13 @@ export default function ViewRequest() {
 
     const handleMouseUp = (e) => {
         if (!holding) return false
-        const targetElement = e.target.getAttribute('name')
-        if (targetElement.split('')[0] !== selItem.s) console.log(`Item moved (${selItem.i} to the ${selItem.s  === 'r' ? 'left' : 'right'})`)
 
         setHolding(false)
         setSelItem({ i: null, s: null, item: { isQuestion: false, text: '', date: new Date() } })
+        const targetElement = e.target.getAttribute('name')
+
+        if (!targetElement) return false
+        if (targetElement.split('')[0] !== selItem.s) console.log(`Item moved (${selItem.i} to the ${selItem.s  === 'r' ? 'left' : 'right'})`)
     }
 
     useEffect(() => {
