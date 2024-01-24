@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaBars } from "react-icons/fa";
 import { MdKeyboardArrowLeft } from "react-icons/md";
-import { getRequests, getChats } from "../../lib/api";
+import { getRequests, getChatMessages } from "../../lib/api";
 import {
   BsQuestionCircleFill,
   BsArrowDownRightCircleFill,
@@ -23,28 +23,6 @@ export default function PatientHistory() {
         console.log("Requests Data:", requestsData);
         setRequests(requestsData);
 
-        // Fetch chats for each request
-        const chatPromises = requestsData.map(async (request) => {
-          try {
-            const chatData = await getChats(request.id);
-            console.log(`Chats for Request ${request.id}:`, chatData);
-            return {
-              requestId: request.id,
-              chats: chatData,
-            };
-          } catch (error) {
-            console.error(
-              `Error fetching chats for request ${request.id}:`,
-              error
-            );
-            return null;
-          }
-        });
-
-        const chatResults = await Promise.all(chatPromises);
-        console.log("Chat Results:", chatResults);
-
-        setChats(chatResults.filter((result) => result !== null));
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -76,11 +54,7 @@ export default function PatientHistory() {
           <p>Loading...</p>
         ) : (
           requests.map((request) => (
-            <PatientHistoryRequest
-              key={request.id}
-              request={request}
-              chats={chats}
-            />
+            <PatientHistoryRequest key={request.id} request={request} />
           ))
         )}
       </div>

@@ -8,6 +8,7 @@
   width: 40%;
   padding: 45px 40px;
   transition: transform 500ms;
+  /* overflow: hidden; */
 }
 
 .patient-history.active {
@@ -87,12 +88,15 @@
 /* CHAT STYLING END */
 
 .patient-history__requests {
+  height: 95%;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
 .request-item {
+  user-select: none;
   border-radius: 10px;
   border: 2px solid var(--color);
 }
@@ -137,24 +141,61 @@
 }
 
 .chat-container {
+  width: 100%;
+}
+
+.chat-container__messages {
   padding: 1rem 1rem 0.5rem 1rem;
-  background-color: rgba(0, 0, 0, 0.1);
   overflow: hidden;
   display: flex;
   flex-direction: column;
   gap: 1rem;
   width: 100%;
+  max-width: 100%;
+}
+
+.chat-container__input {
+  position: relative;
+  padding: 1rem;
+}
+
+.chat-container__input input {
+  width: 100%;
+  background-color: var(--text-background-lighter);
+  border: none;
+  font: "NanumSquare";
+  text-align: left;
+  padding: 0.6rem;
+  padding-right: 3rem;
+}
+
+.chat-container__input button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: rgb(97, 97, 97);
+
+  padding: 0.5rem;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 1rem;
 }
 
 .chat-container.closed {
-  display: hidden;
+  display: none;
+}
+
+.chat-item {
+  max-width: 100%;
+  width: max-content;
+  text-wrap: wrap;
 }
 
 .patient-false {
   background-color: var(--text-background-response);
   border-radius: 10px 10px 10px 0px;
   padding: 0.5rem;
-  width: max-content;
   margin-bottom: 0.5rem;
 }
 
@@ -162,7 +203,6 @@
   background-color: var(--color);
   border-radius: 10px 10px 0px 10px;
   padding: 0.5rem;
-  width: max-content;
   align-self: flex-end;
   margin-bottom: 0.5rem;
 }

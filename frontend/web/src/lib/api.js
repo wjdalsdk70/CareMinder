@@ -59,13 +59,33 @@ export async function getRequests() {
   return data;
 }
 
-export async function getChats(id) {
-  const response = await fetch(`${BASE_URL}/requests/${id}/chat_messages`, {
+export async function getChatMessages(id) {
+  const response = await fetch(`${BASE_URL}/requests/${id}/chat_messages/`, {
     method: "GET",
     headers: {
       "content-type": "application/json",
     },
   });
+
+  if (!response.ok) {
+    return Promise.reject(response);
+  }
+
+  const data = await response.json();
+  return data;
+}
+
+export async function createChatMessage(requestId, { text, from_patient }) {
+  const response = await fetch(
+    `${BASE_URL}/requests/${requestId}/chat_messages/`,
+    {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ text, from_patient }),
+    }
+  );
 
   if (!response.ok) {
     return Promise.reject(response);
