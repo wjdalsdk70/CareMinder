@@ -1,4 +1,4 @@
-.request__home-top {
+.top {
     z-index: 10;
     position: relative;
 
@@ -9,7 +9,7 @@
     padding: 0 15svw 0 15svw;
 }
 
-.request__home-top > div {
+.top > div {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -32,6 +32,7 @@
 
 .active {
     z-index: 11;
+    background: var(--background-primary);
 
     transform: scale(1.025);
 }
@@ -46,7 +47,7 @@
     background: var(--background-primary);
 }
 
-.request__home-bottom {
+.bottom {
     width: 100%;
     height: calc(100svh - var(--header-height));
 
@@ -55,7 +56,7 @@
     padding: 0 16px 16px 16px;
 }
 
-.request__home-bottom > div {
+.bottom > div:not(.follow) {
     height: 100%;
 
     padding: 16px;
