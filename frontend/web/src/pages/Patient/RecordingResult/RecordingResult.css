@@ -20,8 +20,9 @@
 .body {
     display: flex;
     justify-content: center;
-    margin-top: 20rem; 
+    margin-top: 10rem; 
     text-align: center;
+    overflow: hidden;
 
 
 }
@@ -69,13 +70,20 @@
     border-style: none; 
     padding: 10px;
     margin: 10px;
+    font-size: 20px;
+    font-family: "NanumSquare";
+    text-align: center;
     resize: none;
+    line-height: 10; /* Adjust line-height for vertical centering */
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .buttons {
     display: flex;
     flex-direction: row;
-    margin: 10px;
+    margin: 1px;
     justify-content: center;
   }
   

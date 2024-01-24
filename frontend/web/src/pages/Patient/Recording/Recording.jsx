@@ -118,18 +118,18 @@ const updateVolume = () => {
             </div>
             <h2 className="record-text">Recording your voice</h2>
             <div className="record-buttons">
-                <a href="/patient/home">
-                <button className="record-button">
+                <a className="record-button" href="/patient/home">
+              
                     Cancel
-                </button>
+               
                 </a>
                 
-                <a href="/patient/recordingresults">
+                <a className="record-button" href="/patient/recordingresults" onClick={handleFinishClick}>
 
              
-                <button className="record-button" onClick={handleFinishClick}>
+             
                     Finish
-                </button>
+               
                 </a>
             </div>
             <PatientFooter />

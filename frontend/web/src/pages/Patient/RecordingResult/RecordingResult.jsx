@@ -47,7 +47,7 @@ export default function RecordingResult() {
                             <h2>Click the box below for editing with keyboard directly</h2>
                         </div>
                         <div className="textArea-container">
-                            <textarea value={location.state.transcript}></textarea>
+                            <textarea defaultValue={location.state.transcript}></textarea>
                         </div>
                     </div>
                     <div className="buttons">
