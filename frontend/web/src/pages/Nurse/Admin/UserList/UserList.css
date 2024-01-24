@@ -1,0 +1,43 @@
+.userlist-container
+{
+    padding: var(--header-height);
+    height: 100vh;
+    width: 100vw;
+}
+
+#userlist
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#list-items
+{
+    display: flex;
+    flex-direction: row;
+    gap: 5vmin;
+    background-color: #777777;
+    border: 2px outset #5a5a5a;
+    width: max-content;
+    padding: 1vmin 5vmin 1vmin 5vmin;
+    margin-top: 3vmin;
+}
+
+#list-items h2
+{
+    color: white;
+}
+
+.list-item
+{
+    display: flex;
+    flex-direction: row;
+}
+
+.item1
+{
+    display: block;
+    text-align: left;
+}
