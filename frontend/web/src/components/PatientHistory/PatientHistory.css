@@ -56,52 +56,52 @@
 }
 
 .Processing {
-  background: var(--request);
-  border-radius: 10px;
+  --color: var(--request);
+  --color-transparent: var(--request-transparent);
 }
 
 .Waiting {
-  background: var(--quesiton);
-  border-radius: 10px;
+  --color: var(--question);
+  --color-transparent: var(--question-transparent);
 }
 
-
 .Finished {
-  background: var(--background-grey);
-  border-radius: 10px;
-  opacity: 80%;
+  --color: var(--background-grey);
+  --color-transparent: var(--background-grey-transparent);
+}
+
+.patient-history .top-container {
+  background: var(--color);
+  border-radius: 10px 10px 0px 0px;
 }
 
 /* CHAT STYLING START */
 
-.Processingchat {
-  background: var(--request);
+.patient-history .chat-container {
+  background: var(--color-transparent);
+  backdrop-filter: opacity(0.5);
   border-radius: 0px 0px 10px 10px;
-  border: 5px;
-}
-
-.Waitingchat {
-  background: var(--quesiton);
-}
-
-
-.Finishedchat {
-  background: var(--background-grey);
-  opacity: 80%;
+  opacity: 9;
 }
 
 /* CHAT STYLING END */
 
+.patient-history__requests {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 .request-item {
-  align-items: center;
-  border-radius: 1rem;
-  padding: 0.2rem;
-  margin-bottom: 1rem;
+  border-radius: 10px;
+  border: 2px solid var(--color);
 }
 
 .top-container {
   display: flex;
-  padding: 0.5rem;
+  padding: 0.7rem;
+  align-items: center;
+  border-radius: 1rem;
 }
 
 .icon-container {
@@ -139,7 +139,15 @@
 .chat-container {
   padding: 1rem 1rem 0.5rem 1rem;
   background-color: rgba(0, 0, 0, 0.1);
-  overflow: hidden; 
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.chat-container.closed {
+  display: hidden;
 }
 
 .patient-false {
@@ -147,22 +155,20 @@
   border-radius: 10px 10px 10px 0px;
   padding: 0.5rem;
   width: max-content;
-  float: left;
   margin-bottom: 0.5rem;
 }
 
 .patient-true {
-  background-color: var(--text-background-light);
+  background-color: var(--color);
   border-radius: 10px 10px 0px 10px;
   padding: 0.5rem;
   width: max-content;
-  float: right;
+  align-self: flex-end;
   margin-bottom: 0.5rem;
 }
 
 .chat-time {
   color: var(--text);
-  font-family: 'consolas';
   font-size: small;
 }
 
