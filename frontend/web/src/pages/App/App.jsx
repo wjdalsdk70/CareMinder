@@ -63,10 +63,10 @@ function App() {
 
         <Route path="/patient" element={<Navigate to="/patient/home" />} />
         <Route path="/patient/home" element={<PatientHome />} />
+        <Route path="/patient/setup" element={<Setup />} />
         <Route path="/patient/agreement" element={<Agreement />} />
         <Route path="/patient/recording" element={<Recording />} />
         <Route path="/patient/recordingResults" element={<RecordingResult />} />
-        <Route path="/patient/setup" element={<Setup />} />
       </Routes>
     </div>
   );

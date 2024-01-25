@@ -94,3 +94,31 @@ export async function createChatMessage(requestId, { text, from_patient }) {
   const data = await response.json();
   return data;
 }
+
+export async function getTablets() {
+  const response = await fetch(`${BASE_URL}/tablets/`, {
+    method: "GET",
+    headers: {
+      "content-type": "application/json",
+    },
+  });
+  if (!response.ok) {
+    return Promise.reject(response);
+  }
+  const data = await response.json();
+  return data;
+}
+
+export async function getTablet(id) {
+  const response = await fetch(`${BASE_URL}/tablets/${id}`, {
+    method: "GET",
+    headers: {
+      "content-type": "application/json",
+    },
+  });
+  if (!response.ok) {
+    return Promise.reject(response);
+  }
+  const data = await response.json();
+  return data;
+}
