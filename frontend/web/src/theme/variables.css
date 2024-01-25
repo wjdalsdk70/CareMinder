@@ -3,8 +3,11 @@
   --footer-height: 100px;
 
   --request: #f65a5a;
-  --quesiton: #fce150;
+  --question: #fce150;
   --tertiary: #003f88;
+  --request-transparent: rgba(246, 90, 90, 20%);
+  --question-transparent: rgba(252, 226, 79, 20%);
+  --tertiary-transparent: rgba(0, 64, 138, 20%);
 
   --text: #000000;
   --text-alt: #f9efee;

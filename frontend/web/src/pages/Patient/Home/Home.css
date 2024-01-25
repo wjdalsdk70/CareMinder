@@ -16,7 +16,7 @@
 }
 
 .patient__home .menu {
-  padding:0 32px;
+  padding: 0 32px;
   width: 100%;
   height: auto;
 }
@@ -60,7 +60,7 @@
   cursor: pointer;
 }
 .patient__home .question-container button {
-  background: var(--quesiton);
+  background: var(--question);
 }
 .patient__home .request-container button {
   background: var(--request);

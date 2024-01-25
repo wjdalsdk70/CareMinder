@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { FaBars } from "react-icons/fa";
 import { MdKeyboardArrowLeft } from "react-icons/md";
-import { getRequests, getChats } from "../../lib/api";
+import { getRequests, getChatMessages } from "../../lib/api";
 import {
   BsQuestionCircleFill,
   BsArrowDownRightCircleFill,
 } from "react-icons/bs";
 import moment from "moment";
 import "./PatientHistory.css";
+import PatientHistoryRequest from "../PatientHistoryRequest/PatientHistoryRequest";
 
 export default function PatientHistory() {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,28 +23,6 @@ export default function PatientHistory() {
         console.log("Requests Data:", requestsData);
         setRequests(requestsData);
 
-        // Fetch chats for each request
-        const chatPromises = requestsData.map(async (request) => {
-          try {
-            const chatData = await getChats(request.id);
-            console.log(`Chats for Request ${request.id}:`, chatData);
-            return {
-              requestId: request.id,
-              chats: chatData,
-            };
-          } catch (error) {
-            console.error(
-              `Error fetching chats for request ${request.id}:`,
-              error
-            );
-            return null;
-          }
-        });
-
-        const chatResults = await Promise.all(chatPromises);
-        console.log("Chat Results:", chatResults);
-
-        setChats(chatResults.filter((result) => result !== null));
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -57,23 +36,6 @@ export default function PatientHistory() {
   function handleButtonClick() {
     setIsOpen(!isOpen);
   }
-
-  const getStateText = (state) => {
-    switch (state) {
-      case 0:
-        return "Waiting";
-      case 1:
-        return "Processing";
-      case 2:
-        return "Finished";
-      default:
-        return "Unknown State Text";
-    }
-  };
-
-  const timeAgo = (timestamp) => {
-    return moment(timestamp).fromNow();
-  };
 
   return (
     <div className={`patient-history ${isOpen && "active"}`}>
@@ -92,42 +54,7 @@ export default function PatientHistory() {
           <p>Loading...</p>
         ) : (
           requests.map((request) => (
-            <div
-              key={request.id}
-              className={`request-item ${getStateText(request.state)}`}
-            >
-              <div className={`top-container `}>
-                <div className="icon-container">
-                  {request.is_question ? (
-                    <BsQuestionCircleFill size={50} className="icon" />
-                  ) : (
-                    <BsArrowDownRightCircleFill size={50} className="icon" />
-                  )}
-                </div>
-                <div className="content-container">
-                  <div className="info-container">
-                    <h2>{getStateText(request.state)}</h2>
-                    <p className="time">{timeAgo(request.time)}</p>
-                  </div>
-                  <div className="text-container">
-                    <p>{request.text}</p>
-                  </div>
-                </div>
-              </div>
-              <div className={`chat-container ${getStateText(request.state)+"chat"}`}>
-                {chats
-                  .find((chat) => chat.requestId === request.id).chats
-                  .map((chat) => {
-                    console.log("{");
-                    console.log(chat);
-                    console.log("}");
-                    return (<div key={request.id + "-" + chat.id} className={`chat-item patient-${chat.from_patient}`}>
-                      <p>{chat.text}</p>
-                      <p className="chat-time">{timeAgo(chat.time)}</p>
-                    </div>)
-                })}
-              </div>
-            </div>
+            <PatientHistoryRequest key={request.id} request={request} />
           ))
         )}
       </div>
