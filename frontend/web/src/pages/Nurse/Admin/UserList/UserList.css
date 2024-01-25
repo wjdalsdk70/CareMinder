@@ -5,6 +5,19 @@
     width: 100vw;
 }
 
+#add-info
+{
+    margin-left: 1rem;
+    margin-top: 3.5vmin;
+}
+
+#userlist-add
+{
+    display: flex;
+    justify-content: center;
+    margin-right: -3.5rem;
+}
+
 #userlist
 {
     display: flex;
