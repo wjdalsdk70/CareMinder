@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaBars } from "react-icons/fa";
 import { MdKeyboardArrowLeft } from "react-icons/md";
-import { getRequests, getChatMessages } from "../../lib/api";
+import { getRequestsFiltered, getChatMessages } from "../../lib/api";
 import {
   BsQuestionCircleFill,
   BsArrowDownRightCircleFill,
@@ -9,17 +9,19 @@ import {
 import moment from "moment";
 import "./PatientHistory.css";
 import PatientHistoryRequest from "../PatientHistoryRequest/PatientHistoryRequest";
+import useLocalStorage from "src/hooks/useLocalStorage";
 
 export default function PatientHistory() {
   const [isOpen, setIsOpen] = useState(false);
   const [requests, setRequests] = useState([]);
   const [chats, setChats] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [tablet, setTablet] = useLocalStorage("tablet", {});
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const requestsData = await getRequests();
+        const requestsData = await getRequestsFiltered(tablet.id);
         console.log("Requests Data:", requestsData);
         setRequests(requestsData);
 

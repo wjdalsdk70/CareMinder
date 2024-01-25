@@ -45,31 +45,54 @@
 .set-up .container p {
     font-size: 2rem;
     color: white;
-
     padding: 6px;
 }
 
-.set-up .container .form {
+
+
+.set-up .form {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    margin-top: 2%;
+    margin: 0;
+    flex-direction: column;
+    gap: 0;
 }
 
-.set-up .input-form {
-    width: 20%; 
-    height: 40px; 
+.set-up select {
+    width: 200px;
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    background-color: white;
-    color: black;
-    font-size: 1.5rem;
+    background-color: var(--text-background-lighter); 
+    border-radius: 5px; 
+    margin-top: 2rem;
+    padding: 1rem;
+    font-size: 1.3rem;
+    color: var(--text);
+    font-weight: 100;
+  }
+
+  .set-up select option {
+    background-color: var(--text-background-lighter); 
+  }
+  
+
+  .set-up select:focus {
+    outline: none;
+    box-shadow: var(--text-background-light); 
+  }
+
+
+  .styled-button {
+    width: 200px;
+    padding: 10px;
+    background-color: var(--text-background-lighter); 
+    border-radius: 5px; 
+    margin: 2rem;
+    font-size: 1.3rem;
+    color: var(--text);
+    font-weight: 100;
+    cursor: pointer; /* Add this to make it look clickable */
 }
 
-.set-up .input-form::placeholder {
-    font-size: 1.5rem; /* Set the font size for the placeholder text */
-}
+
+  

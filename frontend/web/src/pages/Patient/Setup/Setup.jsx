@@ -1,42 +1,37 @@
 import React, { useState, useEffect } from "react";
 import Logo from "../../../assets/logo.svg";
 import "./Setup.css";
-import { getTablet, createTablet } from "../../../lib/api"; // Import the postTablets function
+import { getTablet, getTablets } from "../../../lib/api";
 import useLocalStorage from "src/hooks/useLocalStorage";
+import { useNavigate } from "react-router-dom";
 
 export default function Setup() {
-  const [tabletName, setTabletName] = useState("");
-  const [tabletArea, setTabletArea] = useState("");
   const [tablet, setTablet] = useLocalStorage("tablet", {});
+  const [tablets, setTablets] = useState([]);
+  const [selectedTablet, setSelectedTablet] = useState("");
+  const navigate = useNavigate();
 
-  async function fetchTablet(id) {
+  async function handleClick() {
+    if (!selectedTablet) return;
     try {
-      const response = await getTablet(id);
+      const response = await getTablet(selectedTablet);
+      console.log(response);
       setTablet(response);
+      navigate("/patient/home");
+    } catch (error) {
+      console.error(error);
+      // Add additional error handling logic here if needed
+    }
+  }
+
+  async function fetchTablets() {
+    try {
+      const response = await getTablets();
+      setTablets(response);
     } catch (error) {
       console.error(error);
     }
   }
-
-  useEffect(() => {
-    fetchTablet(1);
-  }, []);
-
-  const handleNameChange = (event) => {
-    setTabletName(event.target.value);
-  };
-
-  const handleAreaChange = (event) => {
-    setTabletArea(event.target.value);
-  };
-
-  const handleSubmit = async () => {
-    try {
-      await createTablet(tabletName, tabletArea);
-    } catch (error) {
-      console.error("Error posting tablet data:", error);
-    }
-  };
 
   return (
     <div className="set-up">
@@ -50,25 +45,23 @@ export default function Setup() {
           nurse's screen.
         </p>
         <div className="form">
-          <p>Setting a name</p>
-          <input
-            className="input-form"
-            type="text"
-            placeholder="Enter tablet name"
-            value={tabletName}
-            onChange={handleNameChange}
-          />
+          <select
+            onClick={fetchTablets}
+            onChange={(e) => setSelectedTablet(e.target.value)}
+          >
+            <option value="" disabled selected>
+              Select a tablet
+            </option>
+            {tablets.map((tablets) => (
+              <option key={tablets.id} value={tablets.id}>
+                {tablets.name}
+              </option>
+            ))}
+          </select>
 
-          <p>Setting an area</p>
-          <input
-            className="input-form"
-            type="text"
-            placeholder="Enter tablet area"
-            value={tabletArea}
-            onChange={handleAreaChange}
-          />
-
-          <button className="submit-button" onClick={handleSubmit}></button>
+          <button className="submit-button styled-button" onClick={handleClick}>
+            Submit
+          </button>
         </div>
       </div>
     </div>

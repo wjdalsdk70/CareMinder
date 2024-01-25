@@ -59,6 +59,20 @@ export async function getRequests() {
   return data;
 }
 
+export async function getRequestsFiltered(id) {
+  const response = await fetch(`${BASE_URL}/requests/?tablet=${id}`, {
+    method: "GET",
+    headers: {
+      "content-type": "application/json",
+    },
+  });
+  if (!response.ok) {
+    return Promise.reject(response);
+  }
+  const data = await response.json();
+  return data;
+}
+
 export async function getChatMessages(id) {
   const response = await fetch(`${BASE_URL}/requests/${id}/chat_messages/`, {
     method: "GET",
@@ -75,20 +89,20 @@ export async function getChatMessages(id) {
   return data;
 }
 
-export async function createTablet(name, area) {
-  const response = await fetch(`${BASE_URL}/tablets/`, {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-    },
-    body: JSON.stringify({ name, area }),
-  });
-  if (!response.ok) {
-    return Promise.reject(response);
-  }
-  const data = await response.json();
-  return data;
-}
+// export async function createTablet(name, area) {
+//   const response = await fetch(`${BASE_URL}/tablets/`, {
+//     method: "POST",
+//     headers: {
+//       "content-type": "application/json",
+//     },
+//     body: JSON.stringify({ name, area }),
+//   });
+//   if (!response.ok) {
+//     return Promise.reject(response);
+//   }
+//   const data = await response.json();
+//   return data;
+// }
 
 export async function createChatMessage(requestId, { text, from_patient }) {
   const response = await fetch(
@@ -130,6 +144,22 @@ export async function getTablet(id) {
     headers: {
       "content-type": "application/json",
     },
+  });
+  if (!response.ok) {
+    return Promise.reject(response);
+  }
+  const data = await response.json();
+  return data;
+}
+
+
+export async function postRequest(name, area) {
+  const response = await fetch(`${BASE_URL}/tablets/`, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({ name, area }),
   });
   if (!response.ok) {
     return Promise.reject(response);
