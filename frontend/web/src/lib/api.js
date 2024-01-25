@@ -75,6 +75,21 @@ export async function getChatMessages(id) {
   return data;
 }
 
+export async function createTablet(name, area) {
+  const response = await fetch(`${BASE_URL}/tablets/`, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({ name, area }),
+  });
+  if (!response.ok) {
+    return Promise.reject(response);
+  }
+  const data = await response.json();
+  return data;
+}
+
 export async function createChatMessage(requestId, { text, from_patient }) {
   const response = await fetch(
     `${BASE_URL}/requests/${requestId}/chat_messages/`,

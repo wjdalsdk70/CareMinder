@@ -1,10 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Logo from "../../../assets/logo.svg";
 import "./Setup.css";
+import { getTablet, createTablet } from "../../../lib/api"; // Import the postTablets function
 import useLocalStorage from "src/hooks/useLocalStorage";
-import { getTablet } from "src/lib/api";
 
 export default function Setup() {
+  const [tabletName, setTabletName] = useState("");
+  const [tabletArea, setTabletArea] = useState("");
   const [tablet, setTablet] = useLocalStorage("tablet", {});
 
   async function fetchTablet(id) {
@@ -20,6 +22,22 @@ export default function Setup() {
     fetchTablet(1);
   }, []);
 
+  const handleNameChange = (event) => {
+    setTabletName(event.target.value);
+  };
+
+  const handleAreaChange = (event) => {
+    setTabletArea(event.target.value);
+  };
+
+  const handleSubmit = async () => {
+    try {
+      await createTablet(tabletName, tabletArea);
+    } catch (error) {
+      console.error("Error posting tablet data:", error);
+    }
+  };
+
   return (
     <div className="set-up">
       <img className="set-up__logo" src={Logo} alt="" />
@@ -33,8 +51,25 @@ export default function Setup() {
         </p>
         <div className="form">
           <p>Setting a name</p>
+          <input
+            className="input-form"
+            type="text"
+            placeholder="Enter tablet name"
+            value={tabletName}
+            onChange={handleNameChange}
+          />
+
+          <p>Setting an area</p>
+          <input
+            className="input-form"
+            type="text"
+            placeholder="Enter tablet area"
+            value={tabletArea}
+            onChange={handleAreaChange}
+          />
+
+          <button className="submit-button" onClick={handleSubmit}></button>
         </div>
-        <button onClick={() => console.log(tablet)}>test</button> {/* test */}
       </div>
     </div>
   );
