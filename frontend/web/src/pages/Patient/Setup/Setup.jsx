@@ -1,11 +1,26 @@
 import React, { useState, useEffect } from "react";
 import Logo from "../../../assets/logo.svg";
 import "./Setup.css";
-import { postTablets } from "../../../lib/api"; // Import the postTablets function
+import { getTablet, createTablet } from "../../../lib/api"; // Import the postTablets function
+import useLocalStorage from "src/hooks/useLocalStorage";
 
 export default function Setup() {
   const [tabletName, setTabletName] = useState("");
   const [tabletArea, setTabletArea] = useState("");
+  const [tablet, setTablet] = useLocalStorage("tablet", {});
+
+  async function fetchTablet(id) {
+    try {
+      const response = await getTablet(id);
+      setTablet(response);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(() => {
+    fetchTablet(1);
+  }, []);
 
   const handleNameChange = (event) => {
     setTabletName(event.target.value);
@@ -17,7 +32,7 @@ export default function Setup() {
 
   const handleSubmit = async () => {
     try {
-      await postTablets(tabletName, tabletArea);
+      await createTablet(tabletName, tabletArea);
     } catch (error) {
       console.error("Error posting tablet data:", error);
     }
@@ -34,7 +49,6 @@ export default function Setup() {
           The name can then be modified through the Preferences menu on the
           nurse's screen.
         </p>
-
         <div className="form">
           <p>Setting a name</p>
           <input
