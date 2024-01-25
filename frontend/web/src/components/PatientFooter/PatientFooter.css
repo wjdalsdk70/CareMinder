@@ -3,6 +3,8 @@
   height: var(--footer-height);
   overflow: hidden;
   padding: 16px;
+  position: fixed;
+  bottom: 0;
 }
 
 .footer__container {

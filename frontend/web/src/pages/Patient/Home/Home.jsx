@@ -8,7 +8,7 @@ import { BsQuestionCircleFill } from "react-icons/bs";
 import { TbMicrophone } from "react-icons/tb";
 import PatientHistory from "src/components/PatientHistory/PatientHistory";
 
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
   const navigate = useNavigate();

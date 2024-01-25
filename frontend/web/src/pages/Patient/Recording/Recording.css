@@ -2,7 +2,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    justify-content: center;
+    height: 100vh;
 }
 .header {
     position: absolute;
@@ -39,13 +40,13 @@
 .record-buttons {
     margin: 1rem;
     margin-top: 2rem;
-    margin-bottom: 5rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     gap: 4rem;
     margin-bottom: 10rem;
-
+    width: 75%;
+    padding: 0 3rem;
 
 }
 
@@ -58,7 +59,7 @@
     font-size: 30px;
     font-weight: 500;
     border: none;
-    padding: 1rem;
     border-radius: 15px;
     background-color: var(--text-background-light);
+    min-height: 100%;
 }
