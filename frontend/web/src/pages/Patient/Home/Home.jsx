@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import "./Home.css";
 import data from "src/data.json";
 import PatientHeader from "src/components/PatientHeader/PatientHeader";
@@ -9,30 +9,53 @@ import { TbMicrophone } from "react-icons/tb";
 import PatientHistory from "src/components/PatientHistory/PatientHistory";
 
 import { useNavigate } from "react-router-dom";
+import {getSettings} from "../../../lib/api";
 
 export default function Home() {
   const navigate = useNavigate();
-  const navigateToContacts = () => {
+  const [settings, setSettings] = useState([])
+  const navigateToContactsFromQuestion = () => {
     navigate("/patient/recording");
-    console.log("navigateToContacts");
+    localStorage.setItem("isQuestion", "true");
   };
+
+  const navigateToContactsFromRequest = () => {
+    navigate("/patient/recording");
+    localStorage.setItem("isQuestion", "false");
+  };
+
 
   const patient = data.patient;
 
-  return (
+
+  const fetchSettings = async () => {
+    try {
+      const settingsData = await getSettings();
+      setSettings(settingsData);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchSettings().then(r => null);
+  }, []);
+
+
+return (
     <div className="patient__home">
       <PatientHeader />
       <main>
         <div className="container">
           <div className="menu">
-            <h1>{patient.hospitalTitle}</h1>
-            <h2>{patient.hospitalSubtitle} </h2>
+            <h1>{settings.hospital_title}</h1>
+            <h2>{settings.hospital_description} </h2>
           </div>
 
           <div className="rq-container">
             <div className="question-container">
               <h1 className="title">{patient.questionTitle}</h1>
-              <button onClick={navigateToContacts}>
+              <button onClick={navigateToContactsFromQuestion}>
                 <BsQuestionCircleFill size={260} className="icon" />
                 <h1>{patient.questionSubtitle}</h1>
                 <h3>{patient.confirmation}</h3>
@@ -43,7 +66,7 @@ export default function Home() {
 
             <div className="request-container">
               <h1 className="title">{patient.requestTitle}</h1>
-              <button onClick={navigateToContacts}>
+              <button onClick={navigateToContactsFromRequest}>
                 <TbMicrophone size={260} className="icon" />
                 <h1>{patient.requestSubtitle}</h1>
                 <h3>{patient.confirmation}</h3>

@@ -34,11 +34,25 @@
 
         "required": "*",
 
-        "userName": "Name",
+        "username": "Username",
+        "first_name" : "First Name",
+        "last_name" : "Last Name",
         "companyID": "Company ID",
         "ID": "ID",
         "password": "Password",
-        "nfcData": "NFC Data"
+        "nfcData": "NFC Data",
+        "role" : "Role",
+        "type" : "Type",
+        "roles" : [
+            "Careworker",
+            "Secretary"
+
+        ],
+        "types" : [
+            "Doctor",
+            "Nurse",
+            "Helper"
+        ]
     }
 
 }

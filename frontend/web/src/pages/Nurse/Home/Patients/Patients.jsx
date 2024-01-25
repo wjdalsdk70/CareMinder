@@ -1,8 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Filter from "src/components/Filter/Filter";
-import { BiLoaderCircle } from "react-icons/bi";
-import { MdOutlineDownloading } from "react-icons/md";
-import Request from "src/components/Request/Request";
 import { getRequests as getRequests } from "src/lib/api";
 import NurseHeader from "src/components/NurseHeader/NurseHeader";
 

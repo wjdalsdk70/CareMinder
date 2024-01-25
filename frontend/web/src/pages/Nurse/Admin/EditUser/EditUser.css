@@ -88,7 +88,7 @@ span
 .cancel_button
 {
     border: 1px outset #383838;
-    width: 18vmin;
+    width: 20vmin;
     height: 4.5vmin;
     background-color: rgb(245, 245, 245);
     border-radius: 10px;
@@ -107,7 +107,7 @@ span
 .save_button
 {
     border: 1px outset #383838;
-    width: 18vmin;
+    width: 20vmin;
     height: 4.5vmin;
     background-color: #383838;
     border-radius: 10px;

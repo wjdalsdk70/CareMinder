@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { FaArrowLeft } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { FaRegCheckCircle } from "react-icons/fa";
@@ -7,18 +7,42 @@ import { useLocation } from "react-router-dom";
 import PatientFooter from "src/components/PatientFooter/PatientFooter";
 import Logo from "src/assets/logo.svg";
 import "./RecordingResult.css";
+import {getTablet, postRequest} from "../../../lib/api";
+import useLocalStorage from "../../../hooks/useLocalStorage";
 
 export default function RecordingResult() {
   //   const loc = useLocation();
   const transcript = localStorage.getItem("recordingResult");
+  const isQuestion = localStorage.getItem("isQuestion")
+  const [tablet, setTablet] = useLocalStorage("tablet", {});
   const navigate = useNavigate();
+  const [text, setText] = useState(transcript)
+
   const handleRecordAgainClick = () => {
-    navigate("/patient/recording");
+    handelPostRequest().then(r => navigate("/patient/recording"));
+
   };
 
-  const handleHomeClick = () => {
+  const handleCancelClick = () => {
     navigate("/patient/home");
   };
+
+  const handleFinishClick = () => {
+    handelPostRequest().then(r => navigate("/patient/home"));
+  };
+
+  async function handelPostRequest(){
+    try {
+      if (isQuestion === "true"){
+        await postRequest(text, true, 1, tablet.id, 1);
+      }else{
+        await postRequest(text, false, 1, tablet.id, 1);
+      }
+
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <div className="RecordingResult">
@@ -50,13 +74,18 @@ export default function RecordingResult() {
               <GiClick size={50} />
               <h2>Click the box below for editing with keyboard directly</h2>
             </div>
-            <div className="textArea-container">
-              <textarea defaultValue={transcript}></textarea>
+            <div className="textArea-container" >
+              <textarea
+                  defaultValue={transcript}
+                  onChange={e => {
+                    setText(e.target.value);
+                  }}
+              />
             </div>
           </div>
           <div className="buttons">
-            <button className="record-button" onClick={handleHomeClick}>
-              Cancel
+            <button className="record-button" onClick={handleCancelClick}>
+            Cancel
             </button>
             <button
               className="record-button"
@@ -65,7 +94,7 @@ export default function RecordingResult() {
             >
               Record Again
             </button>
-            <button className="record-button">Finish</button>
+            <button className="record-button" onClick={handleFinishClick}>Finish</button>
           </div>
         </div>
       </div>

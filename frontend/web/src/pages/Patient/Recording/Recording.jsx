@@ -102,7 +102,6 @@ export default function Recording() {
   const handleFinishClick = () => {
     SpeechRecognition.stopListening();
     console.log("Finish recording");
-    alert(transcript);
     localStorage.setItem("recordingResult", transcript);
     navigate("/patient/recordingresults");
     // navigate("/patient/recordingresults", { state: { transcript } });

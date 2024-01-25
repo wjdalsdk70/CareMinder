@@ -1,3 +1,6 @@
+import useSession from "../hooks/useSession";
+import {authFetch} from "../core/api";
+
 const BASE_URL = "http://127.0.0.1:8000/api";
 
 export async function login(username, password) {
@@ -89,21 +92,6 @@ export async function getChatMessages(id) {
   return data;
 }
 
-// export async function createTablet(name, area) {
-//   const response = await fetch(`${BASE_URL}/tablets/`, {
-//     method: "POST",
-//     headers: {
-//       "content-type": "application/json",
-//     },
-//     body: JSON.stringify({ name, area }),
-//   });
-//   if (!response.ok) {
-//     return Promise.reject(response);
-//   }
-//   const data = await response.json();
-//   return data;
-// }
-
 export async function createChatMessage(requestId, { text, from_patient }) {
   const response = await fetch(
     `${BASE_URL}/requests/${requestId}/chat_messages/`,
@@ -153,13 +141,86 @@ export async function getTablet(id) {
 }
 
 
-export async function postRequest(name, area) {
-  const response = await fetch(`${BASE_URL}/tablets/`, {
+export async function postRequest(text, is_question, state, tablet_id, for_role) {
+  const response = await fetch(`${BASE_URL}/requests/`, {
     method: "POST",
     headers: {
       "content-type": "application/json",
     },
-    body: JSON.stringify({ name, area }),
+    body: JSON.stringify({ text, is_question, state, tablet_id, for_role }),
+  });
+  if (!response.ok) {
+    return Promise.reject(response);
+  }
+  const data = await response.json();
+  return data;
+}
+
+export async function getSettings() {
+  const response = await fetch(`${BASE_URL}/settings/`, {
+    method: "GET",
+    headers: {
+      "content-type": "application/json",
+    },
+  });
+  if (!response.ok) {
+    return Promise.reject(response);
+  }
+  const data = await response.json();
+  return data;
+}
+
+export async function postStaff(session, username, password, first_name, last_name, role, type, nfc) {
+  const response = await authFetch(session,`${BASE_URL}/staffs/`, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({ username, password, first_name, last_name, role, type, nfc}),
+  });
+  if (!response.ok) {
+    return Promise.reject(response);
+  }
+  const data = await response.json();
+  return data;
+}
+
+export async function updateStaff(session, username, password, first_name, last_name, role, type) {
+  const response = await authFetch(session,`${BASE_URL}/staffs/`, {
+    method: "PUT",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({ username, password, first_name, last_name, role, type}),
+  });
+  if (!response.ok) {
+    return Promise.reject(response);
+  }
+  const data = await response.json();
+  return data;
+}
+
+
+export async function getStaffs() {
+  const response = await fetch(`${BASE_URL}/staffs/`, {
+    method: "GET",
+    headers: {
+      "content-type": "application/json",
+    },
+  });
+  if (!response.ok) {
+    return Promise.reject(response);
+  }
+  const data = await response.json();
+  return data;
+}
+
+export async function getStaff(id) {
+  const response = await fetch(`${BASE_URL}/staffs/${id}`, {
+    method: "GET",
+    headers: {
+      "content-type": "application/json",
+    },
   });
   if (!response.ok) {
     return Promise.reject(response);

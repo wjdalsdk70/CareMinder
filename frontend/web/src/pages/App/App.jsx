@@ -26,12 +26,15 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        {/* <Route path="/" element={} /> Setup Page */}
+        <Route
+            path="/"
+            element={<Navigate to="/nurse/login?next=/nurse/home" />} />
         <Route
           path="/nurse"
           element={<Navigate to="/nurse/login?next=/nurse/home" />}
         />
-        <Route path="/nurse/login" element={<Login session={session} />} />
+        <Route path="/nurse/login"
+               element={<Login session={session} />} />
         <Route
           path="/nurse/home"
           element={<Navigate to="/nurse/home/requests" />}
@@ -53,7 +56,7 @@ function App() {
           element={<AddUser session={session} />}
         />
         <Route
-          path="/nurse/admin/editUser"
+          path="/nurse/admin/editUser/:id"
           element={<EditUser session={session} />}
         />
         <Route
