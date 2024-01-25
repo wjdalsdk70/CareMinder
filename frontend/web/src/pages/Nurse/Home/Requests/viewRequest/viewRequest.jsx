@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 import Filter from 'src/components/Filter/Filter'
 import Request from 'src/components/Request/Request'
@@ -16,6 +16,8 @@ export default function ViewRequest() {
 
     const [selItem, setSelItem] = useState({ i: null, s: null, item: { isQuestion: false, text: '', date: new Date() } })
     const [holding, setHolding] = useState(false)
+
+    const pressTimer = useRef(null)
   
     const handleCheckboxChange = (event) => {
         setSelectedOptions({
@@ -24,12 +26,13 @@ export default function ViewRequest() {
         })
     }
 
-    const handleMouseDown = (e, i, s, item) => {
-        handleMouseMove(e)
-        setHolding(true)
-        setSelItem({ i, s, item })
+    const handleMouseDown = (i, s, item) => {
+        pressTimer.current = setTimeout(() => {
+            setHolding(true)
+            setSelItem({ i, s, item })
+        }, 500)
     }
-
+    
     const handleMouseMove = (e) => {
         const item = document.querySelector(`.${styles.follow}`)
         
@@ -40,6 +43,7 @@ export default function ViewRequest() {
     }
 
     const handleMouseUp = (e) => {
+        clearTimeout(pressTimer.current)
         if (!holding) return false
 
         setHolding(false)
@@ -47,7 +51,16 @@ export default function ViewRequest() {
         const targetElement = e.target.getAttribute('name')
 
         if (!targetElement) return false
-        if (targetElement.split('')[0] !== selItem.s) console.log(`Item moved (${selItem.i} to the ${selItem.s  === 'r' ? 'left' : 'right'})`)
+        if (targetElement.charAt(0) !== selItem.s) {
+            const item = selItem.s === 'r' ? ongoing[selItem.i] : waiting[selItem.i]
+            if (selItem.s === 'l') {
+                setWaiting(waiting.filter((_, i) => i !== selItem.i))
+                setOngoing([...ongoing, item])
+            } else {
+                setOngoing(ongoing.filter((_, i) => i !== selItem.i))
+                setWaiting([...waiting, item])
+            }
+        }
     }
 
     useEffect(() => {
@@ -58,7 +71,7 @@ export default function ViewRequest() {
             window.removeEventListener('mousemove', handleMouseMove)
             window.removeEventListener('mouseup', handleMouseUp)
         }
-    }, [selItem])
+    }, [holding])
 
     useEffect(() => {
         setWaiting([
@@ -90,13 +103,13 @@ export default function ViewRequest() {
 
     return (
         <>
-        { holding ? <div className={`${styles.follow} ${flw.follow}`}>
+        <div className={`${styles.follow} ${flw.follow} ${holding ? '' : styles.hide}`}>
             <Request
                 isQuestion={selItem.item.isQuestion}
                 text={selItem.item.text}
                 date={selItem.item.date}
             />
-        </div> : '' }
+        </div>
         <div className={styles.wrapper}>
             <div>
                 <div className={styles.title}>
@@ -123,12 +136,10 @@ export default function ViewRequest() {
                     handleCheckboxChange={handleCheckboxChange}
                 />
                 </div>
-                { holding ? <div className={styles.area} name='leftArea'>
-
-                </div> : '' }
+                { holding ? <div className={styles.area} name='leftArea'></div> : '' }
                 <div className={styles.waiting} style={holding ? { transform: 'translateY(-100%)' } : {}}>
                     {waiting.map((item, i) => (
-                        <div key={i} onMouseDown={(e) => handleMouseDown(e, i, 'l', {
+                        <div key={i} onMouseDown={(e) => handleMouseDown(i, 'l', {
                             isQuestion: item.is_question,
                             text: item.text,
                             date: new Date(item.time)
@@ -168,12 +179,10 @@ export default function ViewRequest() {
                         handleCheckboxChange={handleCheckboxChange}
                     />
                 </div>
-                { holding ? <div className={styles.area} name='rightArea'>
-                    
-                </div> : '' }
+                { holding ? <div className={styles.area} name='rightArea'></div> : '' }
                 <div className={styles.ongoing} style={holding ? { transform: 'translateY(-100%)' } : {}}>
                     {ongoing.map((item, i) => (
-                        <div key={i} onMouseDown={(e) => handleMouseDown(e, i, 'r', {
+                        <div key={i} onMouseDown={(e) => handleMouseDown(i, 'r', {
                             isQuestion: item.is_question,
                             text: item.text,
                             date: new Date(item.time)
