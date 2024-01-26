@@ -6,177 +6,168 @@ import { BsPersonFillAdd } from "react-icons/bs";
 import { postStaff } from "../../../../lib/api";
 
 export default function AddUser({ session }) {
+  const nurse = data.nurse;
 
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+    first_name: "",
+    last_name: "",
+    roles: 0,
+    type: 0,
+    nfc: "NFCTOKEN",
+  });
 
-    const nurse = data.nurse;
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
-    const [formData, setFormData] = useState({
-        username: "",
-        password: "",
-        first_name: "",
-        last_name: "",
-        roles: 0,
-        type: 0,
-        nfc: "NFCTOKEN"
-    });
+  const handleChangeNum = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: parseInt(value, 10),
+    }));
+  };
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData((prevData) => ({
-            ...prevData,
-            [name]: value,
-        }));
-    };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await postStaff(
+        session,
+        formData.username,
+        formData.password,
+        formData.first_name,
+        formData.last_name,
+        formData.roles,
+        formData.type,
+        formData.nfc
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-    const handleChangeNum = (e) => {
-        const { name, value } = e.target;
-        setFormData((prevData) => ({
-            ...prevData,
-            [name]: parseInt(value, 10),
-        }));
-    };
+  return (
+    <div className="adduser-container">
+      <NurseHeader />
+      <div className="title">
+        <BsPersonFillAdd size="3rem" />
+        <h1>Add new User</h1>
+      </div>
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        console.log(formData)
-        try {
-            await postStaff(session, formData.username, formData.password, formData.first_name, formData.last_name, formData.roles, formData.type, formData.nfc);
-        } catch (error) {
-            console.error(error);
-        }
-    };
+      <div id="data_form">
+        <form onSubmit={handleSubmit}>
+          <div className="input_field">
+            <p>
+              {nurse.username}
+              <span>{nurse.required}</span>
+            </p>
+            <input
+              name="username"
+              value={formData.username}
+              onChange={handleChange}
+              placeholder={nurse.username}
+              autoComplete="off"
+            ></input>
+          </div>
+          <div className="input_field">
+            <p>
+              {nurse.first_name}
+              <span>{nurse.required}</span>
+            </p>
+            <input
+              name="first_name"
+              value={formData.first_name}
+              onChange={handleChange}
+              placeholder={nurse.first_name}
+              autoComplete="off"
+            ></input>
+          </div>
+          <div className="input_field">
+            <p>
+              {nurse.last_name}
+              <span>{nurse.required}</span>
+            </p>
+            <input
+              name="last_name"
+              value={formData.last_name}
+              onChange={handleChange}
+              placeholder={nurse.last_name}
+              autoComplete="off"
+            ></input>
+          </div>
+          <div className="input_field">
+            <p>
+              {nurse.password}
+              <span>{nurse.required}</span>
+            </p>
+            <input
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              placeholder={nurse.password}
+              autoComplete="off"
+            ></input>
+          </div>
+          <div className="input_field">
+            <p>
+              {nurse.role}
+              <span>{nurse.required}</span>
+            </p>
+            <select name="roles" onChange={handleChangeNum} defaultValue="">
+              <option value="" disabled>
+                Please select a Role
+              </option>
+              <option value={0}>Secretary</option>
 
-    return (
-        <div className="adduser-container">
-            <NurseHeader />
-            <div className="title">
-                <BsPersonFillAdd size="3rem" />
-                <h1>Add new User</h1>
+              <option value={1}>Careworker</option>
+            </select>
+          </div>
+          <div className="input_field">
+            <p>
+              {nurse.type}
+              <span>{nurse.required}</span>
+            </p>
+            <select name="type" onChange={handleChangeNum} defaultValue="">
+              <option value="" disabled>
+                Please select a Type
+              </option>
+              <option value={0}>Helper</option>
+
+              <option value={1}>Nurse</option>
+
+              <option value={2}>Doctor</option>
+            </select>
+          </div>
+          <div className="input_field">
+            <div className="input_field">
+              <p>{nurse.nfcData}</p>
+              <input
+                name="nfcData"
+                onChange={handleChange}
+                placeholder={nurse.nfcData}
+                style={{ width: "35vmin" }}
+                disabled={true}
+              ></input>
             </div>
-
-            <div id="data_form">
-                <form onSubmit={handleSubmit}>
-                    <div className="input_field">
-                        <p>
-                            {nurse.username}
-                            <span>{nurse.required}</span>
-                        </p>
-                        <input
-                            name="username"
-                            value={formData.username}
-                            onChange={handleChange}
-                            placeholder={nurse.username}
-                            autoComplete="off"
-                        ></input>
-                    </div>
-                    <div className="input_field">
-                        <p>
-                            {nurse.first_name}
-                            <span>{nurse.required}</span>
-                        </p>
-                        <input
-                            name="first_name"
-                            value={formData.first_name}
-                            onChange={handleChange}
-                            placeholder={nurse.first_name}
-                            autoComplete="off"
-                        ></input>
-                    </div>
-                    <div className="input_field">
-                        <p>
-                            {nurse.last_name}
-                            <span>{nurse.required}</span>
-                        </p>
-                        <input
-                            name="last_name"
-                            value={formData.last_name}
-                            onChange={handleChange}
-                            placeholder={nurse.last_name}
-                            autoComplete="off"
-                        ></input>
-                    </div>
-                    <div className="input_field">
-                        <p>
-                            {nurse.password}
-                            <span>{nurse.required}</span>
-                        </p>
-                        <input
-                            name="password"
-                            value={formData.password}
-                            onChange={handleChange}
-                            placeholder={nurse.password}
-                            autoComplete="off"
-                        ></input>
-                    </div>
-                    <div className="input_field">
-                        <p>
-                            {nurse.role}
-                            <span>{nurse.required}</span>
-                        </p>
-                        <select
-                            name="roles"
-                            onChange={handleChangeNum}
-                            defaultValue=""
-                        >
-                            <option value="" disabled>
-                                Please select a Role
-                            </option>
-                            <option value={0}>
-                                Secretary
-                            </option>
-
-                            <option value={1}>
-                                Careworker
-                            </option>
-                        </select>
-                    </div>
-                    <div className="input_field">
-                        <p>
-                            {nurse.type}
-                            <span>{nurse.required}</span>
-                        </p>
-                        <select
-                            name="type"
-                            onChange={handleChangeNum}
-                            defaultValue=""
-                        >
-                            <option value="" disabled>
-                                Please select a Type
-                            </option>
-                            <option value={0}>
-                                Helper
-                            </option>
-
-                            <option value={1}>
-                                Nurse
-                            </option>
-
-                            <option value={2}>
-                                Doctor
-                            </option>
-
-                        </select>
-                    </div>
-                    <div className="input_field">
-                        <div className="input_field">
-                            <p>{nurse.nfcData}</p>
-                            <input
-                                name="nfcData"
-                                onChange={handleChange}
-                                placeholder={nurse.nfcData}
-                                style={{ width: "35vmin" }}
-                                disabled={true}
-                            ></input>
-                        </div>
-                        <button className="change_data_button">Change Data</button>
-                    </div>
-                    <div id="bottom_buttons">
-                        <button className="cancel_button">Cancel</button>
-                        <button className="save_button" type="submit">Save</button>
-                        <button className="save_button" type="submit">Save and go to staff list</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    );
+            <button className="change_data_button">Change Data</button>
+          </div>
+          <div id="bottom_buttons">
+            <button className="cancel_button">Cancel</button>
+            <button className="save_button" type="submit">
+              Save
+            </button>
+            <button className="save_button" type="submit">
+              Save and go to staff list
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
 }

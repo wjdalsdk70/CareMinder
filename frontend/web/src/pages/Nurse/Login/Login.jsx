@@ -34,7 +34,7 @@ export default function Login({ session }) {
   const [status, setStatus] = useState();
 
   useEffect(() => {
-    if (!session.token || !session.ready) return;
+    if (!session.accessToken || !session.ready) return;
     logout(session);
     session.logout();
   }, []);

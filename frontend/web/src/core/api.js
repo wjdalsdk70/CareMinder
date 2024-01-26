@@ -1,10 +1,11 @@
 export async function authFetch(session, url, options) {
+  console.log(`session: ${JSON.stringify(session)}`);
   options.headers.authorization = "Bearer " + session.accessToken;
   var rawResponse = await fetch(url, options);
 
-  if (rawResponse.status == 403) {
+  if (rawResponse.status == 401) {
     localStorage.accessToken = session.refresh();
-    options.headers.authorization = session.accessToken;
+    options.headers.authorization = "Bearer " + session.accessToken;
     rawResponse = await fetch(url, options);
   }
 
