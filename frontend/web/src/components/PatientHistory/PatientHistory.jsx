@@ -22,7 +22,6 @@ export default function PatientHistory() {
     const fetchData = async () => {
       try {
         const requestsData = await getRequestsFiltered(tablet.id);
-        console.log("Requests Data:", requestsData);
         setRequests(requestsData);
 
         setIsLoading(false);
