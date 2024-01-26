@@ -140,6 +140,25 @@ export async function getTablet(id) {
   return data;
 }
 
+export async function postTablet(name, area_id) {
+  const response = await fetch(
+    `${BASE_URL}/tablets/`,
+    {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ name, area_id }),
+    }
+  );
+
+  if (!response.ok) {
+    return Promise.reject(response);
+  }
+
+  const data = await response.json();
+  return data;
+}
 
 export async function postRequest(text, is_question, state, tablet_id, for_role) {
   const response = await fetch(`${BASE_URL}/requests/`, {
