@@ -3,18 +3,26 @@ import "./Settings.css";
 import Switch from "src/components/Switch/Switch";
 import NurseHeader from "src/components/NurseHeader/NurseHeader";
 import { IoMdAddCircle } from "react-icons/io";
-import { getSettings, getTablets } from "../../../../lib/api";
+import {getSettings, getStaff, getTablets} from "../../../../lib/api";
 import React, { useEffect, useState } from "react";
 
 export default function Settings() {
-  const [settings, setSettings] = useState("");
+  const [settings, setSettings] = useState({
+    hospital_title: "",
+    hospital_description: "",
+    notification: "",
+  });
   const [tablets, setTablets] = useState([]);
 
   const fetchData = async () => {
     try {
       const settingsData = await getSettings();
       const tabletsData = await getTablets();
-      setSettings(settingsData);
+      setSettings({
+        hospital_title: settingsData.hospital_title || "",
+        hospital_description: settingsData.hospital_description || "",
+        notification: settingsData.notification || ""
+      });
       setTablets(tabletsData);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -25,8 +33,17 @@ export default function Settings() {
     fetchData().then((r) => null);
   }, []);
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setSettings((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
   return (
     <div className="settings__home">
+      {}
       <NurseHeader />
       <form>
         <div className="container">
@@ -45,6 +62,8 @@ export default function Settings() {
                   <textarea
                     placeholder={data.patient.hospitalTitle}
                     value={settings.hospital_title}
+                    onChange={handleChange}
+                    name="hospital_title"
                     className="settings__home__textarea"
                   ></textarea>
                 </div>
@@ -54,6 +73,8 @@ export default function Settings() {
                   <textarea
                     placeholder={data.patient.hospitalSubtitle}
                     value={settings.hospital_description}
+                    onChange={handleChange}
+                    name="hospital_description"
                     className="settings__home__textarea"
                   ></textarea>
                 </div>
@@ -68,6 +89,8 @@ export default function Settings() {
                     placeholder={data.patient.hospitalTitle}
                     className="settings__home__textarea"
                     value={settings.notification}
+                    name="notification"
+                    onChange={handleChange}
                   ></textarea>
                 </div>
               </div>

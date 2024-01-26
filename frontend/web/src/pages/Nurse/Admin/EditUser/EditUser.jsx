@@ -13,7 +13,6 @@ export default function EditUser({ session }) {
 
   const [formData, setFormData] = useState({
     username: "",
-    password: "",
     first_name: "",
     last_name: "",
     roles: 0,
@@ -26,7 +25,6 @@ export default function EditUser({ session }) {
       const user = await getStaff(id);
       setFormData({
         username: user.username || "",
-        password: user.password || "",
         first_name: user.first_name || "",
         last_name: user.last_name || "",
         roles: user.role || 0,
@@ -63,9 +61,9 @@ export default function EditUser({ session }) {
     try {
       await updateStaff(
         session,
+        id,
         formData.username,
-        formData.password,
-        formData.first_name,
+          formData.first_name,
         formData.last_name,
         formData.roles,
         formData.type,
@@ -76,6 +74,10 @@ export default function EditUser({ session }) {
       console.error(error);
     }
   };
+
+  function handleCancel() {
+    navigate('/nurse/admin/userlist');
+  }
 
   return (
     <div className="edituser-container">
@@ -127,19 +129,6 @@ export default function EditUser({ session }) {
           </div>
           <div className="input_field">
             <p>
-              {nurse.password}
-              <span>{nurse.required}</span>
-            </p>
-            <input
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              placeholder={nurse.password}
-              autoComplete="off"
-            ></input>
-          </div>
-          <div className="input_field">
-            <p>
               {nurse.role}
               <span>{nurse.required}</span>
             </p>
@@ -184,7 +173,7 @@ export default function EditUser({ session }) {
             <button className="change_data_button">Change Data</button>
           </div>
           <div id="bottom_buttons">
-            <button className="cancel_button">Cancel</button>
+            <button className="cancel_button" onClick={handleCancel}>Cancel</button>
             <button className="save_button" type="submit">
               Update
             </button>

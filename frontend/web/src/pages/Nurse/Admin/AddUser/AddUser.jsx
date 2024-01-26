@@ -4,9 +4,12 @@ import "./AddUser.css";
 import NurseHeader from "src/components/NurseHeader/NurseHeader";
 import { BsPersonFillAdd } from "react-icons/bs";
 import { postStaff } from "../../../../lib/api";
+import {useNavigate} from "react-router-dom";
 
 export default function AddUser({ session }) {
   const nurse = data.nurse;
+  const navigate = useNavigate()
+  console.log(session)
 
   const [formData, setFormData] = useState({
     username: "",
@@ -47,10 +50,15 @@ export default function AddUser({ session }) {
         formData.type,
         formData.nfc
       );
+      navigate('/nurse/admin/userlist');
     } catch (error) {
       console.error(error);
     }
   };
+
+  function handelCancel() {
+    navigate('/nurse/admin/userlist');
+  }
 
   return (
     <div className="adduser-container">

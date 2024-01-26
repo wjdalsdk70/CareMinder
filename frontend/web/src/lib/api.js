@@ -195,7 +195,7 @@ export async function postStaff(session, username, password, first_name, last_na
     headers: {
       "content-type": "application/json",
     },
-    body: JSON.stringify({ username, password, first_name, last_name, role, type, nfc}),
+    body: JSON.stringify({username, password, first_name, last_name, role, type, nfc}),
   });
   if (!response.ok) {
     return Promise.reject(response);
@@ -204,13 +204,13 @@ export async function postStaff(session, username, password, first_name, last_na
   return data;
 }
 
-export async function updateStaff(session, username, password, first_name, last_name, role, type) {
-  const response = await authFetch(session,`${BASE_URL}/staffs/`, {
-    method: "PUT",
+export async function updateStaff(session, id, username, first_name, last_name, role, type) {
+  const response = await authFetch(session,`${BASE_URL}/staffs/${id}/`, {
+    method: "PATCH",
     headers: {
       "content-type": "application/json",
     },
-    body: JSON.stringify({ username, password, first_name, last_name, role, type}),
+    body: JSON.stringify({ username, first_name, last_name, role, type}),
   });
   if (!response.ok) {
     return Promise.reject(response);
