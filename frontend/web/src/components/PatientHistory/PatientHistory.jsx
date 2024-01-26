@@ -8,7 +8,7 @@ import {
 } from "react-icons/bs";
 import moment from "moment";
 import "./PatientHistory.css";
-import PatientHistoryRequest from "../PatientHistoryRequest/PatientHistoryRequest";
+import Request from "../Request/Request";
 import useLocalStorage from "src/hooks/useLocalStorage";
 
 export default function PatientHistory() {
@@ -55,7 +55,7 @@ export default function PatientHistory() {
           <p>Loading...</p>
         ) : (
           requests.map((request) => (
-            <PatientHistoryRequest key={request.id} request={request} />
+            <Request key={request.id} request={request} />
           ))
         )}
       </div>

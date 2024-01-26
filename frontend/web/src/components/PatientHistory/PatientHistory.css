@@ -8,7 +8,6 @@
   width: 40%;
   padding: 45px 40px;
   transition: transform 500ms;
-  /* overflow: hidden; */
 }
 
 .patient-history.active {
@@ -33,6 +32,7 @@
 .patient-history__button__icon {
   transition: transform 500ms;
 }
+
 .patient-history__button__icon.active {
   transform: rotate(180deg);
 }
@@ -43,49 +43,15 @@
   height: 7vw;
   border-top-left-radius: 510px;
   border-bottom-left-radius: 510px;
-
   position: absolute;
   top: 50%;
   left: 0;
   transform: translate(-100%, -50%);
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   user-select: none;
 }
-
-.Processing {
-  --color: var(--request);
-  --color-transparent: var(--request-transparent);
-}
-
-.Waiting {
-  --color: var(--question);
-  --color-transparent: var(--question-transparent);
-}
-
-.Finished {
-  --color: var(--background-grey);
-  --color-transparent: var(--background-grey-transparent);
-}
-
-.patient-history .top-container {
-  background: var(--color);
-  border-radius: 10px 10px 0px 0px;
-}
-
-/* CHAT STYLING START */
-
-.patient-history .chat-container {
-  background: var(--color-transparent);
-  backdrop-filter: opacity(0.5);
-  border-radius: 0px 0px 10px 10px;
-  opacity: 9;
-}
-
-/* CHAT STYLING END */
 
 .patient-history__requests {
   height: 95%;
@@ -93,127 +59,4 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
-}
-
-.request-item {
-  user-select: none;
-  border-radius: 10px;
-  border: 2px solid var(--color);
-}
-
-.top-container {
-  display: flex;
-  padding: 0.7rem;
-  align-items: center;
-  border-radius: 1rem;
-}
-
-.icon-container {
-  display: flex;
-  align-items: center;
-  margin-right: 1rem;
-  max-height: 5rem;
-}
-
-.info-container {
-  display: flex;
-  flex-grow: 1;
-  flex-direction: row;
-  justify-content: space-between;
-  vertical-align: bottom;
-}
-
-.text-container {
-  margin-top: 1rem;
-  background-color: var(--text-background-response);
-  padding: 0.3rem;
-}
-
-.content-container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.time {
-  text-align: right;
-  align-self: flex-end;
-}
-
-.chat-container {
-  width: 100%;
-}
-
-.chat-container__messages {
-  padding: 1rem 1rem 0.5rem 1rem;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  width: 100%;
-  max-width: 100%;
-}
-
-.chat-container__input {
-  position: relative;
-  padding: 1rem;
-}
-
-.chat-container__input input {
-  width: 100%;
-  background-color: var(--text-background-lighter);
-  border: none;
-  font: "NanumSquare";
-  text-align: left;
-  padding: 0.6rem;
-  padding-right: 3rem;
-}
-
-.chat-container__input button {
-  background-color: transparent;
-  border: none;
-  outline: none;
-  color: rgb(97, 97, 97);
-
-  padding: 0.5rem;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  right: 1rem;
-}
-
-.chat-container.closed {
-  display: none;
-}
-
-.chat-item {
-  max-width: 100%;
-  width: max-content;
-  text-wrap: wrap;
-}
-
-.patient-false {
-  background-color: var(--text-background-response);
-  border-radius: 10px 10px 10px 0px;
-  padding: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.patient-true {
-  background-color: var(--color);
-  border-radius: 10px 10px 0px 10px;
-  padding: 0.5rem;
-  align-self: flex-end;
-  margin-bottom: 0.5rem;
-}
-
-.chat-time {
-  color: var(--text);
-  font-size: small;
-}
-
-.clearfix::after {
-  content: "";
-  display: table;
-  clear: both;
 }

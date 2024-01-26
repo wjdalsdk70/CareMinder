@@ -8,16 +8,16 @@ import AddUser from "src/pages/Nurse/Admin/AddUser/AddUser";
 import EditUser from "src/pages/Nurse/Admin/EditUser/EditUser";
 import UserList from "src/pages/Nurse/Admin/UserList/UserList";
 import useSession from "src/hooks/useSession";
-import Login from "src/pages/Nurse/Login/Login";
+import PatientLogin from "src/pages/Patient/PatientLogin/PatientLogin";
 
 import PatientHome from "src/pages/Patient/Home/Home";
 import Agreement from "src/pages/Patient/Agreement/Agreement";
 import Recording from "src/pages/Patient/Recording/Recording";
 import RecordingResult from "src/pages/Patient/RecordingResult/RecordingResult";
-import Setup from "src/pages/Patient/Setup/Setup";
 
 import "src/theme/global.css";
 import "src/theme/variables.css";
+import Login from "../Nurse/Login/Login";
 
 function App() {
   const session = useSession();
@@ -27,14 +27,14 @@ function App() {
     <div className="App">
       <Routes>
         <Route
-            path="/"
-            element={<Navigate to="/nurse/login?next=/nurse/home" />} />
+          path="/"
+          element={<Navigate to="/nurse/login?next=/nurse/home" />}
+        />
         <Route
           path="/nurse"
           element={<Navigate to="/nurse/login?next=/nurse/home" />}
         />
-        <Route path="/nurse/login"
-               element={<Login session={session} />} />
+        <Route path="/nurse/login" element={<Login session={session} />} />
         <Route
           path="/nurse/home"
           element={<Navigate to="/nurse/home/requests" />}
@@ -65,8 +65,11 @@ function App() {
         />
 
         <Route path="/patient" element={<Navigate to="/patient/home" />} />
+        <Route
+          path="/patient/login"
+          element={<PatientLogin session={session} />}
+        />
         <Route path="/patient/home" element={<PatientHome />} />
-        <Route path="/patient/setup" element={<Setup />} />
         <Route path="/patient/agreement" element={<Agreement />} />
         <Route path="/patient/recording" element={<Recording />} />
         <Route path="/patient/recordingResults" element={<RecordingResult />} />
