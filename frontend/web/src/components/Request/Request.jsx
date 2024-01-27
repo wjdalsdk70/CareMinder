@@ -32,7 +32,7 @@ export default function Request({ request, session, from_patient }) {
     try {
       const resp = await postChatMessage(session, request.id, {
         text: messageText,
-        from_patient: true,
+        from_patient: from_patient,
       });
       fetchChatMessages();
       setMessageText("");
