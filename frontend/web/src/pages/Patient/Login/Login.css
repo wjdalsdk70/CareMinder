@@ -94,4 +94,5 @@
 .set-up__form input,
 .set-up__form select {
   width: 100% !important;
+  color: var(--text);
 }

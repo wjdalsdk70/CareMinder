@@ -1,5 +1,5 @@
 import useSession from "../hooks/useSession";
-import {authFetch} from "../core/api";
+import { authFetch } from "../core/api";
 
 const BASE_URL = "http://127.0.0.1:8000/api";
 
@@ -92,7 +92,7 @@ export async function getChatMessages(id) {
   return data;
 }
 
-export async function createChatMessage(requestId, { text, from_patient }) {
+export async function postChatMessage(requestId, { text, from_patient }) {
   const response = await fetch(
     `${BASE_URL}/requests/${requestId}/chat_messages/`,
     {
@@ -141,16 +141,13 @@ export async function getTablet(id) {
 }
 
 export async function postTablet(name, area_id) {
-  const response = await fetch(
-    `${BASE_URL}/tablets/`,
-    {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({ name, area_id }),
-    }
-  );
+  const response = await fetch(`${BASE_URL}/tablets/`, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({ name, area_id }),
+  });
 
   if (!response.ok) {
     return Promise.reject(response);
@@ -160,7 +157,13 @@ export async function postTablet(name, area_id) {
   return data;
 }
 
-export async function postRequest(text, is_question, state, tablet_id, for_role) {
+export async function postRequest(
+  text,
+  is_question,
+  state,
+  tablet_id,
+  for_role
+) {
   const response = await fetch(`${BASE_URL}/requests/`, {
     method: "POST",
     headers: {
@@ -189,13 +192,30 @@ export async function getSettings(session) {
   return data;
 }
 
-export async function postStaff(session, username, password, first_name, last_name, role, type, nfc) {
-  const response = await authFetch(session,`${BASE_URL}/staffs/`, {
+export async function postStaff(
+  session,
+  username,
+  password,
+  first_name,
+  last_name,
+  role,
+  type,
+  nfc
+) {
+  const response = await authFetch(session, `${BASE_URL}/staffs/`, {
     method: "POST",
     headers: {
       "content-type": "application/json",
     },
-    body: JSON.stringify({username, password, first_name, last_name, role, type, nfc}),
+    body: JSON.stringify({
+      username,
+      password,
+      first_name,
+      last_name,
+      role,
+      type,
+      nfc,
+    }),
   });
   if (!response.ok) {
     return Promise.reject(response);
@@ -204,13 +224,21 @@ export async function postStaff(session, username, password, first_name, last_na
   return data;
 }
 
-export async function updateStaff(session, id, username, first_name, last_name, role, type) {
-  const response = await authFetch(session,`${BASE_URL}/staffs/${id}/`, {
+export async function updateStaff(
+  session,
+  id,
+  username,
+  first_name,
+  last_name,
+  role,
+  type
+) {
+  const response = await authFetch(session, `${BASE_URL}/staffs/${id}/`, {
     method: "PATCH",
     headers: {
       "content-type": "application/json",
     },
-    body: JSON.stringify({ username, first_name, last_name, role, type}),
+    body: JSON.stringify({ username, first_name, last_name, role, type }),
   });
   if (!response.ok) {
     return Promise.reject(response);
@@ -218,7 +246,6 @@ export async function updateStaff(session, id, username, first_name, last_name, 
   const data = await response.json();
   return data;
 }
-
 
 export async function getStaffs() {
   const response = await fetch(`${BASE_URL}/staffs/`, {

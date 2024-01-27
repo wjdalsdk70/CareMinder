@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Logo from "src/assets/logo.svg";
 
-import "./PatientLogin.css";
+import "./Login.css";
 import { getTablet, getTablets, login, logout } from "src/lib/api";
 import { jwtDecode } from "jwt-decode";
 import { readForm } from "src/core/utils";
@@ -29,12 +29,10 @@ function validate(data) {
   return errors;
 }
 
-export default function PatientLogin({ session }) {
-  const [username, setUsername] = useState();
-  const [password, setPassword] = useState();
+export default function Login({ session }) {
   const navigate = useNavigate();
   const [searchParams, _] = useSearchParams();
-  const next = searchParams.get("next") || "/nurse/home";
+  const next = searchParams.get("next") || "/patient/home";
 
   const [isLoading, setIsLoading] = useState(false);
   const [status, setStatus] = useState();
@@ -138,23 +136,11 @@ export default function PatientLogin({ session }) {
           {statusMessage()}
           <fieldset>
             <label htmlFor="username">Username</label>
-            <input
-              name="username"
-              type="text"
-              id="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
+            <input name="username" type="text" id="username" />
           </fieldset>
           <fieldset>
             <label htmlFor="password">Password</label>
-            <input
-              name="password"
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
+            <input name="password" type="password" id="password" />
           </fieldset>
 
           <select name="tablet" id="tablet">

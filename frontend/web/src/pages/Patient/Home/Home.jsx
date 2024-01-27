@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import "./Home.css";
 import data from "src/data.json";
 import PatientHeader from "src/components/PatientHeader/PatientHeader";
@@ -9,11 +9,13 @@ import { TbMicrophone } from "react-icons/tb";
 import PatientHistory from "src/components/PatientHistory/PatientHistory";
 
 import { useNavigate } from "react-router-dom";
-import {getSettings} from "../../../lib/api";
+import { getSettings } from "../../../lib/api";
+import { useRedirectToLogin } from "src/hooks/useSession";
 
-export default function Home() {
+export default function Home({ session }) {
+  useRedirectToLogin(session, "/patient/login");
   const navigate = useNavigate();
-  const [settings, setSettings] = useState([])
+  const [settings, setSettings] = useState([]);
   const navigateToContactsFromQuestion = () => {
     navigate("/patient/recording");
     localStorage.setItem("isQuestion", "true");
@@ -24,13 +26,13 @@ export default function Home() {
     localStorage.setItem("isQuestion", "false");
   };
 
-
   const patient = data.patient;
 
-
   const fetchSettings = async () => {
+    if (!session.user) return;
+    console.dir(session);
     try {
-      const settingsData = await getSettings();
+      const settingsData = await getSettings(session);
       setSettings(settingsData);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -38,11 +40,10 @@ export default function Home() {
   };
 
   useEffect(() => {
-    fetchSettings().then(r => null);
-  }, []);
+    fetchSettings();
+  }, [session]);
 
-
-return (
+  return (
     <div className="patient__home">
       <PatientHeader />
       <main>

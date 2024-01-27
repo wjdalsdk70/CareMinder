@@ -1,5 +1,4 @@
 export async function authFetch(session, url, options) {
-  console.log(`session: ${JSON.stringify(session)}`);
   options.headers.authorization = "Bearer " + session.accessToken;
   var rawResponse = await fetch(url, options);
 
