@@ -32,7 +32,7 @@ export default function useSession() {
       login({
         user: session.user,
         accessToken: response.access,
-        refreshToken: response.refresh,
+        refreshToken: session.refreshToken,
       });
       return response.access;
     } catch (e) {

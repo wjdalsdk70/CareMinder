@@ -3,8 +3,8 @@ export async function authFetch(session, url, options) {
   var rawResponse = await fetch(url, options);
 
   if (rawResponse.status == 401) {
-    localStorage.accessToken = session.refresh();
-    options.headers.authorization = "Bearer " + session.accessToken;
+    const accessToken = await session.refresh();
+    options.headers.authorization = "Bearer " + accessToken;
     rawResponse = await fetch(url, options);
   }
 

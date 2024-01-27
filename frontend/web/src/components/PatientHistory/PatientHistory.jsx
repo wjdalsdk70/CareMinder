@@ -58,7 +58,12 @@ export default function PatientHistory({ session }) {
           <p>Loading...</p>
         ) : (
           requests.map((request) => (
-            <Request key={request.id} request={request} session={session} />
+            <Request
+              key={request.id}
+              request={request}
+              session={session}
+              from_patient={true}
+            />
           ))
         )}
       </div>

@@ -133,7 +133,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 GRAPH_MODELS = {
     "all_applications": True,
-
     "graph_models": True,
 }
 

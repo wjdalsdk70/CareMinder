@@ -15,8 +15,11 @@ import {
   getRequestsFilteredStaffIdIsNull,
   updateRequest,
 } from "src/lib/api";
+import { useRedirectToLogin } from "src/hooks/useSession";
 
 export default function ViewRequest({ session }) {
+  // useRedirectToLogin(session, "/nurse/login");
+
   const [selectedOptions, setSelectedOptions] = useState({});
   const [waiting, setWaiting] = useState([]);
   const [ongoing, setOngoing] = useState([]);
@@ -64,8 +67,8 @@ export default function ViewRequest({ session }) {
       item: { isQuestion: false, text: "", date: new Date() },
     });
     const targetElement = e.target.getAttribute("name");
-    console.log(targetElement)
-    console.log(e.target)
+    console.log(targetElement);
+    console.log(e.target);
 
     if (!targetElement) return false;
     if (targetElement.charAt(0) !== selItem.s) {
@@ -120,7 +123,6 @@ export default function ViewRequest({ session }) {
 
   async function fetchMyRequests() {
     try {
-      console.log(session.user.id);
       const getMyRequests = await getRequestsFiltered(session, {
         staff: session.user.user_id,
       });
@@ -153,7 +155,11 @@ export default function ViewRequest({ session }) {
           holding ? "" : styles.hide
         }`}
       >
-        <Request request={selItem.item} session={session} />
+        <Request
+          request={selItem.item}
+          session={session}
+          from_patient={false}
+        />
       </div>
       <div className={styles.wrapper}>
         <div>
@@ -194,7 +200,11 @@ export default function ViewRequest({ session }) {
                   selItem.i === i && selItem.s === "l" ? styles.hide : ""
                 }
               >
-                <Request request={item} session={session} />
+                <Request
+                  request={item}
+                  session={session}
+                  from_patient={false}
+                />
               </div>
             ))}
           </div>
@@ -238,13 +248,21 @@ export default function ViewRequest({ session }) {
                   selItem.i === i && selItem.s === "r" ? styles.hide : ""
                 }
               >
-                <Request request={item} session={session} />
+                <Request
+                  request={item}
+                  session={session}
+                  from_patient={false}
+                />
               </div>
             ))}
           </div>
-          {holding ? <div className={styles.finishArea} name="rightArea"></div> : ""}
-          <div className={styles.finishButton} >
-            <FaCheckCircle size={90} className={styles.finishCheck}/>
+          {holding ? (
+            <div className={styles.finishArea} name="rightArea"></div>
+          ) : (
+            ""
+          )}
+          <div className={styles.finishButton}>
+            <FaCheckCircle size={90} className={styles.finishCheck} />
           </div>
         </div>
       </div>

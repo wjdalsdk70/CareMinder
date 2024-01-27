@@ -9,7 +9,7 @@ import { postChatMessage, getChatMessages, getRequests } from "src/lib/api";
 
 import "./Request.css";
 
-export default function Request({ request, session }) {
+export default function Request({ request, session, from_patient }) {
   const [isOpen, setIsOpen] = useState(false);
   const [messageText, setMessageText] = useState();
   const [chat, setChat] = useState([]);
@@ -19,6 +19,7 @@ export default function Request({ request, session }) {
   }, []);
 
   async function fetchChatMessages() {
+    if (!request.id) return;
     try {
       const resp = await getChatMessages(session, request.id);
       setChat(resp);
@@ -94,7 +95,11 @@ export default function Request({ request, session }) {
               return (
                 <div
                   key={request.id + "-" + chatMessage.id}
-                  className={`chat-item patient-${chatMessage.from_patient}`}
+                  className={`chat-item patient-${
+                    from_patient
+                      ? chatMessage.from_patient
+                      : !chatMessage.from_patient
+                  }`}
                 >
                   <p>{chatMessage.text}</p>
                   <p className="chat-time">{timeAgo(chatMessage.time)}</p>
