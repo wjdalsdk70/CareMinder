@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import Filter from "src/components/Filter/Filter";
 
 import { BiLoaderCircle } from "react-icons/bi";
+import { FaCheckCircle } from "react-icons/fa";
 import { MdOutlineDownloading } from "react-icons/md";
 
 import styles from "./viewRequest.module.css";
@@ -64,6 +65,8 @@ export default function ViewRequest({session}) {
       item: {isQuestion: false, text: "", date: new Date()},
     });
     const targetElement = e.target.getAttribute("name");
+    console.log(targetElement)
+    console.log(e.target)
 
     if (!targetElement) return false;
     if (targetElement.charAt(0) !== selItem.s) {
@@ -230,7 +233,10 @@ export default function ViewRequest({session}) {
                 </div>
             ))}
           </div>
-          <div className="finish-button">+</div>
+          {holding ? <div className={styles.finishArea} name="rightArea"></div> : ""}
+          <div className={styles.finishButton} >
+            <FaCheckCircle size={90} className={styles.finishCheck}/>
+          </div>
         </div>
       </div>
     </>
