@@ -190,46 +190,47 @@ export default function ViewRequest({session}) {
         <span className={styles.line}></span>
         <div className={styles.right}>
           <div className={styles.title}>
-            <MdOutlineDownloading />
+            <MdOutlineDownloading/>
             <h2>내가 진행 중인 요청사항</h2>
           </div>
           <div className={styles.filter}>
             <Filter
-              title="By job"
-              options={[]}
-              selectedOptions={selectedOptions}
-              handleCheckboxChange={handleCheckboxChange}
+                title="By job"
+                options={[]}
+                selectedOptions={selectedOptions}
+                handleCheckboxChange={handleCheckboxChange}
             />
             <Filter
-              title="By Patient"
-              options={[]}
-              selectedOptions={selectedOptions}
-              handleCheckboxChange={handleCheckboxChange}
+                title="By Patient"
+                options={[]}
+                selectedOptions={selectedOptions}
+                handleCheckboxChange={handleCheckboxChange}
             />
             <Filter
-              title="District"
-              options={[]}
-              selectedOptions={selectedOptions}
-              handleCheckboxChange={handleCheckboxChange}
+                title="District"
+                options={[]}
+                selectedOptions={selectedOptions}
+                handleCheckboxChange={handleCheckboxChange}
             />
           </div>
           {holding ? <div className={styles.area} name="rightArea"></div> : ""}
           <div
-            className={styles.ongoing}
-            style={holding ? { transform: "translateY(-100%)" } : {}}
+              className={styles.ongoing}
+              style={holding ? {transform: "translateY(-100%)"} : {}}
           >
             {ongoing.map((item, i) => (
-              <div
-                key={i}
-                onMouseDown={(e) => handleMouseDown(i, "r", item)}
-                className={
-                  selItem.i === i && selItem.s === "r" ? styles.hide : ""
-                }
-              >
-                <Request request={item} session={session}/>
-              </div>
+                <div
+                    key={i}
+                    onMouseDown={(e) => handleMouseDown(i, "r", item)}
+                    className={
+                      selItem.i === i && selItem.s === "r" ? styles.hide : ""
+                    }
+                >
+                  <Request request={item} session={session}/>
+                </div>
             ))}
           </div>
+          <div className="finish-button">+</div>
         </div>
       </div>
     </>

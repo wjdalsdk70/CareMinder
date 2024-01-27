@@ -15,6 +15,7 @@ class RequestSerializer(serializers.ModelSerializer):
         queryset=Staff.objects.all(),
         source="staff",
         required=False,
+        allow_null=True,
     )
 
     class Meta:
