@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import data from "src/data.json";
-import "./EditUser.css";
+import "./EditTablets.css";
 import NurseHeader from "src/components/NurseHeader/NurseHeader";
 import { FaUserEdit } from "react-icons/fa";
 import {
@@ -11,7 +11,7 @@ import {
 } from "../../../../lib/api";
 import { useNavigate, useParams } from "react-router-dom";
 
-export default function EditUser({ session }) {
+export default function EditTablets({ session }) {
   const nurse = data.nurse;
   const { id } = useParams();
   const navigate = useNavigate();

@@ -6,14 +6,14 @@ import { FaUserEdit, FaPlusCircle } from "react-icons/fa";
 import { getStaffs } from "../../../../lib/api";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function UserList() {
+export default function UserList({session}) {
   const nurse = data.nurse;
   const [staffs, setStaffs] = useState([]);
   const navigate = useNavigate();
 
   const fetchSettings = async () => {
     try {
-      const staffsData = await getStaffs();
+      const staffsData = await getStaffs(session);
       setStaffs(staffsData);
     } catch (error) {
       console.error("Error fetching data:", error);

@@ -6,7 +6,7 @@ import { IoMdAddCircle } from "react-icons/io";
 import {getSettings, getStaff, getTablets} from "../../../../lib/api";
 import React, { useEffect, useState } from "react";
 
-export default function Settings() {
+export default function Settings({session}) {
   const [settings, setSettings] = useState({
     hospital_title: "",
     hospital_description: "",
@@ -16,8 +16,8 @@ export default function Settings() {
 
   const fetchData = async () => {
     try {
-      const settingsData = await getSettings();
-      const tabletsData = await getTablets();
+      const settingsData = await getSettings(session);
+      const tabletsData = await getTablets(session);
       setSettings({
         hospital_title: settingsData.hospital_title || "",
         hospital_description: settingsData.hospital_description || "",
@@ -43,7 +43,6 @@ export default function Settings() {
 
   return (
     <div className="settings__home">
-      {}
       <NurseHeader />
       <form>
         <div className="container">

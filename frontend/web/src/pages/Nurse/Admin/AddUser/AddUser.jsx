@@ -9,7 +9,6 @@ import {useNavigate} from "react-router-dom";
 export default function AddUser({ session }) {
   const nurse = data.nurse;
   const navigate = useNavigate()
-  console.log(session)
 
   const [formData, setFormData] = useState({
     username: "",

@@ -112,8 +112,8 @@ export async function createChatMessage(requestId, { text, from_patient }) {
   return data;
 }
 
-export async function getTablets() {
-  const response = await fetch(`${BASE_URL}/tablets/`, {
+export async function getTablets(session) {
+  const response = await authFetch(session, `${BASE_URL}/tablets/`, {
     method: "GET",
     headers: {
       "content-type": "application/json",
@@ -175,8 +175,8 @@ export async function postRequest(text, is_question, state, tablet_id, for_role)
   return data;
 }
 
-export async function getSettings() {
-  const response = await fetch(`${BASE_URL}/settings/`, {
+export async function getSettings(session) {
+  const response = await authFetch(session, `${BASE_URL}/settings/`, {
     method: "GET",
     headers: {
       "content-type": "application/json",
