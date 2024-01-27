@@ -12,16 +12,15 @@ export default function useSession() {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    if (session.accessToken) {
-      try {
-        const { exp } = jwtDecode(session.accessToken);
-        const expirationDate = new Date(0);
-        expirationDate.setUTCSeconds(exp);
-        const now = new Date();
-        setSession(now >= expirationDate ? defaultModel : session);
-      } catch (e) {
-        console.error(e);
-      }
+    if (!session.user) return;
+    try {
+      const { exp } = jwtDecode(session.refreshToken);
+      const expirationDate = new Date(0);
+      expirationDate.setUTCSeconds(exp);
+      const now = new Date();
+      setSession(now >= expirationDate ? defaultModel : session);
+    } catch (e) {
+      console.error(e);
     }
     setReady(true);
   }, [session]);
@@ -61,6 +60,7 @@ export function useRedirectToLogin(session, url) {
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log(session);
     if (session.ready && !session.user) navigate(url);
   }, [session, navigate]);
 }

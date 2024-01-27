@@ -19,8 +19,6 @@ import { useRedirectToLogin } from "src/hooks/useSession";
 import {wait} from "@testing-library/user-event/dist/utils";
 
 export default function ViewRequest({ session }) {
-  // useRedirectToLogin(session, "/nurse/login");
-
   const [selectedOptions, setSelectedOptions] = useState({});
   const [waiting, setWaiting] = useState([]);
   const [ongoing, setOngoing] = useState([]);

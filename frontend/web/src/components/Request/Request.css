@@ -130,6 +130,7 @@
   background-color: var(--text-background-response);
   border-radius: 10px 10px 10px 0px;
   padding: 0.5rem;
+  align-self: flex-start;
   margin-bottom: 0.5rem;
 }
 
