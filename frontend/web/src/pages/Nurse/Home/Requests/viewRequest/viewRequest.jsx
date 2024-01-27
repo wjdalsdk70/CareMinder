@@ -16,6 +16,7 @@ import {
   updateRequest,
 } from "src/lib/api";
 import { useRedirectToLogin } from "src/hooks/useSession";
+import {wait} from "@testing-library/user-event/dist/utils";
 
 export default function ViewRequest({ session }) {
   // useRedirectToLogin(session, "/nurse/login");
@@ -23,6 +24,7 @@ export default function ViewRequest({ session }) {
   const [selectedOptions, setSelectedOptions] = useState({});
   const [waiting, setWaiting] = useState([]);
   const [ongoing, setOngoing] = useState([]);
+
 
   const [selItem, setSelItem] = useState({
     i: null,
@@ -64,28 +66,44 @@ export default function ViewRequest({ session }) {
     setSelItem({
       i: null,
       s: null,
-      item: { isQuestion: false, text: "", date: new Date() },
+      item: {isQuestion: false, text: "", date: new Date()},
     });
     const targetElement = e.target.getAttribute("name");
-    console.log(targetElement);
-    console.log(e.target);
 
     if (!targetElement) return false;
+
+    if (targetElement === 'finishArea') return handleDelete(selItem)
+
     if (targetElement.charAt(0) !== selItem.s) {
       const item = selItem.s === "r" ? ongoing[selItem.i] : waiting[selItem.i];
       if (selItem.s === "l") {
-        await handelStateChangeMine(item.id).then((r) => null);
-        item.state = 1;
+        await handelStateChangeMine(item.id).then(r => null)
+        item.state = 1
         setWaiting(waiting.filter((_, i) => i !== selItem.i));
         setOngoing([...ongoing, item]);
+
       } else {
-        await handelStateChangeGlobal(item.id).then((r) => null);
-        item.state = 0;
+        await handelStateChangeGlobal(item.id).then(r => null)
+        item.state = 0
         setOngoing(ongoing.filter((_, i) => i !== selItem.i));
         setWaiting([...waiting, item]);
       }
     }
   };
+
+  async function handleDelete(item) {
+    await handelStateChangeDelete(item.item.id);
+
+    if (item.s === "r") {
+      setOngoing(ongoing.filter((_, i) => i !== item.i));
+    } else {
+      setWaiting(waiting.filter((_, i) => i !== item.i));
+      console.log(typeof waiting)
+    }
+
+  }
+
+
 
   async function handelStateChangeMine(id) {
     try {
@@ -104,6 +122,15 @@ export default function ViewRequest({ session }) {
   async function handelStateChangeGlobal(id) {
     try {
       const getAllRequests = await updateRequest(session, id, 0, null);
+      setWaiting(getAllRequests);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function handelStateChangeDelete(id) {
+    try {
+      const getAllRequests = await updateRequest(session, id, 2, null);
       setWaiting(getAllRequests);
     } catch (error) {
       console.error(error);
@@ -212,58 +239,57 @@ export default function ViewRequest({ session }) {
         <span className={styles.line}></span>
         <div className={styles.right}>
           <div className={styles.title}>
-            <MdOutlineDownloading />
+            <MdOutlineDownloading/>
             <h2>내가 진행 중인 요청사항</h2>
           </div>
           <div className={styles.filter}>
             <Filter
-              title="By job"
-              options={[]}
-              selectedOptions={selectedOptions}
-              handleCheckboxChange={handleCheckboxChange}
+                title="By job"
+                options={[]}
+                selectedOptions={selectedOptions}
+                handleCheckboxChange={handleCheckboxChange}
             />
             <Filter
-              title="By Patient"
-              options={[]}
-              selectedOptions={selectedOptions}
-              handleCheckboxChange={handleCheckboxChange}
+                title="By Patient"
+                options={[]}
+                selectedOptions={selectedOptions}
+                handleCheckboxChange={handleCheckboxChange}
             />
             <Filter
-              title="District"
-              options={[]}
-              selectedOptions={selectedOptions}
-              handleCheckboxChange={handleCheckboxChange}
+                title="District"
+                options={[]}
+                selectedOptions={selectedOptions}
+                handleCheckboxChange={handleCheckboxChange}
             />
           </div>
           {holding ? <div className={styles.area} name="rightArea"></div> : ""}
           <div
-            className={styles.ongoing}
-            style={holding ? { transform: "translateY(-100%)" } : {}}
+              className={styles.ongoing}
+              style={holding ? {transform: "translateY(-100%)"} : {}}
           >
             {ongoing.map((item, i) => (
-              <div
-                key={i}
-                onMouseDown={(e) => handleMouseDown(i, "r", item)}
-                className={
-                  selItem.i === i && selItem.s === "r" ? styles.hide : ""
-                }
-              >
-                <Request
-                  request={item}
-                  session={session}
-                  from_patient={false}
-                />
-              </div>
+                <div
+                    key={i}
+                    onMouseDown={(e) => handleMouseDown(i, "r", item)}
+                    className={
+                      selItem.i === i && selItem.s === "r" ? styles.hide : ""
+                    }
+                >
+                  <Request
+                      request={item}
+                      session={session}
+                      from_patient={false}
+                  />
+                </div>
             ))}
           </div>
           {holding ? (
-            <div className={styles.finishArea} name="rightArea"></div>
+              <div className={styles.finishArea} name="rightArea"></div>
           ) : (
-            ""
+              ""
           )}
-          <div className={styles.finishButton}>
-            <FaCheckCircle size={90} className={styles.finishCheck} />
-          </div>
+          <div className={styles.finishArea} name='finishArea'></div>
+          <div className={styles.finishButton}><FaCheckCircle size={90} className={styles.finishCheck}/></div>
         </div>
       </div>
     </>

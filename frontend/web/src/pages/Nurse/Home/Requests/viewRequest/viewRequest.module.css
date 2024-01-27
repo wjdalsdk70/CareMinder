@@ -78,19 +78,22 @@
 
 
 .finishButton {
+    z-index: 10;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+    width: 10rem;
+    height: 10rem;
+
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
-    width: 10rem;
-    height: 10rem;
+
+    background: radial-gradient(circle at 100% 100%, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
     clip-path: polygon(100% 100%, 0% 100%, 0% 0%, 100% 0%);
     border-top-left-radius: 100%;
-    z-index: 10;
-    bottom: 0;
-    right: 0;
     text-align: center;
-    background: radial-gradient(circle at 100% 100%, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
 }
 
 .finishCheck {
@@ -98,5 +101,17 @@
     margin-top: 2rem;
     margin-left: 2rem;
     color: white;
+}
+
+.finishArea {
+    z-index: 115;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+    width: 10rem;
+    height: 10rem;
+
+    border-top-left-radius: 100%;
 }
 

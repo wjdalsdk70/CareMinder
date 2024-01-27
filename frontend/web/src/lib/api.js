@@ -75,7 +75,6 @@ export async function getRequestsFiltered(
   }
 ) {
   let url = `${BASE_URL}/requests/?for_role=${forRole}&is_question=${isQuestion}&state=${state}&tablet=${tablet}&staff=${staff}&staff__type=${staffType}&tablet__area=${tabletArea}`;
-
   const response = await authFetch(session, url, {
     method: "GET",
     headers: {
