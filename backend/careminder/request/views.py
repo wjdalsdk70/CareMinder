@@ -4,15 +4,12 @@ from rest_framework import generics
 from .serializers import ChatMessageSerializer, RequestSerializer
 from careminder.permissions import CustomDjangoModelPermissions
 from .models import Request, ChatMessage
+from staff.models import Staff
 
 
 class RequestFilter(django_filters.FilterSet):
-    staff_type = django_filters.CharFilter(
-        field_name="staff__type", lookup_expr="exact"
-    )
-
-    staff_id_is_null = django_filters.BooleanFilter(
-        field_name="staff", lookup_expr="isnull"
+    staff = django_filters.ModelChoiceFilter(
+        queryset=Staff.objects.all(), null_label="null"
     )
 
     class Meta:
@@ -23,6 +20,8 @@ class RequestFilter(django_filters.FilterSet):
             "state",
             "tablet",
             "staff",
+            "staff__type",
+            "tablet__area",
         ]
 
 

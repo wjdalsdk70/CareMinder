@@ -62,44 +62,31 @@ export async function getRequests(session) {
   return data;
 }
 
-export async function getRequestsFilteredStaff(session, id) {
-  const response = await authFetch(session, `${BASE_URL}/requests/?staff=${id}`, {
-    method: "GET",
-    headers: {
-      "content-type": "application/json",
-    },
-  });
-  if (!response.ok) {
-    return Promise.reject(response);
+export async function getRequestsFiltered(
+  session,
+  {
+    forRole = "",
+    isQuestion = "",
+    state = "",
+    tablet = "",
+    staff = "",
+    staffType = "",
+    tabletArea = "",
   }
-  const data = await response.json();
-  return data;
-}
+) {
+  let url = `${BASE_URL}/requests/?for_role=${forRole}&is_question=${isQuestion}&state=${state}&tablet=${tablet}&staff=${staff}&staff__type=${staffType}&tablet__area=${tabletArea}`;
 
-export async function getRequestsFilteredStaffIsNull(session) {
-  const response = await authFetch(session, `${BASE_URL}/requests/?staff_id_is_null=true`, {
+  const response = await authFetch(session, url, {
     method: "GET",
     headers: {
       "content-type": "application/json",
     },
   });
-  if (!response.ok) {
-    return Promise.reject(response);
-  }
-  const data = await response.json();
-  return data;
-}
 
-export async function getRequestsFiltered(session, id) {
-  const response = await authFetch(session, `${BASE_URL}/requests/?tablet=${id}`, {
-    method: "GET",
-    headers: {
-      "content-type": "application/json",
-    },
-  });
   if (!response.ok) {
     return Promise.reject(response);
   }
+
   const data = await response.json();
   return data;
 }
@@ -120,12 +107,16 @@ export async function updateRequest(session, id, state, staff_id) {
 }
 
 export async function getChatMessages(session, id) {
-  const response = await authFetch(session, `${BASE_URL}/requests/${id}/chat_messages/`, {
-    method: "GET",
-    headers: {
-      "content-type": "application/json",
-    },
-  });
+  const response = await authFetch(
+    session,
+    `${BASE_URL}/requests/${id}/chat_messages/`,
+    {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+      },
+    }
+  );
 
   if (!response.ok) {
     return Promise.reject(response);
@@ -135,9 +126,13 @@ export async function getChatMessages(session, id) {
   return data;
 }
 
-export async function postChatMessage(session, requestId, { text, from_patient }) {
+export async function postChatMessage(
+  session,
+  requestId,
+  { text, from_patient }
+) {
   const response = await authFetch(
-      session,
+    session,
     `${BASE_URL}/requests/${requestId}/chat_messages/`,
     {
       method: "POST",
@@ -171,7 +166,7 @@ export async function getTablets() {
 }
 
 export async function getTablet(id) {
-  const response = await fetch( `${BASE_URL}/tablets/${id}`, {
+  const response = await fetch(`${BASE_URL}/tablets/${id}`, {
     method: "GET",
     headers: {
       "content-type": "application/json",
