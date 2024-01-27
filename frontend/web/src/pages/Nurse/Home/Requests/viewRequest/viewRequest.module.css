@@ -77,10 +77,26 @@
 }
 
 
-.finish-button {
+.finishButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
-    width: 100px;
-    background-color: black;
-    border-radius: 50%;
-
+    width: 10rem;
+    height: 10rem;
+    clip-path: polygon(100% 100%, 0% 100%, 0% 0%, 100% 0%);
+    border-top-left-radius: 100%;
+    z-index: 10;
+    bottom: 0;
+    right: 0;
+    text-align: center;
+    background: radial-gradient(circle at 100% 100%, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
 }
+
+.finishCheck {
+    z-index: 11;
+    margin-top: 2rem;
+    margin-left: 2rem;
+    color: white;
+}
+
