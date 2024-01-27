@@ -30,8 +30,6 @@ function validate(data) {
 }
 
 export default function Login({ session }) {
-  const [username, setUsername] = useState();
-  const [password, setPassword] = useState();
   const navigate = useNavigate();
   const [searchParams, _] = useSearchParams();
   const next = searchParams.get("next") || "/patient/home";
@@ -138,23 +136,11 @@ export default function Login({ session }) {
           {statusMessage()}
           <fieldset>
             <label htmlFor="username">Username</label>
-            <input
-              name="username"
-              type="text"
-              id="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
+            <input name="username" type="text" id="username" />
           </fieldset>
           <fieldset>
             <label htmlFor="password">Password</label>
-            <input
-              name="password"
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
+            <input name="password" type="password" id="password" />
           </fieldset>
 
           <select name="tablet" id="tablet">

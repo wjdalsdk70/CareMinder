@@ -5,7 +5,7 @@ import {
   BsSend,
 } from "react-icons/bs";
 import moment from "moment";
-import { createChatMessage, getChatMessages, getRequests } from "src/lib/api";
+import { postChatMessage, getChatMessages, getRequests } from "src/lib/api";
 
 import "./Request.css";
 
@@ -29,7 +29,7 @@ export default function Request({ request }) {
 
   async function newMessage() {
     try {
-      const resp = await createChatMessage(request.id, {
+      const resp = await postChatMessage(request.id, {
         text: messageText,
         from_patient: true,
       });

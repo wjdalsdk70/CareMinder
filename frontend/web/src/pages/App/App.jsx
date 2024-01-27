@@ -66,7 +66,10 @@ function App() {
           path="/patient/login"
           element={<PatientLogin session={session} />}
         />
-        <Route path="/patient/home" element={<PatientHome />} />
+        <Route
+          path="/patient/home"
+          element={<PatientHome session={session} />}
+        />
         <Route path="/patient/agreement" element={<Agreement />} />
         <Route path="/patient/recording" element={<Recording />} />
         <Route path="/patient/recordingResults" element={<RecordingResult />} />

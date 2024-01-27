@@ -57,18 +57,18 @@ export default function useSession() {
   };
 }
 
-export function useRedirectToLogin(session) {
+export function useRedirectToLogin(session, url) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (session.ready && !session.user) navigate("/login?next=/nurse");
+    if (session.ready && !session.user) navigate(url);
   }, [session, navigate]);
 }
 
-export function useRedirectToHome(session) {
+export function useRedirectToHome(session, url) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (session.ready && session.user) navigate("/");
+    if (session.ready && session.user) navigate(url);
   }, [session, navigate]);
 }
