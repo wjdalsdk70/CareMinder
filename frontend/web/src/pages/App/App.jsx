@@ -8,7 +8,7 @@ import AddUser from "src/pages/Nurse/Admin/AddUser/AddUser";
 import EditUser from "src/pages/Nurse/Admin/EditUser/EditUser";
 import UserList from "src/pages/Nurse/Admin/UserList/UserList";
 import useSession from "src/hooks/useSession";
-import PatientLogin from "src/pages/Patient/PatientLogin/PatientLogin";
+import PatientLogin from "src/pages/Patient/Login/Login";
 
 import PatientHome from "src/pages/Patient/Home/Home";
 import Agreement from "src/pages/Patient/Agreement/Agreement";
@@ -17,7 +17,7 @@ import RecordingResult from "src/pages/Patient/RecordingResult/RecordingResult";
 
 import "src/theme/global.css";
 import "src/theme/variables.css";
-import Login from "../Nurse/Login/Login";
+import NurseLogin from "src/pages/Nurse/Login/Login";
 
 function App() {
   const session = useSession();
@@ -26,15 +26,11 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route
-          path="/"
-          element={<Navigate to="/nurse/login?next=/nurse/home" />}
-        />
-        <Route
-          path="/nurse"
-          element={<Navigate to="/nurse/login?next=/nurse/home" />}
-        />
-        <Route path="/nurse/login" element={<Login session={session} />} />
+        <Route path="/" element={<Navigate to="/nurse/login" />} />
+
+        <Route path="/nurse/*" element={<Navigate to="/nurse/login" />} />
+        <Route path="/nurse" element={<Navigate to="/nurse/login" />} />
+        <Route path="/nurse/login" element={<NurseLogin session={session} />} />
         <Route
           path="/nurse/home"
           element={<Navigate to="/nurse/home/requests" />}
@@ -64,7 +60,8 @@ function App() {
           element={<UserList session={session} />}
         />
 
-        <Route path="/patient" element={<Navigate to="/patient/home" />} />
+        <Route path="/patient/*" element={<Navigate to="/patient/login" />} />
+        <Route path="/patient" element={<Navigate to="/patient/login" />} />
         <Route
           path="/patient/login"
           element={<PatientLogin session={session} />}

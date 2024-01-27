@@ -28,7 +28,7 @@ export default function Login({ session }) {
   const [password, setPassword] = useState();
   const navigate = useNavigate();
   const [searchParams, _] = useSearchParams();
-  const next = searchParams.get("next") || "/nurse";
+  const next = searchParams.get("next") || "/nurse/home";
 
   const [isLoading, setIsLoading] = useState(false);
   const [status, setStatus] = useState();
