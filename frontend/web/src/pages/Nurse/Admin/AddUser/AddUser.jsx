@@ -5,8 +5,10 @@ import NurseHeader from "src/components/NurseHeader/NurseHeader";
 import { BsPersonFillAdd } from "react-icons/bs";
 import { postStaff } from "../../../../lib/api";
 import {useNavigate} from "react-router-dom";
+import {useRedirectToLogin} from "../../../../hooks/useSession";
 
 export default function AddUser({ session }) {
+  useRedirectToLogin(session, '/nurse/login')
   const nurse = data.nurse;
   const navigate = useNavigate()
 

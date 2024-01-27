@@ -5,8 +5,11 @@ import Progress from './progress/progress'
 import NurseHeader from 'src/components/NurseHeader/NurseHeader'
 
 import styles from './Requests.module.css'
+import {useRedirectToLogin} from "../../../../hooks/useSession";
 
 export default function Requests({ session }) {
+    useRedirectToLogin(session, '/nurse/login')
+
     const [toggle, setToggle] = useState(true)
 
     const handleToggle = (i) => {
@@ -23,7 +26,7 @@ export default function Requests({ session }) {
             </div>
             <div className={styles.bottom}>
                 { toggle ?
-                        <ViewRequest active={toggle}/> :
+                        <ViewRequest active={toggle} session={session}/> :
                         <Progress active={!toggle}/>
                 }
             </div>

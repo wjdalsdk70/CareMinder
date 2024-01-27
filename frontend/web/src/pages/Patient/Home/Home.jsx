@@ -30,7 +30,6 @@ export default function Home({ session }) {
 
   const fetchSettings = async () => {
     if (!session.user) return;
-    console.dir(session);
     try {
       const settingsData = await getSettings(session);
       setSettings(settingsData);
@@ -45,7 +44,7 @@ export default function Home({ session }) {
 
   return (
     <div className="patient__home">
-      <PatientHeader />
+      <PatientHeader session={session}/>
       <main>
         <div className="container">
           <div className="menu">
@@ -76,8 +75,8 @@ export default function Home({ session }) {
           </div>
         </div>
       </main>
-      <PatientHistory />
-      <PatientFooter />
+      <PatientHistory session={session}/>
+      <PatientFooter session={session}/>
     </div>
   );
 }

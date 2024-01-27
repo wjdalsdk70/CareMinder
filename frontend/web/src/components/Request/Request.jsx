@@ -9,7 +9,7 @@ import { postChatMessage, getChatMessages, getRequests } from "src/lib/api";
 
 import "./Request.css";
 
-export default function Request({ request }) {
+export default function Request({ request, session }) {
   const [isOpen, setIsOpen] = useState(false);
   const [messageText, setMessageText] = useState();
   const [chat, setChat] = useState([]);
@@ -20,7 +20,7 @@ export default function Request({ request }) {
 
   async function fetchChatMessages() {
     try {
-      const resp = await getChatMessages(request.id);
+      const resp = await getChatMessages(session, request.id);
       setChat(resp);
     } catch (error) {
       console.error("Error fetching chat messages");
@@ -29,7 +29,7 @@ export default function Request({ request }) {
 
   async function newMessage() {
     try {
-      const resp = await postChatMessage(request.id, {
+      const resp = await postChatMessage(session, request.id, {
         text: messageText,
         from_patient: true,
       });

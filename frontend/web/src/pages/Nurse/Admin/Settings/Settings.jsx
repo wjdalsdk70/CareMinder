@@ -5,8 +5,10 @@ import NurseHeader from "src/components/NurseHeader/NurseHeader";
 import { IoMdAddCircle } from "react-icons/io";
 import {getSettings, getStaff, getTablets} from "../../../../lib/api";
 import React, { useEffect, useState } from "react";
+import {useRedirectToLogin} from "../../../../hooks/useSession";
 
 export default function Settings({session}) {
+  useRedirectToLogin(session, '/nurse/login')
   const [settings, setSettings] = useState({
     hospital_title: "",
     hospital_description: "",

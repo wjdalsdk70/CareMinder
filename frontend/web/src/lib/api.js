@@ -48,8 +48,8 @@ export async function logout({ refreshToken }) {
   return data;
 }
 
-export async function getRequests() {
-  const response = await fetch(`${BASE_URL}/requests/`, {
+export async function getRequests(session) {
+  const response = await authFetch(session, `${BASE_URL}/requests/`, {
     method: "GET",
     headers: {
       "content-type": "application/json",
@@ -62,8 +62,8 @@ export async function getRequests() {
   return data;
 }
 
-export async function getRequestsFiltered(id) {
-  const response = await fetch(`${BASE_URL}/requests/?tablet=${id}`, {
+export async function getRequestsFilteredStaff(session, id) {
+  const response = await authFetch(session, `${BASE_URL}/requests/?staff=${id}`, {
     method: "GET",
     headers: {
       "content-type": "application/json",
@@ -76,8 +76,51 @@ export async function getRequestsFiltered(id) {
   return data;
 }
 
-export async function getChatMessages(id) {
-  const response = await fetch(`${BASE_URL}/requests/${id}/chat_messages/`, {
+export async function getRequestsFilteredStaffIsNull(session) {
+  const response = await authFetch(session, `${BASE_URL}/requests/?staff_id_is_null=true`, {
+    method: "GET",
+    headers: {
+      "content-type": "application/json",
+    },
+  });
+  if (!response.ok) {
+    return Promise.reject(response);
+  }
+  const data = await response.json();
+  return data;
+}
+
+export async function getRequestsFiltered(session, id) {
+  const response = await authFetch(session, `${BASE_URL}/requests/?tablet=${id}`, {
+    method: "GET",
+    headers: {
+      "content-type": "application/json",
+    },
+  });
+  if (!response.ok) {
+    return Promise.reject(response);
+  }
+  const data = await response.json();
+  return data;
+}
+
+export async function updateRequest(session, id, state, staff_id) {
+  const response = await authFetch(session, `${BASE_URL}/requests/${id}/`, {
+    method: "PATCH",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({ state, staff_id }),
+  });
+  if (!response.ok) {
+    return Promise.reject(response);
+  }
+  const data = await response.json();
+  return data;
+}
+
+export async function getChatMessages(session, id) {
+  const response = await authFetch(session, `${BASE_URL}/requests/${id}/chat_messages/`, {
     method: "GET",
     headers: {
       "content-type": "application/json",
@@ -92,8 +135,9 @@ export async function getChatMessages(id) {
   return data;
 }
 
-export async function postChatMessage(requestId, { text, from_patient }) {
-  const response = await fetch(
+export async function postChatMessage(session, requestId, { text, from_patient }) {
+  const response = await authFetch(
+      session,
     `${BASE_URL}/requests/${requestId}/chat_messages/`,
     {
       method: "POST",
@@ -112,8 +156,8 @@ export async function postChatMessage(requestId, { text, from_patient }) {
   return data;
 }
 
-export async function getTablets(session) {
-  const response = await authFetch(session, `${BASE_URL}/tablets/`, {
+export async function getTablets() {
+  const response = await fetch(`${BASE_URL}/tablets/`, {
     method: "GET",
     headers: {
       "content-type": "application/json",
@@ -127,7 +171,7 @@ export async function getTablets(session) {
 }
 
 export async function getTablet(id) {
-  const response = await fetch(`${BASE_URL}/tablets/${id}`, {
+  const response = await fetch( `${BASE_URL}/tablets/${id}`, {
     method: "GET",
     headers: {
       "content-type": "application/json",
@@ -140,8 +184,8 @@ export async function getTablet(id) {
   return data;
 }
 
-export async function postTablet(name, area_id) {
-  const response = await fetch(`${BASE_URL}/tablets/`, {
+export async function postTablet(session, name, area_id) {
+  const response = await authFetch(session, `${BASE_URL}/tablets/`, {
     method: "POST",
     headers: {
       "content-type": "application/json",
@@ -158,13 +202,14 @@ export async function postTablet(name, area_id) {
 }
 
 export async function postRequest(
+  session,
   text,
   is_question,
   state,
   tablet_id,
   for_role
 ) {
-  const response = await fetch(`${BASE_URL}/requests/`, {
+  const response = await authFetch(session, `${BASE_URL}/requests/`, {
     method: "POST",
     headers: {
       "content-type": "application/json",

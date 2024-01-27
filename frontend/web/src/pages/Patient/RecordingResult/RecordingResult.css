@@ -42,7 +42,6 @@
     justify-content: center; /* Center content vertically */
     background-color: var(--text-background-light);
     margin: 10px;
-    padding: 5px;
     border-radius: 10px;
   }
   
@@ -61,23 +60,24 @@
   .textArea-container {
     margin-top: 20px; /* Adjust the top margin as needed */
   }
-  
-  textarea {
+
+textarea {
     width: 60rem;
     height: 15rem;
     border-radius: 10px;
-    border-style: none; 
+    border-style: none;
     padding: 10px;
     margin: 10px;
     font-size: 20px;
     font-family: "NanumSquare";
     text-align: center;
     resize: none;
-    line-height: 10; /* Adjust line-height for vertical centering */
+    line-height: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-  }
+}
+
 
   .buttons {
     display: flex;

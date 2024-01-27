@@ -11,7 +11,8 @@ import "./PatientHistory.css";
 import Request from "../Request/Request";
 import useLocalStorage from "src/hooks/useLocalStorage";
 
-export default function PatientHistory() {
+export default function PatientHistory({session}) {
+  console.log(session)
   const [isOpen, setIsOpen] = useState(false);
   const [requests, setRequests] = useState([]);
   const [chats, setChats] = useState([]);
@@ -21,7 +22,7 @@ export default function PatientHistory() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const requestsData = await getRequestsFiltered(tablet.id);
+        const requestsData = await getRequestsFiltered(session, tablet.id);
         setRequests(requestsData);
 
         setIsLoading(false);
@@ -55,7 +56,7 @@ export default function PatientHistory() {
           <p>Loading...</p>
         ) : (
           requests.map((request) => (
-            <Request key={request.id} request={request} />
+            <Request key={request.id} request={request} session={session}/>
           ))
         )}
       </div>

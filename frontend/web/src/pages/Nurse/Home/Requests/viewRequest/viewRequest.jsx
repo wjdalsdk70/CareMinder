@@ -8,9 +8,15 @@ import { MdOutlineDownloading } from "react-icons/md";
 import styles from "./viewRequest.module.css";
 import flw from "../Requests.module.css";
 import Request from "src/components/Request/Request";
-import { getRequests } from "src/lib/api";
+import {
+  getRequests,
+  getRequestsFiltered,
+  getRequestsFilteredStaff,
+  getRequestsFilteredStaffIsNull,
+  updateRequest
+} from "src/lib/api";
 
-export default function ViewRequest() {
+export default function ViewRequest({session}) {
   const [selectedOptions, setSelectedOptions] = useState({});
   const [waiting, setWaiting] = useState([]);
   const [ongoing, setOngoing] = useState([]);
@@ -47,7 +53,7 @@ export default function ViewRequest() {
     }
   };
 
-  const handleMouseUp = (e) => {
+  const handleMouseUp = async (e) => {
     clearTimeout(pressTimer.current);
     if (!holding) return false;
 
@@ -55,7 +61,7 @@ export default function ViewRequest() {
     setSelItem({
       i: null,
       s: null,
-      item: { isQuestion: false, text: "", date: new Date() },
+      item: {isQuestion: false, text: "", date: new Date()},
     });
     const targetElement = e.target.getAttribute("name");
 
@@ -63,21 +69,51 @@ export default function ViewRequest() {
     if (targetElement.charAt(0) !== selItem.s) {
       const item = selItem.s === "r" ? ongoing[selItem.i] : waiting[selItem.i];
       if (selItem.s === "l") {
+        await handelStateChangeMine(item.id).then(r => null)
+        item.state = 1
         setWaiting(waiting.filter((_, i) => i !== selItem.i));
         setOngoing([...ongoing, item]);
+
       } else {
+        await handelStateChangeGlobal(item.id).then(r => null)
+        item.state = 0
         setOngoing(ongoing.filter((_, i) => i !== selItem.i));
         setWaiting([...waiting, item]);
       }
     }
   };
 
-  async function fetchRequests() {
-    // TODO: fetch correct waiting/ongoing data, updating request based on drag and drop
+  async function handelStateChangeMine(id) {
     try {
-      const response = await getRequests();
-      setWaiting(response);
-      setOngoing(response);
+      const getAllRequests = await updateRequest(session, id, 1, session.user.user_id);
+      setWaiting(getAllRequests);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function handelStateChangeGlobal(id) {try {
+      const getAllRequests = await updateRequest(session, id, 0, null);
+      setWaiting(getAllRequests);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function fetchRequests() {
+    try {
+      const getAllRequests = await getRequestsFilteredStaffIsNull(session);
+      setWaiting(getAllRequests);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function fetchMyRequests() {try {
+      console.log(session.user.id)
+      const getMyRequests = await getRequestsFilteredStaff(session, session.user.user_id)
+
+      setOngoing(getMyRequests);
     } catch (error) {
       console.error(error);
     }
@@ -95,6 +131,7 @@ export default function ViewRequest() {
 
   useEffect(() => {
     fetchRequests();
+    fetchMyRequests();
   }, []);
 
   return (
@@ -104,7 +141,7 @@ export default function ViewRequest() {
           holding ? "" : styles.hide
         }`}
       >
-        <Request request={selItem.item} />
+        <Request request={selItem.item} session={session} />
       </div>
       <div className={styles.wrapper}>
         <div>
@@ -145,7 +182,7 @@ export default function ViewRequest() {
                   selItem.i === i && selItem.s === "l" ? styles.hide : ""
                 }
               >
-                <Request request={item} />
+                <Request request={item} session={session}/>
               </div>
             ))}
           </div>
@@ -189,7 +226,7 @@ export default function ViewRequest() {
                   selItem.i === i && selItem.s === "r" ? styles.hide : ""
                 }
               >
-                <Request request={item} />
+                <Request request={item} session={session}/>
               </div>
             ))}
           </div>

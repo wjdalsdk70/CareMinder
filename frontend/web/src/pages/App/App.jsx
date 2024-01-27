@@ -66,8 +66,14 @@ function App() {
           element={<UserList session={session} />}
         />
 
-        <Route path="/patient/*" element={<Navigate to="/patient/login" />} />
-        <Route path="/patient" element={<Navigate to="/patient/login" />} />
+        <Route
+            path="/patient/*"
+            element={<Navigate to="/patient/login" />}
+        />
+        <Route
+            path="/patient"
+            element={<Navigate to="/patient/login" />} />
+
         <Route
           path="/patient/login"
           element={<PatientLogin session={session} />}
@@ -76,9 +82,15 @@ function App() {
           path="/patient/home"
           element={<PatientHome session={session} />}
         />
-        <Route path="/patient/agreement" element={<Agreement />} />
-        <Route path="/patient/recording" element={<Recording />} />
-        <Route path="/patient/recordingResults" element={<RecordingResult />} />
+        <Route
+            path="/patient/agreement"
+            element={<Agreement />}/>
+        <Route
+            path="/patient/recording"
+            element={<Recording session={session} />} />
+        <Route
+            path="/patient/recordingResults"
+            element={<RecordingResult session={session}/>} />
       </Routes>
     </div>
   );

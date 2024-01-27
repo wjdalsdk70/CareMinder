@@ -9,8 +9,10 @@ import Logo from "src/assets/logo.svg";
 import "./RecordingResult.css";
 import {getTablet, postRequest} from "../../../lib/api";
 import useLocalStorage from "../../../hooks/useLocalStorage";
+import {useRedirectToLogin} from "../../../hooks/useSession";
 
-export default function RecordingResult() {
+export default function RecordingResult({session}) {
+  useRedirectToLogin(session, "/patient/login");
   //   const loc = useLocation();
   const transcript = localStorage.getItem("recordingResult");
   const isQuestion = localStorage.getItem("isQuestion")
@@ -34,9 +36,9 @@ export default function RecordingResult() {
   async function handelPostRequest(){
     try {
       if (isQuestion === "true"){
-        await postRequest(text, true, 1, tablet.id, 1);
+        await postRequest(session ,text, true, 0, tablet.id, 1);
       }else{
-        await postRequest(text, false, 1, tablet.id, 1);
+        await postRequest(session, text, false, 0, tablet.id, 1);
       }
 
     } catch (error) {
@@ -98,7 +100,7 @@ export default function RecordingResult() {
           </div>
         </div>
       </div>
-      <PatientFooter />
+      <PatientFooter session={session}/>
     </div>
   );
 }

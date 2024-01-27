@@ -5,8 +5,10 @@ import NurseHeader from "src/components/NurseHeader/NurseHeader";
 import { FaUserEdit } from "react-icons/fa";
 import { getStaff, postStaff, updateStaff } from "../../../../lib/api";
 import { useNavigate, useParams } from "react-router-dom";
+import {useRedirectToLogin} from "../../../../hooks/useSession";
 
 export default function EditUser({ session }) {
+  useRedirectToLogin(session, '/nurse/login')
   const nurse = data.nurse;
   const { id } = useParams();
   const navigate = useNavigate();

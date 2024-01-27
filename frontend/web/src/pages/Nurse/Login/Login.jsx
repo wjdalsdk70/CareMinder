@@ -6,6 +6,7 @@ import "./Login.css";
 import { login, logout } from "src/lib/api";
 import { jwtDecode } from "jwt-decode";
 import { readForm } from "src/core/utils";
+import useLocalStorage from "../../../hooks/useLocalStorage";
 
 function validate(data) {
   const errors = {};
@@ -27,6 +28,7 @@ export default function Login({ session }) {
   const navigate = useNavigate();
   const [searchParams, _] = useSearchParams();
   const next = searchParams.get("next") || "/nurse/home";
+  const [staff, setStaff] = useLocalStorage("staff", {});
 
   const [isLoading, setIsLoading] = useState(false);
   const [status, setStatus] = useState();

@@ -7,11 +7,14 @@ import {
   getStaff,
   getTablet,
   postStaff,
+  postTablet,
   updateStaff,
 } from "../../../../lib/api";
 import { useNavigate, useParams } from "react-router-dom";
+import {useRedirectToLogin} from "../../../../hooks/useSession";
 
 export default function EditTablets({ session }) {
+  useRedirectToLogin(session, '/nurse/login')
   const nurse = data.nurse;
   const { id } = useParams();
   const navigate = useNavigate();
@@ -23,7 +26,7 @@ export default function EditTablets({ session }) {
 
   const fetchData = async () => {
     try {
-      const tablet = await getTablet(id);
+      const tablet = await getTablet(session, id);
       setFormData({
         username: tablet.name || "",
         password: tablet.area_id || "",

@@ -8,6 +8,7 @@ import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 import "./Recording.css";
+import {useRedirectToLogin} from "../../../hooks/useSession";
 
 const CustomWaveformIcon = ({ size, volume }) => (
   <svg
@@ -21,7 +22,9 @@ const CustomWaveformIcon = ({ size, volume }) => (
   </svg>
 );
 
-export default function Recording() {
+export default function Recording({session}) {
+
+    useRedirectToLogin(session, "/patient/login");
   const navigate = useNavigate();
   const { transcript } = useSpeechRecognition("");
   const [isRecording, setIsRecording] = useState(false);
@@ -144,7 +147,7 @@ export default function Recording() {
           Finish
         </a>
       </div>
-      <PatientFooter />
+      <PatientFooter session={session}/>
     </div>
   );
 }
