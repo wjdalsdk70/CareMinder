@@ -132,9 +132,9 @@ export default function AddUser({ session }) {
               <option value="" disabled>
                 Please select a Role
               </option>
-              <option value={0}>Secretary</option>
+              <option value={0}>{nurse.roles[0]}</option>
 
-              <option value={1}>Careworker</option>
+              <option value={1}>{nurse.roles[1]}</option>
             </select>
           </div>
           <div className="input_field">
@@ -146,11 +146,11 @@ export default function AddUser({ session }) {
               <option value="" disabled>
                 Please select a Type
               </option>
-              <option value={0}>Helper</option>
+              <option value={0}>{nurse.types[0]}</option>
 
-              <option value={1}>Nurse</option>
+              <option value={1}>{nurse.types[1]}</option>
 
-              <option value={2}>Doctor</option>
+              <option value={2}>{nurse.types[2]}</option>
             </select>
           </div>
           <div className="input_field">

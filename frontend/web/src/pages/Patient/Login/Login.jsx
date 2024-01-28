@@ -7,6 +7,7 @@ import { getTablet, getTablets, login, logout } from "src/lib/api";
 import { jwtDecode } from "jwt-decode";
 import { readForm } from "src/core/utils";
 import useLocalStorage from "src/hooks/useLocalStorage";
+import data from "../../../data.json"
 
 function validate(data) {
   const errors = {};
@@ -30,6 +31,7 @@ function validate(data) {
 }
 
 export default function Login({ session }) {
+  const patient = data.patient
   const navigate = useNavigate();
   const [searchParams, _] = useSearchParams();
   const next = searchParams.get("next") || "/patient/home";
@@ -107,13 +109,13 @@ export default function Login({ session }) {
     let statusMessage;
     switch (status) {
       case "success":
-        statusMessage = <div className="success">Login Successful</div>;
+        statusMessage = <div className="success">{patient.patientLoginInStatusSuccess}</div>;
         break;
       case "failed":
-        statusMessage = <div className="error">Login Failed</div>;
+        statusMessage = <div className="error">{patient.patientLoginInStatusError}</div>;
         break;
       case "tooManyAttempts":
-        statusMessage = <div className="error">Too Many Attempts</div>;
+        statusMessage = <div className="error">{patient.patientLoginInStatusToManyAttempts}</div>;
         break;
       default:
         statusMessage = null;
@@ -125,27 +127,24 @@ export default function Login({ session }) {
     <div className="set-up">
       <img className="set-up__logo" src={Logo} alt="" />
       <div className="container">
-        <h1>Hello, I’m CareMinder</h1>
-        <p>Please set the name of the tablet.</p>
-        <p>This is used to specify tablets by bed area.</p>
-        <p>
-          The name can then be modified through the Preferences menu on the
-          nurse's screen.
-        </p>
+        <h1>{patient.patientSetUpHeader}</h1>
+        <p>{patient.patientSetUpTablet}</p>
+        <p>{patient.patientSetUpTabletExplanation}</p>
+        <p>{patient.patientSetUpModifyExplanation}</p>
         <form className="set-up__form" onSubmit={handleSubmit}>
           {statusMessage()}
           <fieldset>
-            <label htmlFor="username">Username</label>
+            <label htmlFor="username">{patient.patientSetUpUsername}</label>
             <input name="username" type="text" id="username" />
           </fieldset>
           <fieldset>
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">{patient.patientSetUpPassword}</label>
             <input name="password" type="password" id="password" />
           </fieldset>
 
           <select name="tablet" id="tablet">
             <option value="" disabled selected>
-              Select a tablet
+              {patient.patientSetUpSelectTablet}
             </option>
             {tablets.map((tablets) => (
               <option key={tablets.id} value={tablets.id}>
@@ -154,7 +153,7 @@ export default function Login({ session }) {
             ))}
           </select>
 
-          <input type="submit" value="Login" />
+          <input type="submit" value={patient.patientSetUpLogin}/>
         </form>
       </div>
     </div>

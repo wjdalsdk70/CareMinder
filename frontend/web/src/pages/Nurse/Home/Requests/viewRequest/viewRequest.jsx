@@ -10,17 +10,20 @@ import styles from "./viewRequest.module.css";
 import flw from "../Requests.module.css";
 import Request from "src/components/Request/Request";
 import {
-  getRequests,
   getRequestsFiltered,
-  getRequestsFilteredStaffIdIsNull,
   updateRequest,
 } from "src/lib/api";
 import { useRedirectToLogin } from "src/hooks/useSession";
+import {wait} from "@testing-library/user-event/dist/utils";
+import data from "../../../../../data.json"
 
 export default function ViewRequest({ session }) {
+  useRedirectToLogin(session, "nurse/login")
+  const nurse = data.nurse
   const [selectedOptions, setSelectedOptions] = useState({});
   const [waiting, setWaiting] = useState([]);
   const [ongoing, setOngoing] = useState([]);
+
 
   const [selItem, setSelItem] = useState({
     i: null,
@@ -62,28 +65,44 @@ export default function ViewRequest({ session }) {
     setSelItem({
       i: null,
       s: null,
-      item: { isQuestion: false, text: "", date: new Date() },
+      item: {isQuestion: false, text: "", date: new Date()},
     });
     const targetElement = e.target.getAttribute("name");
-    console.log(targetElement);
-    console.log(e.target);
 
     if (!targetElement) return false;
+
+    if (targetElement === 'finishArea') return handleDelete(selItem)
+
     if (targetElement.charAt(0) !== selItem.s) {
       const item = selItem.s === "r" ? ongoing[selItem.i] : waiting[selItem.i];
       if (selItem.s === "l") {
-        await handelStateChangeMine(item.id).then((r) => null);
-        item.state = 1;
+        await handelStateChangeMine(item.id).then(r => null)
+        item.state = 1
         setWaiting(waiting.filter((_, i) => i !== selItem.i));
         setOngoing([...ongoing, item]);
+
       } else {
-        await handelStateChangeGlobal(item.id).then((r) => null);
-        item.state = 0;
+        await handelStateChangeGlobal(item.id).then(r => null)
+        item.state = 0
         setOngoing(ongoing.filter((_, i) => i !== selItem.i));
         setWaiting([...waiting, item]);
       }
     }
   };
+
+  async function handleDelete(item) {
+    await handelStateChangeDelete(item.item.id);
+
+    if (item.s === "r") {
+      setOngoing(ongoing.filter((_, i) => i !== item.i));
+    } else {
+      setWaiting(waiting.filter((_, i) => i !== item.i));
+      console.log(typeof waiting)
+    }
+
+  }
+
+
 
   async function handelStateChangeMine(id) {
     try {
@@ -102,6 +121,15 @@ export default function ViewRequest({ session }) {
   async function handelStateChangeGlobal(id) {
     try {
       const getAllRequests = await updateRequest(session, id, 0, null);
+      setWaiting(getAllRequests);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function handelStateChangeDelete(id) {
+    try {
+      const getAllRequests = await updateRequest(session, id, 2, null);
       setWaiting(getAllRequests);
     } catch (error) {
       console.error(error);
@@ -163,23 +191,23 @@ export default function ViewRequest({ session }) {
         <div>
           <div className={styles.title}>
             <BiLoaderCircle />
-            <h2>대기 중인 환자 요청</h2>
+            <h2>{nurse.nurseHomeGlobalRequestsHeader}</h2>
           </div>
           <div className={styles.filter}>
             <Filter
-              title="By job"
+              title={nurse.filterByJob}
               options={[]}
               selectedOptions={selectedOptions}
               handleCheckboxChange={handleCheckboxChange}
             />
             <Filter
-              title="By Patient"
+              title={nurse.filterByPatient}
               options={[]}
               selectedOptions={selectedOptions}
               handleCheckboxChange={handleCheckboxChange}
             />
             <Filter
-              title="District"
+              title={nurse.filterByArea}
               options={[]}
               selectedOptions={selectedOptions}
               handleCheckboxChange={handleCheckboxChange}
@@ -210,58 +238,57 @@ export default function ViewRequest({ session }) {
         <span className={styles.line}></span>
         <div className={styles.right}>
           <div className={styles.title}>
-            <MdOutlineDownloading />
-            <h2>내가 진행 중인 요청사항</h2>
+            <MdOutlineDownloading/>
+            <h2>{nurse.nurseHomeMyRequestHeader}</h2>
           </div>
           <div className={styles.filter}>
             <Filter
-              title="By job"
-              options={[]}
-              selectedOptions={selectedOptions}
-              handleCheckboxChange={handleCheckboxChange}
+                title={nurse.filterByJob}
+                options={[]}
+                selectedOptions={selectedOptions}
+                handleCheckboxChange={handleCheckboxChange}
             />
             <Filter
-              title="By Patient"
-              options={[]}
-              selectedOptions={selectedOptions}
-              handleCheckboxChange={handleCheckboxChange}
+                title={nurse.filterByPatient}
+                options={[]}
+                selectedOptions={selectedOptions}
+                handleCheckboxChange={handleCheckboxChange}
             />
             <Filter
-              title="District"
-              options={[]}
-              selectedOptions={selectedOptions}
-              handleCheckboxChange={handleCheckboxChange}
+                title={nurse.filterByArea}
+                options={[]}
+                selectedOptions={selectedOptions}
+                handleCheckboxChange={handleCheckboxChange}
             />
           </div>
           {holding ? <div className={styles.area} name="rightArea"></div> : ""}
           <div
-            className={styles.ongoing}
-            style={holding ? { transform: "translateY(-100%)" } : {}}
+              className={styles.ongoing}
+              style={holding ? {transform: "translateY(-100%)"} : {}}
           >
             {ongoing.map((item, i) => (
-              <div
-                key={i}
-                onMouseDown={(e) => handleMouseDown(i, "r", item)}
-                className={
-                  selItem.i === i && selItem.s === "r" ? styles.hide : ""
-                }
-              >
-                <Request
-                  request={item}
-                  session={session}
-                  from_patient={false}
-                />
-              </div>
+                <div
+                    key={i}
+                    onMouseDown={(e) => handleMouseDown(i, "r", item)}
+                    className={
+                      selItem.i === i && selItem.s === "r" ? styles.hide : ""
+                    }
+                >
+                  <Request
+                      request={item}
+                      session={session}
+                      from_patient={false}
+                  />
+                </div>
             ))}
           </div>
           {holding ? (
-            <div className={styles.finishArea} name="rightArea"></div>
+              <div className={styles.finishArea} name="rightArea"></div>
           ) : (
-            ""
+              ""
           )}
-          <div className={styles.finishButton}>
-            <FaCheckCircle size={90} className={styles.finishCheck} />
-          </div>
+          <div className={styles.finishArea} name='finishArea'></div>
+          <div className={styles.finishButton}><FaCheckCircle size={90} className={styles.finishCheck}/></div>
         </div>
       </div>
     </>

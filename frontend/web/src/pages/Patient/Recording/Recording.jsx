@@ -9,6 +9,8 @@ import SpeechRecognition, {
 } from "react-speech-recognition";
 import "./Recording.css";
 import {useRedirectToLogin} from "../../../hooks/useSession";
+import data from "../../../data.json"
+
 
 const CustomWaveformIcon = ({ size, volume }) => (
   <svg
@@ -23,8 +25,8 @@ const CustomWaveformIcon = ({ size, volume }) => (
 );
 
 export default function Recording({session}) {
-
     useRedirectToLogin(session, "/patient/login");
+    const patient = data.patient
   const navigate = useNavigate();
   const { transcript } = useSpeechRecognition("");
   const [isRecording, setIsRecording] = useState(false);
@@ -133,10 +135,10 @@ export default function Recording({session}) {
           <PiWaveformBold size={200} />
         )}
       </div>
-      <h2 className="record-text">Recording your voice</h2>
+      <h2 className="record-text">{patient.patientRecordingRecordYourVoice}</h2>
       <div className="record-buttons">
         <a className="record-button" href="/patient/home">
-          Cancel
+            {patient.patientRecordingCancelButton}
         </a>
 
         <a
@@ -144,7 +146,7 @@ export default function Recording({session}) {
           href="/patient/recordingresults"
           onClick={handleFinishClick}
         >
-          Finish
+            {patient.patientRecordingFinishButton}
         </a>
       </div>
       <PatientFooter session={session}/>

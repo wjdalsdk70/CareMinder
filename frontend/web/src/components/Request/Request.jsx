@@ -15,7 +15,11 @@ export default function Request({ request, session, from_patient }) {
   const [chat, setChat] = useState([]);
 
   useEffect(() => {
-    fetchChatMessages();
+    const fetchMessagesInterval = setInterval(() => {
+      fetchChatMessages().then(response => {
+      });
+    }, 1000);
+    return () => clearInterval(fetchMessagesInterval);
   }, []);
 
   async function fetchChatMessages() {
@@ -34,7 +38,7 @@ export default function Request({ request, session, from_patient }) {
         text: messageText,
         from_patient: from_patient,
       });
-      fetchChatMessages();
+      await fetchChatMessages();
       setMessageText("");
     } catch (error) {
       console.error("Error creating chat messages");
