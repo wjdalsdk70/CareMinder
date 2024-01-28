@@ -60,7 +60,6 @@ export function useRedirectToLogin(session, url) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(session);
     if (session.ready && !session.user) navigate(url);
   }, [session, navigate]);
 }

@@ -26,7 +26,6 @@ export default function PatientHistory({ session }) {
           tablet: tablet.id,
         });
         setRequests(requestsData);
-
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -34,7 +33,12 @@ export default function PatientHistory({ session }) {
       }
     };
 
-    fetchData();
+    const intervalId = setInterval(() => {
+      fetchData();
+    }, 1000); // 1000 milliseconds = 1 second
+
+
+    return () => clearInterval(intervalId);
   }, []);
 
   function handleButtonClick() {
