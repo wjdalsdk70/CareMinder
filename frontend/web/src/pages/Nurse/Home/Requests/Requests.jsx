@@ -7,8 +7,11 @@ import NurseHeader from "src/components/NurseHeader/NurseHeader";
 import styles from "./Requests.module.css";
 import { useRedirectToLogin } from "../../../../hooks/useSession";
 
+import data from "../../../../data.json"
+
 export default function Requests({ session }) {
   useRedirectToLogin(session, "/nurse/login");
+  const nurse = data.nurse
 
   const [toggle, setToggle] = useState(true);
 
@@ -25,13 +28,13 @@ export default function Requests({ session }) {
           className={`${styles.toggle} ${toggle ? styles.active : ""}`}
           onClick={() => handleToggle(0)}
         >
-          View patient-specific requests
+            {nurse.nurseHomeTitleViewPatientRequests}
         </div>
         <div
           className={`${styles.toggle} ${!toggle ? styles.active : ""}`}
           onClick={() => handleToggle(1)}
         >
-          Set progress by patient
+            {nurse.nurseHomeTitleViewPatient}
         </div>
       </div>
       <div className={styles.bottom}>

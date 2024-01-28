@@ -10,8 +10,10 @@ import "./RecordingResult.css";
 import {getTablet, postRequest} from "../../../lib/api";
 import useLocalStorage from "../../../hooks/useLocalStorage";
 import {useRedirectToLogin} from "../../../hooks/useSession";
+import data from "../../../data.json"
 
 export default function RecordingResult({session}) {
+  const patient = data.patient
   useRedirectToLogin(session, "/patient/login");
   //   const loc = useLocation();
   const transcript = localStorage.getItem("recordingResult");
@@ -62,19 +64,18 @@ export default function RecordingResult({session}) {
         <div className="textRecording">
           <div className="check">
             <FaRegCheckCircle size={50} color="green" />
-            <h1>Recording finished. Check the results</h1>
+            <h1>{patient.patientFinishedRecordingHeader}</h1>
           </div>
 
           <h2>
-            If you want to edit, press{" "}
-            <span className="again">Record Again</span> for voice recording or
-            edit directly with keyboard
+            {patient.patientFinishedRecordingRecordAgainBeforeRedRecordAgain}{" "}
+            <span className="again">{patient.patientFinishedRecordingRecordAgainRedRecordAgainButton}</span> {patient.patientFinishedRecordingRecordAgainAfterRedRecordAgain}
           </h2>
 
           <div className="textArea">
             <div className="textArea-text">
               <GiClick size={50} />
-              <h2>Click the box below for editing with keyboard directly</h2>
+              <h2>{patient.patientFinishedRecordingClickToEditText}</h2>
             </div>
             <div className="textArea-container" >
               <textarea
@@ -87,16 +88,16 @@ export default function RecordingResult({session}) {
           </div>
           <div className="buttons">
             <button className="record-button" onClick={handleCancelClick}>
-            Cancel
+              {patient.patientFinishedRecordingCancelButton}
             </button>
             <button
               className="record-button"
               color="var(--request)"
               onClick={handleRecordAgainClick}
             >
-              Record Again
+              {patient.patientFinishedRecordingRecordAgainButton}
             </button>
-            <button className="record-button" onClick={handleFinishClick}>Finish</button>
+            <button className="record-button" onClick={handleFinishClick}>{patient.patientFinishedRecordingFinishButton}</button>
           </div>
         </div>
       </div>

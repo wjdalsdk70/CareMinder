@@ -1,9 +1,30 @@
 {
     "patient": {
-        "hospitalTitle" : "Thank you for visiting OOO hospital!",
-        "hospitalSubtitle": "Our hospital introduces a CareMind service for accurate and smooth communication with patients. Press the button below to solve your questions.",
+        "agreementConsentHeader": "Agreement of the terms and conditions",
+        "consentToCollectionHeader": "[Consent to collect personal information]",
+        "consentToCollectionText": "To use this service, the information subject's separate consent to collect information is required. The type of information you collect is limited to anonymized requests and feedback data. If you do not agree to collect information, your use of the service will be restricted.",
 
-        "notification": "Currently, there is a delay due to the influx of emergency patients. We fully recognize the urgency of the patients, but due to the nature of the emergency room, we are treating them according to their priorities, so we ask for their understanding.",
+        "consentResponsibilityHeader": "[Consent to responsibility]",
+        "consentResponsibilityText" : "This service is designed to enhance the convenience of patients' hospital use and is not applicable to medical devices and medical aids. We encourage you to avoid using this service for medical practice purposes, such as conveying your condition and symptoms and treating diseases, and we are not responsible for any negligence caused by this.",
+
+        "agreeTermsAndConditions": "Agree to terms and conditions:",
+        "agreementContinueButton": "Continue",
+
+
+        "patientLoginInStatusSuccess": "Login Successful",
+        "patientLoginInStatusError": "Login Failed",
+        "patientLoginInStatusToManyAttempts": "Too Many Attempts",
+
+        "patientSetUpHeader": "Hello, I’m CareMinder",
+        "patientSetUpTablet": "Please set the name of the tablet.",
+        "patientSetUpTabletExplanation": "This is used to specify tablets by bed area.",
+        "patientSetUpModifyExplanation": "The name can then be modified through the Preferences menu on the nurse's screen.",
+
+        "patientSetUpUsername": "Username",
+        "patientSetUpPassword": "Password",
+        "patientSetUpSelectTablet": "Select a tablet",
+        "patientSetUpLogin": "Login",
+
 
         "questionTitle": "If you have any question",
         "questionSubtitle" : "Please speak to us",
@@ -13,11 +34,37 @@
         "patientHeader" : "Current Cumulative Requests: ",
         "patientHeaderWaiting" : "Waiting: ",
         "patientHeaderProcess" : "In Process: ",
-        "patientHeaderDone" : "Completed: "
+        "patientHeaderDone" : "Completed: ",
+
+
+        "patientRecordingRecordYourVoice": "Recording your voice",
+        "patientRecordingCancelButton": "Cancel",
+        "patientRecordingFinishButton": "Finish",
+
+
+        "patientFinishedRecordingHeader": "Recording finished. Check the results",
+
+        "patientFinishedRecordingRecordAgainBeforeRedRecordAgain": "If you want to edit, press",
+        "patientFinishedRecordingRecordAgainRedRecordAgainButton": "Record Again",
+        "patientFinishedRecordingRecordAgainAfterRedRecordAgain": "for voice recording or edit directly with keyboard",
+
+        "patientFinishedRecordingClickToEditText": "Click the box below for editing with keyboard directly",
+
+        "patientFinishedRecordingCancelButton": "Cancel",
+        "patientFinishedRecordingRecordAgainButton": "Record Again",
+        "patientFinishedRecordingFinishButton": "Finish"
+
     },
 
 
-    "nurse":{
+    "nurse": {
+        "CareMinder": "CareMinder",
+        "welcomeText" : "WELCOME to CareMinder",
+        "nurseLoginInStatusSuccess": "Login Successful",
+        "nurseLoginInStatusError": "Login Failed",
+        "nurseLoginInStatusToManyAttempts": "Too Many Attempts",
+        "nurseLogin" : "Login",
+
         "nurseHeaderBack" : "Back",
 
         "settingsTitle" : "Show Process of Patent Care",
@@ -51,7 +98,32 @@
             "Doctor",
             "Nurse",
             "Helper"
-        ]
+        ],
+
+
+        "nurseStaffUserListHeader" : "Query User Information",
+        "nurseStaffUserListSubtitle" : "Double-click on the nursing staff information to find out more about the nursing staff. You can add users by pressing the plus button.",
+
+        "nurseStaffIDHeader" : "No.",
+        "nurseStaffName" : "Name",
+        "nurseStaffCompanyId" : "Company ID",
+
+
+        "nurseHomeTitleViewPatientRequests": "View patient-specific requests",
+        "nurseHomeTitleViewPatient": "Set progress by patient",
+
+
+        "nurseHomeGlobalRequestsHeader": "Waiting patient request",
+        "nurseHomeMyRequestHeader": "Requests I'm working on",
+
+        "filterByJob" : "By Job",
+        "filterByPatient" : "By Patient",
+        "filterByArea" : "By Area"
+
+
+
+
+
     }
 
 }

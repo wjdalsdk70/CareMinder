@@ -8,6 +8,8 @@ import { jwtDecode } from "jwt-decode";
 import { readForm } from "src/core/utils";
 import useLocalStorage from "../../../hooks/useLocalStorage";
 
+import data from "../../../data.json"
+
 function validate(data) {
   const errors = {};
 
@@ -25,6 +27,7 @@ function validate(data) {
 }
 
 export default function Login({ session }) {
+  const nurse = data.nurse
   const navigate = useNavigate();
   const [searchParams, _] = useSearchParams();
   const next = searchParams.get("next") || "/nurse/home";
@@ -76,13 +79,13 @@ export default function Login({ session }) {
     let statusMessage;
     switch (status) {
       case "success":
-        statusMessage = <div className="success">Login Successful</div>;
+        statusMessage = <div className="success">{nurse.nurseLoginInStatusSuccess}</div>;
         break;
       case "failed":
-        statusMessage = <div className="error">Login Failed</div>;
+        statusMessage = <div className="error">{nurse.nurseLoginInStatusError}</div>;
         break;
       case "tooManyAttempts":
-        statusMessage = <div className="error">Too Many Attempts</div>;
+        statusMessage = <div className="error">{nurse.nurseLoginInStatusToManyAttempts}</div>;
         break;
       default:
         statusMessage = null;
@@ -96,20 +99,20 @@ export default function Login({ session }) {
       <div className="login__circle" />
       <div className="login__container">
         <div>
-          <h1 className="login__title">CARE MINDER</h1>
-          <h2 className="login__subtitle">WELCOME to CareMinder</h2>
+          <h1 className="login__title">{nurse.CareMinder}</h1>
+          <h2 className="login__subtitle">{nurse.welcomeText}</h2>
           <form className="login__form" onSubmit={handleSubmit}>
             {statusMessage()}
             <fieldset>
-              <label htmlFor="username">Username</label>
+              <label htmlFor="username">{nurse.username}</label>
               <input name="username" type="text" id="username" />
             </fieldset>
             <fieldset>
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password">{nurse.password}</label>
               <input name="password" type="password" id="password" />
             </fieldset>
 
-            <input type="submit" value="Login" />
+            <input type="submit" value={nurse.nurseLogin} />
           </form>
         </div>
       </div>

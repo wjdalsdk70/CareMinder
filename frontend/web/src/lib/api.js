@@ -231,6 +231,22 @@ export async function getSettings(session) {
   return data;
 }
 
+export async function updateSettings(session, hospital_title, hospital_description, notification) {
+  const response = await authFetch(session, `${BASE_URL}/settings/`, {
+    method: "PATCH",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({ hospital_title, hospital_description, notification }),
+  });
+  if (!response.ok) {
+    return Promise.reject(response);
+  }
+  const data = await response.json();
+  return data;
+}
+
+
 export async function postStaff(
   session,
   username,
@@ -286,8 +302,8 @@ export async function updateStaff(
   return data;
 }
 
-export async function getStaffs() {
-  const response = await fetch(`${BASE_URL}/staffs/`, {
+export async function getStaffs(session) {
+  const response = await authFetch(session, `${BASE_URL}/staffs/`, {
     method: "GET",
     headers: {
       "content-type": "application/json",
@@ -300,8 +316,22 @@ export async function getStaffs() {
   return data;
 }
 
-export async function getStaff(id) {
-  const response = await fetch(`${BASE_URL}/staffs/${id}`, {
+export async function getStaff(session, id) {
+  const response = await authFetch(session, `${BASE_URL}/staffs/${id}`, {
+    method: "GET",
+    headers: {
+      "content-type": "application/json",
+    },
+  });
+  if (!response.ok) {
+    return Promise.reject(response);
+  }
+  const data = await response.json();
+  return data;
+}
+
+export async function getAreas(session) {
+  const response = await authFetch(session, `${BASE_URL}/settings/area/`, {
     method: "GET",
     headers: {
       "content-type": "application/json",

@@ -10,15 +10,16 @@ import styles from "./viewRequest.module.css";
 import flw from "../Requests.module.css";
 import Request from "src/components/Request/Request";
 import {
-  getRequests,
   getRequestsFiltered,
-  getRequestsFilteredStaffIdIsNull,
   updateRequest,
 } from "src/lib/api";
 import { useRedirectToLogin } from "src/hooks/useSession";
 import {wait} from "@testing-library/user-event/dist/utils";
+import data from "../../../../../data.json"
 
 export default function ViewRequest({ session }) {
+  useRedirectToLogin(session, "nurse/login")
+  const nurse = data.nurse
   const [selectedOptions, setSelectedOptions] = useState({});
   const [waiting, setWaiting] = useState([]);
   const [ongoing, setOngoing] = useState([]);
@@ -190,23 +191,23 @@ export default function ViewRequest({ session }) {
         <div>
           <div className={styles.title}>
             <BiLoaderCircle />
-            <h2>대기 중인 환자 요청</h2>
+            <h2>{nurse.nurseHomeGlobalRequestsHeader}</h2>
           </div>
           <div className={styles.filter}>
             <Filter
-              title="By job"
+              title={nurse.filterByJob}
               options={[]}
               selectedOptions={selectedOptions}
               handleCheckboxChange={handleCheckboxChange}
             />
             <Filter
-              title="By Patient"
+              title={nurse.filterByPatient}
               options={[]}
               selectedOptions={selectedOptions}
               handleCheckboxChange={handleCheckboxChange}
             />
             <Filter
-              title="District"
+              title={nurse.filterByArea}
               options={[]}
               selectedOptions={selectedOptions}
               handleCheckboxChange={handleCheckboxChange}
@@ -238,23 +239,23 @@ export default function ViewRequest({ session }) {
         <div className={styles.right}>
           <div className={styles.title}>
             <MdOutlineDownloading/>
-            <h2>내가 진행 중인 요청사항</h2>
+            <h2>{nurse.nurseHomeMyRequestHeader}</h2>
           </div>
           <div className={styles.filter}>
             <Filter
-                title="By job"
+                title={nurse.filterByJob}
                 options={[]}
                 selectedOptions={selectedOptions}
                 handleCheckboxChange={handleCheckboxChange}
             />
             <Filter
-                title="By Patient"
+                title={nurse.filterByPatient}
                 options={[]}
                 selectedOptions={selectedOptions}
                 handleCheckboxChange={handleCheckboxChange}
             />
             <Filter
-                title="District"
+                title={nurse.filterByArea}
                 options={[]}
                 selectedOptions={selectedOptions}
                 handleCheckboxChange={handleCheckboxChange}

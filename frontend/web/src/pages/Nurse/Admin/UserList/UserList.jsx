@@ -35,18 +35,17 @@ export default function UserList({session}) {
       <NurseHeader />
       <div className="title">
         <FaUserEdit size="3rem" />
-        <h1>Query User Information</h1>
+        <h1>{nurse.nurseStaffUserListHeader}</h1>
       </div>
       <p style={{ marginTop: "2vmin", marginLeft: "2vmin" }}>
-        Double-click on the nursing staff information to find out more about the
-        nursing staff. You can add users by pressing the plus button.
+        {nurse.nurseStaffUserListSubtitle}
       </p>
       <div id="userlist-add">
         <div id="userlist">
           <div id="list-items">
-            <h2 className="item-number">No.</h2>
-            <h2 className="item-name">Name</h2>
-            <h2 className="company-id">Company ID</h2>
+            <h2 className="item-number">{nurse.nurseStaffIDHeader}</h2>
+            <h2 className="item-name">{nurse.nurseStaffName}</h2>
+            <h2 className="company-id">{nurse.nurseStaffCompanyId}</h2>
           </div>
 
           <div id="userlist-rows">
