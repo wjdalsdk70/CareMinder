@@ -65,7 +65,7 @@ export async function getRequests(session) {
 export async function getRequestsFiltered(
   session,
   {
-    forRole = "",
+    forType = "",
     isQuestion = "",
     state = "",
     tablet = "",
@@ -74,7 +74,7 @@ export async function getRequestsFiltered(
     tabletArea = "",
   }
 ) {
-  let url = `${BASE_URL}/requests/?for_role=${forRole}&is_question=${isQuestion}&state=${state}&tablet=${tablet}&staff=${staff}&staff__type=${staffType}&tablet__area=${tabletArea}`;
+  let url = `${BASE_URL}/requests/?for_type=${forRole}&is_question=${isQuestion}&state=${state}&tablet=${tablet}&staff=${staff}&staff__type=${staffType}&tablet__area=${tabletArea}`;
 
   const response = await authFetch(session, url, {
     method: "GET",
@@ -202,14 +202,14 @@ export async function postRequest(
   is_question,
   state,
   tablet_id,
-  for_role
+  for_type
 ) {
   const response = await authFetch(session, `${BASE_URL}/requests/`, {
     method: "POST",
     headers: {
       "content-type": "application/json",
     },
-    body: JSON.stringify({ text, is_question, state, tablet_id, for_role }),
+    body: JSON.stringify({ text, is_question, state, tablet_id, for_type }),
   });
   if (!response.ok) {
     return Promise.reject(response);

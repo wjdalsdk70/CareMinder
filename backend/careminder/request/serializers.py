@@ -24,7 +24,7 @@ class RequestSerializer(serializers.ModelSerializer):
             "id",
             "text",
             "recording",
-            "for_role",
+            "for_type",
             "is_question",
             "state",
             "time",

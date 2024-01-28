@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 
 GROUPS = {
-    "SECRETARY": [
+    "CAREWORKER": [
         "add_staff",
         "view_staff",
         "change_staff",
@@ -18,22 +18,28 @@ GROUPS = {
         "view_request",
         "change_request",
         "delete_request",
-        "add_settings",
         "view_settings",
         "change_settings",
-        "delete_settings",
         "add_area",
         "view_area",
         "change_area",
         "delete_area",
+        "add_chatmessage",
+        "view_chatmessage",
+        "change_chatmessage",
+        "delete_chatmessage",
     ],
-    "CAREWORKER": [
+    "PATIENT": [
         "view_patient",
-        "change_patient",
+        "view_request",
+        "view_tablet",
         "add_request",
         "view_request",
         "change_request",
-        "delete_request",
+        "view_settings",
+        "view_area",
+        "add_chatmessage",
+        "view_chatmessage",
     ],
 }
 
