@@ -7,7 +7,7 @@ import { getTablet, getTablets, login, logout } from "src/lib/api";
 import { jwtDecode } from "jwt-decode";
 import { readForm } from "src/core/utils";
 import useLocalStorage from "src/hooks/useLocalStorage";
-import data from "../../../data.json"
+import data from "../../../data.json";
 
 function validate(data) {
   const errors = {};
@@ -31,7 +31,7 @@ function validate(data) {
 }
 
 export default function Login({ session }) {
-  const patient = data.patient
+  const patient = data.patient;
   const navigate = useNavigate();
   const [searchParams, _] = useSearchParams();
   const next = searchParams.get("next") || "/patient/home";
@@ -89,7 +89,7 @@ export default function Login({ session }) {
       const resp = await login(data.username, data.password);
       const { user_id } = jwtDecode(resp.access);
       session.login({
-        user: { user_id },
+        user: { id: user_id },
         accessToken: resp.access,
         refreshToken: resp.refresh,
       });
@@ -109,13 +109,21 @@ export default function Login({ session }) {
     let statusMessage;
     switch (status) {
       case "success":
-        statusMessage = <div className="success">{patient.patientLoginInStatusSuccess}</div>;
+        statusMessage = (
+          <div className="success">{patient.patientLoginInStatusSuccess}</div>
+        );
         break;
       case "failed":
-        statusMessage = <div className="error">{patient.patientLoginInStatusError}</div>;
+        statusMessage = (
+          <div className="error">{patient.patientLoginInStatusError}</div>
+        );
         break;
       case "tooManyAttempts":
-        statusMessage = <div className="error">{patient.patientLoginInStatusToManyAttempts}</div>;
+        statusMessage = (
+          <div className="error">
+            {patient.patientLoginInStatusToManyAttempts}
+          </div>
+        );
         break;
       default:
         statusMessage = null;
@@ -153,7 +161,7 @@ export default function Login({ session }) {
             ))}
           </select>
 
-          <input type="submit" value={patient.patientSetUpLogin}/>
+          <input type="submit" value={patient.patientSetUpLogin} />
         </form>
       </div>
     </div>

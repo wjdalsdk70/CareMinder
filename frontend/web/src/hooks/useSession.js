@@ -12,15 +12,16 @@ export default function useSession() {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    if (!session.user) return;
-    try {
-      const { exp } = jwtDecode(session.refreshToken);
-      const expirationDate = new Date(0);
-      expirationDate.setUTCSeconds(exp);
-      const now = new Date();
-      setSession(now >= expirationDate ? defaultModel : session);
-    } catch (e) {
-      console.error(e);
+    if (session.user) {
+      try {
+        const { exp } = jwtDecode(session.refreshToken);
+        const expirationDate = new Date(0);
+        expirationDate.setUTCSeconds(exp);
+        const now = new Date();
+        setSession(now >= expirationDate ? defaultModel : session);
+      } catch (e) {
+        console.error(e);
+      }
     }
     setReady(true);
   }, [session]);

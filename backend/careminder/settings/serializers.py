@@ -16,7 +16,6 @@ class SettingsSerializer(serializers.ModelSerializer):
 
 
 class AreaSerializer(serializers.ModelSerializer):
-    tablets = serializers.SerializerMethodField(read_only=True)
     tablet_ids = serializers.PrimaryKeyRelatedField(
         many=True,
         write_only=True,
@@ -29,15 +28,8 @@ class AreaSerializer(serializers.ModelSerializer):
         fields = [
             "id",
             "name",
-            "tablets",
             "tablet_ids",
         ]
-
-    def get_tablets(self, instance):
-        from tablet.serializers import TabletSerializer
-
-        tablets = instance.tablets.prefetch_related("patient", "doctor", "nurse").all()
-        return TabletSerializer(tablets, many=True).data
 
     def validate_tablets_id(self, value):
         tablet_ids = [tablet.id for tablet in value]
