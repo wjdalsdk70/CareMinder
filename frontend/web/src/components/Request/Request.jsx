@@ -15,10 +15,10 @@ export default function Request({ request, session, from_patient }) {
   const [chat, setChat] = useState([]);
 
   useEffect(() => {
+    fetchChatMessages();
     const fetchMessagesInterval = setInterval(() => {
-      fetchChatMessages().then(response => {
-      });
-    }, 1000);
+      fetchChatMessages();
+    }, 3000);
     return () => clearInterval(fetchMessagesInterval);
   }, []);
 

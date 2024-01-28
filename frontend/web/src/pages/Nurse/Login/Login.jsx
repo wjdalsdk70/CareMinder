@@ -8,7 +8,7 @@ import { jwtDecode } from "jwt-decode";
 import { readForm } from "src/core/utils";
 import useLocalStorage from "../../../hooks/useLocalStorage";
 
-import data from "../../../data.json"
+import data from "../../../data.json";
 
 function validate(data) {
   const errors = {};
@@ -27,7 +27,7 @@ function validate(data) {
 }
 
 export default function Login({ session }) {
-  const nurse = data.nurse
+  const nurse = data.nurse;
   const navigate = useNavigate();
   const [searchParams, _] = useSearchParams();
   const next = searchParams.get("next") || "/nurse/home";
@@ -59,7 +59,7 @@ export default function Login({ session }) {
       const resp = await login(data.username, data.password);
       const { user_id } = jwtDecode(resp.access);
       session.login({
-        user: { user_id },
+        user: { id: user_id },
         accessToken: resp.access,
         refreshToken: resp.refresh,
       });
@@ -79,13 +79,19 @@ export default function Login({ session }) {
     let statusMessage;
     switch (status) {
       case "success":
-        statusMessage = <div className="success">{nurse.nurseLoginInStatusSuccess}</div>;
+        statusMessage = (
+          <div className="success">{nurse.nurseLoginInStatusSuccess}</div>
+        );
         break;
       case "failed":
-        statusMessage = <div className="error">{nurse.nurseLoginInStatusError}</div>;
+        statusMessage = (
+          <div className="error">{nurse.nurseLoginInStatusError}</div>
+        );
         break;
       case "tooManyAttempts":
-        statusMessage = <div className="error">{nurse.nurseLoginInStatusToManyAttempts}</div>;
+        statusMessage = (
+          <div className="error">{nurse.nurseLoginInStatusToManyAttempts}</div>
+        );
         break;
       default:
         statusMessage = null;
