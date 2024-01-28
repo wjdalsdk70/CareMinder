@@ -35,7 +35,7 @@ export default function PatientHistory({ session }) {
 
     const intervalId = setInterval(() => {
       fetchData();
-    }, 1000); // 1000 milliseconds = 1 second
+    }, 5000); // 1000 milliseconds = 1 second
 
 
     return () => clearInterval(intervalId);

@@ -21,7 +21,7 @@ export default function Request({ request, session, from_patient }) {
     fetchChatMessages();
     const fetchMessagesInterval = setInterval(() => {
       fetchChatMessages().then((response) => {});
-    }, 1000);
+    }, 5000);
 
     return () => clearInterval(fetchMessagesInterval);
   }, []);

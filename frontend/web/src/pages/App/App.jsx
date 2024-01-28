@@ -9,6 +9,7 @@ import EditUser from "src/pages/Nurse/Admin/EditUser/EditUser";
 import UserList from "src/pages/Nurse/Admin/UserList/UserList";
 import useSession from "src/hooks/useSession";
 import EditTablets from "src/pages/Nurse/Admin/EditTablets/EditTablets";
+import AddTablet from "src/pages/Nurse/Admin/AddTablet/AddTablet"
 import PatientLogin from "src/pages/Patient/Login/Login";
 
 
@@ -52,6 +53,10 @@ function App() {
         <Route
           path="/nurse/admin/addUser"
           element={<AddUser session={session} />}
+        />
+        <Route
+            path="/nurse/admin/addTablet"
+            element={<AddTablet session={session} />}
         />
         <Route
           path="/nurse/admin/editUser/:id"

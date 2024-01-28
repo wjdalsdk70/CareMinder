@@ -196,6 +196,23 @@ export async function postTablet(session, name, area_id) {
   return data;
 }
 
+export async function patchTablet(session, id, name, area_id) {
+  const response = await authFetch(session, `${BASE_URL}/tablets/${id}/`, {
+    method: "PATCH",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({ name, area_id }),
+  });
+
+  if (!response.ok) {
+    return Promise.reject(response);
+  }
+
+  const data = await response.json();
+  return data;
+}
+
 export async function postRequest(
   session,
   text,
@@ -340,7 +357,7 @@ export async function getStaff(session, id) {
 }
 
 export async function getAreas(session) {
-  const response = await authFetch(session, `${BASE_URL}/settings/area/`, {
+  const response = await authFetch(session, `${BASE_URL}/settings/areas/`, {
     method: "GET",
     headers: {
       "content-type": "application/json",
