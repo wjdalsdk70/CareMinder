@@ -18,13 +18,14 @@ export default function Settings({session}) {
     notification: "",
   });
   const [tablets, setTablets] = useState([]);
+  const [area, setArea] = useState([]);
 
   const fetchData = async () => {
     try {
       const settingsData = await getSettings(session);
       const tabletsData = await getTablets(session);
-      // const areaData = await getAreas(session);
-      // console.log(areaData)
+      const areaData = await getAreas(session);
+      setArea(areaData)
       setSettings({
         hospital_title: settingsData.hospital_title || "",
         hospital_description: settingsData.hospital_description || "",
@@ -64,6 +65,10 @@ export default function Settings({session}) {
 
   function handleCancel() {
     navigate('/nurse/admin/userlist');
+  }
+
+  function handleAddTablet(){
+    navigate('/nurse/admin/addTablet');
   }
 
 
@@ -138,26 +143,35 @@ export default function Settings({session}) {
                   <h2 className="item-name">Area</h2>
                 </div>
 
-
                 <div className="userlist-rows">
                   <div>
-                    {tablets.map((tablet, index) => (
-                        <Link to={`/nurse/admin/editTablet/${tablet.id}`} key={index}>
-                          <div className="userlist-row">
-                            <hr className="userlist-line-top"/>
-                            <div className="list-item">
-                              <p className="number-value">{tablet.name}</p>
-                              <p className="name-value">{tablet.area_id}</p>
+                    {tablets.map((tablet, index) => {
+                      // Find the corresponding area object
+                      const tabletArea = area.find((area) => area.id === tablet.area_id);
+
+                      // Extract the name property from the area object
+                      const areaName = tabletArea ? tabletArea.name : "Unknown Area";
+
+                      return (
+                          <Link to={`/nurse/admin/editTablet/${tablet.id}`} key={index}>
+                            <div className="userlist-row">
+                              <hr className="userlist-line-top"/>
+                              <div className="list-item">
+                                <p className="number-value">{tablet.name}</p>
+                                <p className="name-value">{areaName}</p>
+                              </div>
+                              <hr className="userlist-line-bottom"/>
                             </div>
-                            <hr className="userlist-line-bottom"/>
-                          </div>
-                        </Link>
-                    ))}
+                          </Link>
+                      );
+                    })}
                   </div>
                 </div>
               </div>
-              <FaPlusCircle size="2.5rem" id="add-info"/>
+                <FaPlusCircle size="2.5rem" id="add-info" onClick={handleAddTablet}/>
             </div>
+
+
           </div>
         </div>
         <div className="buttons">

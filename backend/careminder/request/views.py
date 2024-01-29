@@ -15,7 +15,7 @@ class RequestFilter(django_filters.FilterSet):
     class Meta:
         model = Request
         fields = [
-            "for_role",
+            "for_type",
             "is_question",
             "state",
             "tablet",

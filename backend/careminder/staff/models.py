@@ -7,10 +7,13 @@ from django.contrib.auth.hashers import check_password
 
 class Staff(AbstractUser):
     class Role(models.IntegerChoices):
-        SECRETARY = 0, "Secretary"
         CAREWORKER = (
-            1,
+            0,
             "Careworker",
+        )
+        PATIENT = (
+            1,
+            "Patient",
         )
 
     class Type(models.IntegerChoices):

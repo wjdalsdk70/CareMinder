@@ -4,13 +4,12 @@ import "./EditTablets.css";
 import NurseHeader from "src/components/NurseHeader/NurseHeader";
 import { FaUserEdit } from "react-icons/fa";
 import {
-  getStaff,
+  getAreas,
+  patchTablet,
   getTablet,
-  postStaff,
-  postTablet,
-  updateStaff,
+
 } from "../../../../lib/api";
-import { useNavigate, useParams } from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import {useRedirectToLogin} from "../../../../hooks/useSession";
 
 export default function EditTablets({ session }) {
@@ -18,6 +17,7 @@ export default function EditTablets({ session }) {
   const nurse = data.nurse;
   const { id } = useParams();
   const navigate = useNavigate();
+  const [area, setArea] = useState([]);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -26,10 +26,12 @@ export default function EditTablets({ session }) {
 
   const fetchData = async () => {
     try {
-      const tablet = await getTablet(session, id);
+      const areaData = await getAreas(session);
+      setArea(areaData)
+      const tablet = await getTablet(id);
       setFormData({
-        username: tablet.name || "",
-        password: tablet.area_id || "",
+        name: tablet.name || "",
+        area_id: tablet.area_id || "",
       });
     } catch (error) {
       console.error("Error fetching user data:", error);
@@ -38,7 +40,7 @@ export default function EditTablets({ session }) {
 
   useEffect(() => {
     fetchData().then((r) => null);
-  }, [id]);
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -56,11 +58,15 @@ export default function EditTablets({ session }) {
     }));
   };
 
+  const handleCancel = () => {
+    navigate("/nurse/admin/settings");
+
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
     try {
-      await postTablet(formData.name, formData.area_id);
+      await patchTablet(session, id, formData.name, formData.area_id);
       navigate("/nurse/admin/settings");
     } catch (error) {
       console.error(error);
@@ -72,39 +78,50 @@ export default function EditTablets({ session }) {
       <NurseHeader />
       <div className="title">
         <FaUserEdit size="3rem" />
-        <h1>Edit user data</h1>
+        <h1>Edit Tablet</h1>
       </div>
       <div id="data_form">
         <form onSubmit={handleSubmit}>
           <div className="input_field">
             <p>
-              {nurse.username}
+              Name of Tablet
               <span>{nurse.required}</span>
             </p>
             <input
-              name="username"
-              value={formData.username}
-              onChange={handleChange}
-              placeholder={nurse.username}
-              autoComplete="off"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="Name of Tablet"
+                autoComplete="off"
             ></input>
           </div>
+
           <div className="input_field">
             <p>
-              {nurse.type}
+              Area of tablet
               <span>{nurse.required}</span>
             </p>
             <select
-              name="type"
-              onChange={handleChangeNum}
-              value={formData.type}
+                name="area_id" // Correcting the name attribute
+                onChange={handleChangeNum}
+                value={formData.area_id}
             >
-              <option value={0}>Helper</option>
-
-              <option value={1}>Nurse</option>
-
-              <option value={2}>Doctor</option>
+              {area.map((tablet, index) => {
+                return (
+                    <option key={index} value={tablet.id}>
+                      {tablet.name}
+                    </option>
+                );
+              })}
             </select>
+          </div>
+          <div id="bottom_buttons">
+            <button className="cancel_button" onClick={handleCancel}>
+              Cancel
+            </button>
+            <button className="save_button" type="submit">
+              Update
+            </button>
           </div>
         </form>
       </div>

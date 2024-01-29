@@ -161,7 +161,6 @@
 {
     overflow-y: auto;
     overflow-x: hidden;
-    height: 45vmin;
 }
 
 .settings__home .list-item

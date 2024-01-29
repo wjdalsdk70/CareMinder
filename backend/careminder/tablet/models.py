@@ -13,7 +13,7 @@ class Tablet(models.Model):
         Patient, related_name="tablets", on_delete=models.SET_NULL, null=True
     )
     area = models.ForeignKey(
-        Area, related_name="tablets", on_delete=models.CASCADE, null=True
+        Area, related_name="tablets", on_delete=models.SET_NULL, null=True
     )
 
     def __str__(self) -> str:
