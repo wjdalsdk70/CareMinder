@@ -1,17 +1,20 @@
 .filter {
   width: fit-content;
   position: relative;
+  user-select: none;
 }
 
-.filter .title,
+.filter__title,
 .filter-options {
   width: 100%;
   border: 1px solid var(--border);
-  border-radius: 32px;
-  z-index: 50;
 }
 
-.filter .title {
+.filter__title {
+  background-color: var(--background-primary);
+  position: relative;
+  border-radius: 32px;
+  z-index: 50;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,7 +23,7 @@
   cursor: pointer;
 }
 
-.filter .icon {
+.filter__icon {
   width: 32px;
   height: 32px;
 }
@@ -28,7 +31,32 @@
 .filter-options {
   display: none;
   z-index: 45;
+  border-radius: 0 0 32px 32px;
+  padding-top: 32px;
+  padding-bottom: 16px;
+
+  background-color: var(--background-primary);
+
+  width: 100%;
   position: absolute;
-  top: 0;
+  top: 50%;
   left: 0;
+}
+
+.filter-options.active {
+  display: block;
+}
+
+.filter-option {
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 12px;
+  user-select: none;
+}
+
+.filter-option > input {
+  width: fit-content;
 }

@@ -34,14 +34,15 @@ export default function Filter({
 
   return (
     <div className="filter">
-      <div className="title">
-        <MdArrowDropDown className="icon" />
-        <h3 onClick={toggleDropdown}>{title}</h3>
+      <div className="filter__title" onClick={toggleDropdown}>
+        <MdArrowDropDown className="filter__icon" />
+        <h3>{title}</h3>
       </div>
-      <div className="filter-options">
+      <div className={`filter-options ${isOpen ? "active" : ""}`}>
         {isOpen &&
           options.map((option) => (
             <FilterOption
+              key={option.value}
               value={option.value}
               description={option.description}
               selectedOptions={selectedOptions}

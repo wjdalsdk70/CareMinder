@@ -18,6 +18,13 @@
 @font-face {
   font-family: "NanumSquare";
   src: local("NanumSquare"),
+    url(../assets/fonts/NanumSquare/NanumSquareEB.ttf) format("truetype");
+  font-weight: bolder;
+}
+
+@font-face {
+  font-family: "NanumSquare";
+  src: local("NanumSquare"),
     url(../assets/fonts/NanumSquare/NanumSquareL.ttf) format("truetype");
   font-weight: light;
 }

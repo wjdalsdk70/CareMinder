@@ -26,21 +26,6 @@ export default function useSession() {
     setReady(true);
   }, [session]);
 
-  const refresh = async () => {
-    try {
-      const response = await apiRefresh(session);
-      // console.log(`refresh: ${JSON.stringify(response)}`);
-      login({
-        user: session.user,
-        accessToken: response.access,
-        refreshToken: session.refreshToken,
-      });
-      return response.access;
-    } catch (e) {
-      logout();
-    }
-  };
-
   function login(value) {
     setSession(value);
   }
@@ -54,7 +39,6 @@ export default function useSession() {
     ready,
     login,
     logout,
-    refresh,
   };
 }
 

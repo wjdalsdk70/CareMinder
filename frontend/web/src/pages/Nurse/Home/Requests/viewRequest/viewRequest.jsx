@@ -69,7 +69,7 @@ export default function ViewRequest({ session }) {
 
     if (targetElement === "finishArea") {
       const item = selItem.s === "r" ? ongoing[selItem.i] : waiting[selItem.i];
-      await handelStateChangeDelete(item.id).then((r) => null);
+      await handelStateChangeDelete(item.id);
 
       selItem.s === "l"
         ? setWaiting(waiting.filter((_, i) => i !== selItem.i))
@@ -77,12 +77,12 @@ export default function ViewRequest({ session }) {
     } else if (targetElement.charAt(0) !== selItem.s) {
       const item = selItem.s === "r" ? ongoing[selItem.i] : waiting[selItem.i];
       if (selItem.s === "l") {
-        await handelStateChangeMine(item.id).then((r) => null);
+        await handelStateChangeMine(item.id);
         item.state = 1;
         setWaiting(waiting.filter((_, i) => i !== selItem.i));
         setOngoing([...ongoing, item]);
       } else {
-        await handelStateChangeGlobal(item.id).then((r) => null);
+        await handelStateChangeGlobal(item.id);
         item.state = 0;
         setOngoing(ongoing.filter((_, i) => i !== selItem.i));
         setWaiting([...waiting, item]);
@@ -96,7 +96,7 @@ export default function ViewRequest({ session }) {
         session,
         id,
         1,
-        session.user.user_id
+        session.user.id
       );
     } catch (error) {
       console.error(error);
@@ -184,7 +184,10 @@ export default function ViewRequest({ session }) {
           <div className={styles.filter}>
             <Filter
               title={nurse.filterByJob}
-              options={[{ value: "name", description: "description" }]}
+              options={[
+                { value: "name1", description: "description1" },
+                { value: "name2", description: "description2" },
+              ]}
               selectedOptions={selectedOptions}
               handleCheckboxChange={handleCheckboxChange}
             />

@@ -20,7 +20,7 @@ export default function Request({ request, session, from_patient }) {
   const isOpenRef = useRef(isOpen);
   const [messageText, setMessageText] = useState("");
   const [chat, setChat] = useState([]);
-  const [area, setArea] = useState("Area");
+  const [area, setArea] = useState("");
 
   const [newMessageCount, setNewMessageCount] = useState(0);
   let prevCount = 0;
