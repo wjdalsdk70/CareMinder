@@ -31,7 +31,6 @@ export default function Request({ request, session, from_patient }) {
       const resp = await getChatMessages(session, request.id).then();
 
       if (prevCount - resp.length !== 0 && !isOpen) {
-        console.log("asdasdas");
         prevCount = resp.length;
         setNewMessageCount((newMessage) => newMessage + 1);
       }
@@ -82,11 +81,13 @@ export default function Request({ request, session, from_patient }) {
       key={request.id}
       className={`request-item ${getStateText(request.state)}`}
     >
-      {newMessageCount > 0 && <span>{newMessageCount}</span>}
       <div
         className={`top-container ${getStateText(request.state)}`}
         onClick={handleNotificationClick}
       >
+        {newMessageCount > 0 && (
+          <span className="request-item__notification">{newMessageCount}</span>
+        )}
         <div className="icon-container">
           {request.is_question ? (
             <BsQuestionCircleFill size={50} className="icon" />

@@ -34,9 +34,11 @@
   user-select: none;
   border-radius: 10px;
   border: 2px solid var(--color);
+  margin: 0.25rem;
 }
 
 .request-item .top-container {
+  position: relative;
   display: flex;
   padding: 0.7rem;
   align-items: center;
@@ -151,4 +153,19 @@
   content: "";
   display: table;
   clear: both;
+}
+
+.request-item__notification {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-25%, -25%);
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
