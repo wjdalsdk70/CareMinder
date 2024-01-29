@@ -3,17 +3,12 @@ import data from "src/data.json";
 import "./EditTablets.css";
 import NurseHeader from "src/components/NurseHeader/NurseHeader";
 import { FaUserEdit } from "react-icons/fa";
-import {
-  getAreas,
-  patchTablet,
-  getTablet,
-
-} from "../../../../lib/api";
-import {Link, useNavigate, useParams} from "react-router-dom";
-import {useRedirectToLogin} from "../../../../hooks/useSession";
+import { getAreas, patchTablet, getTablet } from "../../../../lib/api";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useRedirectToLogin } from "../../../../hooks/useSession";
 
 export default function EditTablets({ session }) {
-  useRedirectToLogin(session, '/nurse/login')
+  useRedirectToLogin(session, "/nurse/login");
   const nurse = data.nurse;
   const { id } = useParams();
   const navigate = useNavigate();
@@ -27,7 +22,7 @@ export default function EditTablets({ session }) {
   const fetchData = async () => {
     try {
       const areaData = await getAreas(session);
-      setArea(areaData)
+      setArea(areaData);
       const tablet = await getTablet(id);
       setFormData({
         name: tablet.name || "",
@@ -60,8 +55,7 @@ export default function EditTablets({ session }) {
 
   const handleCancel = () => {
     navigate("/nurse/admin/settings");
-
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -75,7 +69,7 @@ export default function EditTablets({ session }) {
 
   return (
     <div className="edituser-container">
-      <NurseHeader />
+      <NurseHeader session={session} />
       <div className="title">
         <FaUserEdit size="3rem" />
         <h1>Edit Tablet</h1>
@@ -88,11 +82,11 @@ export default function EditTablets({ session }) {
               <span>{nurse.required}</span>
             </p>
             <input
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                placeholder="Name of Tablet"
-                autoComplete="off"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              placeholder="Name of Tablet"
+              autoComplete="off"
             ></input>
           </div>
 
@@ -102,15 +96,15 @@ export default function EditTablets({ session }) {
               <span>{nurse.required}</span>
             </p>
             <select
-                name="area_id" // Correcting the name attribute
-                onChange={handleChangeNum}
-                value={formData.area_id}
+              name="area_id" // Correcting the name attribute
+              onChange={handleChangeNum}
+              value={formData.area_id}
             >
               {area.map((tablet, index) => {
                 return (
-                    <option key={index} value={tablet.id}>
-                      {tablet.name}
-                    </option>
+                  <option key={index} value={tablet.id}>
+                    {tablet.name}
+                  </option>
                 );
               })}
             </select>

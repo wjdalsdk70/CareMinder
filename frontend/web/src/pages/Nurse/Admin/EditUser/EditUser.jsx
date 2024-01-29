@@ -5,10 +5,10 @@ import NurseHeader from "src/components/NurseHeader/NurseHeader";
 import { FaUserEdit } from "react-icons/fa";
 import { getStaff, postStaff, updateStaff } from "../../../../lib/api";
 import { useNavigate, useParams } from "react-router-dom";
-import {useRedirectToLogin} from "../../../../hooks/useSession";
+import { useRedirectToLogin } from "../../../../hooks/useSession";
 
 export default function EditUser({ session }) {
-  useRedirectToLogin(session, '/nurse/login')
+  useRedirectToLogin(session, "/nurse/login");
   const nurse = data.nurse;
   const { id } = useParams();
   const navigate = useNavigate();
@@ -65,7 +65,7 @@ export default function EditUser({ session }) {
         session,
         id,
         formData.username,
-          formData.first_name,
+        formData.first_name,
         formData.last_name,
         formData.roles,
         formData.type,
@@ -78,12 +78,12 @@ export default function EditUser({ session }) {
   };
 
   function handleCancel() {
-    navigate('/nurse/admin/userlist');
+    navigate("/nurse/admin/userlist");
   }
 
   return (
     <div className="edituser-container">
-      <NurseHeader />
+      <NurseHeader session={session} />
       <div className="title">
         <FaUserEdit size="3rem" />
         <h1>Edit user data</h1>
@@ -175,7 +175,9 @@ export default function EditUser({ session }) {
             <button className="change_data_button">Change Data</button>
           </div>
           <div id="bottom_buttons">
-            <button className="cancel_button" onClick={handleCancel}>Cancel</button>
+            <button className="cancel_button" onClick={handleCancel}>
+              Cancel
+            </button>
             <button className="save_button" type="submit">
               Update
             </button>

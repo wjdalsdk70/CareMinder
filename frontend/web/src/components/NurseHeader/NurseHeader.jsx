@@ -1,5 +1,3 @@
-
-
 import React, { useState } from "react";
 import { FaBars } from "react-icons/fa";
 import NurseSidebar from "../NurseSidebar/NurseSidebar";
@@ -8,11 +6,11 @@ import { IoIosArrowBack } from "react-icons/io";
 import data from "src/data.json";
 import "./NurseHeader.css";
 
-export default function NurseHeader() {
+export default function NurseHeader({ session }) {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
 
   const openSidebar = (event) => {
-    event.stopPropagation(); 
+    event.stopPropagation();
     console.log("Opening sidebar");
     setSidebarOpen(true);
   };
@@ -26,8 +24,15 @@ export default function NurseHeader() {
       <header className="nurse-header">
         <div className="header-nurse-container">
           <img className="header-img" src={Logo} alt="" />
-          <FaBars className="header-bars" onClick={(event) => openSidebar(event)} />
-          <NurseSidebar isOpen={isSidebarOpen} onClose={closeSidebar} />
+          <FaBars
+            className="header-bars"
+            onClick={(event) => openSidebar(event)}
+          />
+          <NurseSidebar
+            session={session}
+            isOpen={isSidebarOpen}
+            onClose={closeSidebar}
+          />
         </div>
         <div className="go_back">
           <IoIosArrowBack size="32" />

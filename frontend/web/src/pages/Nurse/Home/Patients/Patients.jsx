@@ -38,12 +38,10 @@ const Patients = ({ session }) => {
 
   return (
     <>
-      <NurseHeader />
+      <NurseHeader session={session} />
       <main>
         <div className="nurse__home-requests nurse__home">
-          <div className="container">
-            {/* add here */}
-          </div>
+          <div className="container">{/* add here */}</div>
         </div>
       </main>
     </>

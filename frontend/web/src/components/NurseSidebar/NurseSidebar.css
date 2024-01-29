@@ -59,7 +59,7 @@
   transition: 0.5s;
 }
 
-.sidebar-link-user a {
+.sidebar-link-user p {
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -89,7 +89,7 @@
   background-color: var(--tertiary);
 }
 
-.sidebar-link a {
+.sidebar-link p {
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -122,7 +122,7 @@
 
 
 
-.signout-link a {
+.signout-link p {
   display: flex;
   align-items: center;
   text-decoration: none;
