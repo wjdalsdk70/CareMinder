@@ -5,7 +5,12 @@ import {
   BsSend,
 } from "react-icons/bs";
 import moment from "moment";
-import { postChatMessage, getChatMessages, getRequests } from "src/lib/api";
+import {
+  postChatMessage,
+  getChatMessages,
+  getArea,
+  getTablet,
+} from "src/lib/api";
 
 import "./Request.css";
 import { useRedirectToHome } from "src/hooks/useSession";
@@ -15,6 +20,7 @@ export default function Request({ request, session, from_patient }) {
   const isOpenRef = useRef(isOpen);
   const [messageText, setMessageText] = useState("");
   const [chat, setChat] = useState([]);
+  const [area, setArea] = useState("Area");
 
   const [newMessageCount, setNewMessageCount] = useState(0);
   let prevCount = 0;
@@ -31,10 +37,25 @@ export default function Request({ request, session, from_patient }) {
     return () => clearInterval(fetchMessagesInterval);
   }, []);
 
+  useEffect(() => {
+    fetchArea();
+  }, []);
+
+  async function fetchArea() {
+    if (!request.tablet_id) return;
+    try {
+      const resp = await getTablet(session, request.tablet_id);
+      const area = await getArea(session, resp.area_id);
+      setArea(area.name);
+    } catch (error) {
+      console.error("Error fetching area:");
+    }
+  }
+
   async function fetchChatMessages() {
     if (!request.id) return;
     try {
-      const resp = await getChatMessages(session, request.id).then();
+      const resp = await getChatMessages(session, request.id);
 
       if (prevCount - resp.length !== 0 && !isOpenRef.current) {
         setNewMessageCount((newMessage) => newMessage + 1);
@@ -103,7 +124,7 @@ export default function Request({ request, session, from_patient }) {
         </div>
         <div className="content-container">
           <div className="info-container">
-            <h2>{getStateText(request.state)}</h2>
+            <h2>{from_patient ? getStateText(request.state) : area}</h2>
             <p className="time">{timeAgo(request.time)}</p>
           </div>
           <div className="text-container">

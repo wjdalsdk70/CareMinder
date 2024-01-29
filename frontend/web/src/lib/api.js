@@ -165,8 +165,8 @@ export async function getTablets() {
   return data;
 }
 
-export async function getTablet(id) {
-  const response = await fetch(`${BASE_URL}/tablets/${id}`, {
+export async function getTablet(session, id) {
+  const response = await authFetch(session, `${BASE_URL}/tablets/${id}`, {
     method: "GET",
     headers: {
       "content-type": "application/json",
@@ -363,6 +363,24 @@ export async function getAreas(session) {
       "content-type": "application/json",
     },
   });
+  if (!response.ok) {
+    return Promise.reject(response);
+  }
+  const data = await response.json();
+  return data;
+}
+
+export async function getArea(session, id) {
+  const response = await authFetch(
+    session,
+    `${BASE_URL}/settings/areas/${id}`,
+    {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+      },
+    }
+  );
   if (!response.ok) {
     return Promise.reject(response);
   }

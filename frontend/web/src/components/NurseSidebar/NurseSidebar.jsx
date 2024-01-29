@@ -44,8 +44,12 @@ export default function NurseSidebar({ session, isOpen, onClose }) {
   }, [isOpen, onClose]);
 
   async function fetchStaff() {
-    const resp = await getStaff(session, session.user.id);
-    setStaff(resp);
+    try {
+      const resp = await getStaff(session, session.user.id);
+      setStaff(resp);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   function handleLogOut() {

@@ -29,6 +29,7 @@ export default function useSession() {
   const refresh = async () => {
     try {
       const response = await apiRefresh(session);
+      // console.log(`refresh: ${JSON.stringify(response)}`);
       login({
         user: session.user,
         accessToken: response.access,

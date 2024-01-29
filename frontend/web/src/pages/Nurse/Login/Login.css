@@ -33,6 +33,7 @@
   color: var(--text);
   font-size: 24px;
   padding: 8px;
+  width: 100%;
 }
 
 .login__form input[type="submit"] {
@@ -96,6 +97,8 @@
 }
 
 .login__title {
+  word-wrap: break-word;
+  white-space: nowrap;
   font-size: 3rem;
   letter-spacing: 14px;
 }

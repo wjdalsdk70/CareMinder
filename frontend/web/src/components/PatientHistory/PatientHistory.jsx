@@ -12,7 +12,6 @@ import Request from "../Request/Request";
 import useLocalStorage from "src/hooks/useLocalStorage";
 
 export default function PatientHistory({ session }) {
-  console.log(session);
   const [isOpen, setIsOpen] = useState(false);
   const [requests, setRequests] = useState([]);
   const [chats, setChats] = useState([]);
@@ -36,7 +35,6 @@ export default function PatientHistory({ session }) {
     const intervalId = setInterval(() => {
       fetchData();
     }, 5000); // 1000 milliseconds = 1 second
-
 
     return () => clearInterval(intervalId);
   }, []);
