@@ -1,24 +1,39 @@
-import React from "react";
-import { FaBars } from "react-icons/fa";
-import Logo from "src/assets/logo.svg";
-import { MdKeyboardArrowLeft } from "react-icons/md";
-import data from "src/data.json";
 
+
+import React, { useState } from "react";
+import { FaBars } from "react-icons/fa";
+import NurseSidebar from "../NurseSidebar/NurseSidebar";
+import Logo from "src/assets/logo.svg";
+import { IoIosArrowBack } from "react-icons/io";
+import data from "src/data.json";
 import "./NurseHeader.css";
-import {IoIosArrowBack} from "react-icons/io";
 
 export default function NurseHeader() {
-    return (
-        <header className="nurse-header">
-            <div className="header-nurse-container">
-                <img className="header-img" src={Logo} alt=""/>
-                <FaBars className="header-bars"/>
-            </div>
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
 
-            <div className="go_back">
-                <IoIosArrowBack size="32"/>
-                <h2>{data.nurse.nurseHeaderBack}</h2>
-            </div>
-        </header>
-    );
+  const openSidebar = (event) => {
+    event.stopPropagation(); 
+    console.log("Opening sidebar");
+    setSidebarOpen(true);
+  };
+
+  const closeSidebar = () => {
+    setSidebarOpen(false);
+  };
+
+  return (
+    <>
+      <header className="nurse-header">
+        <div className="header-nurse-container">
+          <img className="header-img" src={Logo} alt="" />
+          <FaBars className="header-bars" onClick={(event) => openSidebar(event)} />
+          <NurseSidebar isOpen={isSidebarOpen} onClose={closeSidebar} />
+        </div>
+        <div className="go_back">
+          <IoIosArrowBack size="32" />
+          <h2>{data.nurse.nurseHeaderBack}</h2>
+        </div>
+      </header>
+    </>
+  );
 }
