@@ -13,16 +13,15 @@ export default function Request({ request, session, from_patient }) {
   const [isOpen, setIsOpen] = useState(false);
   const [messageText, setMessageText] = useState("");
   const [chat, setChat] = useState([]);
-  const [newMessagesCountsMap, setNewMessagesCountsMap] = useState(new Map());
 
-  const [newMessageCount, setNewMessageCount] = useState(0)
+  const [newMessageCount, setNewMessageCount] = useState(0);
+  let prevCount = 0;
 
   useEffect(() => {
     fetchChatMessages();
     const fetchMessagesInterval = setInterval(() => {
-      fetchChatMessages().then((response) => {});
+      fetchChatMessages();
     }, 5000);
-
     return () => clearInterval(fetchMessagesInterval);
   }, []);
 
@@ -30,16 +29,14 @@ export default function Request({ request, session, from_patient }) {
     if (!request.id) return;
     try {
       const resp = await getChatMessages(session, request.id).then();
-      setChat(resp);
 
-      const previousCount = newMessagesCountsMap.get(request.id) || 0;
-
-      const messagesCount = resp.length - previousCount;
-
-      if (messagesCount > 0) {
-        setNewMessagesCountsMap((prevMap) => new Map(prevMap.set(request.id, resp.length)));
-        setNewMessageCount(newMessageCount => newMessageCount + 1)
+      if (prevCount - resp.length !== 0 && !isOpen) {
+        console.log("asdasdas");
+        prevCount = resp.length;
+        setNewMessageCount((newMessage) => newMessage + 1);
       }
+
+      setChat(resp);
     } catch (error) {
       console.error("Error fetching chat messages");
     }
@@ -59,8 +56,8 @@ export default function Request({ request, session, from_patient }) {
   }
 
   const handleNotificationClick = () => {
-    setNewMessageCount(0)
-    setIsOpen(true); // Optionally, open the chat container when notification is clicked
+    setNewMessageCount(0);
+    setIsOpen(!isOpen);
   };
 
   const getStateText = (state) => {
@@ -81,46 +78,44 @@ export default function Request({ request, session, from_patient }) {
   };
 
   return (
+    <div
+      key={request.id}
+      className={`request-item ${getStateText(request.state)}`}
+    >
+      {newMessageCount > 0 && <span>{newMessageCount}</span>}
       <div
-          key={request.id}
-          className={`request-item ${getStateText(request.state)}`}
+        className={`top-container ${getStateText(request.state)}`}
+        onClick={handleNotificationClick}
       >
-        {/*{newMessagesCountsMap.get(request.id) > 0 && (*/}
-        {/*    <span onClick={handleNotificationClick}>{newMessageCount}</span>*/}
-        {/*)}*/}
-        <div
-            className={`top-container ${getStateText(request.state)}`}
-            onClick={() => setIsOpen(!isOpen)}
-        >
-          <div className="icon-container">
-            {request.is_question ? (
-                <BsQuestionCircleFill size={50} className="icon"/>
-            ) : (
-                <BsArrowDownRightCircleFill size={50} className="icon"/>
-            )}
+        <div className="icon-container">
+          {request.is_question ? (
+            <BsQuestionCircleFill size={50} className="icon" />
+          ) : (
+            <BsArrowDownRightCircleFill size={50} className="icon" />
+          )}
+        </div>
+        <div className="content-container">
+          <div className="info-container">
+            <h2>{getStateText(request.state)}</h2>
+            <p className="time">{timeAgo(request.time)}</p>
           </div>
-          <div className="content-container">
-            <div className="info-container">
-              <h2>{getStateText(request.state)}</h2>
-              <p className="time">{timeAgo(request.time)}</p>
-            </div>
-            <div className="text-container">
-              <p>{request.text}</p>
-            </div>
+          <div className="text-container">
+            <p>{request.text}</p>
           </div>
         </div>
-        <div
-            className={`chat-container ${getStateText(request.state)} ${
-                isOpen ? "open" : "closed"
-            }`}
-        >
-          <div className="chat-container__messages">
-            {chat &&
-                chat.map((chatMessage) => {
-                  return (
-                      <div
-                          key={request.id + "-" + chatMessage.id}
-                          className={`chat-item patient-${
+      </div>
+      <div
+        className={`chat-container ${getStateText(request.state)} ${
+          isOpen ? "open" : "closed"
+        }`}
+      >
+        <div className="chat-container__messages">
+          {chat &&
+            chat.map((chatMessage) => {
+              return (
+                <div
+                  key={request.id + "-" + chatMessage.id}
+                  className={`chat-item patient-${
                     from_patient
                       ? chatMessage.from_patient
                       : !chatMessage.from_patient
