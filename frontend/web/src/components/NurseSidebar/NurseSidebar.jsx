@@ -20,7 +20,6 @@ import { Link } from "react-router-dom";
 
 export default function NurseSidebar({ session, isOpen, onClose }) {
   const sidebarRef = useRef(null);
-  const navigate = useNavigate;
   const [staff, setStaff] = useState([]);
 
   useEffect(() => {
@@ -44,7 +43,7 @@ export default function NurseSidebar({ session, isOpen, onClose }) {
       }
     };
 
-    fetchStaff(); //oli comment
+    fetchStaff();
 
     document.addEventListener("click", handleOutsideClick);
     document.addEventListener("touchstart", handleOutsideTouch);
@@ -80,8 +79,7 @@ export default function NurseSidebar({ session, isOpen, onClose }) {
         <div className="sidebar-link-user">
   <p>
     <BiSolidUserCircle />
-    {/* {staff.username} */}
-    ahsdfad sfh
+     {staff.username}
   </p>
   <div className="sidebar-link-signout" onClick={handleLogOut}>
     <GoSignOut />

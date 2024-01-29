@@ -26,7 +26,7 @@ export default function UserList({ session }) {
     fetchSettings().then((r) => null);
   }, []);
 
-  function handelGoAddPage() {
+  function handleGoAddPage() {
     navigate("/nurse/admin/adduser");
   }
 
@@ -65,7 +65,7 @@ export default function UserList({ session }) {
             </div>
           </div>
         </div>
-        <FaPlusCircle size="2.5rem" id="add-info" onClick={handelGoAddPage} />
+        <FaPlusCircle size="2.5rem" id="add-info" onClick={handleGoAddPage} />
       </div>
     </div>
   );

@@ -90,7 +90,7 @@ export default function ViewRequest({ session }) {
     }
   };
 
-  async function handelStateChangeMine(id) {
+  async function handleStateChangeMine(id) {
     try {
       const getAllRequests = await updateRequest(
         session,
@@ -103,7 +103,7 @@ export default function ViewRequest({ session }) {
     }
   }
 
-  async function handelStateChangeGlobal(id) {
+  async function handleStateChangeGlobal(id) {
     try {
       const getAllRequests = await updateRequest(session, id, 0, null);
     } catch (error) {
@@ -111,7 +111,7 @@ export default function ViewRequest({ session }) {
     }
   }
 
-  async function handelStateChangeDelete(id) {
+  async function handleStateChangeDelete(id) {
     try {
       const getAllRequests = await updateRequest(session, id, 2, null);
     } catch (error) {

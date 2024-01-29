@@ -3,7 +3,7 @@ import data from "src/data.json";
 import "./EditUser.css";
 import NurseHeader from "src/components/NurseHeader/NurseHeader";
 import { FaUserEdit } from "react-icons/fa";
-import { getStaff, postStaff, updateStaff } from "../../../../lib/api";
+import {getStaff, patchStaff} from "../../../../lib/api";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRedirectToLogin } from "../../../../hooks/useSession";
 
@@ -12,6 +12,7 @@ export default function EditUser({ session }) {
   const nurse = data.nurse;
   const { id } = useParams();
   const navigate = useNavigate();
+  const [status, setStatus] = useState()
 
   const [formData, setFormData] = useState({
     username: "",
@@ -29,7 +30,6 @@ export default function EditUser({ session }) {
         username: user.username || "",
         first_name: user.first_name || "",
         last_name: user.last_name || "",
-        roles: user.role || 0,
         type: user.type || 0,
         nfc: user.nfc || "NFCTOKEN",
       });
@@ -61,21 +61,42 @@ export default function EditUser({ session }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await updateStaff(
-        session,
-        id,
-        formData.username,
-        formData.first_name,
-        formData.last_name,
-        formData.roles,
-        formData.type,
-        formData.nfc
+      await patchStaff(
+          session,
+          id,
+          formData.username,
+          formData.password,
+          formData.first_name,
+          formData.last_name,
+          formData.roles,
+          formData.type,
+          formData.nfc
       );
       navigate("/nurse/admin/userlist");
     } catch (error) {
       console.error(error);
+      setStatus("failed");
     }
   };
+
+  function statusMessage() {
+    let statusMessage;
+    switch (status) {
+      case "success":
+        statusMessage = (
+            <div className="success">Added user</div>
+        );
+        break;
+      case "failed":
+        statusMessage = (
+            <div className="error">username may contain only letters, numbers, and @/./+/-/_ characters.</div>
+        );
+        break;
+      default:
+        statusMessage = null;
+    }
+    return statusMessage;
+  }
 
   function handleCancel() {
     navigate("/nurse/admin/userlist");
@@ -90,6 +111,7 @@ export default function EditUser({ session }) {
       </div>
       <div id="data_form">
         <form onSubmit={handleSubmit}>
+          {statusMessage()}
           <div className="input_field">
             <p>
               {nurse.username}
@@ -128,21 +150,6 @@ export default function EditUser({ session }) {
               placeholder={nurse.last_name}
               autoComplete="off"
             ></input>
-          </div>
-          <div className="input_field">
-            <p>
-              {nurse.role}
-              <span>{nurse.required}</span>
-            </p>
-            <select
-              name="roles"
-              onChange={handleChangeNum}
-              value={formData.roles}
-            >
-              <option value={0}>{nurse.roles[0]}</option>
-
-              <option value={1}>{nurse.roles[0]}</option>
-            </select>
           </div>
           <div className="input_field">
             <p>

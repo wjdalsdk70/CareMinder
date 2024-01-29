@@ -23,7 +23,7 @@ export default function RecordingResult({session}) {
   const [text, setText] = useState(transcript)
 
   const handleRecordAgainClick = () => {
-    handelPostRequest().then(r => navigate("/patient/recording"));
+    handlePostRequest().then(r => navigate("/patient/recording"));
 
   };
 
@@ -32,10 +32,10 @@ export default function RecordingResult({session}) {
   };
 
   const handleFinishClick = () => {
-    handelPostRequest().then(r => navigate("/patient/home"));
+    handlePostRequest().then(r => navigate("/patient/home"));
   };
 
-  async function handelPostRequest(){
+  async function handlePostRequest(){
     try {
       if (isQuestion === "true"){
         await postRequest(session ,text, true, 0, tablet.id, 1);

@@ -305,6 +305,36 @@ export async function postStaff(
   return data;
 }
 
+export async function patchStaff(
+    session,
+    id,
+    username,
+    password,
+    first_name,
+    last_name,
+    type,
+) {
+  const response = await authFetch(session, `${BASE_URL}/staffs/${id}/`, {
+    method: "PATCH",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({
+      username,
+      password,
+      first_name,
+      last_name,
+      type,
+    }),
+  });
+  if (!response.ok) {
+    return Promise.reject(response);
+  }
+  const data = await response.json();
+  return data;
+}
+
+
 export async function updateStaff(
   session,
   id,
@@ -373,7 +403,7 @@ export async function getAreas(session) {
 export async function getArea(session, id) {
   const response = await authFetch(
     session,
-    `${BASE_URL}/settings/areas/${id}`,
+    `${BASE_URL}/settings/areas/${id}/`,
     {
       method: "GET",
       headers: {
@@ -381,6 +411,43 @@ export async function getArea(session, id) {
       },
     }
   );
+  if (!response.ok) {
+    return Promise.reject(response);
+  }
+  const data = await response.json();
+  return data;
+}
+
+export async function patchArea(
+    session,
+    id,
+    name,
+) {
+  const response = await authFetch(session, `${BASE_URL}/setting/areas/${id}/`, {
+    method: "PATCH",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({ name }),
+  });
+  if (!response.ok) {
+    return Promise.reject(response);
+  }
+  const data = await response.json();
+  return data;
+}
+
+export async function postArea(
+    session,
+    name,
+) {
+  const response = await authFetch(session, `${BASE_URL}/settings/areas/`, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({ name }),
+  });
   if (!response.ok) {
     return Promise.reject(response);
   }
