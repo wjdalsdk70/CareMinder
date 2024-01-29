@@ -92,7 +92,7 @@
         "type" : "Type",
         "roles" : [
             "Careworker",
-            "Secretary"
+            "Patient"
         ],
         "types" : [
             "Doctor",
