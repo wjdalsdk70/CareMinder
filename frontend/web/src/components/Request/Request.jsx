@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   BsQuestionCircleFill,
   BsArrowDownRightCircleFill,
@@ -8,14 +8,20 @@ import moment from "moment";
 import { postChatMessage, getChatMessages, getRequests } from "src/lib/api";
 
 import "./Request.css";
+import { useRedirectToHome } from "src/hooks/useSession";
 
 export default function Request({ request, session, from_patient }) {
   const [isOpen, setIsOpen] = useState(false);
+  const isOpenRef = useRef(isOpen);
   const [messageText, setMessageText] = useState("");
   const [chat, setChat] = useState([]);
 
   const [newMessageCount, setNewMessageCount] = useState(0);
   let prevCount = 0;
+
+  useEffect(() => {
+    isOpenRef.current = isOpen;
+  }, [isOpen]);
 
   useEffect(() => {
     fetchChatMessages();
@@ -30,9 +36,9 @@ export default function Request({ request, session, from_patient }) {
     try {
       const resp = await getChatMessages(session, request.id).then();
 
-      if (prevCount - resp.length !== 0 && !isOpen) {
-        prevCount = resp.length;
+      if (prevCount - resp.length !== 0 && !isOpenRef.current) {
         setNewMessageCount((newMessage) => newMessage + 1);
+        prevCount = resp.length;
       }
 
       setChat(resp);
@@ -54,7 +60,7 @@ export default function Request({ request, session, from_patient }) {
     }
   }
 
-  const handleNotificationClick = () => {
+  const handleClick = () => {
     setNewMessageCount(0);
     setIsOpen(!isOpen);
   };
@@ -83,7 +89,7 @@ export default function Request({ request, session, from_patient }) {
     >
       <div
         className={`top-container ${getStateText(request.state)}`}
-        onClick={handleNotificationClick}
+        onClick={handleClick}
       >
         {newMessageCount > 0 && (
           <span className="request-item__notification">{newMessageCount}</span>
