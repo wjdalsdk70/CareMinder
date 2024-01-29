@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/sixty_opacity_background_black"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/background_grey"
+            android:layout_margin="150dp">
+
+            <ListView
+                android:id="@+id/list_view_messages"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/layout_chatbox" />
+
+            <LinearLayout
+                android:id="@+id/layout_chatbox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="15dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="-1dp"
+                android:orientation="vertical"
+                android:layout_marginHorizontal="45dp">
+
+                <EditText
+                    android:id="@+id/edit_text_message"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toStartOf="@+id/button_send"
+                    android:layout_toLeftOf="@+id/button_send"
+                    android:background="@color/white"
+                    android:hint="Type a message"
+                    android:paddingVertical="15dp" />
+
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.AppCompat.Button"
+                    android:layout_width="300dp"
+                    android:layout_height="75dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="center"
+                    android:layout_marginVertical="20dp"
+                    android:backgroundTint="@color/primary"
+                    android:onClick="OnSendTextClick"
+                    android:text="@string/red_cancel" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
