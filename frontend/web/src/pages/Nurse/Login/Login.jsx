@@ -39,8 +39,12 @@ export default function Login({ session }) {
 
   useEffect(() => {
     if (!session.accessToken || !session.ready) return;
-    logout(session);
-    session.logout();
+    try {
+      logout(session);
+      session.logout();
+    } catch (error) {
+      console.error(error);
+    }
   }, []);
 
   const handleSubmit = async (event) => {

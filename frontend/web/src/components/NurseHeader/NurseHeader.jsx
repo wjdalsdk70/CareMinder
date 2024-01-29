@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaBars } from "react-icons/fa";
+import { useLocation } from "react-router-dom";
 import NurseSidebar from "../NurseSidebar/NurseSidebar";
 import Logo from "src/assets/logo.svg";
 import { IoIosArrowBack } from "react-icons/io";
@@ -8,10 +9,11 @@ import "./NurseHeader.css";
 
 export default function NurseHeader({ session }) {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const location = useLocation();
+  const showGoBackButton = !location.pathname.includes("/nurse/home");
 
   const openSidebar = (event) => {
     event.stopPropagation();
-    console.log("Opening sidebar");
     setSidebarOpen(true);
   };
 
@@ -34,10 +36,12 @@ export default function NurseHeader({ session }) {
             onClose={closeSidebar}
           />
         </div>
-        <div className="go_back">
-          <IoIosArrowBack size="32" />
-          <h2>{data.nurse.nurseHeaderBack}</h2>
-        </div>
+        {showGoBackButton && (
+          <div className="go_back">
+            <IoIosArrowBack size="32" />
+            <h2>{data.nurse.nurseHeaderBack}</h2>
+          </div>
+        )}
       </header>
     </>
   );
