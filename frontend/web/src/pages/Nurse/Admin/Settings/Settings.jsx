@@ -78,6 +78,10 @@ export default function Settings({ session }) {
     navigate("/nurse/admin/addTablet");
   }
 
+  function handleAddArea(){
+    navigate("/nurse/admin/addArea");
+  }
+
   return (
     <div className="settings__home">
       <NurseHeader session={session} />
@@ -136,8 +140,44 @@ export default function Settings({ session }) {
             <div className="row">
               <div className="on-off">
                 <h2>{data.nurse.settingsNFC}</h2>
-                <Switch />
+                <Switch/>
               </div>
+            </div>
+
+            <h2>Edit Area Name</h2>
+            <div className="tabletslist-add">
+              <div className="tabletslist">
+                <div className="list-items">
+                  <h2 className="item-number">Name</h2>
+                </div>
+
+                <div className="userlist-rows">
+                  <div>
+                    {area.map((area, index) => {
+
+                      return (
+                          <Link
+                              to={`/nurse/admin/editArea/${area.id}`}
+                              key={index}
+                          >
+                            <div className="userlist-row">
+                              <hr className="userlist-line-top"/>
+                              <div className="list-item">
+                                <p className="number-value">{area.name}</p>
+                              </div>
+                              <hr className="userlist-line-bottom"/>
+                            </div>
+                          </Link>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+              <FaPlusCircle
+                  size="2.5rem"
+                  id="add-info"
+                  onClick={handleAddArea}
+              />
             </div>
 
             <h2>Edit Tablets</h2>
@@ -153,44 +193,46 @@ export default function Settings({ session }) {
                     {tablets.map((tablet, index) => {
                       // Find the corresponding area object
                       const tabletArea = area.find(
-                        (area) => area.id === tablet.area_id
+                          (area) => area.id === tablet.area_id
                       );
 
                       // Extract the name property from the area object
                       const areaName = tabletArea
-                        ? tabletArea.name
-                        : "Unknown Area";
+                          ? tabletArea.name
+                          : "Unknown Area";
 
                       return (
-                        <Link
-                          to={`/nurse/admin/editTablet/${tablet.id}`}
-                          key={index}
-                        >
-                          <div className="userlist-row">
-                            <hr className="userlist-line-top" />
-                            <div className="list-item">
-                              <p className="number-value">{tablet.name}</p>
-                              <p className="name-value">{areaName}</p>
+                          <Link
+                              to={`/nurse/admin/editTablet/${tablet.id}`}
+                              key={index}
+                          >
+                            <div className="userlist-row">
+                              <hr className="userlist-line-top"/>
+                              <div className="list-item">
+                                <p className="number-value">{tablet.name}</p>
+                                <p className="name-value">{areaName}</p>
+                              </div>
+                              <hr className="userlist-line-bottom"/>
                             </div>
-                            <hr className="userlist-line-bottom" />
-                          </div>
-                        </Link>
+                          </Link>
                       );
                     })}
                   </div>
                 </div>
               </div>
               <FaPlusCircle
-                size="2.5rem"
-                id="add-info"
-                onClick={handleAddTablet}
+                  size="2.5rem"
+                  id="add-info"
+                  onClick={handleAddTablet}
               />
             </div>
+
+
           </div>
         </div>
         <div className="buttons">
-          <input className="cancel" onClick={handleCancel} value="Cancel" />
-          <input className="save" type="submit" value="Save" />
+          <input className="cancel" onClick={handleCancel} value="Cancel"/>
+          <input className="save" type="submit" value="Save"/>
         </div>
       </form>
     </div>

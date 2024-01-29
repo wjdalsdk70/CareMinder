@@ -154,8 +154,12 @@ export default function ViewRequest({ session }) {
   }, [holding]);
 
   useEffect(() => {
-    fetchRequests();
-    fetchMyRequests();
+    const intervalId = setInterval(() => {
+      fetchRequests();
+      fetchMyRequests();
+    }, 5000);
+
+    return () => clearInterval(intervalId);
   }, []);
 
   return (
@@ -180,7 +184,7 @@ export default function ViewRequest({ session }) {
           <div className={styles.filter}>
             <Filter
               title={nurse.filterByJob}
-              options={[]}
+              options={[{ value: "name", description: "description" }]}
               selectedOptions={selectedOptions}
               handleCheckboxChange={handleCheckboxChange}
             />

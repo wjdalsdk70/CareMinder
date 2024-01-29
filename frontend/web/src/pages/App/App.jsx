@@ -21,6 +21,9 @@ import RecordingResult from "src/pages/Patient/RecordingResult/RecordingResult";
 import "src/theme/global.css";
 import "src/theme/variables.css";
 import NurseLogin from "src/pages/Nurse/Login/Login";
+import AddArea from "../Nurse/Admin/AddArea/AddArea";
+import EditArea from "../Nurse/Admin/EditArea/EditArea";
+import CompletedPatientRequests from "../Nurse/Home/CompletedPatientRequest/CompletedPatientRequests";
 
 function App() {
   const session = useSession();
@@ -43,6 +46,10 @@ function App() {
           element={<NurseHomeRequests session={session} />}
         />
         <Route
+            path="/nurse/home/completedRequests"
+            element={<CompletedPatientRequests session={session} />}
+        />
+        <Route
           path="/nurse/home/patients"
           element={<NurseHomePatients session={session} />}
         />
@@ -59,12 +66,20 @@ function App() {
             element={<AddTablet session={session} />}
         />
         <Route
+            path="/nurse/admin/addArea"
+            element={<AddArea session={session} />}
+        />
+        <Route
           path="/nurse/admin/editUser/:id"
           element={<EditUser session={session} />}
         />
         <Route
             path="/nurse/admin/editTablet/:id"
             element={<EditTablets session={session} />}
+        />
+        <Route
+            path="/nurse/admin/editArea/:id"
+            element={<EditArea session={session} />}
         />
         <Route
           path="/nurse/admin/userList"
