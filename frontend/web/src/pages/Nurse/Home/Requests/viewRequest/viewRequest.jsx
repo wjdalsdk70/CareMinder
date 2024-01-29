@@ -119,6 +119,30 @@ export default function ViewRequest({ session }) {
     }
   }
 
+  async function fetchRequests() {
+    try {
+      const getAllRequests = await getRequestsFiltered(session, {
+        staff: null,
+        state: 0,
+      });
+      setWaiting(getAllRequests);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function fetchMyRequests() {
+    try {
+      const getMyRequests = await getRequestsFiltered(session, {
+        staff: session.user.id,
+      });
+
+      setOngoing(getMyRequests);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   useEffect(() => {
     window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("mouseup", handleMouseUp);
@@ -129,34 +153,10 @@ export default function ViewRequest({ session }) {
     };
   }, [holding]);
 
-
-  async function fetchData  () {
-    try {
-      const getAllRequests = await getRequestsFiltered(session, {
-        staff: null,
-        state: 0,
-      });
-      setWaiting(getAllRequests);
-
-      const getMyRequests = await getRequestsFiltered(session, {
-        staff: session.user.id,
-      });
-      setOngoing(getMyRequests);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   useEffect(() => {
-    fetchData
-    const intervalId = setInterval(() => {
-      fetchData();
-    }, 5000); // 2000 milliseconds = 2 seconds
-
-    // Cleanup function to clear the interval when the component unmounts
-    return () => clearInterval(intervalId);
+    fetchRequests();
+    fetchMyRequests();
   }, []);
-
 
   return (
     <>
