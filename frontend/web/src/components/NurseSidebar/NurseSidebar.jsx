@@ -33,21 +33,38 @@ export default function NurseSidebar({ session, isOpen, onClose }) {
       }
     };
 
-    fetchStaff();
+    const handleOutsideTouch = (event) => {
+      if (
+        isOpen &&
+        sidebarRef.current &&
+        !sidebarRef.current.contains(event.target)
+      ) {
+        onClose();
+      }
+    };
+
+    fetchStaff(); //oli comment
 
     document.addEventListener("click", handleOutsideClick);
+    document.addEventListener("touchstart", handleOutsideTouch);
 
     return () => {
       document.removeEventListener("click", handleOutsideClick);
+      document.removeEventListener("touchstart", handleOutsideTouch);
     };
   }, [isOpen, onClose]);
 
   async function fetchStaff() {
-    const resp = await getStaff(session, session.user.id);
-    setStaff(resp);
+    try {
+      const resp = await getStaff(session, session.user.id);
+      setStaff(resp);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   function handleLogOut() {
+    console.log("logout");
     session.logout();
   }
 
@@ -59,52 +76,60 @@ export default function NurseSidebar({ session, isOpen, onClose }) {
 
       <div className="sidebar-links">
         <img className="sidebar-logo" src={longLogo} alt="" />
-
         <div className="sidebar-link-user">
-          <p>
-            <BiSolidUserCircle />
-            {/* {staff.username} */}
-            ahsdfad sfh
-            <div onClick={handleLogOut}>
-              <GoSignOut className="sidebar-link-signout" />
-            </div>
-          </p>
-        </div>
+  <p>
+    <BiSolidUserCircle />
+    {/* {staff.username} */}
+    ahsdfad sfh
+  </p>
+  <div className="sidebar-link-signout" onClick={handleLogOut}>
+    <GoSignOut />
+  </div>
+</div>
 
-        <div className="sidebar-link">
-          <Link to="/nurse/home/" href="#">
-            <FaHouse />
+      
+          <Link className="sidebar-link" to="/nurse/home/" href="#">
+            <FaHouse color="white"/>
+            <p>
             Patient Request
+            </p>
+          
           </Link>
-        </div>
+   
 
-        <div className="sidebar-link">
-          <Link to="/nurse/home/">
-            <IoIosCheckmarkCircle />
-            Completed Patient Requests
+       
+          <Link className="sidebar-link" to="/nurse/home/">
+            <IoIosCheckmarkCircle color="white" />
+            <p> Completed Patient Requests</p>
+           
           </Link>
-        </div>
+     
 
-        <div className="sidebar-link">
-          <Link to="/nurse/home/">
-            <MdDownloading />
-            Set progress by patient
+
+          <Link className="sidebar-link" to="/nurse/home/">
+            <MdDownloading color="white" />
+            <p> Set progress by patient</p>
+           
           </Link>
-        </div>
+    
 
-        <div className="sidebar-link">
-          <Link to="/nurse/admin/userlist">
-            <FaUserEdit />
+      
+          <Link className="sidebar-link" to="/nurse/admin/userlist">
+            <FaUserEdit color="white" />
+            <p>
             Query user Information
+            </p>
           </Link>
-        </div>
+   
 
-        <div className="sidebar-link">
-          <Link to="/nurse/admin/settings">
-            <IoMdSettings />
+   
+          <Link className="sidebar-link" to="/nurse/admin/settings">
+            <IoMdSettings color="white" />
+            <p>
             Configuration Settings
+            </p>
           </Link>
-        </div>
+      
       </div>
     </div>
   );

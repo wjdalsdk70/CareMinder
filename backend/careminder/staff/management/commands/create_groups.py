@@ -54,19 +54,20 @@ class Command(BaseCommand):
         for group_name, permissions in GROUPS.items():
             group, created = Group.objects.get_or_create(name=group_name)
             if created:
-                for perm in permissions:
-                    try:
-                        perm = Permission.objects.get(
-                            codename=perm,
-                        )
-                        group.permissions.add(perm)
-                    except Permission.DoesNotExist:
-                        all_permissions = Permission.objects.values_list(
-                            "codename", flat=True
-                        )
-                        raise ObjectDoesNotExist(
-                            f"Permission {perm} does not exist.\nAvailable permissions are: {', '.join(all_permissions)}"
-                        )
+                group.permissions.clear()
+            for perm in permissions:
+                try:
+                    perm = Permission.objects.get(
+                        codename=perm,
+                    )
+                    group.permissions.add(perm)
+                except Permission.DoesNotExist:
+                    all_permissions = Permission.objects.values_list(
+                        "codename", flat=True
+                    )
+                    raise ObjectDoesNotExist(
+                        f"Permission {perm} does not exist.\nAvailable permissions are: {', '.join(all_permissions)}"
+                    )
 
         self.stdout.write(
             self.style.SUCCESS("Successfully created groups and assigned permissions")
