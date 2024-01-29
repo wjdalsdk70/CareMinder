@@ -16,8 +16,9 @@ import {
 import { MdDownloading } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { getStaff } from "../../lib/api";
+import { Link } from "react-router-dom";
 
-export default function NurseSidebar({ isOpen, onClose }) {
+export default function NurseSidebar({ session, isOpen, onClose }) {
   const sidebarRef = useRef(null);
   const navigate = useNavigate;
   const [staff, setStaff] = useState([]);
@@ -33,12 +34,23 @@ export default function NurseSidebar({ isOpen, onClose }) {
       }
     };
 
+    fetchStaff();
+
     document.addEventListener("click", handleOutsideClick);
 
     return () => {
       document.removeEventListener("click", handleOutsideClick);
     };
   }, [isOpen, onClose]);
+
+  async function fetchStaff() {
+    const resp = await getStaff(session, session.user.id);
+    setStaff(resp);
+  }
+
+  function handleLogOut() {
+    session.logout();
+  }
 
   return (
     <div ref={sidebarRef} className={`sidebar ${isOpen ? "open" : ""}`}>
@@ -50,48 +62,49 @@ export default function NurseSidebar({ isOpen, onClose }) {
         <img className="sidebar-logo" src={longLogo} alt="" />
 
         <div className="sidebar-link-user">
-          <a href="#">
+          <p>
             <BiSolidUserCircle />
-            Username
-            <a href="#">
+            {/* {staff.username} */}
+            ahsdfad sfh
+            <div onClick={handleLogOut}>
               <GoSignOut className="sidebar-link-signout" />
-            </a>
-          </a>
+            </div>
+          </p>
         </div>
 
         <div className="sidebar-link">
-          <a href="#">
+          <Link to="/nurse/home/" href="#">
             <FaHouse />
             Patient Request
-          </a>
+          </Link>
         </div>
 
         <div className="sidebar-link">
-          <a href="#">
+          <Link to="/nurse/home/">
             <IoIosCheckmarkCircle />
             Completed Patient Requests
-          </a>
+          </Link>
         </div>
 
         <div className="sidebar-link">
-          <a href="#">
+          <Link to="/nurse/home/">
             <MdDownloading />
             Set progress by patient
-          </a>
+          </Link>
         </div>
 
         <div className="sidebar-link">
-          <a href="#">
+          <Link to="/nurse/admin/userlist">
             <FaUserEdit />
             Query user Information
-          </a>
+          </Link>
         </div>
 
         <div className="sidebar-link">
-          <a href="#">
+          <Link to="/nurse/admin/settings">
             <IoMdSettings />
             Configuration Settings
-          </a>
+          </Link>
         </div>
       </div>
     </div>

@@ -5,10 +5,10 @@ import NurseHeader from "src/components/NurseHeader/NurseHeader";
 import { FaUserEdit, FaPlusCircle } from "react-icons/fa";
 import { getStaffs } from "../../../../lib/api";
 import { Link, useNavigate } from "react-router-dom";
-import {useRedirectToLogin} from "../../../../hooks/useSession";
+import { useRedirectToLogin } from "../../../../hooks/useSession";
 
-export default function UserList({session}) {
-  useRedirectToLogin(session, '/nurse/login')
+export default function UserList({ session }) {
+  useRedirectToLogin(session, "/nurse/login");
   const nurse = data.nurse;
   const [staffs, setStaffs] = useState([]);
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ export default function UserList({session}) {
 
   return (
     <div className="userlist-container">
-      <NurseHeader />
+      <NurseHeader session={session} />
       <div className="title">
         <FaUserEdit size="3rem" />
         <h1>{nurse.nurseStaffUserListHeader}</h1>

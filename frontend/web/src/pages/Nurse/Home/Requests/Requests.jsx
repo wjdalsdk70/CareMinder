@@ -7,11 +7,11 @@ import NurseHeader from "src/components/NurseHeader/NurseHeader";
 import styles from "./Requests.module.css";
 import { useRedirectToLogin } from "../../../../hooks/useSession";
 
-import data from "../../../../data.json"
+import data from "../../../../data.json";
 
 export default function Requests({ session }) {
   useRedirectToLogin(session, "/nurse/login");
-  const nurse = data.nurse
+  const nurse = data.nurse;
 
   const [toggle, setToggle] = useState(true);
 
@@ -22,19 +22,19 @@ export default function Requests({ session }) {
 
   return (
     <>
-      <NurseHeader />
+      <NurseHeader session={session} />
       <div className={styles.top}>
         <div
           className={`${styles.toggle} ${toggle ? styles.active : ""}`}
           onClick={() => handleToggle(0)}
         >
-            {nurse.nurseHomeTitleViewPatientRequests}
+          {nurse.nurseHomeTitleViewPatientRequests}
         </div>
         <div
           className={`${styles.toggle} ${!toggle ? styles.active : ""}`}
           onClick={() => handleToggle(1)}
         >
-            {nurse.nurseHomeTitleViewPatient}
+          {nurse.nurseHomeTitleViewPatient}
         </div>
       </div>
       <div className={styles.bottom}>

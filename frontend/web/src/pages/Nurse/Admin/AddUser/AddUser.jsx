@@ -4,13 +4,13 @@ import "./AddUser.css";
 import NurseHeader from "src/components/NurseHeader/NurseHeader";
 import { BsPersonFillAdd } from "react-icons/bs";
 import { postStaff } from "../../../../lib/api";
-import {useNavigate} from "react-router-dom";
-import {useRedirectToLogin} from "../../../../hooks/useSession";
+import { useNavigate } from "react-router-dom";
+import { useRedirectToLogin } from "../../../../hooks/useSession";
 
 export default function AddUser({ session }) {
-  useRedirectToLogin(session, '/nurse/login')
+  useRedirectToLogin(session, "/nurse/login");
   const nurse = data.nurse;
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     username: "",
@@ -51,19 +51,19 @@ export default function AddUser({ session }) {
         formData.type,
         formData.nfc
       );
-      navigate('/nurse/admin/userlist');
+      navigate("/nurse/admin/userlist");
     } catch (error) {
       console.error(error);
     }
   };
 
   function handelCancel() {
-    navigate('/nurse/admin/userlist');
+    navigate("/nurse/admin/userlist");
   }
 
   return (
     <div className="adduser-container">
-      <NurseHeader />
+      <NurseHeader session={session} />
       <div className="title">
         <BsPersonFillAdd size="3rem" />
         <h1>Add new User</h1>
