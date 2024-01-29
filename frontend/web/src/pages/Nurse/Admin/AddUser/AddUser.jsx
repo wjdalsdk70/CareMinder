@@ -11,6 +11,7 @@ export default function AddUser({ session }) {
   useRedirectToLogin(session, "/nurse/login");
   const nurse = data.nurse;
   const navigate = useNavigate();
+  const [status, setStatus] = useState()
 
   const [formData, setFormData] = useState({
     username: "",
@@ -38,7 +39,7 @@ export default function AddUser({ session }) {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSaveReturn = async (e) => {
     e.preventDefault();
     try {
       await postStaff(
@@ -54,10 +55,59 @@ export default function AddUser({ session }) {
       navigate("/nurse/admin/userlist");
     } catch (error) {
       console.error(error);
+      setStatus("failed");
     }
   };
 
-  function handelCancel() {
+  const handleSaveAddAnother = async (e) => {
+    e.preventDefault();
+    try {
+      await postStaff(
+          session,
+          formData.username,
+          formData.password,
+          formData.first_name,
+          formData.last_name,
+          formData.roles,
+          formData.type,
+          formData.nfc
+      );
+      setFormData({
+        username: "",
+        password: "",
+        first_name: "",
+        last_name: "",
+        roles: 0,
+        type: 0,
+        nfc: "NFCTOKEN",
+      });
+      setStatus("success")
+    } catch (error) {
+      console.error(error);
+      setStatus("failed");
+    }
+  };
+
+  function statusMessage() {
+    let statusMessage;
+    switch (status) {
+      case "success":
+        statusMessage = (
+            <div className="success">Added user</div>
+        );
+        break;
+      case "failed":
+        statusMessage = (
+            <div className="error">username may contain only letters, numbers, and @/./+/-/_ characters.</div>
+        );
+        break;
+      default:
+        statusMessage = null;
+    }
+    return statusMessage;
+  }
+
+  function handleCancel() {
     navigate("/nurse/admin/userlist");
   }
 
@@ -70,7 +120,8 @@ export default function AddUser({ session }) {
       </div>
 
       <div id="data_form">
-        <form onSubmit={handleSubmit}>
+        <form>
+          {statusMessage()}
           <div className="input_field">
             <p>
               {nurse.username}
@@ -125,20 +176,6 @@ export default function AddUser({ session }) {
           </div>
           <div className="input_field">
             <p>
-              {nurse.role}
-              <span>{nurse.required}</span>
-            </p>
-            <select name="roles" onChange={handleChangeNum} defaultValue="">
-              <option value="" disabled>
-                Please select a Role
-              </option>
-              <option value={0}>{nurse.roles[0]}</option>
-
-              <option value={1}>{nurse.roles[1]}</option>
-            </select>
-          </div>
-          <div className="input_field">
-            <p>
               {nurse.type}
               <span>{nurse.required}</span>
             </p>
@@ -167,12 +204,12 @@ export default function AddUser({ session }) {
             <button className="change_data_button">Change Data</button>
           </div>
           <div id="bottom_buttons">
-            <button className="cancel_button">Cancel</button>
-            <button className="save_button" type="submit">
-              Save
+            <button className="cancel_button" onClick={handleCancel}>Cancel</button>
+            <button className="save_button" onClick={handleSaveAddAnother}>
+              Save and add another
             </button>
-            <button className="save_button" type="submit">
-              Save and go to staff list
+            <button className="save_button" onClick={handleSaveReturn}>
+              Save and return
             </button>
           </div>
         </form>

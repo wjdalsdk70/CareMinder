@@ -6,19 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="705c982a-fc4a-4646-9e69-913c4d72a412" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/web/src/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/web/src/data.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/web/src/lib/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/web/src/lib/api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/web/src/pages/Nurse/Admin/AddUser/AddUser.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/web/src/pages/Nurse/Admin/AddUser/AddUser.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/web/src/pages/Nurse/Admin/EditUser/EditUser.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/web/src/pages/Nurse/Admin/EditUser/EditUser.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/web/src/pages/Nurse/Admin/Settings/Settings.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/web/src/pages/Nurse/Admin/Settings/Settings.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/web/src/pages/Nurse/Admin/UserList/UserList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/web/src/pages/Nurse/Admin/UserList/UserList.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/web/src/pages/Nurse/Home/Requests/Requests.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/web/src/pages/Nurse/Home/Requests/Requests.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/web/src/pages/Nurse/Home/Requests/viewRequest/viewRequest.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/web/src/pages/Nurse/Home/Requests/viewRequest/viewRequest.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/web/src/pages/Nurse/Login/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/web/src/pages/Nurse/Login/Login.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/web/src/pages/Patient/Agreement/Agreement.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/web/src/pages/Patient/Agreement/Agreement.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/web/src/pages/Patient/Login/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/web/src/pages/Patient/Login/Login.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/web/src/pages/Patient/Recording/Recording.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/web/src/pages/Patient/Recording/Recording.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/web/src/pages/Patient/RecordingResult/RecordingResult.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/web/src/pages/Patient/RecordingResult/RecordingResult.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,6 +135,8 @@
       <workItem from="1706449413125" duration="10000" />
       <workItem from="1706449492806" duration="17000" />
       <workItem from="1706455549128" duration="158000" />
+      <workItem from="1706542672422" duration="10000" />
+      <workItem from="1706542718658" duration="148000" />
     </task>
     <servers />
   </component>

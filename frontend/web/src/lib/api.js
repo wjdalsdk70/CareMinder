@@ -305,6 +305,36 @@ export async function postStaff(
   return data;
 }
 
+export async function patchStaff(
+    session,
+    id,
+    username,
+    password,
+    first_name,
+    last_name,
+    type,
+) {
+  const response = await authFetch(session, `${BASE_URL}/staffs/${id}/`, {
+    method: "PATCH",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({
+      username,
+      password,
+      first_name,
+      last_name,
+      type,
+    }),
+  });
+  if (!response.ok) {
+    return Promise.reject(response);
+  }
+  const data = await response.json();
+  return data;
+}
+
+
 export async function updateStaff(
   session,
   id,

@@ -20,7 +20,6 @@ import { Link } from "react-router-dom";
 
 export default function NurseSidebar({ session, isOpen, onClose }) {
   const sidebarRef = useRef(null);
-  const navigate = useNavigate;
   const [staff, setStaff] = useState([]);
 
   useEffect(() => {

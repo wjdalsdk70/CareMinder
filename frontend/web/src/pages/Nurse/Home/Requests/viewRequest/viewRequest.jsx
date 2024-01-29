@@ -69,7 +69,7 @@ export default function ViewRequest({ session }) {
 
     if (targetElement === "finishArea") {
       const item = selItem.s === "r" ? ongoing[selItem.i] : waiting[selItem.i];
-      await handelStateChangeDelete(item.id).then((r) => null);
+      await handleStateChangeDelete(item.id).then((r) => null);
 
       selItem.s === "l"
         ? setWaiting(waiting.filter((_, i) => i !== selItem.i))
@@ -77,12 +77,12 @@ export default function ViewRequest({ session }) {
     } else if (targetElement.charAt(0) !== selItem.s) {
       const item = selItem.s === "r" ? ongoing[selItem.i] : waiting[selItem.i];
       if (selItem.s === "l") {
-        await handelStateChangeMine(item.id).then((r) => null);
+        await handleStateChangeMine(item.id).then((r) => null);
         item.state = 1;
         setWaiting(waiting.filter((_, i) => i !== selItem.i));
         setOngoing([...ongoing, item]);
       } else {
-        await handelStateChangeGlobal(item.id).then((r) => null);
+        await handleStateChangeGlobal(item.id).then((r) => null);
         item.state = 0;
         setOngoing(ongoing.filter((_, i) => i !== selItem.i));
         setWaiting([...waiting, item]);
@@ -90,7 +90,7 @@ export default function ViewRequest({ session }) {
     }
   };
 
-  async function handelStateChangeMine(id) {
+  async function handleStateChangeMine(id) {
     try {
       const getAllRequests = await updateRequest(
         session,
@@ -103,7 +103,7 @@ export default function ViewRequest({ session }) {
     }
   }
 
-  async function handelStateChangeGlobal(id) {
+  async function handleStateChangeGlobal(id) {
     try {
       const getAllRequests = await updateRequest(session, id, 0, null);
     } catch (error) {
@@ -111,33 +111,9 @@ export default function ViewRequest({ session }) {
     }
   }
 
-  async function handelStateChangeDelete(id) {
+  async function handleStateChangeDelete(id) {
     try {
       const getAllRequests = await updateRequest(session, id, 2, null);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  async function fetchRequests() {
-    try {
-      const getAllRequests = await getRequestsFiltered(session, {
-        staff: null,
-        state: 0,
-      });
-      setWaiting(getAllRequests);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  async function fetchMyRequests() {
-    try {
-      const getMyRequests = await getRequestsFiltered(session, {
-        staff: session.user.id,
-      });
-
-      setOngoing(getMyRequests);
     } catch (error) {
       console.error(error);
     }
@@ -153,10 +129,34 @@ export default function ViewRequest({ session }) {
     };
   }, [holding]);
 
+
+  async function fetchData  () {
+    try {
+      const getAllRequests = await getRequestsFiltered(session, {
+        staff: null,
+        state: 0,
+      });
+      setWaiting(getAllRequests);
+
+      const getMyRequests = await getRequestsFiltered(session, {
+        staff: session.user.id,
+      });
+      setOngoing(getMyRequests);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
-    fetchRequests();
-    fetchMyRequests();
+    fetchData
+    const intervalId = setInterval(() => {
+      fetchData();
+    }, 5000); // 2000 milliseconds = 2 seconds
+
+    // Cleanup function to clear the interval when the component unmounts
+    return () => clearInterval(intervalId);
   }, []);
+
 
   return (
     <>
