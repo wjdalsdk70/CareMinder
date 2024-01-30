@@ -15,6 +15,7 @@ import React, { useEffect, useState } from "react";
 import { useRedirectToLogin } from "../../../../hooks/useSession";
 import { Link, useNavigate } from "react-router-dom";
 import { FaPlusCircle } from "react-icons/fa";
+import InfoBox from "../../../../components/InfoBox/InfoBox";
 
 export default function Settings({ session }) {
   useRedirectToLogin(session, "/nurse/login");
@@ -26,6 +27,7 @@ export default function Settings({ session }) {
   });
   const [tablets, setTablets] = useState([]);
   const [area, setArea] = useState([]);
+  const [status, setStatus]=useState([])
 
   const fetchData = async () => {
     try {
@@ -65,7 +67,9 @@ export default function Settings({ session }) {
         settings.hospital_description,
         settings.notification
       );
+      setStatus("success")
     } catch (error) {
+      setStatus("failed")
       console.error(error);
     }
   };
@@ -80,6 +84,25 @@ export default function Settings({ session }) {
 
   function handleAddArea(){
     navigate("/nurse/admin/addArea");
+  }
+
+  function statusMessage() {
+    let statusMessage;
+    switch (status) {
+      case "success":
+        statusMessage = (
+            <InfoBox type="success" message="Edited Hospital Settings" />
+        );
+        break;
+      case "failed":
+        statusMessage = (
+            <InfoBox type="error" message="Failed to edit settings" />
+        );
+        break;
+      default:
+        statusMessage = null;
+    }
+    return statusMessage;
   }
 
   return (
@@ -152,9 +175,7 @@ export default function Settings({ session }) {
                 </div>
 
                 <div className="userlist-rows">
-                  <div>
                     {area.map((area, index) => {
-
                       return (
                           <Link
                               to={`/nurse/admin/editArea/${area.id}`}
@@ -170,7 +191,7 @@ export default function Settings({ session }) {
                           </Link>
                       );
                     })}
-                  </div>
+
                 </div>
               </div>
               <FaPlusCircle
@@ -227,6 +248,7 @@ export default function Settings({ session }) {
 
           </div>
         </div>
+        {statusMessage()}
         <div className="buttons">
           <input className="cancel" onClick={handleCancel} value={data.nurse.editButtonsCancel}/>
           <input className="save" type="submit" value={data.nurse.editButtonsSave}/>

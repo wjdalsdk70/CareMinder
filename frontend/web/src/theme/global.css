@@ -152,9 +152,7 @@ main {
   @apply text-red-500;
 }
 
-.error,
-.success,
-.loading {
+.info-box {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -164,12 +162,4 @@ main {
   width: 100%;
   color: white;
   font-size: 1.5rem;
-}
-
-.error {
-  background-color: #b91c1c;
-}
-
-.success {
-  background-color: #059669;
 }

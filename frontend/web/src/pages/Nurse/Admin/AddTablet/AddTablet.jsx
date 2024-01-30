@@ -11,7 +11,8 @@ export default function EditTablets({ session }) {
   useRedirectToLogin(session, "/nurse/login");
   const nurse = data.nurse;
   const navigate = useNavigate();
-  const [area, setArea] = useState([]);
+  const [area, setArea] = useState([])
+  const [status, setStatus] = useState()
 
   const [formData, setFormData] = useState({
     name: "",
@@ -57,6 +58,7 @@ export default function EditTablets({ session }) {
       await postTablet(session, formData.name, formData.area_id);
       navigate("/nurse/admin/settings");
     } catch (error) {
+      setStatus("failed")
       console.error(error);
     }
   };
@@ -69,10 +71,31 @@ export default function EditTablets({ session }) {
         name: "",
         area_id: "",
       });
+      setStatus("success")
     } catch (error) {
+      setStatus("failed")
       console.error(error);
     }
   };
+
+  function statusMessage() {
+    let statusMessage;
+    switch (status) {
+      case "success":
+        statusMessage = (
+            <div className="success">Added tablet</div>
+        );
+        break;
+      case "failed":
+        statusMessage = (
+            <div className="error">Failed to add tablet.</div>
+        );
+        break;
+      default:
+        statusMessage = null;
+    }
+    return statusMessage;
+  }
 
   return (
     <div className="edituser-container">
@@ -83,6 +106,7 @@ export default function EditTablets({ session }) {
       </div>
       <div id="data_form">
         <form >
+          {statusMessage()}
           <div className="input_field">
             <p>
               {nurse.addTabletNameOfTablet}
