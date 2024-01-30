@@ -3,7 +3,7 @@ import data from "src/data.json";
 import "./AddTablet.css";
 import NurseHeader from "src/components/NurseHeader/NurseHeader";
 import { FaUserEdit } from "react-icons/fa";
-import { getAreas, postTablet } from "../../../../lib/api";
+import {getAreas, postArea, postTablet} from "../../../../lib/api";
 import { useNavigate } from "react-router-dom";
 import { useRedirectToLogin } from "../../../../hooks/useSession";
 
@@ -11,7 +11,8 @@ export default function EditTablets({ session }) {
   useRedirectToLogin(session, "/nurse/login");
   const nurse = data.nurse;
   const navigate = useNavigate();
-  const [area, setArea] = useState([]);
+  const [area, setArea] = useState([])
+  const [status, setStatus] = useState()
 
   const [formData, setFormData] = useState({
     name: "",
@@ -51,28 +52,64 @@ export default function EditTablets({ session }) {
     navigate("/nurse/admin/settings");
   };
 
-  const handleSubmit = async (e) => {
+  const handleSaveReturn = async (e) => {
     e.preventDefault();
     try {
       await postTablet(session, formData.name, formData.area_id);
       navigate("/nurse/admin/settings");
     } catch (error) {
+      setStatus("failed")
       console.error(error);
     }
   };
+
+  const handleSaveAddAnother = async (e) => {
+    e.preventDefault();
+    try {
+      await postTablet(session, formData.name, formData.area_id);
+      setFormData({
+        name: "",
+        area_id: "",
+      });
+      setStatus("success")
+    } catch (error) {
+      setStatus("failed")
+      console.error(error);
+    }
+  };
+
+  function statusMessage() {
+    let statusMessage;
+    switch (status) {
+      case "success":
+        statusMessage = (
+            <div className="success">Added tablet</div>
+        );
+        break;
+      case "failed":
+        statusMessage = (
+            <div className="error">Failed to add tablet.</div>
+        );
+        break;
+      default:
+        statusMessage = null;
+    }
+    return statusMessage;
+  }
 
   return (
     <div className="edituser-container">
       <NurseHeader session={session} />
       <div className="title">
         <FaUserEdit size="3rem" />
-        <h1>Add Tablet</h1>
+        <h1>{nurse.addTabletHeader}</h1>
       </div>
       <div id="data_form">
-        <form onSubmit={handleSubmit}>
+        <form >
+          {statusMessage()}
           <div className="input_field">
             <p>
-              Name of Tablet
+              {nurse.addTabletNameOfTablet}
               <span>{nurse.required}</span>
             </p>
             <input
@@ -86,7 +123,7 @@ export default function EditTablets({ session }) {
 
           <div className="input_field">
             <p>
-              Area of tablet
+              {nurse.addTabletArea}
               <span>{nurse.required}</span>
             </p>
             <select
@@ -96,7 +133,7 @@ export default function EditTablets({ session }) {
               defaultValue={"select an Area"}
             >
               <option value="" disabled>
-                Please select an Area
+                {nurse.setArea}
               </option>
               {area.map((area) => (
                 <option key={area.id} value={area.id}>
@@ -106,11 +143,12 @@ export default function EditTablets({ session }) {
             </select>
           </div>
           <div id="bottom_buttons">
-            <button className="cancel_button" onClick={handleCancel}>
-              Cancel
+            <button className="cancel_button" onClick={handleCancel}>{nurse.editButtonsCancel}</button>
+            <button className="save_button" onClick={handleSaveAddAnother}>
+              {nurse.editButtonsSaveAndAddAnother}
             </button>
-            <button className="save_button" type="submit">
-              Create
+            <button className="save_button" onClick={handleSaveReturn}>
+              {nurse.editButtonsSaveAndReturn}
             </button>
           </div>
         </form>

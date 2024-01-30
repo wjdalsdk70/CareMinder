@@ -34,6 +34,7 @@ export default function AddArea({ session }) {
       );
       navigate("/nurse/admin/settings");
     } catch (error) {
+      setStatus("failed")
       console.error(error);
     }
   };
@@ -48,10 +49,31 @@ export default function AddArea({ session }) {
       setFormData({
         area: "",
       });
+      setStatus("success")
     } catch (error) {
+      setStatus("failed")
       console.error(error);
     }
   };
+
+  function statusMessage() {
+    let statusMessage;
+    switch (status) {
+      case "success":
+        statusMessage = (
+            <div className="success">Added area</div>
+        );
+        break;
+      case "failed":
+        statusMessage = (
+            <div className="error">Failed to create area</div>
+        );
+        break;
+      default:
+        statusMessage = null;
+    }
+    return statusMessage;
+  }
 
   function handleCancel() {
     navigate("/nurse/admin/settings");
@@ -62,31 +84,32 @@ export default function AddArea({ session }) {
       <NurseHeader session={session} />
       <div className="title">
         <BsPersonFillAdd size="3rem" />
-        <h1>Add new Area</h1>
+        <h1>{nurse.areaHeader}</h1>
       </div>
 
       <div id="data_form">
         <form>
+          {statusMessage()}
           <div className="input_field">
             <p>
-              Set Area
+              {nurse.setArea}
               <span>{nurse.required}</span>
             </p>
             <input
               name="area"
               value={formData.area}
               onChange={handleChange}
-              placeholder="Set Area"
+              placeholder={nurse.setArea}
               autoComplete="off"
             ></input>
           </div>
           <div id="bottom_buttons">
-            <button className="cancel_button" onClick={handleCancel}>Cancel</button>
+            <button className="cancel_button" onClick={handleCancel}>{nurse.editButtonsCancel}</button>
             <button className="save_button" onClick={handleSaveAddAnother}>
-              Save and add another
+              {nurse.editButtonsSaveAndAddAnother}
             </button>
             <button className="save_button" onClick={handleSaveReturn}>
-              Save and return
+              {nurse.editButtonsSaveAndReturn}
             </button>
           </div>
         </form>

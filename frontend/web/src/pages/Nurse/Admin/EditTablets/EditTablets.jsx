@@ -13,6 +13,8 @@ export default function EditTablets({ session }) {
   const { id } = useParams();
   const navigate = useNavigate();
   const [area, setArea] = useState([]);
+  const [status, setStatus] = useState()
+
 
   const [formData, setFormData] = useState({
     name: "",
@@ -23,7 +25,7 @@ export default function EditTablets({ session }) {
     try {
       const areaData = await getAreas(session);
       setArea(areaData);
-      const tablet = await getTablet(id);
+      const tablet = await getTablet(session, id);
       setFormData({
         name: tablet.name || "",
         area_id: tablet.area_id || "",
@@ -53,6 +55,25 @@ export default function EditTablets({ session }) {
     }));
   };
 
+  function statusMessage() {
+    let statusMessage;
+    switch (status) {
+      case "success":
+        statusMessage = (
+            <div className="success">edited area</div>
+        );
+        break;
+      case "failed":
+        statusMessage = (
+            <div className="error">Failed to edit Area</div>
+        );
+        break;
+      default:
+        statusMessage = null;
+    }
+    return statusMessage;
+  }
+
   const handleCancel = () => {
     navigate("/nurse/admin/settings");
   };
@@ -63,6 +84,7 @@ export default function EditTablets({ session }) {
       await patchTablet(session, id, formData.name, formData.area_id);
       navigate("/nurse/admin/settings");
     } catch (error) {
+      setStatus("failed")
       console.error(error);
     }
   };
@@ -72,13 +94,14 @@ export default function EditTablets({ session }) {
       <NurseHeader session={session} />
       <div className="title">
         <FaUserEdit size="3rem" />
-        <h1>Edit Tablet</h1>
+        <h1>{nurse.editTabletHeader}</h1>
       </div>
       <div id="data_form">
         <form onSubmit={handleSubmit}>
+          {statusMessage()}
           <div className="input_field">
             <p>
-              Name of Tablet
+              {nurse.addTabletNameOfTablet}
               <span>{nurse.required}</span>
             </p>
             <input
@@ -92,7 +115,7 @@ export default function EditTablets({ session }) {
 
           <div className="input_field">
             <p>
-              Area of tablet
+              {nurse.setArea}
               <span>{nurse.required}</span>
             </p>
             <select
@@ -111,10 +134,10 @@ export default function EditTablets({ session }) {
           </div>
           <div id="bottom_buttons">
             <button className="cancel_button" onClick={handleCancel}>
-              Cancel
+              {nurse.editButtonsCancel}
             </button>
             <button className="save_button" type="submit">
-              Update
+              {nurse.editButtonsSave}
             </button>
           </div>
         </form>

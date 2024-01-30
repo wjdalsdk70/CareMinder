@@ -51,9 +51,29 @@ export default function EditArea({ session }) {
       );
       navigate("/nurse/admin/settings");
     } catch (error) {
+      setStatus("failed")
       console.error(error);
     }
   };
+
+  function statusMessage() {
+    let statusMessage;
+    switch (status) {
+      case "success":
+        statusMessage = (
+            <div className="success">Edit area</div>
+        );
+        break;
+      case "failed":
+        statusMessage = (
+            <div className="error">Failed to edit area</div>
+        );
+        break;
+      default:
+        statusMessage = null;
+    }
+    return statusMessage;
+  }
 
   function handleCancel() {
     navigate("/nurse/admin/settings");
@@ -64,13 +84,14 @@ export default function EditArea({ session }) {
       <NurseHeader session={session} />
       <div className="title">
         <FaUserEdit size="3rem" />
-          <h1>Edit Area data</h1>
+          <h1>{nurse.editAreaHeader}</h1>
       </div>
       <div id="data_form">
         <form onSubmit={handleSubmit}>
+          {statusMessage()}
           <div className="input_field">
             <p>
-              Edit Area
+              {nurse.editAreaHeader}
               <span>{nurse.required}</span>
             </p>
             <input
@@ -83,10 +104,10 @@ export default function EditArea({ session }) {
           </div>
           <div id="bottom_buttons">
             <button className="cancel_button" onClick={handleCancel}>
-              Cancel
+              {nurse.editButtonsCancel}
             </button>
             <button className="save_button" type="submit">
-              Update
+              {nurse.editButtonsSave}
             </button>
           </div>
         </form>

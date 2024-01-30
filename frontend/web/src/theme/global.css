@@ -152,9 +152,7 @@ main {
   color: #b91c1c;
 }
 
-.error,
-.success,
-.loading {
+.info-box {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -164,6 +162,7 @@ main {
   width: 100%;
   color: white;
   font-size: 1.5rem;
+<<<<<<< HEAD
 }
 
 .error {
@@ -188,3 +187,6 @@ main {
   justify-content: center;
   align-items: center;
 }
+=======
+}
+>>>>>>> fec3780cde9633e4750699b0939778614f11cdcb

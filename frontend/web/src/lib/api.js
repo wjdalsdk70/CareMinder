@@ -439,7 +439,7 @@ export async function getArea(session, id) {
 export async function patchArea(session, id, name) {
   const response = await authFetch(
     session,
-    `${BASE_URL}/setting/areas/${id}/`,
+    `${BASE_URL}/settings/areas/${id}/`,
     {
       method: "PATCH",
       headers: {
