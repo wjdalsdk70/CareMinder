@@ -10,6 +10,7 @@ import useLocalStorage from "../../../hooks/useLocalStorage";
 import { getStaff } from "src/lib/api";
 
 import data from "../../../data.json";
+import { useRedirectToHome } from "src/hooks/useSession";
 
 function validate(data) {
   const errors = {};

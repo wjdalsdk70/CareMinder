@@ -8,19 +8,16 @@ import { GoSignOut } from "react-icons/go";
 import longLogo from "src/assets/longLogo.svg";
 import { IoClose } from "react-icons/io5";
 import "./NurseSidebar.css";
-import {
-  IoIosCheckmarkCircle,
-  IoMdSettings,
-} from "react-icons/io";
+import { IoIosCheckmarkCircle, IoMdSettings } from "react-icons/io";
 import { MdDownloading } from "react-icons/md";
 import { getStaff } from "../../lib/api";
 import { Link } from "react-router-dom";
-import data from "../../data.json"
+import data from "../../data.json";
 
 export default function NurseSidebar({ session, isOpen, onClose }) {
   const sidebarRef = useRef(null);
   const [staff, setStaff] = useState([]);
-  const nurse = data.nurse
+  const nurse = data.nurse;
 
   useEffect(() => {
     const handleOutsideClick = (event) => {
@@ -55,6 +52,7 @@ export default function NurseSidebar({ session, isOpen, onClose }) {
   }, [isOpen, onClose]);
 
   async function fetchStaff() {
+    if (!session.user.id) return;
     try {
       const resp = await getStaff(session, session.user.id);
       setStaff(resp);
@@ -77,58 +75,39 @@ export default function NurseSidebar({ session, isOpen, onClose }) {
       <div className="sidebar-links">
         <img className="sidebar-logo" src={longLogo} alt="" />
         <div className="sidebar-link-user">
-  <p>
-    <BiSolidUserCircle />
-     {staff.username}
-  </p>
-  <div className="sidebar-link-signout" onClick={handleLogOut}>
-    <GoSignOut />
-  </div>
-</div>
+          <p>
+            <BiSolidUserCircle />
+            {staff.username}
+          </p>
+          <div className="sidebar-link-signout" onClick={handleLogOut}>
+            <GoSignOut />
+          </div>
+        </div>
 
-      
-          <Link className="sidebar-link" to="/nurse/home/" href="#">
-            <FaHouse color="white"/>
-            <p>
-              {nurse.nurseSideBarHome}
-            </p>
-          
-          </Link>
-   
+        <Link className="sidebar-link" to="/nurse/home/" href="#">
+          <FaHouse color="white" />
+          <p>{nurse.nurseSideBarHome}</p>
+        </Link>
 
-       
-          <Link className="sidebar-link" to="/nurse/home/completedRequests">
-            <IoIosCheckmarkCircle color="white" />
-            <p> {nurse.nurseSideBarCompleted}</p>
-           
-          </Link>
-     
+        <Link className="sidebar-link" to="/nurse/home/completedRequests">
+          <IoIosCheckmarkCircle color="white" />
+          <p> {nurse.nurseSideBarCompleted}</p>
+        </Link>
 
+        <Link className="sidebar-link" to="/nurse/home/completedRequests">
+          <MdDownloading color="white" />
+          <p>{nurse.nurseSideBarSetProgress}</p>
+        </Link>
 
-          <Link className="sidebar-link" to="/nurse/home/completedRequests">
-            <MdDownloading color="white" />
-            <p>{nurse.nurseSideBarSetProgress}</p>
-           
-          </Link>
-    
+        <Link className="sidebar-link" to="/nurse/admin/userlist">
+          <FaUserEdit color="white" />
+          <p>{nurse.nurseSideBarUserInfo}</p>
+        </Link>
 
-      
-          <Link className="sidebar-link" to="/nurse/admin/userlist">
-            <FaUserEdit color="white" />
-            <p>
-              {nurse.nurseSideBarUserInfo}
-            </p>
-          </Link>
-   
-
-   
-          <Link className="sidebar-link" to="/nurse/admin/settings">
-            <IoMdSettings color="white" />
-            <p>
-              {nurse.nurseSideBarSettings}
-            </p>
-          </Link>
-      
+        <Link className="sidebar-link" to="/nurse/admin/settings">
+          <IoMdSettings color="white" />
+          <p>{nurse.nurseSideBarSettings}</p>
+        </Link>
       </div>
     </div>
   );

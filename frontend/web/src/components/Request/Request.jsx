@@ -35,6 +35,7 @@ export default function Request({
   }, [isOpen]);
 
   useEffect(() => {
+    fetchChatMessages();
     const fetchMessagesInterval = setInterval(() => {
       fetchChatMessages();
     }, 5000);

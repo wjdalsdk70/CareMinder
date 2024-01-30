@@ -41,7 +41,7 @@ class RequestFilter(django_filters.FilterSet):
 
 
 class RequestListCreateView(generics.ListCreateAPIView):
-    # permission_classes = [CustomDjangoModelPermissions]
+    permission_classes = [CustomDjangoModelPermissions]
     queryset = Request.objects.all()
     serializer_class = RequestSerializer
     filter_backends = [DjangoFilterBackend]

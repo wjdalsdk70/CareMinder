@@ -9,9 +9,8 @@ import EditUser from "src/pages/Nurse/Admin/EditUser/EditUser";
 import UserList from "src/pages/Nurse/Admin/UserList/UserList";
 import useSession from "src/hooks/useSession";
 import EditTablets from "src/pages/Nurse/Admin/EditTablets/EditTablets";
-import AddTablet from "src/pages/Nurse/Admin/AddTablet/AddTablet"
+import AddTablet from "src/pages/Nurse/Admin/AddTablet/AddTablet";
 import PatientLogin from "src/pages/Patient/Login/Login";
-
 
 import PatientHome from "src/pages/Patient/Home/Home";
 import Agreement from "src/pages/Patient/Agreement/Agreement";
@@ -34,7 +33,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigate to="/nurse/login" />} />
 
-        <Route path="/nurse/*" element={<Navigate to="/nurse/login" />} />
+        <Route path="/nurse/*" element={<Navigate to="/nurse/home" />} />
         <Route path="/nurse" element={<Navigate to="/nurse/login" />} />
         <Route path="/nurse/login" element={<NurseLogin session={session} />} />
         <Route
@@ -46,8 +45,8 @@ function App() {
           element={<NurseHomeRequests session={session} />}
         />
         <Route
-            path="/nurse/home/completedRequests"
-            element={<CompletedPatientRequests session={session} />}
+          path="/nurse/home/completedRequests"
+          element={<CompletedPatientRequests session={session} />}
         />
         <Route
           path="/nurse/home/patients"
@@ -62,37 +61,32 @@ function App() {
           element={<AddUser session={session} />}
         />
         <Route
-            path="/nurse/admin/addTablet"
-            element={<AddTablet session={session} />}
+          path="/nurse/admin/addTablet"
+          element={<AddTablet session={session} />}
         />
         <Route
-            path="/nurse/admin/addArea"
-            element={<AddArea session={session} />}
+          path="/nurse/admin/addArea"
+          element={<AddArea session={session} />}
         />
         <Route
           path="/nurse/admin/editUser/:id"
           element={<EditUser session={session} />}
         />
         <Route
-            path="/nurse/admin/editTablet/:id"
-            element={<EditTablets session={session} />}
+          path="/nurse/admin/editTablet/:id"
+          element={<EditTablets session={session} />}
         />
         <Route
-            path="/nurse/admin/editArea/:id"
-            element={<EditArea session={session} />}
+          path="/nurse/admin/editArea/:id"
+          element={<EditArea session={session} />}
         />
         <Route
           path="/nurse/admin/userList"
           element={<UserList session={session} />}
         />
 
-        <Route
-            path="/patient/*"
-            element={<Navigate to="/patient/login" />}
-        />
-        <Route
-            path="/patient"
-            element={<Navigate to="/patient/login" />} />
+        <Route path="/patient/*" element={<Navigate to="/patient/home" />} />
+        <Route path="/patient" element={<Navigate to="/patient/login" />} />
 
         <Route
           path="/patient/login"
@@ -102,15 +96,15 @@ function App() {
           path="/patient/home"
           element={<PatientHome session={session} />}
         />
+        <Route path="/patient/agreement" element={<Agreement />} />
         <Route
-            path="/patient/agreement"
-            element={<Agreement />}/>
+          path="/patient/recording"
+          element={<Recording session={session} />}
+        />
         <Route
-            path="/patient/recording"
-            element={<Recording session={session} />} />
-        <Route
-            path="/patient/recordingResults"
-            element={<RecordingResult session={session}/>} />
+          path="/patient/recordingResults"
+          element={<RecordingResult session={session} />}
+        />
       </Routes>
     </div>
   );
