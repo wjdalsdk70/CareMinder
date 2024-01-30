@@ -146,21 +146,42 @@ export default function ViewRequest({ session }) {
       const item = selItem.s === "r" ? ongoing[selItem.i] : waiting[selItem.i];
       await handleStateChangeDelete(item.id);
 
+      let newWaiting = waiting.filter((_, i) => i !== selItem.i);
+      let newOngoing = ongoing.filter((_, i) => i !== selItem.i);
+
+      // Sort the arrays before setting them
+      newWaiting.sort((a, b) => a.id - b.id);
+      newOngoing.sort((a, b) => a.id - b.id);
+
       selItem.s === "l"
-        ? setWaiting(waiting.filter((_, i) => i !== selItem.i))
-        : setOngoing(ongoing.filter((_, i) => i !== selItem.i));
+        ? setWaiting(newWaiting)
+        : setOngoing(newOngoing);
     } else if (targetElement.charAt(0) !== selItem.s) {
       const item = selItem.s === "r" ? ongoing[selItem.i] : waiting[selItem.i];
       if (selItem.s === "l") {
         await handleStateChangeMine(item.id);
         item.state = 1;
-        setWaiting(waiting.filter((_, i) => i !== selItem.i));
-        setOngoing([...ongoing, item]);
+        let newWaiting = waiting.filter((_, i) => i !== selItem.i);
+        let newOngoing = [...ongoing, item];
+
+        // Sort the arrays before setting them
+        newWaiting.sort((a, b) => a.id - b.id);
+        newOngoing.sort((a, b) => a.id - b.id);
+
+        setWaiting(newWaiting);
+        setOngoing(newOngoing);
       } else {
         await handleStateChangeGlobal(item.id);
         item.state = 0;
-        setOngoing(ongoing.filter((_, i) => i !== selItem.i));
-        setWaiting([...waiting, item]);
+        let newOngoing = ongoing.filter((_, i) => i !== selItem.i);
+        let newWaiting = [...waiting, item];
+
+        // Sort the arrays before setting them
+        newWaiting.sort((a, b) => a.id - b.id);
+        newOngoing.sort((a, b) => a.id - b.id);
+
+        setWaiting(newWaiting);
+        setOngoing(newOngoing);
       }
     }
   };
@@ -244,6 +265,7 @@ export default function ViewRequest({ session }) {
         selectedOptions.ongoing.area,
         selectedOptions.ongoing.job
       );
+
       setOngoing(getAllRequests);
     } catch (error) {
       console.error(error);
@@ -375,7 +397,7 @@ export default function ViewRequest({ session }) {
                   from_patient={false}
                 />
               </div>
-            ))}
+              ))}
           </div>
           {holding ? (
             <div className={styles.finishArea} name="rightArea"></div>

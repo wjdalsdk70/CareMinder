@@ -16,7 +16,9 @@ export default function CompletedPatientRequests({ session }) {
             const getAllRequests = await getRequestsFiltered(session, {
                 state : 2
             });
-            setRequests(getAllRequests);
+            const reversedRequests = getAllRequests.reverse();
+
+            setRequests(reversedRequests);
 
         } catch (error) {
             console.error(error);
@@ -49,9 +51,9 @@ export default function CompletedPatientRequests({ session }) {
             <div className="data-form">
                 <form className="table">
                     <div className="completedRequestHeader">
-                        <div className="itemTime">Time</div>
-                        <div className="item">Classification</div>
-                        <div className="itemRequest">Request Details</div>
+                        <div className="itemTime">{nurse.completedPatientTime}</div>
+                        <div className="item">{nurse.completedPatientClassification}</div>
+                        <div className="itemRequest">{nurse.completedPatientRequestDetails}</div>
                     </div>
 
                     {request.map((request, index) => {
@@ -64,7 +66,6 @@ export default function CompletedPatientRequests({ session }) {
                                 </div>
                             )
                     })}
-
 
                 </form>
             </div>

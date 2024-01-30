@@ -34,7 +34,7 @@ export default function Login({ session }) {
   const patient = data.patient;
   const navigate = useNavigate();
   const [searchParams, _] = useSearchParams();
-  const next = searchParams.get("next") || "/patient/home";
+  const next = searchParams.get("next") || "/patient/agreement";
 
   const [isLoading, setIsLoading] = useState(false);
   const [status, setStatus] = useState();

@@ -8,12 +8,10 @@ import moment from "moment";
 import {
   postChatMessage,
   getChatMessages,
-  getArea,
-  getTablet,
+
 } from "src/lib/api";
 
 import "./Request.css";
-import { useRedirectToHome } from "src/hooks/useSession";
 
 export default function Request({
   request,
@@ -36,21 +34,14 @@ export default function Request({
 
   useEffect(() => {
     fetchChatMessages();
-    const fetchMessagesInterval = setInterval(() => {
-      fetchChatMessages();
-    }, 5000);
-    return () => clearInterval(fetchMessagesInterval);
-  }, []);
+  }, [request]);
 
   async function fetchChatMessages() {
     if (!request.id) return;
     try {
       const resp = await getChatMessages(session, request.id);
 
-      if (prevCount - resp.length !== 0 && !isOpenRef.current) {
-        setNewMessageCount((newMessage) => newMessage + 1);
-        prevCount = resp.length;
-      }
+      setNewMessageCount(resp.length - newMessageCount);
 
       setChat(resp);
     } catch (error) {

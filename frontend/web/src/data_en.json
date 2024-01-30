@@ -121,7 +121,18 @@
 
     "settingsName": "Name",
     "settingsArea": "Area",
-    "settingsTablet": "Tablet"
+    "settingsTablet": "Tablet",
+
+    "nurseSideBarHome": "Patient Request",
+    "nurseSideBarCompleted": "Completed Patient Requests",
+    "nurseSideBarSetProgress": "Set progress by patient",
+    "nurseSideBarUserInfo": "Query user Information",
+    "nurseSideBarSettings": "Configuration Settings",
+
+    "completedPatientRequests": "Completed patient requests",
+    "completedPatientTime": "Time",
+    "completedPatientClassification": "Classification",
+    "completedPatientRequestDetails": "Request Details"
 
   }
 }

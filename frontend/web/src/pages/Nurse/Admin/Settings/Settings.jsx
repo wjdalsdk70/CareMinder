@@ -2,20 +2,17 @@ import data from "src/data.json";
 import "./Settings.css";
 import Switch from "src/components/Switch/Switch";
 import NurseHeader from "src/components/NurseHeader/NurseHeader";
-import { IoMdAddCircle } from "react-icons/io";
 import {
   getAreas,
   getSettings,
-  getStaff,
   getTablets,
   updateSettings,
-  updateStaff,
 } from "../../../../lib/api";
 import React, { useEffect, useState } from "react";
 import { useRedirectToLogin } from "../../../../hooks/useSession";
 import { Link, useNavigate } from "react-router-dom";
 import { FaPlusCircle } from "react-icons/fa";
-import InfoBox from "../../../../components/InfoBox/InfoBox";
+
 
 export default function Settings({ session }) {
   useRedirectToLogin(session, "/nurse/login");
@@ -91,12 +88,12 @@ export default function Settings({ session }) {
     switch (status) {
       case "success":
         statusMessage = (
-            <InfoBox type="success" message="Edited Hospital Settings" />
+            <div className="success">Edited Hospital Settings</div>
         );
         break;
       case "failed":
         statusMessage = (
-            <InfoBox type="error" message="Failed to edit settings" />
+            <div className="error"> Failed to edit settings</div>
         );
         break;
       default:
@@ -123,7 +120,7 @@ export default function Settings({ session }) {
                 <div>
                   <label>{data.nurse.settingsHospitalTitle}</label>
                   <textarea
-                    placeholder={data.patient.hospitalTitle}
+                    placeholder={data.nurse.settingsHospitalTitle}
                     value={settings.hospital_title}
                     onChange={handleChange}
                     name="hospital_title"
@@ -134,7 +131,7 @@ export default function Settings({ session }) {
                 <div>
                   <label>{data.nurse.settingsHospitalSubtitle}</label>
                   <textarea
-                    placeholder={data.patient.hospitalSubtitle}
+                    placeholder={data.nurse.settingsHospitalSubtitle}
                     value={settings.hospital_description}
                     onChange={handleChange}
                     name="hospital_description"
@@ -149,7 +146,7 @@ export default function Settings({ session }) {
                 <div>
                   <label>{data.nurse.settingsHospitalTitle}</label>
                   <textarea
-                    placeholder={data.patient.hospitalTitle}
+                    placeholder={data.nurse.settingsHospitalTitle}
                     className="settings__home__textarea"
                     value={settings.notification}
                     name="notification"
@@ -167,7 +164,7 @@ export default function Settings({ session }) {
               </div>
             </div>
 
-            <h2>Edit Area Name</h2>
+            <h2>{data.nurse.editAreaHeader}</h2>
             <div className="tabletslist-add">
               <div className="tabletslist">
                 <div className="list-items">
@@ -201,7 +198,7 @@ export default function Settings({ session }) {
               />
             </div>
 
-            <h2>Edit Tablets</h2>
+            <h2>{data.nurse.editTabletHeader}</h2>
             <div className="tabletslist-add">
               <div className="tabletslist">
                 <div className="list-items">

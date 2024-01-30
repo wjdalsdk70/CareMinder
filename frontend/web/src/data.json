@@ -121,38 +121,37 @@
         "filterByPatient" : "환자별",
         "filterByArea" : "병실별",
 
-        "areaHeader": "Add an Area",
-        "setArea": "Set and Area",
-        "addUserHeader": "Add new User",
-        "addTabletArea": "Area of Tablet",
-        "addTabletNameOfTablet": "Name of tablet",
-        "addTabletHeader": "Add Tablet",
-        "editAreaHeader": "Edit Area",
-        "editTabletHeader": "Edit Tablet",
-        "editUserHeader": "Edit User",
+        "areaHeader": "병실 추가",
+        "setArea": "병실 선택",
+        "addUserHeader": "새 사용자 추가",
+        "addTabletArea": "태블릿 지정 병실",
+        "addTabletNameOfTablet": "태블릿 이름",
+        "addTabletHeader": "태블릿 추가",
+        "editAreaHeader": "병실 설정 편집",
+        "editTabletHeader": "태블릿 설정 편집",
+        "editUserHeader": "사용자 설정 편집",
 
 
-        "editButtonsSave": "Save",
-        "editButtonsSaveAndAddAnother": "Save and add another",
-        "editButtonsSaveAndReturn": "Save and return",
-        "editButtonsCancel": "Cancel",
-        "userSelectType" : "Please select a Type",
+        "editButtonsSave": "저장",
+        "editButtonsSaveAndAddAnother": "저장하고 다른 항목 추가",
+        "editButtonsSaveAndReturn": "저장하고 돌아가기",
+        "editButtonsCancel": "취소",
+        "userSelectTpye" : "유형을 선택해 주세요",
 
-        "settingsName": "Name",
-        "settingsArea": "Area",
-        "settingsTablet": "Tablet",
+        "settingsName": "이름",
+        "settingsArea": "병실",
+        "settingsTablet": "태블릿",
 
-        "nurseSideBarHome": "Patient Request",
-        "nurseSideBarCompleted": "Completed Patient Requests",
-        "nurseSideBarSetProgress": "Set progress by patient",
-        "nurseSideBarUserInfo": "Query user Information",
-        "nurseSideBarSettings": "Configuration Settings",
+        "nurseSideBarHome": "환자 요청",
+        "nurseSideBarCompleted": "완료된 환자 요청",
+        "nurseSideBarSetProgress": "환자별 진행상황 설정",
+        "nurseSideBarUserInfo": "사용자 정보 조회",
+        "nurseSideBarSettings": "구성 설정",
 
-        "completedPatientRequests": "Completed patient requests",
-        "completedPatientTime": "Time",
-        "completedPatientClassification": "Classification",
-        "completedPatientRequestDetails": "Request Details"
-
+        "completedPatientRequests": "완료된 환자 요청",
+        "completedPatientTime": "시간",
+        "completedPatientClassification": "분류",
+        "completedPatientRequestDetails": "요청사항 세부정보"
     }
 
 }
