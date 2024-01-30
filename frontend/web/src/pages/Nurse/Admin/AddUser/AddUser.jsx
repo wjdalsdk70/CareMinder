@@ -11,7 +11,7 @@ export default function AddUser({ session }) {
   useRedirectToLogin(session, "/nurse/login");
   const nurse = data.nurse;
   const navigate = useNavigate();
-  const [status, setStatus] = useState()
+  const [status, setStatus] = useState();
 
   const [formData, setFormData] = useState({
     username: "",
@@ -63,14 +63,14 @@ export default function AddUser({ session }) {
     e.preventDefault();
     try {
       await postStaff(
-          session,
-          formData.username,
-          formData.password,
-          formData.first_name,
-          formData.last_name,
-          formData.roles,
-          formData.type,
-          formData.nfc
+        session,
+        formData.username,
+        formData.password,
+        formData.first_name,
+        formData.last_name,
+        formData.roles,
+        formData.type,
+        formData.nfc
       );
       setFormData({
         username: "",
@@ -81,7 +81,7 @@ export default function AddUser({ session }) {
         type: 0,
         nfc: "NFCTOKEN",
       });
-      setStatus("success")
+      setStatus("success");
     } catch (error) {
       console.error(error);
       setStatus("failed");
@@ -92,14 +92,10 @@ export default function AddUser({ session }) {
     let statusMessage;
     switch (status) {
       case "success":
-        statusMessage = (
-            <div className="success">Added user</div>
-        );
+        statusMessage = <div className="success">Added user</div>;
         break;
       case "failed":
-        statusMessage = (
-            <div className="error">username may contain only letters, numbers, and @/./+/-/_ characters.</div>
-        );
+        statusMessage = <div className="error">Failed to add user</div>;
         break;
       default:
         statusMessage = null;
@@ -204,7 +200,9 @@ export default function AddUser({ session }) {
             <button className="change_data_button">Change Data</button>
           </div>
           <div id="bottom_buttons">
-            <button className="cancel_button" onClick={handleCancel}>Cancel</button>
+            <button className="cancel_button" onClick={handleCancel}>
+              Cancel
+            </button>
             <button className="save_button" onClick={handleSaveAddAnother}>
               Save and add another
             </button>

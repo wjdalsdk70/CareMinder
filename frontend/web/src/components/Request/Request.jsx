@@ -15,7 +15,12 @@ import {
 import "./Request.css";
 import { useRedirectToHome } from "src/hooks/useSession";
 
-export default function Request({ request, session, from_patient }) {
+export default function Request({
+  request,
+  session,
+  from_patient,
+  handleChatMessageCountChange,
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const isOpenRef = useRef(isOpen);
   const [messageText, setMessageText] = useState("");
@@ -35,21 +40,6 @@ export default function Request({ request, session, from_patient }) {
     }, 5000);
     return () => clearInterval(fetchMessagesInterval);
   }, []);
-
-  useEffect(() => {
-    fetchArea();
-  }, []);
-
-  async function fetchArea() {
-    if (!request.tablet_id) return;
-    try {
-      const resp = await getTablet(session, request.tablet_id);
-      const area = await getArea(session, resp.area_id);
-      setArea(area.name);
-    } catch (error) {
-      console.error("Error fetching area:");
-    }
-  }
 
   async function fetchChatMessages() {
     if (!request.id) return;
@@ -112,7 +102,7 @@ export default function Request({ request, session, from_patient }) {
         onClick={handleClick}
       >
         {newMessageCount > 0 && (
-          <span className="request-item__notification">{newMessageCount}</span>
+          <span className="notification">{newMessageCount}</span>
         )}
         <div className="icon-container">
           {request.is_question ? (
@@ -123,7 +113,9 @@ export default function Request({ request, session, from_patient }) {
         </div>
         <div className="content-container">
           <div className="info-container">
-            <h2>{from_patient ? getStateText(request.state) : area}</h2>
+            <h2>
+              {from_patient ? getStateText(request.state) : request?.area?.name}
+            </h2>
             <p className="time">{timeAgo(request.time)}</p>
           </div>
           <div className="text-container">

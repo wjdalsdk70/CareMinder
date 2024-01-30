@@ -149,7 +149,7 @@ main {
 
 /* errors */
 .error-text {
-  @apply text-red-500;
+  color: #b91c1c;
 }
 
 .error,
@@ -172,4 +172,19 @@ main {
 
 .success {
   background-color: #059669;
+}
+
+.notification {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-25%, -25%);
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
