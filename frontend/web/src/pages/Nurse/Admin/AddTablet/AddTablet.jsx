@@ -3,7 +3,7 @@ import data from "src/data.json";
 import "./AddTablet.css";
 import NurseHeader from "src/components/NurseHeader/NurseHeader";
 import { FaUserEdit } from "react-icons/fa";
-import {getAreas, postArea, postTablet} from "../../../../lib/api";
+import { getAreas, postArea, postTablet } from "../../../../lib/api";
 import { useNavigate } from "react-router-dom";
 import { useRedirectToLogin } from "../../../../hooks/useSession";
 
@@ -11,8 +11,8 @@ export default function EditTablets({ session }) {
   useRedirectToLogin(session, "/nurse/login");
   const nurse = data.nurse;
   const navigate = useNavigate();
-  const [area, setArea] = useState([])
-  const [status, setStatus] = useState()
+  const [area, setArea] = useState([]);
+  const [status, setStatus] = useState();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -58,7 +58,7 @@ export default function EditTablets({ session }) {
       await postTablet(session, formData.name, formData.area_id);
       navigate("/nurse/admin/settings");
     } catch (error) {
-      setStatus("failed")
+      setStatus("failed");
       console.error(error);
     }
   };
@@ -71,9 +71,9 @@ export default function EditTablets({ session }) {
         name: "",
         area_id: "",
       });
-      setStatus("success")
+      setStatus("success");
     } catch (error) {
-      setStatus("failed")
+      setStatus("failed");
       console.error(error);
     }
   };
@@ -82,14 +82,10 @@ export default function EditTablets({ session }) {
     let statusMessage;
     switch (status) {
       case "success":
-        statusMessage = (
-            <div className="success">Added tablet</div>
-        );
+        statusMessage = <div className="success">Added tablet</div>;
         break;
       case "failed":
-        statusMessage = (
-            <div className="error">Failed to add tablet.</div>
-        );
+        statusMessage = <div className="error">Failed to add tablet</div>;
         break;
       default:
         statusMessage = null;
@@ -105,7 +101,7 @@ export default function EditTablets({ session }) {
         <h1>{nurse.addTabletHeader}</h1>
       </div>
       <div id="data_form">
-        <form >
+        <form>
           {statusMessage()}
           <div className="input_field">
             <p>
@@ -143,7 +139,9 @@ export default function EditTablets({ session }) {
             </select>
           </div>
           <div id="bottom_buttons">
-            <button className="cancel_button" onClick={handleCancel}>{nurse.editButtonsCancel}</button>
+            <button className="cancel_button" onClick={handleCancel}>
+              {nurse.editButtonsCancel}
+            </button>
             <button className="save_button" onClick={handleSaveAddAnother}>
               {nurse.editButtonsSaveAndAddAnother}
             </button>

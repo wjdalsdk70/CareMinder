@@ -13,8 +13,7 @@ export default function EditTablets({ session }) {
   const { id } = useParams();
   const navigate = useNavigate();
   const [area, setArea] = useState([]);
-  const [status, setStatus] = useState()
-
+  const [status, setStatus] = useState();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -59,14 +58,10 @@ export default function EditTablets({ session }) {
     let statusMessage;
     switch (status) {
       case "success":
-        statusMessage = (
-            <div className="success">edited area</div>
-        );
+        statusMessage = <div className="success">edited area</div>;
         break;
       case "failed":
-        statusMessage = (
-            <div className="error">Failed to edit Area</div>
-        );
+        statusMessage = <div className="error">Failed to edit Area</div>;
         break;
       default:
         statusMessage = null;
@@ -84,7 +79,7 @@ export default function EditTablets({ session }) {
       await patchTablet(session, id, formData.name, formData.area_id);
       navigate("/nurse/admin/settings");
     } catch (error) {
-      setStatus("failed")
+      setStatus("failed");
       console.error(error);
     }
   };
