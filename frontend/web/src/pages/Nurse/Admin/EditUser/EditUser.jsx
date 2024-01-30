@@ -107,7 +107,7 @@ export default function EditUser({ session }) {
       <NurseHeader session={session} />
       <div className="title">
         <FaUserEdit size="3rem" />
-        <h1>Edit user data</h1>
+        <h1>{nurse.editUserHeader}</h1>
       </div>
       <div id="data_form">
         <form onSubmit={handleSubmit}>

@@ -3,15 +3,13 @@ import data from "src/data.json";
 import "./CompletedPatientRequest.css";
 import NurseHeader from "src/components/NurseHeader/NurseHeader";
 import { FaUserEdit } from "react-icons/fa";
-import {getArea, getRequestsFiltered, getStaff, getTablet, patchArea} from "../../../../lib/api";
-import { useNavigate, useParams } from "react-router-dom";
+import {getRequestsFiltered} from "../../../../lib/api";
 import { useRedirectToLogin } from "../../../../hooks/useSession";
 
 export default function CompletedPatientRequests({ session }) {
     useRedirectToLogin(session, "/nurse/login");
     const [request, setRequests] = useState([])
-    const [area, setArea] = useState([])
-    const [staff, setStaff] = useState([])
+    const nurse = data.nurse
 
     async function fetchRequests() {
         try {
@@ -46,7 +44,7 @@ export default function CompletedPatientRequests({ session }) {
             <NurseHeader session={session} />
             <div className="title">
                 <FaUserEdit size="3rem" />
-                <h1>Completed patient requests</h1>
+                <h1>{nurse.completedPatientRequests}</h1>
             </div>
             <div className="data-form">
                 <form className="table">

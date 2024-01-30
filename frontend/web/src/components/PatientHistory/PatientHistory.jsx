@@ -2,14 +2,10 @@ import React, { useState, useEffect } from "react";
 import { FaBars } from "react-icons/fa";
 import { MdKeyboardArrowLeft } from "react-icons/md";
 import { getRequestsFiltered, getChatMessages } from "../../lib/api";
-import {
-  BsQuestionCircleFill,
-  BsArrowDownRightCircleFill,
-} from "react-icons/bs";
-import moment from "moment";
 import "./PatientHistory.css";
 import Request from "../Request/Request";
 import useLocalStorage from "src/hooks/useLocalStorage";
+import data from "../../data.json"
 
 export default function PatientHistory({ session }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,6 +13,7 @@ export default function PatientHistory({ session }) {
   const [chats, setChats] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [tablet, setTablet] = useLocalStorage("tablet", {});
+  const patient = data.patient
 
   useEffect(() => {
     const fetchData = async () => {
@@ -53,7 +50,7 @@ export default function PatientHistory({ session }) {
       </div>
       <div className="patient-history__title">
         <FaBars size="2rem" className="patient-history__title__icon" />
-        <h1>Request Details</h1>
+        <h1>{patient.requestDetails}</h1>
       </div>
       <div className="patient-history__requests">
         {isLoading ? (

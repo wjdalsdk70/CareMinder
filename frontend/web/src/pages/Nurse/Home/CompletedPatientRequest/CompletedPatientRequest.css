@@ -22,22 +22,23 @@
     display: flex;
     justify-content: space-between;
     padding: 10px;
+    font-size: 1.3rem;
 }
 
 .completedRequestHeader, .row .itemRequest {
-    width: 60%;
+    width: 74%;
     padding: 0 1rem;
 
 }
 
 .completedRequestHeader, .row .item {
-    width: 27%;
+    width: 16%;
     padding: 0.5rem 1rem;
 
 }
 
 .completedRequestHeader, .row .itemTime {
-    width: 13%;
+    width: 10%;
     padding: 0.5rem 1rem;
 
 }
@@ -49,7 +50,7 @@
 }
 
 .completedRequestHeader .itemRequest {
-    width: 60%;
+    width: 74%;
     color: white;
     font-size: 1.3rem;
     padding: 0.5rem 1rem;
@@ -57,14 +58,14 @@
 }
 
 .completedRequestHeader .item {
-    width: 27%;
+    width: 16%;
     color: white;
     font-size: 1.3rem;
     padding: 0.5rem 1rem;
 }
 
 .completedRequestHeader .itemTime {
-    width: 13%;
+    width: 10%;
     color: white;
     font-size: 1.3rem;
     padding: 0.5rem 1rem;
