@@ -17,7 +17,7 @@ export default function Request({
   request,
   session,
   from_patient,
-  handleChatMessageCountChange,
+  handleNotificationCountChange = () => {},
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const isOpenRef = useRef(isOpen);
@@ -31,6 +31,10 @@ export default function Request({
   useEffect(() => {
     isOpenRef.current = isOpen;
   }, [isOpen]);
+
+  useEffect(() => {
+    handleNotificationCountChange(newMessageCount);
+  }, [newMessageCount]);
 
   useEffect(() => {
     fetchChatMessages();

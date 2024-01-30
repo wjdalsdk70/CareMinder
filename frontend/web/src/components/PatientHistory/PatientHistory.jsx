@@ -5,15 +5,24 @@ import { getRequestsFiltered, getChatMessages } from "../../lib/api";
 import "./PatientHistory.css";
 import Request from "../Request/Request";
 import useLocalStorage from "src/hooks/useLocalStorage";
-import data from "../../data.json"
+import data from "../../data.json";
 
 export default function PatientHistory({ session }) {
   const [isOpen, setIsOpen] = useState(false);
   const [requests, setRequests] = useState([]);
   const [chats, setChats] = useState([]);
+  const [notificationCount, setNotificationCount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [tablet, setTablet] = useLocalStorage("tablet", {});
-  const patient = data.patient
+  const patient = data.patient;
+
+  function handleNotificationCountChange(count) {
+    setNotificationCount((prev) => prev + count);
+  }
+
+  useEffect(() => {
+    if (isOpen) setNotificationCount(0);
+  }, [isOpen]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,11 +56,11 @@ export default function PatientHistory({ session }) {
           className={`patient-history__button__icon ${isOpen && "active"}`}
           size="8rem"
         />
-        {
+        {notificationCount > 0 && (
           <span className="patient-history__notification notification">
-            {5}
+            {notificationCount}
           </span>
-        }
+        )}
       </div>
       <div className="patient-history__title">
         <FaBars size="2rem" className="patient-history__title__icon" />
@@ -71,6 +80,7 @@ export default function PatientHistory({ session }) {
                 request={request}
                 session={session}
                 from_patient={true}
+                handleNotificationCountChange={handleNotificationCountChange}
               />
             ))
         )}
