@@ -69,7 +69,7 @@ export default function ViewRequest({ session }) {
 
     if (targetElement === "finishArea") {
       const item = selItem.s === "r" ? ongoing[selItem.i] : waiting[selItem.i];
-      await handelStateChangeDelete(item.id);
+      await handleStateChangeDelete(item.id);
 
       selItem.s === "l"
         ? setWaiting(waiting.filter((_, i) => i !== selItem.i))
@@ -77,12 +77,12 @@ export default function ViewRequest({ session }) {
     } else if (targetElement.charAt(0) !== selItem.s) {
       const item = selItem.s === "r" ? ongoing[selItem.i] : waiting[selItem.i];
       if (selItem.s === "l") {
-        await handelStateChangeMine(item.id);
+        await handleStateChangeMine(item.id);
         item.state = 1;
         setWaiting(waiting.filter((_, i) => i !== selItem.i));
         setOngoing([...ongoing, item]);
       } else {
-        await handelStateChangeGlobal(item.id);
+        await handleStateChangeGlobal(item.id);
         item.state = 0;
         setOngoing(ongoing.filter((_, i) => i !== selItem.i));
         setWaiting([...waiting, item]);
