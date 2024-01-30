@@ -65,16 +65,35 @@ export async function getRequests(session) {
 export async function getRequestsFiltered(
   session,
   {
-    forType = "",
-    isQuestion = "",
-    state = "",
-    tablet = "",
-    staff = "",
-    staffType = "",
-    tabletArea = "",
+    forType = [],
+    isQuestion = [],
+    state = [],
+    tablet = [],
+    staff = [],
+    staffType = [],
+    tabletArea = [],
   }
 ) {
-  let url = `${BASE_URL}/requests/?for_type=${forType}&is_question=${isQuestion}&state=${state}&tablet=${tablet}&staff=${staff}&staff__type=${staffType}&tablet__area=${tabletArea}`;
+  const params = new URLSearchParams();
+
+  // Function to append parameters
+  const appendParams = (key, value) => {
+    if (Array.isArray(value)) {
+      value.forEach((v) => params.append(key, v));
+    } else {
+      params.append(key, value);
+    }
+  };
+
+  appendParams("for_type", forType);
+  appendParams("is_question", isQuestion);
+  appendParams("state", state);
+  appendParams("tablet", tablet);
+  appendParams("staff", staff);
+  appendParams("staff__type", staffType);
+  appendParams("tablet__area", tabletArea);
+
+  let url = `${BASE_URL}/requests/?${params.toString()}`;
 
   const response = await authFetch(session, url, {
     method: "GET",
@@ -306,13 +325,13 @@ export async function postStaff(
 }
 
 export async function patchStaff(
-    session,
-    id,
-    username,
-    password,
-    first_name,
-    last_name,
-    type,
+  session,
+  id,
+  username,
+  password,
+  first_name,
+  last_name,
+  type
 ) {
   const response = await authFetch(session, `${BASE_URL}/staffs/${id}/`, {
     method: "PATCH",
@@ -333,7 +352,6 @@ export async function patchStaff(
   const data = await response.json();
   return data;
 }
-
 
 export async function updateStaff(
   session,
@@ -418,18 +436,18 @@ export async function getArea(session, id) {
   return data;
 }
 
-export async function patchArea(
+export async function patchArea(session, id, name) {
+  const response = await authFetch(
     session,
-    id,
-    name,
-) {
-  const response = await authFetch(session, `${BASE_URL}/setting/areas/${id}/`, {
-    method: "PATCH",
-    headers: {
-      "content-type": "application/json",
-    },
-    body: JSON.stringify({ name }),
-  });
+    `${BASE_URL}/setting/areas/${id}/`,
+    {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ name }),
+    }
+  );
   if (!response.ok) {
     return Promise.reject(response);
   }
@@ -437,10 +455,7 @@ export async function patchArea(
   return data;
 }
 
-export async function postArea(
-    session,
-    name,
-) {
+export async function postArea(session, name) {
   const response = await authFetch(session, `${BASE_URL}/settings/areas/`, {
     method: "POST",
     headers: {

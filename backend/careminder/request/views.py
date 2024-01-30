@@ -5,11 +5,26 @@ from .serializers import ChatMessageSerializer, RequestSerializer
 from careminder.permissions import CustomDjangoModelPermissions
 from .models import Request, ChatMessage
 from staff.models import Staff
+from tablet.models import Tablet
+from settings.models import Area
+
+
+# Create your views here.
 
 
 class RequestFilter(django_filters.FilterSet):
-    staff = django_filters.ModelChoiceFilter(
+    for_type = django_filters.MultipleChoiceFilter(choices=Staff.Type.choices)
+    is_question = django_filters.MultipleChoiceFilter(
+        choices=[(1, "true"), (0, "false")]
+    )
+    state = django_filters.MultipleChoiceFilter(choices=Request.State.choices)
+    tablet = django_filters.ModelMultipleChoiceFilter(queryset=Tablet.objects.all())
+    staff = django_filters.ModelMultipleChoiceFilter(
         queryset=Staff.objects.all(), null_label="null"
+    )
+    staff__type = django_filters.MultipleChoiceFilter(choices=Staff.Type.choices)
+    tablet__area = django_filters.ModelMultipleChoiceFilter(
+        field_name="tablet__area", queryset=Area.objects.all()
     )
 
     class Meta:

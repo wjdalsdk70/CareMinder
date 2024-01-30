@@ -9,6 +9,8 @@ import Request from "src/components/Request/Request";
 import { getAreas, getRequestsFiltered, updateRequest } from "src/lib/api";
 import { useRedirectToLogin } from "src/hooks/useSession";
 import data from "../../../../../data.json";
+import { setSelectionRange } from "@testing-library/user-event/dist/utils";
+import { uniqueObjects } from "src/core/utils";
 
 export default function ViewRequest({ session }) {
   useRedirectToLogin(session, "nurse/login");
@@ -16,11 +18,11 @@ export default function ViewRequest({ session }) {
 
   const [selectedOptions, setSelectedOptions] = useState({
     waiting: {
-      job: {},
+      job: { 0: true, 1: true },
       area: {},
     },
     ongoing: {
-      job: {},
+      job: { 0: true, 1: true },
       area: {},
     },
   });
@@ -30,8 +32,8 @@ export default function ViewRequest({ session }) {
 
   const [filterOptions, setFilterOptions] = useState({
     job: [
-      { value: "request", description: "Request" },
-      { value: "question", description: "Question" },
+      { value: 0, description: "Request" },
+      { value: 1, description: "Question" },
     ],
     patient: [],
     area: [],
@@ -60,7 +62,26 @@ export default function ViewRequest({ session }) {
           area: areas,
         };
       });
-    } catch (error) {}
+      setSelectedOptions((prev) => {
+        return {
+          ...prev,
+          waiting: {
+            ...prev.waiting,
+            area: areas.reduce((acc, area) => {
+              return { ...acc, [area.value]: true };
+            }, {}),
+          },
+          ongoing: {
+            ...prev.waiting,
+            area: areas.reduce((acc, area) => {
+              return { ...acc, [area.value]: true };
+            }, {}),
+          },
+        };
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   useEffect(() => {
@@ -167,30 +188,44 @@ export default function ViewRequest({ session }) {
 
   async function handleStateChangeDelete(id) {
     try {
-      const getAllRequests = await updateRequest(session, id, 2, session.user.id);
+      const getAllRequests = await updateRequest(
+        session,
+        id,
+        2,
+        session.user.id
+      );
     } catch (error) {
       console.error(error);
     }
   }
 
-  async function fetchRequests(filters, areas) {
-    let getAllRequests = [];
+  async function fetchRequests(filters, areas, jobs) {
+    let selectedAreas = [];
+    let selectedJobs = [];
+
     for (const [areaKey, areaValue] of Object.entries(areas)) {
-      if (!areaValue) continue;
-      const resp = await getRequestsFiltered(session, {
-        ...filters,
-        tabletArea: areaKey,
-      });
-      getAllRequests.push(...resp);
+      if (areaValue) selectedAreas.push(areaKey);
     }
-    return getAllRequests;
+
+    for (const [jobKey, jobValue] of Object.entries(jobs)) {
+      if (jobValue) selectedJobs.push(jobKey);
+    }
+
+    const resp = await getRequestsFiltered(session, {
+      ...filters,
+      tabletArea: selectedAreas,
+      isQuestion: selectedJobs,
+    });
+
+    return resp;
   }
 
   async function fetchWaitingRequests() {
     try {
       const getAllRequests = await fetchRequests(
         { staff: null, state: 0 },
-        selectedOptions.waiting.area
+        selectedOptions.waiting.area,
+        selectedOptions.waiting.job
       );
       setWaiting(getAllRequests);
     } catch (error) {
@@ -205,7 +240,8 @@ export default function ViewRequest({ session }) {
           staff: session.user.id,
           state: 1,
         },
-        selectedOptions.ongoing.area
+        selectedOptions.ongoing.area,
+        selectedOptions.ongoing.job
       );
       setOngoing(getAllRequests);
     } catch (error) {

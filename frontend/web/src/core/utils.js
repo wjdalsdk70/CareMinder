@@ -35,3 +35,10 @@ export function timeSince(date) {
   }
   return Math.floor(seconds) + " seconds";
 }
+
+export function uniqueObjects(array) {
+  const unique = [...new Set(array.map((o) => JSON.stringify(o)))].map((s) =>
+    JSON.parse(s)
+  );
+  return unique;
+}
