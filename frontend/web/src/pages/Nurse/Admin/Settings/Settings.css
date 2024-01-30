@@ -109,17 +109,11 @@
     line-height: 1.5; /* Adjust the line height as needed */
 }
 
-
-
-
-
-
 .settings__home .tabletslist-add
 {
     display: flex;
     justify-content: center;
-    margin-right: -3.5rem;
-    margin-top: -2.5rem;
+
 }
 
 .settings__home .tabletslist-add .tabletslist

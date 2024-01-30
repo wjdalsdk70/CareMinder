@@ -227,6 +227,7 @@ export default function ViewRequest({ session }) {
         selectedOptions.waiting.area,
         selectedOptions.waiting.job
       );
+
       setWaiting(getAllRequests);
     } catch (error) {
       console.error(error);
@@ -279,6 +280,7 @@ export default function ViewRequest({ session }) {
         }`}
       >
         <Request
+
           request={selItem.item}
           session={session}
           from_patient={false}

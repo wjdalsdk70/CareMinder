@@ -14,7 +14,6 @@
   width: 100%;
   padding: 32px;
 }
-
 .patient__home .menu {
   padding: 0 32px;
   width: 100%;
@@ -24,7 +23,9 @@
 .patient__home .menu h1 {
   font-size: 3.5rem;
   font-weight: 700;
+  margin-top: -2rem;
 }
+
 .patient__home .icon {
   color: white;
   height: 10rem;

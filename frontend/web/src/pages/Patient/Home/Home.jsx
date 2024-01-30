@@ -46,7 +46,7 @@ export default function Home({ session }) {
     <div className="patient__home">
       <PatientHeader session={session}/>
       <main>
-        <div className="container">
+        <div className="patient__home container">
           <div className="menu">
             <h1>{settings.hospital_title}</h1>
             <h2>{settings.hospital_description} </h2>
