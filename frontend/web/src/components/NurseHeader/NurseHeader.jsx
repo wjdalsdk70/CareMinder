@@ -11,7 +11,7 @@ import {useNavigate} from "react-router-dom";
 export default function NurseHeader({ session }) {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const location = useLocation();
-  const showGoBackButton = !location.pathname.includes("/nurse/home");
+  const showGoBackButton = !location.pathname.includes("/nurse/home/requests");
   const navigate = useNavigate()
 
 
