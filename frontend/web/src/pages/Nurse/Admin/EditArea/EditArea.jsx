@@ -3,7 +3,7 @@ import data from "src/data.json";
 import "./EditArea.css";
 import NurseHeader from "src/components/NurseHeader/NurseHeader";
 import { FaUserEdit } from "react-icons/fa";
-import {getArea, patchArea} from "../../../../lib/api";
+import { getArea, patchArea } from "../../../../lib/api";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRedirectToLogin } from "../../../../hooks/useSession";
 
@@ -12,10 +12,10 @@ export default function EditArea({ session }) {
   const nurse = data.nurse;
   const { id } = useParams();
   const navigate = useNavigate();
-  const [status, setStatus] = useState()
+  const [status, setStatus] = useState();
 
   const [formData, setFormData] = useState({
-    area: ""
+    area: "",
   });
 
   const fetchData = async () => {
@@ -44,14 +44,10 @@ export default function EditArea({ session }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await patchArea(
-          session,
-          id,
-          formData.area,
-      );
+      await patchArea(session, id, formData.area);
       navigate("/nurse/admin/settings");
     } catch (error) {
-      setStatus("failed")
+      setStatus("failed");
       console.error(error);
     }
   };
@@ -60,14 +56,10 @@ export default function EditArea({ session }) {
     let statusMessage;
     switch (status) {
       case "success":
-        statusMessage = (
-            <div className="success">Edit area</div>
-        );
+        statusMessage = <div className="success">Edit area</div>;
         break;
       case "failed":
-        statusMessage = (
-            <div className="error">Failed to edit area</div>
-        );
+        statusMessage = <div className="error">Failed to edit area</div>;
         break;
       default:
         statusMessage = null;
@@ -84,7 +76,7 @@ export default function EditArea({ session }) {
       <NurseHeader session={session} />
       <div className="title">
         <FaUserEdit size="3rem" />
-          <h1>{nurse.editAreaHeader}</h1>
+        <h1>{nurse.editAreaHeader}</h1>
       </div>
       <div id="data_form">
         <form onSubmit={handleSubmit}>

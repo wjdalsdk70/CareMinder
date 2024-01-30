@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from staff.models import Staff
+from settings.serializers import AreaSerializer
 from tablet.models import Tablet
 from .models import ChatMessage, Request
 from django.db.models import Q
@@ -10,6 +11,7 @@ class RequestSerializer(serializers.ModelSerializer):
         queryset=Tablet.objects.all(),
         source="tablet",
     )
+    area = AreaSerializer(read_only=True, source="tablet.area")
 
     staff_id = serializers.PrimaryKeyRelatedField(
         queryset=Staff.objects.all(),
@@ -32,6 +34,7 @@ class RequestSerializer(serializers.ModelSerializer):
             "response_time",
             "tablet_id",
             "staff_id",
+            "area",
         ]
 
 

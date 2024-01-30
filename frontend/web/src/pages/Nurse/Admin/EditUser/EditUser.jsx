@@ -3,7 +3,7 @@ import data from "src/data.json";
 import "./EditUser.css";
 import NurseHeader from "src/components/NurseHeader/NurseHeader";
 import { FaUserEdit } from "react-icons/fa";
-import {getStaff, patchStaff} from "../../../../lib/api";
+import { getStaff, patchStaff } from "../../../../lib/api";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRedirectToLogin } from "../../../../hooks/useSession";
 
@@ -12,7 +12,7 @@ export default function EditUser({ session }) {
   const nurse = data.nurse;
   const { id } = useParams();
   const navigate = useNavigate();
-  const [status, setStatus] = useState()
+  const [status, setStatus] = useState();
 
   const [formData, setFormData] = useState({
     username: "",
@@ -62,15 +62,15 @@ export default function EditUser({ session }) {
     e.preventDefault();
     try {
       await patchStaff(
-          session,
-          id,
-          formData.username,
-          formData.password,
-          formData.first_name,
-          formData.last_name,
-          formData.roles,
-          formData.type,
-          formData.nfc
+        session,
+        id,
+        formData.username,
+        formData.password,
+        formData.first_name,
+        formData.last_name,
+        formData.roles,
+        formData.type,
+        formData.nfc
       );
       navigate("/nurse/admin/userlist");
     } catch (error) {
@@ -83,14 +83,10 @@ export default function EditUser({ session }) {
     let statusMessage;
     switch (status) {
       case "success":
-        statusMessage = (
-            <div className="success">Added user</div>
-        );
+        statusMessage = <div className="success">Added user</div>;
         break;
       case "failed":
-        statusMessage = (
-            <div className="error">username may contain only letters, numbers, and @/./+/-/_ characters.</div>
-        );
+        statusMessage = <div className="error">Failed to edit user</div>;
         break;
       default:
         statusMessage = null;

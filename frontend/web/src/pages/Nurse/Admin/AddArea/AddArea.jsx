@@ -11,7 +11,7 @@ export default function AddArea({ session }) {
   useRedirectToLogin(session, "/nurse/login");
   const nurse = data.nurse;
   const navigate = useNavigate();
-  const [status, setStatus] = useState()
+  const [status, setStatus] = useState();
 
   const [formData, setFormData] = useState({
     area: "",
@@ -28,13 +28,10 @@ export default function AddArea({ session }) {
   const handleSaveReturn = async (e) => {
     e.preventDefault();
     try {
-      await postArea(
-        session,
-        formData.area,
-      );
+      await postArea(session, formData.area);
       navigate("/nurse/admin/settings");
     } catch (error) {
-      setStatus("failed")
+      setStatus("failed");
       console.error(error);
     }
   };
@@ -42,16 +39,13 @@ export default function AddArea({ session }) {
   const handleSaveAddAnother = async (e) => {
     e.preventDefault();
     try {
-      await postArea(
-          session,
-          formData.area
-      );
+      await postArea(session, formData.area);
       setFormData({
         area: "",
       });
-      setStatus("success")
+      setStatus("success");
     } catch (error) {
-      setStatus("failed")
+      setStatus("failed");
       console.error(error);
     }
   };
@@ -60,14 +54,10 @@ export default function AddArea({ session }) {
     let statusMessage;
     switch (status) {
       case "success":
-        statusMessage = (
-            <div className="success">Added area</div>
-        );
+        statusMessage = <div className="success">Added area</div>;
         break;
       case "failed":
-        statusMessage = (
-            <div className="error">Failed to create area</div>
-        );
+        statusMessage = <div className="error">Failed to create area</div>;
         break;
       default:
         statusMessage = null;
@@ -104,7 +94,9 @@ export default function AddArea({ session }) {
             ></input>
           </div>
           <div id="bottom_buttons">
-            <button className="cancel_button" onClick={handleCancel}>{nurse.editButtonsCancel}</button>
+            <button className="cancel_button" onClick={handleCancel}>
+              {nurse.editButtonsCancel}
+            </button>
             <button className="save_button" onClick={handleSaveAddAnother}>
               {nurse.editButtonsSaveAndAddAnother}
             </button>

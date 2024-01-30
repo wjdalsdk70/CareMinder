@@ -47,6 +47,11 @@ export default function PatientHistory({ session }) {
           className={`patient-history__button__icon ${isOpen && "active"}`}
           size="8rem"
         />
+        {
+          <span className="patient-history__notification notification">
+            {5}
+          </span>
+        }
       </div>
       <div className="patient-history__title">
         <FaBars size="2rem" className="patient-history__title__icon" />
@@ -56,14 +61,18 @@ export default function PatientHistory({ session }) {
         {isLoading ? (
           <p>Loading...</p>
         ) : (
-          requests.map((request) => (
-            <Request
-              key={request.id}
-              request={request}
-              session={session}
-              from_patient={true}
-            />
-          ))
+          requests
+            .sort(function (a, b) {
+              return new Date(b.time) - new Date(a.time);
+            })
+            .map((request) => (
+              <Request
+                key={request.id}
+                request={request}
+                session={session}
+                from_patient={true}
+              />
+            ))
         )}
       </div>
     </div>
