@@ -112,7 +112,7 @@ export default function AddUser({ session }) {
       <NurseHeader session={session} />
       <div className="title">
         <BsPersonFillAdd size="3rem" />
-        <h1>Add new User</h1>
+        <h1>{nurse.addUserHeader}</h1>
       </div>
 
       <div id="data_form">
@@ -177,7 +177,7 @@ export default function AddUser({ session }) {
             </p>
             <select name="type" onChange={handleChangeNum} defaultValue="">
               <option value="" disabled>
-                Please select a Type
+                {nurse.userSelectType}
               </option>
               <option value={0}>{nurse.types[0]}</option>
 

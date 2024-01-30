@@ -1,7 +1,7 @@
 import React from "react";
 
 import { useState, useEffect, useRef } from "react";
-import { FaBars, FaUserEdit } from "react-icons/fa";
+import { FaUserEdit } from "react-icons/fa";
 import { FaHouse } from "react-icons/fa6";
 import { BiSolidUserCircle } from "react-icons/bi";
 import { GoSignOut } from "react-icons/go";
@@ -9,18 +9,18 @@ import longLogo from "src/assets/longLogo.svg";
 import { IoClose } from "react-icons/io5";
 import "./NurseSidebar.css";
 import {
-  IoIosArrowBack,
   IoIosCheckmarkCircle,
   IoMdSettings,
 } from "react-icons/io";
 import { MdDownloading } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
 import { getStaff } from "../../lib/api";
 import { Link } from "react-router-dom";
+import data from "../../data.json"
 
 export default function NurseSidebar({ session, isOpen, onClose }) {
   const sidebarRef = useRef(null);
   const [staff, setStaff] = useState([]);
+  const nurse = data.nurse
 
   useEffect(() => {
     const handleOutsideClick = (event) => {
@@ -90,7 +90,7 @@ export default function NurseSidebar({ session, isOpen, onClose }) {
           <Link className="sidebar-link" to="/nurse/home/" href="#">
             <FaHouse color="white"/>
             <p>
-            Patient Request
+              {nurse.nurseSideBarHome}
             </p>
           
           </Link>
@@ -99,7 +99,7 @@ export default function NurseSidebar({ session, isOpen, onClose }) {
        
           <Link className="sidebar-link" to="/nurse/home/completedRequests">
             <IoIosCheckmarkCircle color="white" />
-            <p> Completed Patient Requests</p>
+            <p> {nurse.nurseSideBarCompleted}</p>
            
           </Link>
      
@@ -107,7 +107,7 @@ export default function NurseSidebar({ session, isOpen, onClose }) {
 
           <Link className="sidebar-link" to="/nurse/home/completedRequests">
             <MdDownloading color="white" />
-            <p> Set progress by patient</p>
+            <p>{nurse.nurseSideBarSetProgress}</p>
            
           </Link>
     
@@ -116,7 +116,7 @@ export default function NurseSidebar({ session, isOpen, onClose }) {
           <Link className="sidebar-link" to="/nurse/admin/userlist">
             <FaUserEdit color="white" />
             <p>
-            Query user Information
+              {nurse.nurseSideBarUserInfo}
             </p>
           </Link>
    
@@ -125,7 +125,7 @@ export default function NurseSidebar({ session, isOpen, onClose }) {
           <Link className="sidebar-link" to="/nurse/admin/settings">
             <IoMdSettings color="white" />
             <p>
-            Configuration Settings
+              {nurse.nurseSideBarSettings}
             </p>
           </Link>
       
