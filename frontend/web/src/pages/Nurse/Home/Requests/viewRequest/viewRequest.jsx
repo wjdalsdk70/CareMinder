@@ -167,12 +167,7 @@ export default function ViewRequest({ session }) {
 
   async function handleStateChangeMine(id) {
     try {
-      const getAllRequests = await updateRequest(
-        session,
-        id,
-        1,
-        session.user.id
-      );
+      const resp = await updateRequest(session, id, 1, session.user.id);
     } catch (error) {
       console.error(error);
     }
@@ -180,7 +175,7 @@ export default function ViewRequest({ session }) {
 
   async function handleStateChangeGlobal(id) {
     try {
-      const getAllRequests = await updateRequest(session, id, 0, null);
+      const resp = await updateRequest(session, id, 0, null);
     } catch (error) {
       console.error(error);
     }
@@ -188,12 +183,7 @@ export default function ViewRequest({ session }) {
 
   async function handleStateChangeDelete(id) {
     try {
-      const getAllRequests = await updateRequest(
-        session,
-        id,
-        2,
-        session.user.id
-      );
+      const resp = await updateRequest(session, id, 2, session.user.id);
     } catch (error) {
       console.error(error);
     }
@@ -222,12 +212,13 @@ export default function ViewRequest({ session }) {
 
   async function fetchWaitingRequests() {
     try {
-      const getAllRequests = await fetchRequests(
+      const resp = await fetchRequests(
         { staff: null, state: 0 },
         selectedOptions.waiting.area,
         selectedOptions.waiting.job
       );
-      setWaiting(getAllRequests);
+
+      setWaiting(resp);
     } catch (error) {
       console.error(error);
     }
@@ -235,7 +226,7 @@ export default function ViewRequest({ session }) {
 
   async function fetchOngoingRequests() {
     try {
-      const getAllRequests = await fetchRequests(
+      const resp = await fetchRequests(
         {
           staff: session.user.id,
           state: 1,
@@ -243,7 +234,8 @@ export default function ViewRequest({ session }) {
         selectedOptions.ongoing.area,
         selectedOptions.ongoing.job
       );
-      setOngoing(getAllRequests);
+
+      setOngoing(resp);
     } catch (error) {
       console.error(error);
     }
