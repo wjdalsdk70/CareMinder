@@ -148,7 +148,7 @@ export default function Settings({ session }) {
             <div className="tabletslist-add">
               <div className="tabletslist">
                 <div className="list-items">
-                  <h2 className="item-number">Name</h2>
+                  <h2 className="item-number">{data.nurse.settingsName}</h2>
                 </div>
 
                 <div className="userlist-rows">
@@ -184,8 +184,8 @@ export default function Settings({ session }) {
             <div className="tabletslist-add">
               <div className="tabletslist">
                 <div className="list-items">
-                  <h2 className="item-number">Name</h2>
-                  <h2 className="item-name">Area</h2>
+                  <h2 className="item-number">{data.nurse.settingsName}</h2>
+                  <h2 className="item-name">{data.nurse.settingsArea}</h2>
                 </div>
 
                 <div className="userlist-rows">
@@ -228,8 +228,8 @@ export default function Settings({ session }) {
           </div>
         </div>
         <div className="buttons">
-          <input className="cancel" onClick={handleCancel} value="Cancel"/>
-          <input className="save" type="submit" value="Save"/>
+          <input className="cancel" onClick={handleCancel} value={data.nurse.editButtonsCancel}/>
+          <input className="save" type="submit" value={data.nurse.editButtonsSave}/>
         </div>
       </form>
     </div>

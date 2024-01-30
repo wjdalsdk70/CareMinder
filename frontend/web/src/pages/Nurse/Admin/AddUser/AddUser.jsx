@@ -204,12 +204,12 @@ export default function AddUser({ session }) {
             <button className="change_data_button">Change Data</button>
           </div>
           <div id="bottom_buttons">
-            <button className="cancel_button" onClick={handleCancel}>Cancel</button>
+            <button className="cancel_button" onClick={handleCancel}>{nurse.editButtonsCancel}</button>
             <button className="save_button" onClick={handleSaveAddAnother}>
-              Save and add another
+              {nurse.editButtonsSaveAndAddAnother}
             </button>
             <button className="save_button" onClick={handleSaveReturn}>
-              Save and return
+              {nurse.editButtonsSaveAndReturn}
             </button>
           </div>
         </form>

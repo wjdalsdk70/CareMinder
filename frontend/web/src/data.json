@@ -102,6 +102,26 @@
 
     "filterByJob": "By Job",
     "filterByPatient": "By Patient",
-    "filterByArea": "By Area"
+    "filterByArea": "By Area",
+
+    "areaHeader": "Add an Area",
+    "setArea": "Set and Area",
+    "addTabletArea": "Area of Tablet",
+    "addTabletNameOfTablet": "Name of tablet",
+    "addTabletHeader": "Add Tablet",
+
+    "editAreaHeader": "Edit Area",
+    "editTabletHeader": "Edit Tablet",
+
+
+    "editButtonsSave": "Save",
+    "editButtonsSaveAndAddAnother": "Save and add another",
+    "editButtonsSaveAndReturn": "Save and return",
+    "editButtonsCancel": "Cancel",
+
+    "settingsName": "Name",
+    "settingsArea": "Area",
+    "settingsTablet": "Tablet"
+
   }
 }

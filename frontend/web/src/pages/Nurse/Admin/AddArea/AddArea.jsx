@@ -62,31 +62,31 @@ export default function AddArea({ session }) {
       <NurseHeader session={session} />
       <div className="title">
         <BsPersonFillAdd size="3rem" />
-        <h1>Add new Area</h1>
+        <h1>{nurse.areaHeader}</h1>
       </div>
 
       <div id="data_form">
         <form>
           <div className="input_field">
             <p>
-              Set Area
+              {nurse.setArea}
               <span>{nurse.required}</span>
             </p>
             <input
               name="area"
               value={formData.area}
               onChange={handleChange}
-              placeholder="Set Area"
+              placeholder={nurse.setArea}
               autoComplete="off"
             ></input>
           </div>
           <div id="bottom_buttons">
-            <button className="cancel_button" onClick={handleCancel}>Cancel</button>
+            <button className="cancel_button" onClick={handleCancel}>{nurse.editButtonsCancel}</button>
             <button className="save_button" onClick={handleSaveAddAnother}>
-              Save and add another
+              {nurse.editButtonsSaveAndAddAnother}
             </button>
             <button className="save_button" onClick={handleSaveReturn}>
-              Save and return
+              {nurse.editButtonsSaveAndReturn}
             </button>
           </div>
         </form>

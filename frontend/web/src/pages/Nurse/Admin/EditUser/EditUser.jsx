@@ -183,10 +183,10 @@ export default function EditUser({ session }) {
           </div>
           <div id="bottom_buttons">
             <button className="cancel_button" onClick={handleCancel}>
-              Cancel
+              {nurse.editButtonsCancel}
             </button>
             <button className="save_button" type="submit">
-              Update
+              {nurse.editButtonsSave}
             </button>
           </div>
         </form>
