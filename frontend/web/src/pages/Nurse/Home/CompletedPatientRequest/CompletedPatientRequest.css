@@ -18,35 +18,69 @@
     border-collapse: collapse;
 }
 
-
-.completed-request-header, .row {
+.completedRequestHeader, .row {
     display: flex;
     justify-content: space-between;
     padding: 10px;
+}
+
+.completedRequestHeader, .row .itemRequest {
+    width: 60%;
+    padding: 0 1rem;
 
 }
 
-.completed-request-header {
+.completedRequestHeader, .row .item {
+    width: 27%;
+    padding: 0.5rem 1rem;
+
+}
+
+.completedRequestHeader, .row .itemTime {
+    width: 13%;
+    padding: 0.5rem 1rem;
+
+}
+
+.completedRequestHeader {
     background-color: #383838;
     font-weight: bold;
+    width: 100%
 }
 
-.completed-request-header p{
+.completedRequestHeader .itemRequest {
+    width: 60%;
     color: white;
     font-size: 1.3rem;
+    padding: 0.5rem 1rem;
+
+}
+
+.completedRequestHeader .item {
+    width: 27%;
+    color: white;
+    font-size: 1.3rem;
+    padding: 0.5rem 1rem;
+}
+
+.completedRequestHeader .itemTime {
+    width: 13%;
+    color: white;
+    font-size: 1.3rem;
+    padding: 0.5rem 1rem;
 }
 
 
-.completed-request-header .row:nth-child(even) {
+.completedRequestHeader .row:nth-child(even) {
     background-color: #f2f2f2;
 }
 
-.completed-request-header .row > p, .row > button {
+.completedRequestHeader .row > p, .row > button {
     flex: 1;
     text-align: left;
 }
 
-.completed-request-header .row > button {
+.completedRequestHeader .row > button {
     background-color: #4CAF50; /* Adjust color as needed */
     color: white;
     border: none;
@@ -58,6 +92,6 @@
     cursor: pointer;
 }
 
-.completed-request-header.row > button:hover {
+.completedRequestHeader.row > button:hover {
     background-color: #45a049; /* Adjust color as needed */
 }

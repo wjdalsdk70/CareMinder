@@ -191,12 +191,9 @@ export default function Settings({ session }) {
                 <div className="userlist-rows">
                   <div>
                     {tablets.map((tablet, index) => {
-                      // Find the corresponding area object
                       const tabletArea = area.find(
                           (area) => area.id === tablet.area_id
                       );
-
-                      // Extract the name property from the area object
                       const areaName = tabletArea
                           ? tabletArea.name
                           : "Unknown Area";

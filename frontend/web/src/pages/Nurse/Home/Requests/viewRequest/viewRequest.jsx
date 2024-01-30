@@ -167,7 +167,7 @@ export default function ViewRequest({ session }) {
 
   async function handleStateChangeDelete(id) {
     try {
-      const getAllRequests = await updateRequest(session, id, 2, null);
+      const getAllRequests = await updateRequest(session, id, 2, session.user.id);
     } catch (error) {
       console.error(error);
     }

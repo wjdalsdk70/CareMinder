@@ -97,7 +97,7 @@ export default function NurseSidebar({ session, isOpen, onClose }) {
    
 
        
-          <Link className="sidebar-link" to="/nurse/home/">
+          <Link className="sidebar-link" to="/nurse/home/completedRequests">
             <IoIosCheckmarkCircle color="white" />
             <p> Completed Patient Requests</p>
            
@@ -105,7 +105,7 @@ export default function NurseSidebar({ session, isOpen, onClose }) {
      
 
 
-          <Link className="sidebar-link" to="/nurse/home/">
+          <Link className="sidebar-link" to="/nurse/home/completedRequests">
             <MdDownloading color="white" />
             <p> Set progress by patient</p>
            
