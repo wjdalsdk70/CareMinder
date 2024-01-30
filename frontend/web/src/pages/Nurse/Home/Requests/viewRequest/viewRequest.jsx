@@ -1,40 +1,94 @@
-import { useState, useEffect, useRef } from "react";
-
+import React, { useState, useEffect, useRef } from "react";
 import Filter from "src/components/Filter/Filter";
-
 import { BiLoaderCircle } from "react-icons/bi";
 import { FaCheckCircle } from "react-icons/fa";
 import { MdOutlineDownloading } from "react-icons/md";
-
 import styles from "./viewRequest.module.css";
 import flw from "../Requests.module.css";
 import Request from "src/components/Request/Request";
-import { getRequestsFiltered, updateRequest } from "src/lib/api";
+import { getAreas, getRequestsFiltered, updateRequest } from "src/lib/api";
 import { useRedirectToLogin } from "src/hooks/useSession";
-import { wait } from "@testing-library/user-event/dist/utils";
 import data from "../../../../../data.json";
 
 export default function ViewRequest({ session }) {
   useRedirectToLogin(session, "nurse/login");
   const nurse = data.nurse;
-  const [selectedOptions, setSelectedOptions] = useState({});
+
+  const [selectedOptions, setSelectedOptions] = useState({
+    waiting: {
+      job: {},
+      area: {},
+    },
+    ongoing: {
+      job: {},
+      area: {},
+    },
+  });
+
   const [waiting, setWaiting] = useState([]);
   const [ongoing, setOngoing] = useState([]);
+
+  const [filterOptions, setFilterOptions] = useState({
+    job: [
+      { value: "request", description: "Request" },
+      { value: "question", description: "Question" },
+    ],
+    patient: [],
+    area: [],
+  });
 
   const [selItem, setSelItem] = useState({
     i: null,
     s: null,
     item: { isQuestion: false, text: "", date: new Date() },
   });
+
   const [holding, setHolding] = useState(false);
 
   const pressTimer = useRef(null);
 
-  const handleCheckboxChange = (event) => {
-    setSelectedOptions({
-      ...selectedOptions,
-      [event.target.name]: event.target.checked,
+  async function fetchFilterOptions() {
+    try {
+      const resp = await getAreas(session);
+      const areas = resp.map((area) => ({
+        value: area.id,
+        description: area.name,
+      }));
+      setFilterOptions((prev) => {
+        return {
+          ...prev,
+          area: areas,
+        };
+      });
+    } catch (error) {}
+  }
+
+  useEffect(() => {
+    fetchFilterOptions();
+  }, []);
+
+  const handleCheckBoxChange = (event, filterName, section) => {
+    const { name, checked } = event.target;
+    setSelectedOptions((prevSelectedOptions) => {
+      return {
+        ...prevSelectedOptions,
+        [section]: {
+          ...prevSelectedOptions[section],
+          [filterName]: {
+            ...prevSelectedOptions[section][filterName],
+            [name]: checked,
+          },
+        },
+      };
     });
+  };
+
+  const handleWaitingCheckBoxChange = (event, filterName) => {
+    handleCheckBoxChange(event, filterName, "waiting");
+  };
+
+  const handleOngoingCheckBoxChange = (event, filterName) => {
+    handleCheckBoxChange(event, filterName, "ongoing");
   };
 
   const handleMouseDown = (i, s, item) => {
@@ -119,25 +173,41 @@ export default function ViewRequest({ session }) {
     }
   }
 
-  async function fetchRequests() {
-    try {
-      const getAllRequests = await getRequestsFiltered(session, {
-        staff: null,
-        state: 0,
+  async function fetchRequests(filters, areas) {
+    let getAllRequests = [];
+    for (const [areaKey, areaValue] of Object.entries(areas)) {
+      if (!areaValue) continue;
+      const resp = await getRequestsFiltered(session, {
+        ...filters,
+        tabletArea: areaKey,
       });
+      getAllRequests.push(...resp);
+    }
+    return getAllRequests;
+  }
+
+  async function fetchWaitingRequests() {
+    try {
+      const getAllRequests = await fetchRequests(
+        { staff: null, state: 0 },
+        selectedOptions.waiting.area
+      );
       setWaiting(getAllRequests);
     } catch (error) {
       console.error(error);
     }
   }
 
-  async function fetchMyRequests() {
+  async function fetchOngoingRequests() {
     try {
-      const getMyRequests = await getRequestsFiltered(session, {
-        staff: session.user.id,
-      });
-
-      setOngoing(getMyRequests);
+      const getAllRequests = await fetchRequests(
+        {
+          staff: session.user.id,
+          state: 1,
+        },
+        selectedOptions.ongoing.area
+      );
+      setOngoing(getAllRequests);
     } catch (error) {
       console.error(error);
     }
@@ -154,13 +224,16 @@ export default function ViewRequest({ session }) {
   }, [holding]);
 
   useEffect(() => {
+    fetchWaitingRequests();
+    fetchOngoingRequests();
+
     const intervalId = setInterval(() => {
-      fetchRequests();
-      fetchMyRequests();
+      fetchWaitingRequests();
+      fetchOngoingRequests();
     }, 5000);
 
     return () => clearInterval(intervalId);
-  }, []);
+  }, [selectedOptions]);
 
   return (
     <>
@@ -184,24 +257,19 @@ export default function ViewRequest({ session }) {
           <div className={styles.filter}>
             <Filter
               title={nurse.filterByJob}
-              options={[
-                { value: "name1", description: "description1" },
-                { value: "name2", description: "description2" },
-              ]}
-              selectedOptions={selectedOptions}
-              handleCheckboxChange={handleCheckboxChange}
-            />
-            <Filter
-              title={nurse.filterByPatient}
-              options={[]}
-              selectedOptions={selectedOptions}
-              handleCheckboxChange={handleCheckboxChange}
+              options={filterOptions.job}
+              selectedOptions={selectedOptions["waiting"]["job"]}
+              handleCheckboxChange={(e) =>
+                handleWaitingCheckBoxChange(e, "job")
+              }
             />
             <Filter
               title={nurse.filterByArea}
-              options={[]}
-              selectedOptions={selectedOptions}
-              handleCheckboxChange={handleCheckboxChange}
+              options={filterOptions.area}
+              selectedOptions={selectedOptions["waiting"]["area"]}
+              handleCheckboxChange={(e) =>
+                handleWaitingCheckBoxChange(e, "area")
+              }
             />
           </div>
           {holding ? <div className={styles.area} name="leftArea"></div> : ""}
@@ -235,21 +303,19 @@ export default function ViewRequest({ session }) {
           <div className={styles.filter}>
             <Filter
               title={nurse.filterByJob}
-              options={[]}
-              selectedOptions={selectedOptions}
-              handleCheckboxChange={handleCheckboxChange}
-            />
-            <Filter
-              title={nurse.filterByPatient}
-              options={[]}
-              selectedOptions={selectedOptions}
-              handleCheckboxChange={handleCheckboxChange}
+              options={filterOptions.job}
+              selectedOptions={selectedOptions["ongoing"]["job"]}
+              handleCheckboxChange={(e) =>
+                handleOngoingCheckBoxChange(e, "job")
+              }
             />
             <Filter
               title={nurse.filterByArea}
-              options={[]}
-              selectedOptions={selectedOptions}
-              handleCheckboxChange={handleCheckboxChange}
+              options={filterOptions.area}
+              selectedOptions={selectedOptions["ongoing"]["area"]}
+              handleCheckboxChange={(e) =>
+                handleOngoingCheckBoxChange(e, "area")
+              }
             />
           </div>
           {holding ? <div className={styles.area} name="rightArea"></div> : ""}
