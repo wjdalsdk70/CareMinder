@@ -86,6 +86,12 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
+        # 'ENGINE': 'django.db.backends.mysql',
+        # 'NAME': 'careminder',
+        # 'USER': 'mysql_username',  # change with actual value
+        # 'PASSWORD': 'mysql_password',
+        # 'HOST': 'mysql_hostname',
+        # 'PORT': '3306',
     }
 }
 
