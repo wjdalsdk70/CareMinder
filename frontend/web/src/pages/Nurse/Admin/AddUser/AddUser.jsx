@@ -163,6 +163,7 @@ export default function AddUser({ session }) {
               <span>{nurse.required}</span>
             </p>
             <input
+              type="password"
               name="password"
               value={formData.password}
               onChange={handleChange}
