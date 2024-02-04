@@ -43,7 +43,7 @@ export default function Login({ session }) {
       logout(session);
       session.logout();
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }, []);
 

@@ -97,7 +97,7 @@ function App() {
           element={<Recording session={session} />}
         />
         <Route
-          path="/patient/recordingResults"
+          path="/patient/recording/result"
           element={<RecordingResult session={session} />}
         />
       </Routes>

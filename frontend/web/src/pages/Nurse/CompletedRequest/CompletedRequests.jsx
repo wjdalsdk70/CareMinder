@@ -49,8 +49,8 @@ export default function CompletedRequests({ session }) {
       <div className="data-form">
         <form className="table">
           <div className="completedRequestHeader">
-            <div className="itemTime">{nurse.completedPatientTime}</div>
-            <div className="item">{nurse.completedPatientClassification}</div>
+            <div className="itemTime">{nurse.completedTime}</div>
+            <div className="item">{nurse.completedClassification}</div>
             <div className="itemRequest">{nurse.CompletedRequestDetails}</div>
           </div>
 
