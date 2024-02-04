@@ -41,7 +41,7 @@ export default function PatientHistory({ session }) {
           }
         });
 
-// Now, requestsData is sorted first by time and then by state
+        // Now, requestsData is sorted first by time and then by state
         setRequests(requestsData);
 
         setIsLoading(false);
@@ -81,18 +81,17 @@ export default function PatientHistory({ session }) {
       </div>
       <div className="patient-history__requests">
         {isLoading ? (
-            <p>Loading...</p>
+          <p>Loading...</p>
         ) : (
-            requests.map((request) => (
-                    <Request
-                        key={request.id}
-                        request={request}
-                        session={session}
-                        from_patient={true}
-                        is_staff={false}
-                        handleNotificationCountChange={handleNotificationCountChange}
-                    />
-                ))
+          requests.map((request) => (
+            <Request
+              key={request.id}
+              request={request}
+              session={session}
+              from_patient={true}
+              handleNotificationCountChange={handleNotificationCountChange}
+            />
+          ))
         )}
       </div>
     </div>

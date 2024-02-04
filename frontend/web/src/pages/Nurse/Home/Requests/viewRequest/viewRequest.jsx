@@ -153,9 +153,7 @@ export default function ViewRequest({ session }) {
       newWaiting.sort((a, b) => new Date(b.time) - new Date(a.time));
       newOngoing.sort((a, b) => new Date(b.time) - new Date(a.time));
 
-      selItem.s === "l"
-        ? setWaiting(newWaiting)
-        : setOngoing(newOngoing);
+      selItem.s === "l" ? setWaiting(newWaiting) : setOngoing(newOngoing);
     } else if (targetElement.charAt(0) !== selItem.s) {
       const item = selItem.s === "r" ? ongoing[selItem.i] : waiting[selItem.i];
       if (selItem.s === "l") {
@@ -240,7 +238,6 @@ export default function ViewRequest({ session }) {
       );
 
       setWaiting(resp.sort((a, b) => new Date(b.time) - new Date(a.time)));
-
     } catch (error) {
       console.error(error);
     }
@@ -258,7 +255,6 @@ export default function ViewRequest({ session }) {
       );
 
       setOngoing(resp.sort((a, b) => new Date(b.time) - new Date(a.time)));
-
     } catch (error) {
       console.error(error);
     }
@@ -297,7 +293,6 @@ export default function ViewRequest({ session }) {
           request={selItem.item}
           session={session}
           from_patient={false}
-          is_staff={true}
         />
       </div>
       <div className={styles.wrapper}>
@@ -341,7 +336,6 @@ export default function ViewRequest({ session }) {
                   request={item}
                   session={session}
                   from_patient={false}
-                  is_staff={true}
                 />
               </div>
             ))}
@@ -388,10 +382,9 @@ export default function ViewRequest({ session }) {
                   request={item}
                   session={session}
                   from_patient={false}
-                  is_staff={true}
                 />
               </div>
-              ))}
+            ))}
           </div>
           {holding ? (
             <div className={styles.finishArea} name="rightArea"></div>

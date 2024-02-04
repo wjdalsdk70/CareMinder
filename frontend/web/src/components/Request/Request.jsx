@@ -9,7 +9,7 @@ import { postChatMessage, getChatMessages } from "src/lib/api";
 
 import "./Request.css";
 
-export default function Request({ request, session, from_patient, is_staff }) {
+export default function Request({ request, session, from_patient }) {
   const [isOpen, setIsOpen] = useState(false);
   const isOpenRef = useRef(isOpen);
   const [messageText, setMessageText] = useState("");
@@ -31,10 +31,10 @@ export default function Request({ request, session, from_patient, is_staff }) {
     if (!request.id) return;
     try {
       const resp = await getChatMessages(session, request.id);
-      const chatLength = chat.filter(message => {
-        return message.from_patient === is_staff;
+      const chatLength = chat.filter((message) => {
+        return message.from_patient === !from_patient;
       }).length;
-      if (prevCount !== chatLength && !isOpen){
+      if (prevCount !== chatLength && !isOpen) {
         setPrevCount(chatLength);
         setNewMessageCount((newMessageCount) => newMessageCount + 1);
       }
