@@ -33,7 +33,6 @@ export default function Login({ session }) {
   const navigate = useNavigate();
   const [searchParams, _] = useSearchParams();
   const next = searchParams.get("next") || "/nurse/home";
-  const [staff, setStaff] = useLocalStorage("staff", {});
 
   const [isLoading, setIsLoading] = useState(false);
   const [status, setStatus] = useState();
@@ -44,7 +43,7 @@ export default function Login({ session }) {
       logout(session);
       session.logout();
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   }, []);
 
