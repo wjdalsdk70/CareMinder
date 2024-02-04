@@ -31,6 +31,17 @@ export default function PatientHistory({ session }) {
         });
         requestsData.sort((a, b) => new Date(b.time) - new Date(a.time));
 
+        // Sort requests by state (finished last)
+        requestsData.sort((a, b) => {
+          if (a.state === 2 && b.state !== 2) {
+            return 1;
+          } else if (a.state !== 2 && b.state === 2) {
+            return -1;
+          } else {
+            return 0;
+          }
+        });
+
         setRequests(requestsData);
 
         setIsLoading(false);

@@ -3,12 +3,12 @@ import Filter from "src/components/Filter/Filter";
 import { BiLoaderCircle } from "react-icons/bi";
 import { FaCheckCircle } from "react-icons/fa";
 import { MdOutlineDownloading } from "react-icons/md";
-import styles from "./viewRequest.module.css";
-import flw from "../Requests.module.css";
+import styles from "./ViewRequest.module.css";
+import flw from "../Home.module.css";
 import Request from "src/components/Request/Request";
 import { getAreas, getRequestsFiltered, updateRequest } from "src/lib/api";
 import { useRedirectToLogin } from "src/hooks/useSession";
-import data from "../../../../../data.json";
+import data from "src/data.json";
 import { setSelectionRange } from "@testing-library/user-event/dist/utils";
 import { uniqueObjects } from "src/core/utils";
 

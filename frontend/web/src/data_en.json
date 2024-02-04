@@ -113,7 +113,6 @@
     "editAreaHeader": "Edit Area",
     "editTabletHeader": "Edit Tablet",
 
-
     "editButtonsSave": "Save",
     "editButtonsSaveAndAddAnother": "Save and add another",
     "editButtonsSaveAndReturn": "Save and return",
@@ -129,10 +128,9 @@
     "nurseSideBarUserInfo": "Query user Information",
     "nurseSideBarSettings": "Configuration Settings",
 
-    "completedPatientRequests": "Completed patient requests",
+    "CompletedRequests": "Completed patient requests",
     "completedPatientTime": "Time",
     "completedPatientClassification": "Classification",
-    "completedPatientRequestDetails": "Request Details"
-
+    "CompletedRequestDetails": "Request Details"
   }
 }
