@@ -9,7 +9,12 @@ import { postChatMessage, getChatMessages } from "src/lib/api";
 
 import "./Request.css";
 
-export default function Request({ request, session, from_patient }) {
+export default function Request({
+  request,
+  session,
+  from_patient,
+  handleNotificationCountChange,
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const isOpenRef = useRef(isOpen);
   const [messageText, setMessageText] = useState("");
@@ -26,6 +31,11 @@ export default function Request({ request, session, from_patient }) {
   useEffect(() => {
     fetchChatMessages();
   }, [request]);
+
+  useEffect(() => {
+    if (!handleNotificationCountChange) return;
+    handleNotificationCountChange(newMessageCount);
+  }, [newMessageCount]);
 
   async function fetchChatMessages() {
     if (!request.id) return;

@@ -10,14 +10,13 @@ import data from "../../data.json";
 export default function PatientHistory({ session }) {
   const [isOpen, setIsOpen] = useState(false);
   const [requests, setRequests] = useState([]);
-  const [chats, setChats] = useState([]);
   const [notificationCount, setNotificationCount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [tablet, setTablet] = useLocalStorage("tablet", {});
   const patient = data.patient;
 
   function handleNotificationCountChange(count) {
-    setNotificationCount((prev) => prev + count);
+    if (!isOpen) setNotificationCount((prev) => prev + count);
   }
 
   useEffect(() => {
@@ -31,17 +30,7 @@ export default function PatientHistory({ session }) {
           tablet: tablet.id,
         });
         requestsData.sort((a, b) => new Date(b.time) - new Date(a.time));
-        requestsData.sort((a, b) => {
-          if (a.state === 2 && b.state !== 2) {
-            return 1;
-          } else if (a.state !== 2 && b.state === 2) {
-            return -1;
-          } else {
-            return 0;
-          }
-        });
 
-        // Now, requestsData is sorted first by time and then by state
         setRequests(requestsData);
 
         setIsLoading(false);
