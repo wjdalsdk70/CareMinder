@@ -19,7 +19,6 @@ export default function Request({
   const isOpenRef = useRef(isOpen);
   const [messageText, setMessageText] = useState("");
   const [chat, setChat] = useState([]);
-  const [area, setArea] = useState("");
 
   const [newMessageCount, setNewMessageCount] = useState(0);
   const [prevCount, setPrevCount] = useState(0);
@@ -112,7 +111,9 @@ export default function Request({
         <div className="content-container">
           <div className="info-container">
             <h2>
-              {from_patient ? getStateText(request.state) : request?.area?.name}
+              {from_patient
+                ? getStateText(request.state)
+                : request?.area?.name || "Unknown Area"}
             </h2>
             <p className="time">{timeAgo(request.time)}</p>
           </div>
