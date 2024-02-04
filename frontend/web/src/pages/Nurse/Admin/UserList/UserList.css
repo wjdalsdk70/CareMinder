@@ -51,18 +51,14 @@
 
 .item-number, .number-value
 {
-    width: 15%;
+    width: 35%;
 }
 
 .item-name, .name-value
 {
-    width: 35%;
+    width: 65%;
 }
 
-.company-id, .company-id-value
-{
-    width: 40%;
-}
 
 #userlist-rows
 {

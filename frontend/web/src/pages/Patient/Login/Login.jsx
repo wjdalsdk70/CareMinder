@@ -44,7 +44,7 @@ export default function Login({ session }) {
 
   async function fetchTablet(id) {
     try {
-      const response = await getTablet(id);
+      const response = await getTablet(session, id);
       setTablet(response);
       return response;
     } catch (error) {
@@ -98,6 +98,7 @@ export default function Login({ session }) {
         refreshToken: resp.refresh,
       });
       setStatus("success");
+      fetchTablet(data.tablet);
       navigate(next);
     } catch (error) {
       if (error.status === 429) {

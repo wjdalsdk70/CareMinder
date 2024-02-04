@@ -150,8 +150,8 @@ export default function ViewRequest({ session }) {
       let newOngoing = ongoing.filter((_, i) => i !== selItem.i);
 
       // Sort the arrays before setting them
-      newWaiting.sort((a, b) => a.id - b.id);
-      newOngoing.sort((a, b) => a.id - b.id);
+      newWaiting.sort((a, b) => new Date(b.time) - new Date(a.time));
+      newOngoing.sort((a, b) => new Date(b.time) - new Date(a.time));
 
       selItem.s === "l"
         ? setWaiting(newWaiting)
@@ -165,8 +165,8 @@ export default function ViewRequest({ session }) {
         let newOngoing = [...ongoing, item];
 
         // Sort the arrays before setting them
-        newWaiting.sort((a, b) => a.id - b.id);
-        newOngoing.sort((a, b) => a.id - b.id);
+        newWaiting.sort((a, b) => new Date(b.time) - new Date(a.time));
+        newOngoing.sort((a, b) => new Date(b.time) - new Date(a.time));
 
         setWaiting(newWaiting);
         setOngoing(newOngoing);
@@ -177,8 +177,8 @@ export default function ViewRequest({ session }) {
         let newWaiting = [...waiting, item];
 
         // Sort the arrays before setting them
-        newWaiting.sort((a, b) => a.id - b.id);
-        newOngoing.sort((a, b) => a.id - b.id);
+        newWaiting.sort((a, b) => new Date(b.time) - new Date(a.time));
+        newOngoing.sort((a, b) => new Date(b.time) - new Date(a.time));
 
         setWaiting(newWaiting);
         setOngoing(newOngoing);
@@ -239,7 +239,7 @@ export default function ViewRequest({ session }) {
         selectedOptions.waiting.job
       );
 
-      setWaiting(resp);
+      setWaiting(resp.sort((a, b) => new Date(b.time) - new Date(a.time)));
 
     } catch (error) {
       console.error(error);
@@ -257,7 +257,8 @@ export default function ViewRequest({ session }) {
         selectedOptions.ongoing.job
       );
 
-      setOngoing(resp);
+      setOngoing(resp.sort((a, b) => new Date(b.time) - new Date(a.time)));
+
     } catch (error) {
       console.error(error);
     }
@@ -293,10 +294,10 @@ export default function ViewRequest({ session }) {
         }`}
       >
         <Request
-
           request={selItem.item}
           session={session}
           from_patient={false}
+          is_staff={true}
         />
       </div>
       <div className={styles.wrapper}>
@@ -340,6 +341,7 @@ export default function ViewRequest({ session }) {
                   request={item}
                   session={session}
                   from_patient={false}
+                  is_staff={true}
                 />
               </div>
             ))}
@@ -386,6 +388,7 @@ export default function ViewRequest({ session }) {
                   request={item}
                   session={session}
                   from_patient={false}
+                  is_staff={true}
                 />
               </div>
               ))}

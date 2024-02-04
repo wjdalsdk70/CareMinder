@@ -5,20 +5,11 @@ import {
   BsSend,
 } from "react-icons/bs";
 import moment from "moment";
-import {
-  postChatMessage,
-  getChatMessages,
-
-} from "src/lib/api";
+import { postChatMessage, getChatMessages } from "src/lib/api";
 
 import "./Request.css";
 
-export default function Request({
-  request,
-  session,
-  from_patient,
-  handleNotificationCountChange = () => {},
-}) {
+export default function Request({ request, session, from_patient, is_staff }) {
   const [isOpen, setIsOpen] = useState(false);
   const isOpenRef = useRef(isOpen);
   const [messageText, setMessageText] = useState("");
@@ -26,15 +17,11 @@ export default function Request({
   const [area, setArea] = useState("");
 
   const [newMessageCount, setNewMessageCount] = useState(0);
-  let prevCount = 0;
+  const [prevCount, setPrevCount] = useState(0);
 
   useEffect(() => {
     isOpenRef.current = isOpen;
   }, [isOpen]);
-
-  useEffect(() => {
-    handleNotificationCountChange(newMessageCount);
-  }, [newMessageCount]);
 
   useEffect(() => {
     fetchChatMessages();
@@ -44,8 +31,13 @@ export default function Request({
     if (!request.id) return;
     try {
       const resp = await getChatMessages(session, request.id);
-
-      setNewMessageCount(resp.length - newMessageCount);
+      const chatLength = chat.filter(message => {
+        return message.from_patient === is_staff;
+      }).length;
+      if (prevCount !== chatLength && !isOpen){
+        setPrevCount(chatLength);
+        setNewMessageCount((newMessageCount) => newMessageCount + 1);
+      }
 
       setChat(resp);
     } catch (error) {
@@ -115,7 +107,7 @@ export default function Request({
             <p className="time">{timeAgo(request.time)}</p>
           </div>
           <div className="text-container">
-            <p>{request.text}</p>
+            <h2>{request.text}</h2>
           </div>
         </div>
       </div>

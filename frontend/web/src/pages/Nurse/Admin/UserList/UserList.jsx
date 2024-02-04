@@ -45,7 +45,6 @@ export default function UserList({ session }) {
           <div id="list-items">
             <h2 className="item-number">{nurse.nurseStaffIDHeader}</h2>
             <h2 className="item-name">{nurse.nurseStaffName}</h2>
-            <h2 className="company-id">{nurse.nurseStaffCompanyId}</h2>
           </div>
 
           <div id="userlist-rows">
@@ -56,7 +55,11 @@ export default function UserList({ session }) {
                     <hr className="userlist-line-top" />
                     <div className="list-item">
                       <p className="number-value">{user.id}</p>
-                      <p className="name-value">{`${user.first_name} ${user.last_name}`}</p>
+                      <p className="name-value">{`${
+                        user.first_name || user.last_name
+                          ? `${user.first_name} ${user.last_name}`
+                          : user.username
+                      }`}</p>
                     </div>
                     <hr className="userlist-line-bottom" />
                   </div>
