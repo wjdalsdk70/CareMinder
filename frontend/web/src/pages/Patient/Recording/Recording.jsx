@@ -8,8 +8,8 @@ import SpeechRecognition, {
 } from "react-speech-recognition";
 import AudioVisualizer from "src/components/AudioVisualizer/AudioVisualizer";
 import "./Recording.css";
-import { useRedirectToLogin } from "../../../hooks/useSession";
-import data from "../../../data.json";
+import { useRedirectToLogin } from "src/hooks/useSession";
+import data from "src/data.json";
 import useLocalStorage from "src/hooks/useLocalStorage";
 
 export default function Recording({ session }) {
@@ -18,7 +18,6 @@ export default function Recording({ session }) {
   const navigate = useNavigate();
   const { transcript } = useSpeechRecognition("");
   const [isRecording, setIsRecording] = useState(false);
-  const [_, setRecording] = useLocalStorage("recording", "");
 
   useEffect(() => {
     if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
@@ -27,12 +26,11 @@ export default function Recording({ session }) {
   }, []);
 
   useEffect(() => {
-    console.log(transcript);
-  }, [transcript]);
-
-  useEffect(() => {
     setIsRecording(true);
-    SpeechRecognition.startListening({ continuous: true, language: "en" });
+    SpeechRecognition.startListening({
+      continuous: true,
+      language: patient.recordingLang,
+    });
 
     return () => {
       setIsRecording(false);
@@ -47,7 +45,7 @@ export default function Recording({ session }) {
 
   const handleFinishClick = () => {
     SpeechRecognition.stopListening();
-    setRecording(transcript);
+    localStorage.setItem("recordingResult", transcript);
     navigate("/patient/recording/result");
     setIsRecording(false);
   };
@@ -64,7 +62,7 @@ export default function Recording({ session }) {
           </div>
         </div>
       </div>
-      <div className="body">
+      <div className="recording__body">
         <div className="visualizer">
           <AudioVisualizer />
         </div>

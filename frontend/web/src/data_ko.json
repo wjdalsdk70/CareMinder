@@ -1,5 +1,6 @@
 {
   "patient": {
+    "recordingLang": "ko",
     "agreementConsentHeader": "이용 약관 동의",
     "consentToCollectionHeader": "[개인정보 수집에 대한 동의]",
     "consentToCollectionText": "본 서비스를 이용하기 위해서는 정보주체의 별도의 정보수집 동의가 필요합니다. 귀하가 수집하는 정보 유형은 익명 요청 및 피드백 데이터로 제한됩니다. 정보수집에 동의하지 않으실 경우 서비스 이용이 제한됩니다.",
