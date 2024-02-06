@@ -36,6 +36,7 @@ export default function Login({ session }) {
 
   const [isLoading, setIsLoading] = useState(false);
   const [status, setStatus] = useState();
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     if (!session.accessToken || !session.ready) return;
@@ -50,18 +51,20 @@ export default function Login({ session }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsLoading(true);
-    setStatus(null);
+    setStatus("loading");
+    setErrors({});
     session.logout();
-    const data = readForm(event.target);
-    const validationErrors = validate(data);
+    const formData = readForm(event.target);
+    const validationErrors = validate(formData);
     if (Object.keys(validationErrors).length > 0) {
-      setIsLoading(false);
+      setErrors(validationErrors);
       setStatus("failed");
+      setIsLoading(false);
       return;
     }
 
     try {
-      const resp = await login(data.username, data.password);
+      const resp = await login(formData.username, formData.password);
       const { user_id } = jwtDecode(resp.access);
       session.login({
         user: { id: user_id },
@@ -98,6 +101,11 @@ export default function Login({ session }) {
           <div className="error">{nurse.nurseLoginInStatusToManyAttempts}</div>
         );
         break;
+      case "loading":
+        statusMessage = (
+          <div className="loading">{nurse.nurseLoginInStatusLoading}</div>
+        );
+        break;
       default:
         statusMessage = null;
     }
@@ -117,10 +125,16 @@ export default function Login({ session }) {
             <fieldset>
               <label htmlFor="username">{nurse.username}</label>
               <input name="username" type="text" id="username" />
+              {errors.username && (
+                <p className="error-text">{errors.username[0]}</p>
+              )}
             </fieldset>
             <fieldset>
               <label htmlFor="password">{nurse.password}</label>
               <input name="password" type="password" id="password" />
+              {errors.password && (
+                <p className="error-text">{errors.password[0]}</p>
+              )}
             </fieldset>
 
             <input type="submit" value={nurse.nurseLogin} />

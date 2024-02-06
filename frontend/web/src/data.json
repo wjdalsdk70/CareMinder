@@ -57,6 +57,7 @@
     "nurseLoginInStatusSuccess": "Login Successful",
     "nurseLoginInStatusError": "Login Failed",
     "nurseLoginInStatusToManyAttempts": "Too Many Attempts",
+    "nurseLoginInStatusLoading": "Loading",
     "nurseLogin": "Login",
 
     "nurseHeaderBack": "Back",
