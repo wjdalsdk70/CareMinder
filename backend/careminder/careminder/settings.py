@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     "django_filters",
     "rest_framework",
     "corsheaders",
-    "django_extensions",
     "patient",
     "staff",
     "request",
@@ -136,11 +135,6 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-GRAPH_MODELS = {
-    "all_applications": True,
-    "graph_models": True,
-}
 
 AUTH_USER_MODEL = "staff.Staff"
 
