@@ -60,4 +60,4 @@ We welcome contributions from the open-source community. If you'd like to contri
 
 ## License
 
-This project is licensed under the [MIT License](./LICENSE). Feel free to use, modify, and distribute the code according to the terms of the license.
+This project is licensed under the [MIT License](./LICENSE). Feel free to use, modify, and distribute the code according to the terms of the license.# CareMinder
