@@ -110,14 +110,14 @@ export default function EditUser({ session }) {
           {statusMessage()}
           <div className="input_field">
             <p>
-              {nurse.username}
+              {nurse.ID}
               <span>{nurse.required}</span>
             </p>
             <input
               name="username"
               value={formData.username}
               onChange={handleChange}
-              placeholder={nurse.username}
+              placeholder={nurse.ID}
               autoComplete="off"
             ></input>
           </div>

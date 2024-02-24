@@ -123,7 +123,7 @@ export default function Login({ session }) {
           <form className="login__form" onSubmit={handleSubmit}>
             {statusMessage()}
             <fieldset>
-              <label htmlFor="username">{nurse.username}</label>
+              <label htmlFor="username">{nurse.ID}</label>
               <input name="username" type="text" id="username" />
               {errors.username && (
                 <p className="error-text">{errors.username[0]}</p>

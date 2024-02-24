@@ -1,7 +1,7 @@
 import useSession from "../hooks/useSession";
 import { authFetch } from "../core/api";
 
-const BASE_URL = "http://127.0.0.1:8000/api";
+const BASE_URL = "http://43.200.196.223:5500/api";
 
 export async function login(username, password) {
   const response = await fetch(`${BASE_URL}/staffs/login/`, {

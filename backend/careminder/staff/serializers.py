@@ -37,7 +37,7 @@ class StaffSerializer(serializers.ModelSerializer):
         role = validated_data.get("role")
         if role is not None:
             group_name = Staff.Role.choices[role][1].upper()
-            group = Group.objects.get(name=group_name)
+            group, created = Group.objects.get_or_create(name=group_name)
             user.groups.add(group)
 
         return user

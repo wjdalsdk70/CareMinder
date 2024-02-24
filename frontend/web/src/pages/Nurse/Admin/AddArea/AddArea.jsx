@@ -82,14 +82,14 @@ export default function AddArea({ session }) {
           {statusMessage()}
           <div className="input_field">
             <p>
-              {nurse.setArea}
+              {nurse.areaName}
               <span>{nurse.required}</span>
             </p>
             <input
               name="area"
               value={formData.area}
               onChange={handleChange}
-              placeholder={nurse.setArea}
+              placeholder={nurse.areaName}
               autoComplete="off"
             ></input>
           </div>

@@ -5,7 +5,7 @@ import {
   BsSend,
 } from "react-icons/bs";
 import moment from "moment";
-import { postChatMessage, getChatMessages } from "src/lib/api";
+import { getTablet, postChatMessage, getChatMessages } from "src/lib/api";
 
 import "./Request.css";
 
@@ -22,6 +22,7 @@ export default function Request({
 
   const [newMessageCount, setNewMessageCount] = useState(0);
   const [prevCount, setPrevCount] = useState(0);
+  const [tabletName, setTabletName] = useState("");
 
   useEffect(() => {
     isOpenRef.current = isOpen;
@@ -29,6 +30,7 @@ export default function Request({
 
   useEffect(() => {
     fetchChatMessages();
+    getTabletName();
   }, [request]);
 
   useEffect(() => {
@@ -62,6 +64,17 @@ export default function Request({
       });
       await fetchChatMessages();
       setMessageText("");
+    } catch (error) {
+      console.error("Error creating chat messages");
+    }
+  }
+
+  async function getTabletName() {
+    try {
+      console.log(request.tablet_id);
+      const tablet = await getTablet(request.tablet_id)
+      console.log(tablet);
+      setTabletName(tablet.name);
     } catch (error) {
       console.error("Error creating chat messages");
     }
@@ -113,7 +126,7 @@ export default function Request({
             <h2>
               {from_patient
                 ? getStateText(request.state)
-                : request?.area?.name || "Unknown Area"}
+                : (request?.area?.name ? request.area.name + ' ' + tabletName : "Unknown Area")}
             </h2>
             <p className="time">{timeAgo(request.time)}</p>
           </div>
@@ -123,9 +136,8 @@ export default function Request({
         </div>
       </div>
       <div
-        className={`chat-container ${getStateText(request.state)} ${
-          isOpen ? "open" : "closed"
-        }`}
+        className={`chat-container ${getStateText(request.state)} ${isOpen ? "open" : "closed"
+          }`}
       >
         <div className="chat-container__messages">
           {chat &&
@@ -133,11 +145,10 @@ export default function Request({
               return (
                 <div
                   key={request.id + "-" + chatMessage.id}
-                  className={`chat-item patient-${
-                    from_patient
-                      ? chatMessage.from_patient
-                      : !chatMessage.from_patient
-                  }`}
+                  className={`chat-item patient-${from_patient
+                    ? chatMessage.from_patient
+                    : !chatMessage.from_patient
+                    }`}
                 >
                   <p>{chatMessage.text}</p>
                   <p className="chat-time">{timeAgo(chatMessage.time)}</p>

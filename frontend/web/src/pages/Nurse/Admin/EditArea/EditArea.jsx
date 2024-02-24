@@ -83,7 +83,7 @@ export default function EditArea({ session }) {
           {statusMessage()}
           <div className="input_field">
             <p>
-              {nurse.editAreaHeader}
+              {nurse.areaName}
               <span>{nurse.required}</span>
             </p>
             <input
