@@ -5,10 +5,11 @@ import {
   BsSend,
 } from "react-icons/bs";
 import moment from "moment";
+import 'moment/locale/ko';
 import { getTablet, postChatMessage, getChatMessages } from "src/lib/api";
 
 import "./Request.css";
-
+moment.locale('ko');
 export default function Request({
   request,
   session,
@@ -98,8 +99,22 @@ export default function Request({
     }
   };
 
+  const getStateTextKko = (state) => {
+    switch (state) {
+      case 0:
+        return "대기 중";
+      case 1:
+        return "처리 중";
+      case 2:
+        return "완료";
+      default:
+        return "Unknown State Text";
+    }
+  };
+
   const timeAgo = (timestamp) => {
     return moment(timestamp).fromNow();
+    // return moment(timestamp).fromNow();
   };
 
   return (
@@ -125,7 +140,7 @@ export default function Request({
           <div className="info-container">
             <h2>
               {from_patient
-                ? getStateText(request.state)
+                ? getStateTextKko(request.state)
                 : (request?.area?.name ? request.area.name + ' ' + tabletName : "Unknown Area")}
             </h2>
             <p className="time">{timeAgo(request.time)}</p>

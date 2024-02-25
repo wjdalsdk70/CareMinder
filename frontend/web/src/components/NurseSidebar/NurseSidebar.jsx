@@ -94,7 +94,11 @@ export default function NurseSidebar({ session, isOpen, onClose }) {
           <p> {nurse.nurseSideBarCompleted}</p>
         </Link>
 
-        <Link className="sidebar-link" to="/nurse/home/completedRequests">
+        {/* <Link className="sidebar-link" to="/nurse/home/completedRequests">
+          <MdDownloading color="white" />
+          <p>{nurse.nurseSideBarSetProgress}</p>
+        </Link> */}
+        <Link className="sidebar-link" to="#" onClick={(e) => e.preventDefault()}>
           <MdDownloading color="white" />
           <p>{nurse.nurseSideBarSetProgress}</p>
         </Link>

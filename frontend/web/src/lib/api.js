@@ -331,6 +331,7 @@ export async function patchStaff(
   password,
   first_name,
   last_name,
+  role,
   type
 ) {
   const response = await authFetch(session, `${BASE_URL}/staffs/${id}/`, {
@@ -343,6 +344,7 @@ export async function patchStaff(
       password,
       first_name,
       last_name,
+      role,
       type,
     }),
   });

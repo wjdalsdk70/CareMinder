@@ -21,10 +21,19 @@
   gap: 4px;
 }
 
+input[type=password] {
+  font-family: "나눔스퀘어 아닐때 쓸 글꼴";
+
+  &::placeholder {
+      font-family: "NanumSquare";
+  }
+}
+
 .login__form fieldset label {
-  color: white;
+  color: var(--text);
   font-size: 24px;
 }
+
 
 .login__form fieldset input {
   border: none;

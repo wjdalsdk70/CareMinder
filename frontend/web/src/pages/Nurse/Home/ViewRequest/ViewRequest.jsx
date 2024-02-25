@@ -32,8 +32,8 @@ export default function ViewRequest({ session }) {
 
   const [filterOptions, setFilterOptions] = useState({
     job: [
-      { value: 0, description: "Request" },
-      { value: 1, description: "Question" },
+      { value: 0, description: "질문" },
+      { value: 1, description: "요청사항" },
     ],
     patient: [],
     area: [],

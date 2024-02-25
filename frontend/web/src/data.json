@@ -89,7 +89,7 @@
     "nurseHomeTitleViewPatient": "환자별 진행상황 설정",
     "nurseHomeGlobalRequestsHeader": "환자 요청 대기 중",
     "nurseHomeMyRequestHeader": "내가 처리 중인 요청",
-    "filterByJob": "직무별",
+    "filterByJob": "업무별",
     "filterByPatient": "환자별",
     "filterByArea": "병실별",
     "areaName": "병실 이름",
