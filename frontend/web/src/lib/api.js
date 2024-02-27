@@ -1,7 +1,7 @@
 import useSession from "../hooks/useSession";
 import { authFetch } from "../core/api";
 
-const BASE_URL = "http://careminder.shop/api";
+const BASE_URL = "https://careminder.shop/api";
 
 export async function login(username, password) {
   const response = await fetch(`${BASE_URL}/staffs/login/`, {
