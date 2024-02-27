@@ -59,5 +59,6 @@ class StaffSerializer(serializers.ModelSerializer):
             group = Group.objects.get(name=group_name)
             instance.groups.clear()
             instance.groups.add(group)
+            instance.save()
 
-        return instance
+        return instancegi

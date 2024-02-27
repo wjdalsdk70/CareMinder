@@ -1,6 +1,6 @@
 from .base import *
 
-ALLOWED_HOSTS = ["localhost", "43.200.196.223"]
+ALLOWED_HOSTS = ["localhost", "43.200.196.223","careminder.shop","www.careminder.shop"]
 
 DATABASES = {
     'default': {
@@ -15,7 +15,7 @@ DATABASES = {
 
 CORS_ORIGIN_WHITELIST = [
     'http://43.200.196.223:5000',
-    'http://43.200.196.223:5500',  # 추가된 출처
+    'http://43.200.196.223:5500'# 추가된 출처
 ]
 
 CSRF_TRUSTED_ORIGINS = [

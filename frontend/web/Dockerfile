@@ -4,6 +4,10 @@ FROM nginx:1.25.1-alpine3.17-slim
 # nginx의 기본 service를 제거한다.
 RUN rm -rf /etc/nginx/sites-enabled/default
 
+# SSL 인증서와 키를 컨테이너 내로 복사한다.
+# COPY ssl/fullchain.pem /etc/nginx/ssl/fullchain.pem
+# COPY ssl/privkey.pem /etc/nginx/ssl/privkey.pem
+
 # nginx에 serving할 html의 설정파일을 복사한다.
 COPY nginx.conf /etc/nginx/conf.d
 
@@ -12,6 +16,9 @@ WORKDIR /code
 
 # 배포할 파일을 복사한다.
 COPY build/ build/
+
+# HTTPS 포트를 노출한다.
+# EXPOSE 443
 
 # frontend Port를 설정한다.
 EXPOSE 5000
